@@ -1,5 +1,26 @@
-<main class="container-fluid">
-  <h1>{{ title }}</h1>
+<div class="container-xxl app-layout">
+  <aside class="sidebar">
+    <div class="offcanvas offcanvas-start show bg-body-tertiary"
+         tabindex="-1"
+         id="navSidebar"
+         aria-labelledby="sidebarLabel">
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title h5" id="sidebarLabel">
+          <i class="bi-people-fill me-2"></i>
+          Grouper
+        </h2>
+      </div>
 
-  <app-time-slot-list />
-</main>
+      <div class="offcanvas-body">
+        <app-navigation/>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <app-top-bar />
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -28,6 +28,66 @@ export class TimeSlotService {
       "Slot 4",
       new Time(15),
       new Time(16, 30)
+    ),
+    createTimeSlot(
+      "Slot 1",
+      new Time(9),
+      new Time(10, 30)
+    ),
+    createTimeSlot(
+      "Slot 2",
+      new Time(10, 45),
+      new Time(12, 15)
+    ),
+    createTimeSlot(
+      "Slot 3",
+      new Time(13, 15),
+      new Time(14, 45)
+    ),
+    createTimeSlot(
+      "Slot 4",
+      new Time(15),
+      new Time(16, 30)
+    ),
+    createTimeSlot(
+      "Slot 1",
+      new Time(9),
+      new Time(10, 30)
+    ),
+    createTimeSlot(
+      "Slot 2",
+      new Time(10, 45),
+      new Time(12, 15)
+    ),
+    createTimeSlot(
+      "Slot 3",
+      new Time(13, 15),
+      new Time(14, 45)
+    ),
+    createTimeSlot(
+      "Slot 4",
+      new Time(15),
+      new Time(16, 30)
+    ),
+    createTimeSlot(
+      "Slot 1",
+      new Time(9),
+      new Time(10, 30)
+    ),
+    createTimeSlot(
+      "Slot 2",
+      new Time(10, 45),
+      new Time(12, 15)
+    ),
+    createTimeSlot(
+      "Slot 3",
+      new Time(13, 15),
+      new Time(14, 45)
+    ),
+    createTimeSlot(
+      "Slot 4",
+      new Time(15),
+      new Time(16, 30)
     )
   ];
 

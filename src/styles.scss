@@ -5,3 +5,23 @@
 @use "bootstrap-icons/font/bootstrap-icons.css";
 
 @use "app/styles/time-slots";
+
+
+.app-layout {
+  display: grid;
+  grid-template-areas: "sidebar main";
+  grid-template-columns: 1fr 5fr;
+  gap: 1.5rem;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.top-bar {
+  height: fit-content;
+}
+
+.main {
+  grid-area: main;
+}

@@ -62,7 +62,8 @@ export class TimeSlotListComponent {
 
     const options: NgbOffcanvasOptions = {
       ariaLabelledBy: title,
-      position: "end"
+      position: "end",
+      backdropClass: "offcanvas-backdrop"
     };
 
     this.offcanvas.open(content, options);

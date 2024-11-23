@@ -1,11 +1,15 @@
 import {Component} from '@angular/core';
-import {TimeSlotListComponent} from './timeslots/components/time-slot-list/time-slot-list.component';
+import {NavigationComponent} from './navigation/components/navigation/navigation.component';
+import {TopBarComponent} from './navigation/components/top-bar/top-bar.component';
+import {RouterOutlet} from '@angular/router';
 
 
 @Component({
   selector: 'app-root',
   imports: [
-    TimeSlotListComponent
+    NavigationComponent,
+    TopBarComponent,
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

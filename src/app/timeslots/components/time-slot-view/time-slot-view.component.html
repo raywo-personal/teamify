@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center">
+    <div class="me-2">
+      <i class="bi-list"></i>
+    </div>
+
+    <div class="d-flex flex-column">
+      {{ timeSlot().description }}
+      <small>
+        ({{ timeSlot().start | time }} – {{ timeSlot().end | time }} o’clock)
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-primary me-2" (click)="onEdit()">
+      <i class="bi-pencil"></i>
+      <span class="visually-hidden">Edit {{ timeSlot().description }}</span>
+    </button>
+
+    <button class="btn btn-danger" (click)="onDelete()">
+      <i class="bi-trash"></i>
+      <span class="visually-hidden">Delete {{ timeSlot().description }}</span>
+    </button>
+  </div>
+</div>

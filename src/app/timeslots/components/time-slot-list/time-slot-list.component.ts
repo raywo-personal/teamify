@@ -2,7 +2,7 @@ import {Component, inject, TemplateRef} from '@angular/core';
 import {TimeSlotViewComponent} from '../time-slot-view/time-slot-view.component';
 import {TimeSlotService} from '../../services/time-slot.service';
 import {AsyncPipe} from '@angular/common';
-import {NgbOffcanvas, NgbOffcanvasOptions, OffcanvasDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
 import {TimeSlotEditComponent} from '../time-slot-edit/time-slot-edit.component';
 import {createTimeSlot, TimeSlot} from '../../models/time-slot.model';
 
@@ -22,50 +22,50 @@ export class TimeSlotListComponent {
   private slotService = inject(TimeSlotService);
   private offcanvas = inject(NgbOffcanvas);
 
-  protected closeResult = "";
-
   protected slots$ = this.slotService.slots$;
   protected timeSlotToEdit?: TimeSlot;
+  protected canvasTitle: string = "";
+  protected edit = false;
 
 
   protected onAdd(content: TemplateRef<any>) {
+    this.timeSlotToEdit = createTimeSlot("");
+    this.edit = false;
+    this.openOffcanvas(content, "Add new time slot");
+  }
+
+
+  protected onEdit(content: TemplateRef<any>, slot: TimeSlot) {
+    this.timeSlotToEdit = slot;
+    this.edit = true;
+    this.openOffcanvas(content, "Edit time slot");
+  }
+
+
+  protected onAddCancelled() {
+    this.offcanvas.dismiss("cancelled");
+  }
+
+
+  protected onAddSaved() {
+    this.offcanvas.dismiss("saved");
+  }
+
+
+  protected onDelete(slot: TimeSlot) {
+    this.slotService.removeSlot(slot);
+  }
+
+
+  private openOffcanvas(content: TemplateRef<any>, title: string) {
+    this.canvasTitle = title;
+
     const options: NgbOffcanvasOptions = {
-      ariaLabelledBy: "Add new time slot",
+      ariaLabelledBy: title,
       position: "end"
     };
-    this.timeSlotToEdit = createTimeSlot("");
 
-    this.offcanvas.open(content, options)
-      .result
-      .then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed with: ${this.getDismissReason(reason)}`;
-        }
-      );
+    this.offcanvas.open(content, options);
   }
 
-
-  private getDismissReason(reason: any): string {
-    switch (reason) {
-      case OffcanvasDismissReasons.ESC:
-        return 'by pressing ESC';
-      case OffcanvasDismissReasons.BACKDROP_CLICK:
-        return 'by clicking on the backdrop';
-      default:
-        return `with: ${reason}`;
-    }
-  }
-
-
-  onAddCancelled() {
-    this.offcanvas.dismiss();
-  }
-
-
-  onAddSaved(timeSlot: TimeSlot) {
-    this.offcanvas.dismiss();
-  }
 }

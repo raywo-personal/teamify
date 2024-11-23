@@ -18,6 +18,7 @@ import {TimeSlotService} from '../../services/time-slot.service';
 export class TimeSlotEditComponent {
 
   public timeSlot = input<TimeSlot>();
+  public edit = input<boolean>(false);
   public cancelled = output();
   public saved = output<TimeSlot>();
 
@@ -53,12 +54,18 @@ export class TimeSlotEditComponent {
     const start = new Time(this.startHour(), this.startMinute());
     const end = this.endTime();
     const timeSlot = {
+      id: this.timeSlot()?.id,
       description: this.description,
       start,
       end
     }
 
-    this.timeSlotService.addSlot(timeSlot);
+    if (this.edit()) {
+      this.timeSlotService.updateSlot(timeSlot)
+    } else {
+      this.timeSlotService.addSlot(timeSlot);
+    }
+
     this.saved.emit(timeSlot);
   }
 

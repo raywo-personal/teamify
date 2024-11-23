@@ -41,8 +41,13 @@ export class TimeSlotService {
   }
 
 
+  public updateSlot(slot: TimeSlot) {
+    this.slots = this.slots.map(s => s.id === slot.id ? slot : s);
+  }
+
+
   public removeSlot(slot: TimeSlot) {
-    this.slots = this.slots.splice(this.slots.indexOf(slot), 1);
+    this.slots = this.slots.filter(s => s.id !== slot.id);
   }
 
 

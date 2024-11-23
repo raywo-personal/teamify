@@ -11,21 +11,25 @@
 <ul class="list-group">
   @for (timeSlot of slots$ | async; track timeSlot.id) {
     <a href="#" class="list-group-item list-group-item-action">
-      <app-time-slot-view [timeSlot]="timeSlot"/>
+      <app-time-slot-view [timeSlot]="timeSlot"
+                          (edit)="onEdit(content, $event)"
+                          (delete)="onDelete($event)"
+      />
     </a>
   }
 </ul>
 
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
-    <h4 class="offcanvas-title" id="offcanvas-basic-title">Add time slot</h4>
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ canvasTitle }}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
 
   <div class="offcanvas-body">
     <app-time-slot-edit [timeSlot]="timeSlotToEdit"
+                        [edit]="edit"
                         (cancelled)="onAddCancelled()"
-                        (saved)="onAddSaved($event)"
+                        (saved)="onAddSaved()"
     />
   </div>
 </ng-template>

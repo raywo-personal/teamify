@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {TimeSlot} from '../../models/time-slot.model';
 import {TimePipe} from '../../pipes/time.pipe';
 
@@ -14,14 +14,16 @@ import {TimePipe} from '../../pipes/time.pipe';
 export class TimeSlotViewComponent {
 
   public timeSlot = input.required<TimeSlot>();
+  public edit = output<TimeSlot>();
+  public delete = output<TimeSlot>();
 
 
   protected onEdit() {
-
+    this.edit.emit(this.timeSlot());
   }
 
 
   protected onDelete() {
-
+    this.delete.emit(this.timeSlot());
   }
 }

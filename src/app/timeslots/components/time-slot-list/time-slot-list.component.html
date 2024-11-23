@@ -1,0 +1,9 @@
+<h2>Time slots</h2>
+
+<ul class="list-group">
+  @for (timeSlot of slots; track timeSlot.id) {
+    <a href="#" class="list-group-item list-group-item-action">
+      {{ timeSlot.description }}
+    </a>
+  }
+</ul>

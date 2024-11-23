@@ -7,7 +7,7 @@
     <div class="d-flex flex-column">
       {{ timeSlot().description }}
       <small>
-        ({{ timeSlot().start.toJSDate() | date: 'HH:mm' }} – {{ timeSlot().end.toJSDate() | date: 'HH:mm' }} o’clock)
+        ({{ timeSlot().start | time }} – {{ timeSlot().end | time }} o’clock)
       </small>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <h2>Time slots</h2>
 
   <button class="btn btn-sm btn-outline-secondary"
-          (click)="onAdd()">
+          (click)="onAdd(content)">
     <i class="bi-plus-lg"></i>
     <span class="visually-hidden">Add time slot</span>
   </button>
@@ -15,3 +15,17 @@
     </a>
   }
 </ul>
+
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">Add time slot</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <app-time-slot-edit [timeSlot]="timeSlotToEdit"
+                        (cancelled)="onAddCancelled()"
+                        (saved)="onAddSaved($event)"
+    />
+  </div>
+</ng-template>

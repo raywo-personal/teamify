@@ -1,12 +1,12 @@
-import {Component, input, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {TimeSlot} from '../../models/time-slot.model';
-import {DatePipe} from '@angular/common';
+import {TimePipe} from '../../pipes/time.pipe';
 
 
 @Component({
   selector: 'app-time-slot-view',
   imports: [
-    DatePipe
+    TimePipe
   ],
   templateUrl: './time-slot-view.component.html',
   styleUrl: './time-slot-view.component.scss'

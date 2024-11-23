@@ -1,9 +1,17 @@
-<h2>Time slots</h2>
+<div class="d-flex justify-content-between align-items-baseline pt-3 mb-3 border-bottom">
+  <h2>Time slots</h2>
+
+  <button class="btn btn-sm btn-outline-secondary"
+          (click)="onAdd()">
+    <i class="bi-plus-lg"></i>
+    <span class="visually-hidden">Add time slot</span>
+  </button>
+</div>
 
 <ul class="list-group">
-  @for (timeSlot of slots; track timeSlot.id) {
+  @for (timeSlot of slots$ | async; track timeSlot.id) {
     <a href="#" class="list-group-item list-group-item-action">
-      <app-time-slot-view [timeSlot]="timeSlot" />
+      <app-time-slot-view [timeSlot]="timeSlot"/>
     </a>
   }
 </ul>

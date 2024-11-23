@@ -3,7 +3,7 @@
 <ul class="list-group">
   @for (timeSlot of slots; track timeSlot.id) {
     <a href="#" class="list-group-item list-group-item-action">
-      {{ timeSlot.description }}
+      <app-time-slot-view [timeSlot]="timeSlot" />
     </a>
   }
 </ul>

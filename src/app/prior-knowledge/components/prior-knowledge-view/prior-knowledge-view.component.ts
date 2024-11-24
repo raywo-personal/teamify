@@ -1,4 +1,4 @@
-import {Component, input, output, TemplateRef} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {PriorKnowledge} from '../../models/prior-knowledge.model';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 
@@ -20,8 +20,9 @@ export class PriorKnowledgeViewComponent {
   protected canvasTitle: string = "";
 
 
-  protected onEdit(content: TemplateRef<any>, event: MouseEvent) {
+  protected onEdit(event: MouseEvent) {
     event.stopPropagation();
+    this.edit.emit(this.knowledge());
   }
 
 

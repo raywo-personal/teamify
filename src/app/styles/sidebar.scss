@@ -1,0 +1,48 @@
+.sidebar {
+  grid-area: sidebar;
+
+  .offcanvas {
+    width: 35ch;
+  }
+
+  .offcanvas-footer {
+    //flex-grow: 1;
+    padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
+    padding-bottom: 0.5rem;
+    overflow-y: auto;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  color: var(--bs-primary);
+
+  .brand-logo {
+    border: 2.5px solid var(--bs-primary);
+    border-radius: 0.75rem;
+
+    margin-right: 0.5rem;
+
+    height: 3rem;
+    aspect-ratio: 1;
+
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  .text-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 1;
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    small {
+      font-weight: 350;
+    }
+  }
+}

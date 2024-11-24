@@ -1,21 +1,20 @@
-<div class="d-flex justify-content-between align-items-baseline pt-3 mb-3 border-bottom">
-  <h2>Time slots</h2>
-
+<div class="d-flex justify-content-end align-items-baseline py-2 mb-3">
   <button class="btn btn-sm btn-outline-secondary"
           (click)="onAdd(content)">
-    <i class="bi-plus-lg"></i>
-    <span class="visually-hidden">Add time slot</span>
+    <i class="bi-plus-lg me-2"></i>
+    Add time slot
   </button>
 </div>
 
 <ul class="list-group">
   @for (timeSlot of slots$ | async; track timeSlot.id) {
-    <a href="#" class="list-group-item list-group-item-action">
+    <div class="list-group-item list-group-item-action pointer"
+         (click)="onEdit(content, timeSlot)">
       <app-time-slot-view [timeSlot]="timeSlot"
                           (edit)="onEdit(content, $event)"
                           (delete)="onDelete($event)"
       />
-    </a>
+    </div>
   }
 </ul>
 

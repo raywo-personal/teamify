@@ -13,12 +13,12 @@
   </div>
 
   <div>
-    <button class="btn btn-primary me-2" (click)="onEdit()">
+    <button class="btn btn-primary me-2" (click)="onEdit($event)">
       <i class="bi-pencil"></i>
       <span class="visually-hidden">Edit {{ timeSlot().description }}</span>
     </button>
 
-    <button class="btn btn-danger" (click)="onDelete()">
+    <button class="btn btn-danger" (click)="onDelete($event)">
       <i class="bi-trash"></i>
       <span class="visually-hidden">Delete {{ timeSlot().description }}</span>
     </button>

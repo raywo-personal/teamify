@@ -2,17 +2,17 @@
   <button class="btn btn-sm btn-outline-secondary"
           (click)="onAdd(content)">
     <i class="bi-plus-lg me-2"></i>
-    Add time slot
+    Add knowledge item
   </button>
 </div>
 
 <ul class="list-group">
-  @for (timeSlot of slots$ | async; track timeSlot.id) {
+  @for (priorKnowledge of knowledgeList$ | async; track priorKnowledge.id) {
     <li class="list-group-item list-group-item-action pointer"
-        (click)="onEdit(content, timeSlot)">
-      <app-time-slot-view [timeSlot]="timeSlot"
-                          (edit)="onEdit(content, $event)"
-                          (delete)="onDelete($event)"
+        (click)="onEdit(content, priorKnowledge)">
+      <app-prior-knowledge-view [knowledge]="priorKnowledge"
+                                (edit)="onEdit(content, $event)"
+                                (delete)="onDelete($event)"
       />
     </li>
   }
@@ -25,10 +25,11 @@
   </div>
 
   <div class="offcanvas-body">
-    <app-time-slot-edit [timeSlot]="timeSlotToEdit"
-                        [edit]="edit"
-                        (cancelled)="onAddCancelled()"
-                        (saved)="onAddSaved()"
+    <app-prior-knowledge-edit
+      [knowledge]="knowledgeToEdit"
+      [edit]="edit"
+      (cancelled)="onEditCancelled()"
+      (saved)="onEditSaved()"
     />
   </div>
 </ng-template>

@@ -18,9 +18,10 @@
       <span class="visually-hidden">Edit {{ timeSlot().description }}</span>
     </button>
 
-    <button class="btn btn-danger" (click)="onDelete($event)">
-      <i class="bi-trash"></i>
-      <span class="visually-hidden">Delete {{ timeSlot().description }}</span>
-    </button>
+    <app-delete-button
+      confirmationTitle="Delete time slot"
+      confirmationMessage="Are you sure you want to delete time slot “{{timeSlot().description}}”"
+      (deleteConfirmed)="onDelete()"
+    />
   </div>
 </div>

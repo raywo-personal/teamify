@@ -1,6 +1,30 @@
-<div class="fw-bold">
-  {{ knowledge().name }}
+<div class="d-flex justify-content-between">
+  <div>
+    <div class="fw-bold">
+      {{ knowledge().name }}
+    </div>
+    <div>
+      <small>{{ knowledge().description }}</small>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-primary me-2" (click)="onEdit(content, $event)">
+      <i class="bi-pencil"></i>
+      <span class="visually-hidden">Edit {{ knowledge().name }}</span>
+    </button>
+
+    <app-delete-button
+      confirmationTitle="Delete knowledge item"
+      confirmationMessage="Are you sure you want to delete knowledge item “{{knowledge().name}}”?"
+      (deleteConfirmed)="onDelete()"
+    />
+  </div>
 </div>
-<div>
-  <small>{{ knowledge().description }}</small>
-</div>
+
+<ng-template #content let-offcanvas>
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ canvasTitle }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+  </div>
+</ng-template>

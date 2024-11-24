@@ -8,12 +8,13 @@
 
 <ul class="list-group">
   @for (timeSlot of slots$ | async; track timeSlot.id) {
-    <a href="#" class="list-group-item list-group-item-action">
+    <div class="list-group-item list-group-item-action pointer"
+         (click)="onEdit(content, timeSlot)">
       <app-time-slot-view [timeSlot]="timeSlot"
                           (edit)="onEdit(content, $event)"
                           (delete)="onDelete($event)"
       />
-    </a>
+    </div>
   }
 </ul>
 

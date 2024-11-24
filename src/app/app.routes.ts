@@ -12,13 +12,35 @@ export const routes: Routes = [
   {
     path: "start",
     component: StartComponent,
-    data: {title: "Start"},
+    data: {title: "Start", icon: "house-door"},
     pathMatch: "full"
   },
   {
     path: "time-slots",
     component: TimeSlotListComponent,
-    data: {title: "Time slots"},
+    data: {title: "Time slots", icon: "clock"},
     pathMatch: "full"
+  },
+  {
+    path: "prior-knowledge",
+    component: TimeSlotListComponent,
+    data: {title: "Prior knowledge", icon: "book"},
+    pathMatch: "full"
+  },
+  {
+    path: "persons",
+    component: TimeSlotListComponent,
+    data: {title: "Persons", icon: "people"},
+    pathMatch: "full"
+  },
+  {
+    path: "grouping",
+    component: TimeSlotListComponent,
+    data: {title: "Grouping", icon: "people-fill"},
+    pathMatch: "full"
+  },
+  {
+    path: "**",
+    redirectTo: "/time-slots",
   }
 ];

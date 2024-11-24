@@ -5,6 +5,7 @@ import {AsyncPipe} from '@angular/common';
 import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
 import {TimeSlotEditComponent} from '../time-slot-edit/time-slot-edit.component';
 import {createTimeSlot, TimeSlot} from '../../models/time-slot.model';
+import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/add-header-bar.component';
 
 
 @Component({
@@ -12,7 +13,8 @@ import {createTimeSlot, TimeSlot} from '../../models/time-slot.model';
   imports: [
     TimeSlotViewComponent,
     AsyncPipe,
-    TimeSlotEditComponent
+    TimeSlotEditComponent,
+    AddHeaderBarComponent
   ],
   templateUrl: './time-slot-list.component.html',
   styleUrl: './time-slot-list.component.scss'

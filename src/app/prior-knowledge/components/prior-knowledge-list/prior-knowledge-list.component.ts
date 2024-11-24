@@ -5,6 +5,7 @@ import {PriorKnowledgeViewComponent} from '../prior-knowledge-view/prior-knowled
 import {createPriorKnowledge, PriorKnowledge} from '../../models/prior-knowledge.model';
 import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
 import {PriorKnowledgeEditComponent} from '../prior-knowledge-edit/prior-knowledge-edit.component';
+import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/add-header-bar.component';
 
 
 @Component({
@@ -12,7 +13,8 @@ import {PriorKnowledgeEditComponent} from '../prior-knowledge-edit/prior-knowled
   imports: [
     AsyncPipe,
     PriorKnowledgeViewComponent,
-    PriorKnowledgeEditComponent
+    PriorKnowledgeEditComponent,
+    AddHeaderBarComponent
   ],
   templateUrl: './prior-knowledge-list.component.html',
   styleUrl: './prior-knowledge-list.component.scss'

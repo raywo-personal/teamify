@@ -1,10 +1,7 @@
-<div class="d-flex justify-content-end align-items-baseline py-2 mb-3">
-  <button class="btn btn-sm btn-outline-secondary"
-          (click)="onAdd(content)">
-    <i class="bi-plus-lg me-2"></i>
-    Add knowledge item
-  </button>
-</div>
+<app-add-header-bar
+  caption="Add knowledge item"
+  (addClick)="onAdd(content)"
+/>
 
 <ul class="list-group">
   @for (priorKnowledge of knowledgeList$ | async; track priorKnowledge.id) {

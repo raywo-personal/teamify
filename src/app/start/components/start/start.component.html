@@ -1,10 +1,10 @@
 <p>start works!</p>
 
-<app-prior-knowledge-edit
-
+<app-add-header-bar
+  caption="Add person"
 />
 
-<div>
-  <p>Name: {{knowledge.name}}</p>
-  <p>Description: {{knowledge.description}}</p>
-</div>
+<app-person-edit
+  [person]="person"
+
+/>

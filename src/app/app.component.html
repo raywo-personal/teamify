@@ -4,21 +4,32 @@
          tabindex="-1"
          id="navSidebar"
          aria-labelledby="sidebarLabel">
-      <div class="offcanvas-header">
-        <h2 class="offcanvas-title h5" id="sidebarLabel">
-          <i class="bi-people-fill me-2"></i>
-          Grouper
-        </h2>
+      <div class="offcanvas-header brand">
+        <i class="bi-people-fill brand-logo"></i>
+        <div class="text-logo" id="sidebarLabel">
+          <h2 class="offcanvas-title h5">Grouper</h2>
+          <small class="">Create groups of students</small>
+        </div>
       </div>
 
       <div class="offcanvas-body">
         <app-navigation/>
       </div>
+
+      <div class="offcanvas-footer">
+        <small>
+          Made by raywo with <i class="bi-heart-fill text-danger"></i>&nbsp;|&nbsp;
+          <a href="https://github.com/raywo/grouper" target="_blank">
+            <i class="bi-github"></i>
+            Source code
+          </a>
+        </small>
+      </div>
     </div>
   </aside>
 
   <div class="main">
-    <app-top-bar />
+    <app-top-bar/>
     <main>
       <router-outlet></router-outlet>
     </main>

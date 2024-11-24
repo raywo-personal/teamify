@@ -1,0 +1,7 @@
+<ul class="list-group">
+  @for (person of persons$ | async; track person.id) {
+    <li class="list-group-item list-group-item-action pointer">
+      {{ person.name }}
+    </li>
+  }
+</ul>

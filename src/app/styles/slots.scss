@@ -1,0 +1,12 @@
+.slot-pill {
+  border: 1px solid var(--bs-light);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+
+  background: var(--bs-body-bg);
+
+  .slot-pill-title {
+    font-size: var(--bs-font-size);
+    font-weight: bold;
+  }
+}

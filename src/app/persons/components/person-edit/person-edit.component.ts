@@ -7,6 +7,8 @@ import {PriorKnowledgeService} from '../../../prior-knowledge/services/prior-kno
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {TimePipe} from '../../../timeslots/pipes/time.pipe';
 import {PersonService} from '../../services/person.service';
+import {TimeSlotViewComponent} from '../../../timeslots/components/time-slot-view/time-slot-view.component';
+import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 
 
 interface PriorKnowledgeSelection {
@@ -25,7 +27,11 @@ interface TimeSlotSelection {
   selector: 'app-person-edit',
   imports: [
     FormsModule,
-    TimePipe
+    TimePipe,
+    TimeSlotViewComponent,
+    CdkDropList,
+    CdkDrag,
+    CdkDropListGroup
   ],
   templateUrl: './person-edit.component.html',
   styleUrl: './person-edit.component.scss'
@@ -44,6 +50,10 @@ export class PersonEditComponent {
   protected name: string = "";
   protected knowledge: PriorKnowledgeSelection[] = [];
   protected slots: TimeSlotSelection[] = [];
+  protected priorKnowledge: PriorKnowledge[] = [];
+  protected timeSlots: TimeSlot[] = [];
+  // protected priorKnowledge$ = this.knowledgeService.knowledgeList$;
+  // protected timeSlots = this.timeSlotService.slots$;
 
 
   constructor() {
@@ -56,8 +66,10 @@ export class PersonEditComponent {
 
       this.name = person.name;
 
+      // TODO: Remove!
       this.knowledgeService.knowledgeList$
         .subscribe(knowledge => {
+          this.priorKnowledge = knowledge;
           this.knowledge = knowledge.map(k => {
             return {
               knowledge: k,
@@ -68,6 +80,7 @@ export class PersonEditComponent {
 
       this.timeSlotService.slots$
         .subscribe(slots => {
+          this.timeSlots = slots;
           this.slots = slots.map(slot => {
             return {
               slot,
@@ -113,5 +126,10 @@ export class PersonEditComponent {
     this.name = ""
     this.knowledge = [];
     this.slots = [];
+  }
+
+
+  protected onKnowledgeDropped($event: CdkDragDrop<PriorKnowledgeSelection[], any>) {
+
   }
 }

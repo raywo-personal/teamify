@@ -71,4 +71,27 @@
       </button>
     }
   </div>
+
+  <div class="row" cdkDropListGroup>
+    <div class="col" cdkDropList>
+      target
+    </div>
+
+    <div class="col">
+      <div
+        cdkDropList
+        [cdkDropListData]="knowledge"
+        (cdkDropListDropped)="onKnowledgeDropped($event)"
+        class="knowledge-list"
+      >
+        @for (slot of timeSlots; track slot.id) {
+          <div class="slot-pill" cdkDrag>
+            <app-time-slot-view [timeSlot]="slot"
+                                [showButtons]="false"
+                                [showDragHandle]="true"/>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
 </form>

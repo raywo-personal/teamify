@@ -4,13 +4,15 @@ import {AsyncPipe} from '@angular/common';
 import {PriorKnowledgeViewComponent} from '../prior-knowledge-view/prior-knowledge-view.component';
 import {createPriorKnowledge, PriorKnowledge} from '../../models/prior-knowledge.model';
 import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
+import {PriorKnowledgeEditComponent} from '../prior-knowledge-edit/prior-knowledge-edit.component';
 
 
 @Component({
   selector: 'app-prior-knowledge-list',
   imports: [
     AsyncPipe,
-    PriorKnowledgeViewComponent
+    PriorKnowledgeViewComponent,
+    PriorKnowledgeEditComponent
   ],
   templateUrl: './prior-knowledge-list.component.html',
   styleUrl: './prior-knowledge-list.component.scss'
@@ -34,8 +36,8 @@ export class PriorKnowledgeListComponent {
 
 
   protected onEdit(content: TemplateRef<any>, knowledge: PriorKnowledge) {
-    this.knowledgeToEdit = knowledge;
     this.edit = true
+    this.knowledgeToEdit = knowledge;
     this.openOffcanvas(content, "Edit prior knowledge");
   }
 
@@ -45,12 +47,12 @@ export class PriorKnowledgeListComponent {
   }
 
 
-  protected onAddCancelled() {
+  protected onEditCancelled() {
     this.offcanvas.dismiss("cancelled");
   }
 
 
-  protected onAddSaved() {
+  protected onEditSaved() {
     this.offcanvas.dismiss("saved");
   }
 

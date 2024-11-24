@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between">
+  <div class="">
+    <div class="fw-bold">
+      {{ person().name }}
+    </div>
+
+    <div>
+      @for (knowledge of person().priorKnowledge; track knowledge.id) {
+        <div class="badge text-bg-secondary rounded-pill me-2">
+          {{ knowledge.name }}
+        </div>
+      }
+    </div>
+
+    <div>
+      @for (slot of person().timeSlots; track slot.id) {
+        <div class="badge bg-light text-primary rounded-pill me-2">
+          {{ slot.description }}
+        </div>
+      }
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-primary me-2" (click)="onEdit($event)">
+      <i class="bi-pencil"></i>
+      <span class="visually-hidden">Edit {{ person().name }}</span>
+    </button>
+
+    <app-delete-button
+      confirmationTitle="Delete person"
+      confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
+      (deleteConfirmed)="onDelete()"
+    />
+  </div>
+</div>

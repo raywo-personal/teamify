@@ -34,6 +34,6 @@ export class PriorKnowledgeListComponent {
 
 
   protected onDelete(knowledge: PriorKnowledge) {
-
+    this.knowledgeService.removeKnowledge(knowledge);
   }
 }

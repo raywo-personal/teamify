@@ -1,12 +1,14 @@
 import {Component, input, output} from '@angular/core';
 import {TimeSlot} from '../../models/time-slot.model';
 import {TimePipe} from '../../pipes/time.pipe';
+import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 
 
 @Component({
   selector: 'app-time-slot-view',
   imports: [
-    TimePipe
+    TimePipe,
+    DeleteButtonComponent
   ],
   templateUrl: './time-slot-view.component.html',
   styleUrl: './time-slot-view.component.scss'
@@ -24,8 +26,7 @@ export class TimeSlotViewComponent {
   }
 
 
-  protected onDelete(event: MouseEvent) {
-    event.stopPropagation();
+  protected onDelete() {
     this.delete.emit(this.timeSlot());
   }
 }

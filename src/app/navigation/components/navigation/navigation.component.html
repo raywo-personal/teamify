@@ -1,0 +1,20 @@
+<ul ngbNav
+    #nav="ngbNav"
+    [(activeId)]="active"
+    class="nav-pills"
+    orientation="vertical">
+
+  @for (navItem of navItems; track navItem) {
+    <li [ngbNavItem]="navItem.title">
+      <a ngbNavLink
+         [routerLink]="navItem.link"
+         [routerLinkActive]="'active'">
+        @if (navItem.icon) {
+          <i class="bi-{{ navItem.icon }} me-2"></i>
+        }
+
+        {{ navItem.title }}
+      </a>
+    </li>
+  }
+</ul>

@@ -1,0 +1,12 @@
+@use "bootstrap/scss/bootstrap" with (
+  // Fonts
+  $font-family-sans-serif: 'Inter',
+
+  // Colors
+  $primary: #05263f, // #c73e1d; // #53131e; //#09203f;
+  $secondary: #293f51,
+);
+
+// In order to avoid errors regarding the order of @use and @import
+// we do the import after the use.
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');

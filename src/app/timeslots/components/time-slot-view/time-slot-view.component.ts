@@ -18,12 +18,14 @@ export class TimeSlotViewComponent {
   public delete = output<TimeSlot>();
 
 
-  protected onEdit() {
+  protected onEdit(event: MouseEvent) {
+    event.stopPropagation();
     this.edit.emit(this.timeSlot());
   }
 
 
-  protected onDelete() {
+  protected onDelete(event: MouseEvent) {
+    event.stopPropagation();
     this.delete.emit(this.timeSlot());
   }
 }

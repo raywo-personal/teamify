@@ -9,12 +9,10 @@
 <ul class="list-group">
   @for (priorKnowledge of knowledgeList$ | async; track priorKnowledge.id) {
     <li class="list-group-item list-group-item-action pointer">
-      <div class="fw-bold">
-        {{ priorKnowledge.name }}
-      </div>
-      <div>
-        <small>{{ priorKnowledge.description }}</small>
-      </div>
+      <app-prior-knowledge-view [knowledge]="priorKnowledge"
+                                (edit)="onEdit(content, $event)"
+                                (delete)="onDelete($event)"
+      />
     </li>
   }
 </ul>

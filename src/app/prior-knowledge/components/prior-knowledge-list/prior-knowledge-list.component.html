@@ -25,6 +25,11 @@
   </div>
 
   <div class="offcanvas-body">
-    body
+    <app-prior-knowledge-edit
+      [knowledge]="knowledgeToEdit"
+      [edit]="edit"
+      (cancelled)="onEditCancelled()"
+      (saved)="onEditSaved()"
+    />
   </div>
 </ng-template>

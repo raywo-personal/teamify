@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {TimeSlotListComponent} from './timeslots/components/time-slot-list/time-slot-list.component';
 import {StartComponent} from './start/components/start/start.component';
+import {PriorKnowledgeListComponent} from './prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component';
 
 
 export const routes: Routes = [
@@ -23,7 +24,7 @@ export const routes: Routes = [
   },
   {
     path: "prior-knowledge",
-    component: TimeSlotListComponent,
+    component: PriorKnowledgeListComponent,
     data: {title: "Prior knowledge", icon: "book"},
     pathMatch: "full"
   },

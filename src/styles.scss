@@ -6,7 +6,8 @@
 @use "bootstrap-icons/font/bootstrap-icons.css";
 
 @use "app/styles/sidebar";
-@use "app/styles/slots";
+@use "app/styles/drag-drop-support";
+
 
 small {
   font-weight: 300;

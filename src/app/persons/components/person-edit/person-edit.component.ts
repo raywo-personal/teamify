@@ -51,7 +51,7 @@ export class PersonEditComponent implements OnInit {
   protected slots: TimeSlotSelection[] = [];
   protected knowledgeSource: PriorKnowledge[] = [];
   protected priorKnowledge: PriorKnowledge[] = [];
-  protected timeSlots: TimeSlot[] = [];
+  protected timeSlots: TimeSlot[][] = [];
   protected timeSlotsSource: TimeSlot[] = [];
   // protected priorKnowledge$ = this.knowledgeService.knowledgeList$;
   // protected timeSlots = this.timeSlotService.slots$;
@@ -100,6 +100,9 @@ export class PersonEditComponent implements OnInit {
     this.timeSlotService.slots$
       .subscribe(slots => {
         this.timeSlotsSource = slots;
+        slots.forEach(slot => {
+          this.timeSlots.push([]);
+        });
       });
   }
 

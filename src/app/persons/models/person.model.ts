@@ -6,7 +6,9 @@ export interface Person {
 
   id?: string;
   name: string;
+  // TODO: Make list of knowledge including remarks
   priorKnowledge: PriorKnowledge[];
+  // TODO: Make list of prioritized time slots
   timeSlots: TimeSlot[];
 
 }

@@ -1,48 +1,8 @@
-.slot-pill {
-  border: 1px solid var(--bs-light);
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  margin-bottom: 0.5rem;
 
-  background: var(--bs-body-bg);
-
-  .slot-pill-title {
-    font-size: var(--bs-font-size);
-    font-weight: bold;
-  }
-}
-
-//.slot-source-list,
-//.slot-target-list {
-  .slot-pill-placeholder {
-    border: 1px dashed var(--bs-light);
-    border-radius: 0.5rem;
-
-    background: var(--bs-tertiary-bg);
-
-    min-height: 3rem;
-    padding: 0.25rem 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-//}
-
-.slot-list {
-  //.slot-pill-placeholder {
-  //  border: 1px dashed var(--bs-light);
-  //  border-radius: 0.5rem;
-  //
-  //  background: var(--bs-tertiary-bg);
-  //
-  //  min-height: 3rem;
-  //  padding: 0.25rem 0.75rem;
-  //  margin-bottom: 0.5rem;
-  //}
-
-  &.cdk-drop-list-dragging {
-    .slot-pill {
-      &:not(.cdk-drag-placeholder) {
-        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-      }
+.cdk-drop-list-dragging {
+  .cdk-drag {
+    &:not(.cdk-drag-placeholder) {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
     }
   }
 }

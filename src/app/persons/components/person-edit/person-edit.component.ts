@@ -1,14 +1,13 @@
-import {Component, effect, inject, input, output} from '@angular/core';
+import {Component, effect, inject, input, OnInit, output} from '@angular/core';
 import {Person} from '../../models/person.model';
 import {FormsModule} from '@angular/forms';
 import {PriorKnowledge} from '../../../prior-knowledge/models/prior-knowledge.model';
 import {TimeSlot} from '../../../timeslots/models/time-slot.model';
 import {PriorKnowledgeService} from '../../../prior-knowledge/services/prior-knowledge.service';
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
-import {TimePipe} from '../../../timeslots/pipes/time.pipe';
 import {PersonService} from '../../services/person.service';
 import {TimeSlotViewComponent} from '../../../timeslots/components/time-slot-view/time-slot-view.component';
-import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 
 interface PriorKnowledgeSelection {
@@ -27,16 +26,16 @@ interface TimeSlotSelection {
   selector: 'app-person-edit',
   imports: [
     FormsModule,
-    TimePipe,
     TimeSlotViewComponent,
     CdkDropList,
     CdkDrag,
-    CdkDropListGroup
+    CdkDropListGroup,
+    CdkDragPlaceholder
   ],
   templateUrl: './person-edit.component.html',
   styleUrl: './person-edit.component.scss'
 })
-export class PersonEditComponent {
+export class PersonEditComponent implements OnInit {
 
   private personService = inject(PersonService);
   private knowledgeService = inject(PriorKnowledgeService);
@@ -50,8 +49,10 @@ export class PersonEditComponent {
   protected name: string = "";
   protected knowledge: PriorKnowledgeSelection[] = [];
   protected slots: TimeSlotSelection[] = [];
+  protected knowledgeSource: PriorKnowledge[] = [];
   protected priorKnowledge: PriorKnowledge[] = [];
   protected timeSlots: TimeSlot[] = [];
+  protected timeSlotsSource: TimeSlot[] = [];
   // protected priorKnowledge$ = this.knowledgeService.knowledgeList$;
   // protected timeSlots = this.timeSlotService.slots$;
 
@@ -69,7 +70,6 @@ export class PersonEditComponent {
       // TODO: Remove!
       this.knowledgeService.knowledgeList$
         .subscribe(knowledge => {
-          this.priorKnowledge = knowledge;
           this.knowledge = knowledge.map(k => {
             return {
               knowledge: k,
@@ -80,7 +80,6 @@ export class PersonEditComponent {
 
       this.timeSlotService.slots$
         .subscribe(slots => {
-          this.timeSlots = slots;
           this.slots = slots.map(slot => {
             return {
               slot,
@@ -89,6 +88,19 @@ export class PersonEditComponent {
           });
         });
     });
+  }
+
+
+  public ngOnInit() {
+    this.knowledgeService.knowledgeList$
+      .subscribe(knowledge => {
+        this.knowledgeSource = knowledge;
+      });
+
+    this.timeSlotService.slots$
+      .subscribe(slots => {
+        this.timeSlotsSource = slots;
+      });
   }
 
 
@@ -129,7 +141,16 @@ export class PersonEditComponent {
   }
 
 
-  protected onKnowledgeDropped($event: CdkDragDrop<PriorKnowledgeSelection[], any>) {
+  protected onSlotDropped(dropEvent: CdkDragDrop<TimeSlot[], any>) {
+    console.log("Dropped", dropEvent);
 
+    if (dropEvent.previousContainer === dropEvent.container) {
+      moveItemInArray(dropEvent.container.data, dropEvent.previousIndex, dropEvent.currentIndex);
+    } else {
+      transferArrayItem(dropEvent.previousContainer.data,
+        dropEvent.container.data,
+        dropEvent.previousIndex,
+        dropEvent.currentIndex);
+    }
   }
 }

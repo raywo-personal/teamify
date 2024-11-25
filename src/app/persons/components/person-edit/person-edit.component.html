@@ -1,91 +1,111 @@
 <form (ngSubmit)="onSubmit()" #form="ngForm">
-  <div class="form-floating mb-3">
-    <input
-      type="text"
-      class="form-control"
-      id="name"
-      name="name"
-      [(ngModel)]="name"
-      required
-      minlength="2"
-      maxlength="50"
-    >
-    <label for="name">Name</label>
-    <div class="invalid-feedback">
-      Please enter a name (2-50 characters).
-    </div>
-  </div>
+<!--  <div class="form-floating mb-3">-->
+<!--    <input-->
+<!--      type="text"-->
+<!--      class="form-control"-->
+<!--      id="name"-->
+<!--      name="name"-->
+<!--      [(ngModel)]="name"-->
+<!--      required-->
+<!--      minlength="2"-->
+<!--      maxlength="50"-->
+<!--    >-->
+<!--    <label for="name">Name</label>-->
+<!--    <div class="invalid-feedback">-->
+<!--      Please enter a name (2-50 characters).-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="row">
-    <div class="col">
-      @for (k of knowledge; track k.knowledge.id) {
-        <div class="form-check mb-3">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="knowledge_{{ k.knowledge.id }}"
-            name="knowledge_{{ k.knowledge.id }}"
-            [(ngModel)]="knowledge[$index].selected"
-          >
-          <label class="form-check-label d-flex flex-column" for="knowledge_{{ k.knowledge.id }}">
-            {{ k.knowledge.name }}
-            <small class="text-muted">{{ k.knowledge.description }}</small>
-          </label>
-        </div>
-      }
-    </div>
+<!--  <div class="row">-->
+<!--    <div class="col">-->
+<!--      @for (k of knowledge; track k.knowledge.id) {-->
+<!--        <div class="form-check mb-3">-->
+<!--          <input-->
+<!--            type="checkbox"-->
+<!--            class="form-check-input"-->
+<!--            id="knowledge_{{ k.knowledge.id }}"-->
+<!--            name="knowledge_{{ k.knowledge.id }}"-->
+<!--            [(ngModel)]="knowledge[$index].selected"-->
+<!--          >-->
+<!--          <label class="form-check-label d-flex flex-column" for="knowledge_{{ k.knowledge.id }}">-->
+<!--            {{ k.knowledge.name }}-->
+<!--            <small class="text-muted">{{ k.knowledge.description }}</small>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      }-->
+<!--    </div>-->
 
-    <div class="col">
-      @for (t of slots; track t.slot.id) {
-        <div class="form-check mb-3">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="slot_{{ t.slot.id }}"
-            name="slot_{{ t.slot.id }}"
-            [(ngModel)]="slots[$index].selected"
-          >
-          <label class="form-check-label d-flex flex-column" for="slot_{{ t.slot.id }}">
-            {{ t.slot.description }}
-            <small class="text-muted">{{ t.slot.start | time }}–{{ t.slot.end | time }}</small>
-          </label>
-        </div>
-      }
-    </div>
-  </div>
+<!--    <div class="col">-->
+<!--      @for (t of slots; track t.slot.id) {-->
+<!--        <div class="form-check mb-3">-->
+<!--          <input-->
+<!--            type="checkbox"-->
+<!--            class="form-check-input"-->
+<!--            id="slot_{{ t.slot.id }}"-->
+<!--            name="slot_{{ t.slot.id }}"-->
+<!--            [(ngModel)]="slots[$index].selected"-->
+<!--          >-->
+<!--          <label class="form-check-label d-flex flex-column" for="slot_{{ t.slot.id }}">-->
+<!--            {{ t.slot.description }}-->
+<!--            <small class="text-muted">{{ t.slot.start | time }}–{{ t.slot.end | time }}</small>-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      }-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="d-flex justify-content-end border-top pt-2 mt-2">
-    <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancel()">
-      Cancel
-    </button>
+<!--  <div class="d-flex justify-content-end border-top pt-2 mt-2">-->
+<!--    <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancel()">-->
+<!--      Cancel-->
+<!--    </button>-->
 
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-      Save
-    </button>
+<!--    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">-->
+<!--      Save-->
+<!--    </button>-->
 
-    @if (!edit()) {
-      <button type="button" class="btn btn-primary ms-3"
-              [disabled]="form.invalid"
-              (click)="onNextAdd()">
-        Add next person <i class="bi-chevron-right"></i>
-      </button>
-    }
-  </div>
+<!--    @if (!edit()) {-->
+<!--      <button type="button" class="btn btn-primary ms-3"-->
+<!--              [disabled]="form.invalid"-->
+<!--              (click)="onNextAdd()">-->
+<!--        Add next person <i class="bi-chevron-right"></i>-->
+<!--      </button>-->
+<!--    }-->
+<!--  </div>-->
 
   <div class="row" cdkDropListGroup>
-    <div class="col" cdkDropList>
-      target
-    </div>
-
     <div class="col">
+      <h4 class="h6">Preferred time slots</h4>
       <div
         cdkDropList
-        [cdkDropListData]="knowledge"
-        (cdkDropListDropped)="onKnowledgeDropped($event)"
-        class="knowledge-list"
+        [cdkDropListData]="timeSlots"
+        (cdkDropListDropped)="onSlotDropped($event)"
+        class="slot-list"
       >
         @for (slot of timeSlots; track slot.id) {
           <div class="slot-pill" cdkDrag>
+            <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
+            <app-time-slot-view [timeSlot]="slot"
+                                [showButtons]="false"
+                                [showDragHandle]="true"/>
+          </div>
+        } @empty {
+          <p>No time slots available.</p>
+        }
+      </div>
+    </div>
+
+    <div class="col">
+      <h4 class="h6">Available time slots</h4>
+      <div
+        cdkDropList
+        cdkDropListSortingDisabled
+        [cdkDropListData]="timeSlotsSource"
+        (cdkDropListDropped)="onSlotDropped($event)"
+        class="slot-list"
+      >
+        @for (slot of timeSlotsSource; track slot.id) {
+          <div class="slot-pill" cdkDrag>
+            <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
             <app-time-slot-view [timeSlot]="slot"
                                 [showButtons]="false"
                                 [showDragHandle]="true"/>

@@ -1,58 +1,65 @@
-.slot-source,
-.slot-target {
-  h4 {
-    font-size: 1rem;
+.person-form {
+  h3 {
+    font-size: 1.1rem;
     font-weight: 600;
   }
 
-  h5 {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-top: 0.5rem;
+  .slot-source,
+  .slot-target {
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    h5 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .priority-column {
+      background: var(--bs-tertiary-bg);
+      border: 1px solid var(--bs-light);
+      border-radius: 0.5rem;
+
+      min-height: 5rem;
+    }
+
+    .slot-time {
+      font-size: 0.75rem;
+    }
   }
 
-  .priority-column {
-    background: var(--bs-tertiary-bg);
+  .slot-list {
+    background-color: var(--bs-light-bg-subtle);
     border: 1px solid var(--bs-light);
     border-radius: 0.5rem;
-
+    padding: 0.5rem 0.5rem 1rem;
     min-height: 5rem;
   }
 
-  .slot-time {
-    font-size: 0.75rem;
+  .slot-pill {
+    border: 1px solid var(--bs-light);
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 0.5rem;
+
+    background: var(--bs-body-bg);
+
+    .slot-pill-title {
+      font-size: var(--bs-font-size);
+      font-weight: bold;
+    }
   }
-}
 
-.slot-list {
-  background-color: var(--bs-light-bg-subtle);
-  border: 1px solid var(--bs-light);
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.5rem 1rem;
-  min-height: 5rem;
-}
+  .slot-pill-placeholder {
+    border: 1px dashed var(--bs-light);
+    border-radius: 0.5rem;
 
-.slot-pill {
-  border: 1px solid var(--bs-light);
-  border-radius: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  margin-bottom: 0.5rem;
+    background: var(--bs-tertiary-bg);
 
-  background: var(--bs-body-bg);
-
-  .slot-pill-title {
-    font-size: var(--bs-font-size);
-    font-weight: bold;
+    min-height: 3rem;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 0.5rem;
   }
-}
-
-.slot-pill-placeholder {
-  border: 1px dashed var(--bs-light);
-  border-radius: 0.5rem;
-
-  background: var(--bs-tertiary-bg);
-
-  min-height: 3rem;
-  padding: 0.25rem 0.75rem;
-  margin-bottom: 0.5rem;
 }

@@ -1,25 +1,24 @@
-import {PriorKnowledge} from '../../prior-knowledge/models/prior-knowledge.model';
-import {TimeSlot} from '../../timeslots/models/time-slot.model';
+import {PersonKnowledge} from './person-knowledge.model';
+import {PersonTimeSlot} from './person-timeslot.model';
 
 
 export interface Person {
-
   id?: string;
   name: string;
-  // TODO: Make list of knowledge including remarks
-  priorKnowledge: PriorKnowledge[];
-  // TODO: Make list of prioritized time slots
-  timeSlots: TimeSlot[];
-
+  info: string;
+  priorKnowledge: PersonKnowledge[];
+  timeSlots: PersonTimeSlot[];
 }
 
 
 export function createPerson(name: string,
-                             priorKnowledge: PriorKnowledge[] = [],
-                             timeSlots: TimeSlot[] = []): Person {
+                             info: string = "",
+                             priorKnowledge: PersonKnowledge[] = [],
+                             timeSlots: PersonTimeSlot[] = []): Person {
   return {
     id: crypto.randomUUID(),
     name,
+    info,
     priorKnowledge,
     timeSlots
   };

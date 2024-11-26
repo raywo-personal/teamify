@@ -1,4 +1,4 @@
-import {Component, input, output} from '@angular/core';
+import {Component, computed, input, output} from '@angular/core';
 import {Person} from '../../models/person.model';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 
@@ -16,6 +16,18 @@ export class PersonViewComponent {
   public person = input.required<Person>();
   public edit = output<Person>();
   public delete = output<Person>();
+
+  protected slots = computed(() => {
+    const person = this.person();
+    return person
+      .timeSlots
+      .sort((a, b) => {
+        const aPriority = a.priority || -1;
+        const bPriority = b.priority || -1;
+
+        return aPriority - bPriority;
+      })
+  })
 
 
   protected onEdit(event: MouseEvent) {

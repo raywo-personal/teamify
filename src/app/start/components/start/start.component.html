@@ -4,7 +4,12 @@
   caption="Add person"
 />
 
-<app-person-edit
-  [person]="person"
+<app-person-edit [person]="person" (saved)="onSaved($event)"/>
 
-/>
+<hr>
+
+<div class="mb-5">
+  <app-person-view [person]="person" />
+</div>
+
+<hr>

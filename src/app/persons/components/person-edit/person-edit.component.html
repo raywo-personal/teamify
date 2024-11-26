@@ -1,5 +1,6 @@
-<form (ngSubmit)="onSubmit()" #form="ngForm">
-  <div class="row mb-3">
+<form (ngSubmit)="onSubmit()" class="person-form" #form="ngForm">
+  <h3>Person</h3>
+  <div class="row">
     <div class="col">
       <div class="form-floating mb-3">
         <input
@@ -21,6 +22,31 @@
   </div>
 
   <div class="row mb-3">
+    <div class="col">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="info"
+          name="info"
+          [(ngModel)]="info"
+          minlength="2"
+          maxlength="150"
+        >
+        <label for="info">Information</label>
+        <div class="invalid-feedback">
+          Please enter information (2-150 characters).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <h3>Prior knowledge</h3>
+    <small class="mb-2">
+      State what prior knowledge the person already has. This will have
+      influence on the creation of groups.
+    </small>
     @for (k of knowledge; track k.knowledge.id) {
       <div class="col">
         <div class="form-check form-switch mb-3">
@@ -45,11 +71,14 @@
               class="form-control"
               id="knowledge-remark-{{$index}}"
               name="knowledge-remark-{{$index}}"
-              required
               minlength="2"
-              maxlength="50"
+              maxlength="160"
+              [(ngModel)]="knowledge[$index].remark"
             >
             <label for="knowledge-remark-{{$index}}">Remark</label>
+            <div class="invalid-feedback">
+              Please enter a remark (2-160 characters).
+            </div>
           </div>
         }
       </div>
@@ -57,6 +86,10 @@
   </div>
 
   <div class="row mb-4" cdkDropListGroup>
+    <h3>Time slots</h3>
+    <small class="mb-2">
+      Select the preferred time slots for the person.
+    </small>
     <div class="col-8 slot-target">
       <h4 class="h6">Preferred time slots</h4>
 

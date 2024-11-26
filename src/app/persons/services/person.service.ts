@@ -24,23 +24,35 @@ export class PersonService {
 
 
   constructor() {
+    // TODO: Remove once real data are available
     this.knowledgeService.knowledgeList$
       .subscribe(knowledge => {
         this.persons.forEach(p => {
           const randomCount = this.randomNumber(knowledge.length);
           const indices = this.randomIndices(knowledge.length, randomCount);
 
-          p.priorKnowledge = indices.map(i => knowledge[i]);
+          p.priorKnowledge = indices.map(i => {
+            return {
+              priorKnowledge: knowledge[i],
+              remark: ""
+            }
+          });
         });
       })
 
+    // TODO: Remove once real data are available
     this.timeSlotService.slots$
       .subscribe(slots => {
         this.persons.forEach(p => {
           const randomCount = this.randomNumber(slots.length, 1);
           const indices = this.randomIndices(slots.length, randomCount);
 
-          p.timeSlots = indices.map(i => slots[i]);
+          p.timeSlots = indices.map(i => {
+            return {
+              timeSlot: slots[i],
+              priority: this.randomNumberIncludingUndefined(4)
+            }
+          });
         });
       })
   }
@@ -74,10 +86,18 @@ export class PersonService {
   // TODO: Remove!
   private randomNumber(max: number, min = 0): number {
     return Math.max(Math.floor(Math.random() * max), min);
-    // return Math.floor(Math.random() * (max )) + min;
   }
 
 
+  // TODO: Remove!
+  private randomNumberIncludingUndefined(max: number): number | undefined {
+    const random = this.randomNumber(max, -1);
+
+    return random === -1 ? undefined : random + 1;
+  }
+
+
+  // TODO: Remove!
   private randomIndices(max: number, count: number): number[] {
     const indices: number[] = [];
 

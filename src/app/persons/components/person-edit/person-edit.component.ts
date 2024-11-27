@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, OnInit, output} from '@angular/core';
+import {Component, effect, inject, input, output} from '@angular/core';
 import {Person} from '../../models/person.model';
 import {FormsModule} from '@angular/forms';
 import {PriorKnowledge} from '../../../prior-knowledge/models/prior-knowledge.model';
@@ -19,13 +19,6 @@ interface PriorKnowledgeSelection {
 }
 
 
-interface TimeSlotSelection {
-  slot: TimeSlot;
-  priority: number;
-  selected: boolean;
-}
-
-
 @Component({
   selector: 'app-person-edit',
   imports: [
@@ -39,7 +32,7 @@ interface TimeSlotSelection {
   templateUrl: './person-edit.component.html',
   styleUrl: './person-edit.component.scss'
 })
-export class PersonEditComponent implements OnInit {
+export class PersonEditComponent {
 
   private personService = inject(PersonService);
   private knowledgeService = inject(PriorKnowledgeService);
@@ -54,14 +47,8 @@ export class PersonEditComponent implements OnInit {
   protected info: string = "";
 
   protected knowledge: PriorKnowledgeSelection[] = [];
-  protected knowledgeSource: PriorKnowledge[] = [];
-  protected priorKnowledge: PriorKnowledge[] = [];
-
-  protected slots: TimeSlotSelection[] = [];
   protected timeSlots: TimeSlot[][] = [];
   protected timeSlotsSource: TimeSlot[] = [];
-  // protected priorKnowledge$ = this.knowledgeService.knowledgeList$;
-  // protected timeSlots = this.timeSlotService.slots$;
 
 
   constructor() {
@@ -75,7 +62,6 @@ export class PersonEditComponent implements OnInit {
       this.name = person.name;
       this.info = person.info;
 
-      // TODO: Remove!
       this.knowledgeService.knowledgeList$
         .subscribe(knowledge => {
           this.knowledge = knowledge.map(k => {
@@ -86,33 +72,19 @@ export class PersonEditComponent implements OnInit {
             }
           });
         });
-      //
-      // this.timeSlotService.slots$
-      //   .subscribe(slots => {
-      //     this.slots = slots.map(slot => {
-      //       return {
-      //         slot,
-      //         selected: person.timeSlots.includes(slot)
-      //       }
-      //     });
-      //   });
-    });
-  }
 
+      this.timeSlotService.slots$
+        .subscribe(slots => {
+          this.timeSlotsSource = slots;
+          const length = slots.length
+          this.timeSlots = new Array(length).fill(0).map(() => []);
 
-  public ngOnInit() {
-    this.knowledgeService.knowledgeList$
-      .subscribe(knowledge => {
-        this.knowledgeSource = knowledge;
-      });
-
-    this.timeSlotService.slots$
-      .subscribe(slots => {
-        this.timeSlotsSource = slots;
-        slots.forEach(slot => {
-          this.timeSlots.push([]);
+          person.timeSlots.forEach(ts => {
+            const priority = ts.priority || 1;
+            this.timeSlots[priority - 1].push(ts.timeSlot);
+          })
         });
-      });
+    });
   }
 
 
@@ -141,7 +113,7 @@ export class PersonEditComponent implements OnInit {
     this.name = "";
     this.info = "";
     this.knowledge = [];
-    this.slots = [];
+    this.timeSlots = [];
   }
 
 

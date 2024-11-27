@@ -129,6 +129,15 @@ export class PersonEditComponent {
   }
 
 
+  protected showTimeSlotPriority(index: number): boolean {
+    if (index < 1) {
+      return true;
+    }
+
+    return this.timeSlots[index - 1].length !== 0;
+  }
+
+
   private createPerson() {
     let priorKnowledge: PersonKnowledge[] = this.knowledge
       .filter(k => k.selected)

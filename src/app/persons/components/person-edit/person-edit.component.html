@@ -88,15 +88,20 @@
   <div class="row mb-4" cdkDropListGroup>
     <h3>Time slots</h3>
     <small class="mb-2">
-      Select the preferred time slots for the person.
+      <p>Select the preferred time slots for the person.</p>
+      <p>
+        Place them into the buckets according to the person’s preference. If
+        the person has no specific preference, put the time slots into the
+        first bucket.
+      </p>
     </small>
     <div class="col-8 slot-target">
       <h4 class="h6">Preferred time slots</h4>
 
       <div class="row">
         @for (slots of timeSlots; track $index) {
-          <div class="col">
-            <h5>Prio {{ $index + 1 }}</h5>
+          <div class="col" [class.hidden]="!showTimeSlotPriority($index)">
+            <h5>Priority {{ $index + 1 }}</h5>
 
             <div
               cdkDropList

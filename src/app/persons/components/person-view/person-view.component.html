@@ -1,28 +1,35 @@
-<div class="d-flex justify-content-between">
-  <div class="">
-    <div class="fw-bold">
-      {{ person().name }}
+<div class="person-view">
+  <div class="person-view-body">
+    <div class="person-view-header">
+      <h3>
+        {{ person().name }}
+      </h3>
+
+      <div class="person-view-slots">
+        @for (slotPriority of slotKeys; track $index) {
+          <div class="person-view-slot">
+            <span class="slot-priority">{{ slotPriority }}</span>
+            @for (slot of slots().get(slotPriority); track slot.timeSlot.id) {
+              <div class="badge bg-light text-primary rounded-pill me-2">
+                {{ slot.timeSlot.description }}
+              </div>
+            }
+          </div>
+        }
+      </div>
     </div>
 
-    <div>
+    <div class="person-view-knowledge">
       @for (knowledge of person().priorKnowledge; track knowledge.priorKnowledge.id) {
-        <div class="badge text-bg-secondary rounded-pill me-2">
-          {{ knowledge.priorKnowledge.name }}
-        </div>
-      }
-    </div>
-
-    <div>
-      @for (slot of slots(); track slot.timeSlot.id) {
-        <div class="badge bg-light text-primary rounded-pill me-2">
-          {{ slot.timeSlot.description }}&nbsp;|&nbsp;
-          <span class="badge bg-primary rounded-pill">{{ slot.priority ?? "-" }}</span>
+        <div class="knowledge-pill">
+          <div class="knowledge-pill-title">{{ knowledge.priorKnowledge.name }}</div>
+          <div class="knowledge-pill-remark">{{ knowledge.remark }}</div>
         </div>
       }
     </div>
   </div>
 
-  <div>
+  <div class="person-view-interaction">
     <button class="btn btn-primary me-2" (click)="onEdit($event)">
       <i class="bi-pencil"></i>
       <span class="visually-hidden">Edit {{ person().name }}</span>

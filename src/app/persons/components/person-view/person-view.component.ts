@@ -1,6 +1,7 @@
 import {Component, computed, input, output} from '@angular/core';
 import {Person} from '../../models/person.model';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
+import {PersonTimeSlot} from '../../models/person-timeslot.model';
 
 
 @Component({
@@ -19,15 +20,25 @@ export class PersonViewComponent {
 
   protected slots = computed(() => {
     const person = this.person();
-    return person
-      .timeSlots
-      .sort((a, b) => {
-        const aPriority = a.priority || -1;
-        const bPriority = b.priority || -1;
+    let slotBuckets = new Map<number, PersonTimeSlot[]>();
 
-        return aPriority - bPriority;
-      })
-  })
+    person.timeSlots.forEach(slot => {
+      const priority = slot.priority || 0;
+      let slots = slotBuckets.get(priority) || [];
+      slots.push(slot);
+      slots = slots.sort((a, b) => {
+        return a.timeSlot.description.localeCompare(b.timeSlot.description)
+      });
+      slotBuckets.set(priority, slots);
+    })
+
+    return slotBuckets;
+  });
+
+
+  protected get slotKeys(): number[] {
+    return [...this.slots().keys()].sort((a, b) => a - b);
+  }
 
 
   protected onEdit(event: MouseEvent) {

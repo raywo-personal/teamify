@@ -3,6 +3,7 @@ import {createPerson, Person} from '../models/person.model';
 import {BehaviorSubject} from 'rxjs';
 import {PriorKnowledgeService} from '../../prior-knowledge/services/prior-knowledge.service';
 import {TimeSlotService} from '../../timeslots/services/time-slot.service';
+import {generate} from 'random-words';
 
 
 @Injectable({
@@ -34,7 +35,7 @@ export class PersonService {
           p.priorKnowledge = indices.map(i => {
             return {
               priorKnowledge: knowledge[i],
-              remark: ""
+              remark: generate({min: 3, max: 15, join: " "})
             }
           });
         });
@@ -47,10 +48,10 @@ export class PersonService {
           const randomCount = this.randomNumber(slots.length, 1);
           const indices = this.randomIndices(slots.length, randomCount);
 
-          p.timeSlots = indices.map(i => {
+          p.timeSlots = indices.map((i, index) => {
             return {
               timeSlot: slots[i],
-              priority: this.randomNumberIncludingUndefined(4)
+              priority: index === 0 ? 1 : this.randomNumberIncludingUndefined(4)
             }
           });
         });

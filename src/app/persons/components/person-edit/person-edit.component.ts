@@ -51,6 +51,7 @@ export class PersonEditComponent {
   protected timeSlotsSource: TimeSlot[] = [];
 
 
+  // TODO: Validate that time slots must not be empty.
   constructor() {
     effect(() => {
       const person = this.person();
@@ -65,24 +66,28 @@ export class PersonEditComponent {
       this.knowledgeService.knowledgeList$
         .subscribe(knowledge => {
           this.knowledge = knowledge.map(k => {
+            const priorKnowledge = person.priorKnowledge.find(pK => pK.priorKnowledge.id === k.id)
             return {
               knowledge: k,
-              remark: "",
-              selected: person.priorKnowledge.find(pK => pK.priorKnowledge.id === k.id) !== undefined
+              remark: priorKnowledge?.remark || "",
+              selected: priorKnowledge !== undefined
             }
           });
         });
 
       this.timeSlotService.slots$
         .subscribe(slots => {
-          this.timeSlotsSource = slots;
           const length = slots.length
           this.timeSlots = new Array(length).fill(0).map(() => []);
+
+          const personTimeSlots = person.timeSlots.map(t => t.timeSlot);
 
           person.timeSlots.forEach(ts => {
             const priority = ts.priority || 1;
             this.timeSlots[priority - 1].push(ts.timeSlot);
-          })
+          });
+
+          this.timeSlotsSource = slots.filter(s => !personTimeSlots.includes(s));
         });
     });
   }
@@ -134,7 +139,9 @@ export class PersonEditComponent {
       return true;
     }
 
-    return this.timeSlots[index - 1].length !== 0;
+    return this.timeSlots
+      .slice(index - 1, this.timeSlots.length)
+      .some(slot => slot.length !== 0);
   }
 
 
@@ -144,6 +151,7 @@ export class PersonEditComponent {
       .map(k => createPersonKnowledge(k.knowledge, k.remark));
     let personTimeSlots: PersonTimeSlot[] = this.timeSlots
       .map((s, index) => {
+        // TODO: Set time slot priority without gaps.
         return s.map(slot => createPersonTimeSlot(slot, index + 1))
       })
       .flat();

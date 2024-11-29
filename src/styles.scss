@@ -6,7 +6,12 @@
 @use "bootstrap-icons/font/bootstrap-icons.css";
 
 @use "app/styles/sidebar";
+@use "app/styles/drag-drop-support";
+@use "app/styles/persons";
 
+small {
+  font-weight: 300;
+}
 
 .app-layout {
   display: grid;
@@ -21,4 +26,15 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.grabber {
+  cursor: grab;
+}
+.grabber:active {
+  cursor: grabbing;
+}
+
+.badge {
+  font-weight: 500;
 }

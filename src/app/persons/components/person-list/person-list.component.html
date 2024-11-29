@@ -1,15 +1,16 @@
 <app-add-header-bar
-  caption="Add knowledge item"
+  caption="Add person"
   (addClick)="onAdd(content)"
 />
 
 <ul class="list-group">
-  @for (priorKnowledge of knowledgeList$ | async; track priorKnowledge.id) {
+  @for (person of persons$ | async; track person.id) {
     <li class="list-group-item list-group-item-action pointer"
-        (click)="onEdit(content, priorKnowledge)">
-      <app-prior-knowledge-view [knowledge]="priorKnowledge"
-                                (edit)="onEdit(content, $event)"
-                                (delete)="onDelete($event)"
+        (click)="onEdit(content, person)">
+      <app-person-view
+        [person]="person"
+        (edit)="onEdit(content, $event)"
+        (delete)="onDelete($event)"
       />
     </li>
   }
@@ -22,8 +23,8 @@
   </div>
 
   <div class="offcanvas-body">
-    <app-prior-knowledge-edit
-      [knowledge]="knowledgeToEdit"
+    <app-person-edit
+      [person]="personToEdit"
       [edit]="edit"
       (cancelled)="onEditCancelled()"
       (saved)="onEditSaved()"

@@ -1,10 +1,7 @@
-<div class="d-flex justify-content-end align-items-baseline py-2 mb-3">
-  <button class="btn btn-sm btn-outline-secondary"
-          (click)="onAdd(content)">
-    <i class="bi-plus-lg me-2"></i>
-    Add time slot
-  </button>
-</div>
+<app-add-header-bar
+  caption="Add time slot"
+  (addClick)="onAdd(content)"
+/>
 
 <ul class="list-group">
   @for (timeSlot of slots$ | async; track timeSlot.id) {

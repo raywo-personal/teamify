@@ -2,7 +2,8 @@
   <h3>Person</h3>
   <div class="row">
     <div class="col">
-      <div class="form-floating mb-3">
+      <div class="form-floating mb-3"
+           [class.was-validated]="nameInput.dirty || nameInput.touched">
         <input
           type="text"
           class="form-control"
@@ -12,6 +13,8 @@
           required
           minlength="2"
           maxlength="50"
+          #nameInput="ngModel"
+          autofocus
         >
         <label for="name">Name</label>
         <div class="invalid-feedback">

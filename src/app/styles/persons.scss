@@ -1,3 +1,9 @@
+
+.person-offcanvas {
+  width: 75% !important;
+}
+
+
 .person-form {
   h3 {
     font-size: 1.1rem;
@@ -77,26 +83,26 @@
     font-weight: 600;
   }
 
-  .person-view-body {
+  &-body {
     flex: 1 1 auto;
     margin-right: 1rem
   }
 
-  .person-view-header {
+  &-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.75rem;
   }
 
-  .person-view-interaction {
+  &-interaction {
     width: fit-content;
   }
 
-  .person-view-slots {
+  &-slots {
     display: flex;
     gap: 0.5rem;
 
-    .person-view-slot {
+    &-slot {
       background: var(--bs-light-bg-subtle);
       padding: 0.25rem;
       border: 1px solid var(--bs-light);
@@ -110,7 +116,7 @@
     }
   }
 
-  .person-view-knowledge {
+  &-knowledge {
     display: flex;
     flex-direction: row;
     gap: 0.75rem;

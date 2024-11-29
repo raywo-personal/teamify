@@ -1,5 +1,5 @@
 import {Component, effect, inject, input, output} from '@angular/core';
-import {Person} from '../../models/person.model';
+import {createPerson, Person} from '../../models/person.model';
 import {FormsModule} from '@angular/forms';
 import {PriorKnowledge} from '../../../prior-knowledge/models/prior-knowledge.model';
 import {TimeSlot} from '../../../timeslots/models/time-slot.model';
@@ -38,6 +38,9 @@ export class PersonEditComponent {
   private knowledgeService = inject(PriorKnowledgeService);
   private timeSlotService = inject(TimeSlotService);
 
+  private _priorKnowledgeSource: PriorKnowledge[] = [];
+  private _timeSlotSource: TimeSlot[] = [];
+
   public person = input<Person>();
   public edit = input<boolean>(false);
   public saved = output<Person>();
@@ -65,29 +68,14 @@ export class PersonEditComponent {
 
       this.knowledgeService.knowledgeList$
         .subscribe(knowledge => {
-          this.knowledge = knowledge.map(k => {
-            const priorKnowledge = person.priorKnowledge.find(pK => pK.priorKnowledge.id === k.id)
-            return {
-              knowledge: k,
-              remark: priorKnowledge?.remark || "",
-              selected: priorKnowledge !== undefined
-            }
-          });
+          this._priorKnowledgeSource = knowledge;
+          this.fillKnowledge(person);
         });
 
       this.timeSlotService.slots$
         .subscribe(slots => {
-          const length = slots.length
-          this.timeSlots = new Array(length).fill(0).map(() => []);
-
-          const personTimeSlots = person.timeSlots.map(t => t.timeSlot);
-
-          person.timeSlots.forEach(ts => {
-            const priority = ts.priority || 1;
-            this.timeSlots[priority - 1].push(ts.timeSlot);
-          });
-
-          this.timeSlotsSource = slots.filter(s => !personTimeSlots.includes(s));
+          this._timeSlotSource = slots;
+          this.fillTimeSlots(person);
         });
     });
   }
@@ -112,13 +100,14 @@ export class PersonEditComponent {
 
 
   protected onNextAdd() {
-    const person = this.createPerson();
+    const createdPerson = this.createPerson();
+    this.personService.addPerson(createdPerson);
 
-    this.personService.addPerson(person);
+    const emptyPerson = createPerson("");
     this.name = "";
     this.info = "";
-    this.knowledge = [];
-    this.timeSlots = [];
+    this.fillKnowledge(emptyPerson)
+    this.fillTimeSlots(emptyPerson);
   }
 
 
@@ -145,7 +134,7 @@ export class PersonEditComponent {
   }
 
 
-  private createPerson() {
+  private createPerson(): Person {
     let priorKnowledge: PersonKnowledge[] = this.knowledge
       .filter(k => k.selected)
       .map(k => createPersonKnowledge(k.knowledge, k.remark));
@@ -163,5 +152,31 @@ export class PersonEditComponent {
       priorKnowledge: priorKnowledge,
       timeSlots: personTimeSlots
     };
+  }
+
+
+  private fillKnowledge(person: Person) {
+    this.knowledge = this._priorKnowledgeSource.map(k => {
+      const priorKnowledge = person.priorKnowledge.find(pK => pK.priorKnowledge.id === k.id)
+      return {
+        knowledge: k,
+        remark: priorKnowledge?.remark || "",
+        selected: priorKnowledge !== undefined
+      }
+    });
+  }
+
+
+  private fillTimeSlots(person: Person) {
+    const length = this._timeSlotSource.length
+    this.timeSlots = new Array(length).fill(0).map(() => []);
+
+    person.timeSlots.forEach(ts => {
+      const priority = ts.priority || 1;
+      this.timeSlots[priority - 1].push(ts.timeSlot);
+    });
+
+    const personTimeSlots = person.timeSlots.map(t => t.timeSlot);
+    this.timeSlotsSource = this._timeSlotSource.filter(s => !personTimeSlots.includes(s));
   }
 }

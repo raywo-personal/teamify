@@ -8,6 +8,8 @@
 @use "app/styles/sidebar";
 @use "app/styles/drag-drop-support";
 @use "app/styles/persons";
+@use "app/styles/grouping";
+@use "app/styles/teams";
 
 small {
   font-weight: 300;
@@ -31,6 +33,7 @@ small {
 .grabber {
   cursor: grab;
 }
+
 .grabber:active {
   cursor: grabbing;
 }

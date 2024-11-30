@@ -14,6 +14,7 @@ import {DeleteButtonComponent} from '../../../shared/components/delete-button/de
 export class PriorKnowledgeViewComponent {
 
   public knowledge = input.required<PriorKnowledge>();
+  public showButtons = input(true);
   public edit = output<PriorKnowledge>();
   public delete = output<PriorKnowledge>();
 

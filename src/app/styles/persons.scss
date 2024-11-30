@@ -98,29 +98,15 @@
     width: fit-content;
   }
 
-  &-slots {
-    display: flex;
-    gap: 0.5rem;
-
-    &-slot {
-      background: var(--bs-light-bg-subtle);
-      padding: 0.25rem;
-      border: 1px solid var(--bs-light);
-      border-radius: 0.5rem;
-    }
-
-    .slot-priority {
-      color: var(--bs-gray-600);
-      margin-left: 0.25rem;
-      margin-right: 0.75rem;
-    }
-  }
-
   &-knowledge {
     display: flex;
     flex-direction: row;
     gap: 0.75rem;
     align-items: flex-start;
+  }
+
+  &-info {
+    display: none;
   }
 
   .knowledge-pill {
@@ -140,6 +126,51 @@
 
     .knowledge-pill-remark {
       font-style: italic;
+    }
+  }
+
+  .popover {
+    display: none;
+  }
+}
+
+.person-view-slots {
+  display: flex;
+  gap: 0.5rem;
+  height: fit-content;
+
+  .person-view-slot {
+    background: var(--bs-light-bg-subtle);
+    padding: 0.25rem;
+    border: 1px solid var(--bs-light);
+    border-radius: 0.5rem;
+  }
+
+  .slot-priority {
+    color: var(--bs-gray-600);
+    margin-left: 0.25rem;
+    margin-right: 0.75rem;
+  }
+}
+
+.person-mini-view {
+  border: 1px solid var(--bs-light);
+  border-radius: 0.5rem;
+  background-color: var(--bs-tertiary-bg);
+
+  padding: 0.5rem;
+
+  .person-view {
+    .knowledge-pill-title {
+      font-weight: 400;
+    }
+
+    .knowledge-pill-remark {
+      display: none;
+    }
+
+    .popover {
+      display: block;
     }
   }
 }

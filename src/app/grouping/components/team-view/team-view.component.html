@@ -1,0 +1,22 @@
+<div class="team">
+  <div class="team-header">
+    <h4>{{ team().name }}</h4>
+    <div>
+      <small>
+        {{ team().timeSlot.start | time }}–{{ team().timeSlot.end | time }}
+      </small>
+    </div>
+  </div>
+
+  <div class="team-body">
+    <div class="person-list" cdkDropList>
+      @for (person of team().persons; track person.id) {
+        <div class="person-mini-view shadow-sm" cdkDrag>
+          <app-person-view [person]="person"
+                           [showButtons]="false"
+                           [showDragHandle]="true"/>
+        </div>
+      }
+    </div>
+  </div>
+</div>

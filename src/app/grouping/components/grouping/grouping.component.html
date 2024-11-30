@@ -1,0 +1,28 @@
+<div class="grouping" cdkDropListGroup>
+  <div class="grouping-persons">
+    <h3 class="mt-3">Persons</h3>
+    <div class="grouping-person-list mt-3"
+         cdkDropList
+         [cdkDropListData]="persons$"
+         (cdkDropListDropped)="onDrop($event)">
+      @for (person of persons$ |async; track person.id) {
+        <div class="person-mini-view shadow-sm" cdkDrag>
+          <app-person-view [person]="person"
+                           [showButtons]="false"
+                           [showDragHandle]="true"/>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="grouping-teams">
+    <h3 class="mt-3">Teams</h3>
+    <div class="grouping-team-list">
+      @for (team of teams$ | async; track $index) {
+        <app-team-view [team]="team"/>
+      }
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,30 @@
+.grouping {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "persons teams";
+  gap: 1rem;
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  &-persons {
+    grid-area: persons;
+  }
+
+  &-person-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &-teams {
+    grid-area: teams;
+  }
+
+  &-team-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

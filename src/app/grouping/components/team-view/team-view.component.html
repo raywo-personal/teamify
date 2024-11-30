@@ -1,4 +1,4 @@
-<div class="team">
+<section class="team">
   <div class="team-header">
     <h4>{{ team().name }}</h4>
     <div>
@@ -21,7 +21,9 @@
                            [showButtons]="false"
                            [showDragHandle]="true"/>
         </div>
+      } @empty {
+        <small class="text-muted mt-2">No persons assigned to this team.</small>
       }
     </div>
   </div>
-</div>
+</section>

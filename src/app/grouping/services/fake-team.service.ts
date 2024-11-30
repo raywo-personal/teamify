@@ -23,9 +23,7 @@ export class FakeTeamService {
         this._teams = new Array(slotsCount)
           .fill(0)
           .map((_, i) => {
-            const teamName = slots[i].description;
-            console.log(persons)
-            return createTeam(teamName, slots[i], persons);
+            return createTeam(slots[i].description, slots[i], [...persons]);
           });
       });
   }

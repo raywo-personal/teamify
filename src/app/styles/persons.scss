@@ -61,17 +61,6 @@
       font-weight: bold;
     }
   }
-
-  .slot-pill-placeholder {
-    border: 1px dashed var(--bs-light);
-    border-radius: 0.5rem;
-
-    background: var(--bs-tertiary-bg);
-
-    min-height: 3rem;
-    padding: 0.25rem 0.75rem;
-    margin-bottom: 0.5rem;
-  }
 }
 
 .person-view {
@@ -160,17 +149,7 @@
 
   padding: 0.5rem;
 
-  .person-view {
-    .knowledge-pill-title {
-      font-weight: 400;
-    }
-
-    .knowledge-pill-remark {
-      display: none;
-    }
-
-    .popover {
-      display: block;
-    }
+  .popover {
+    display: block;
   }
 }

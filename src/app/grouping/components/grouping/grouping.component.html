@@ -3,10 +3,11 @@
     <h3 class="mt-3">Persons</h3>
     <div class="grouping-person-list mt-3"
          cdkDropList
-         [cdkDropListData]="persons$"
+         [cdkDropListData]="personSource"
          (cdkDropListDropped)="onDrop($event)">
-      @for (person of persons$ |async; track person.id) {
+      @for (person of personSource; track person.id) {
         <div class="person-mini-view shadow-sm" cdkDrag>
+          <div class="person-placeholder" *cdkDragPlaceholder></div>
           <app-person-view [person]="person"
                            [showButtons]="false"
                            [showDragHandle]="true"/>

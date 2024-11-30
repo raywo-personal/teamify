@@ -4,7 +4,7 @@ import {TimeSlot} from '../../timeslots/models/time-slot.model';
 
 export interface Team {
 
-  id?: string;
+  id: string;
   name?: string;
   persons: Person[];
   timeSlot: TimeSlot;

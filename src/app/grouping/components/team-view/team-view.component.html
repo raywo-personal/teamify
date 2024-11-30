@@ -9,9 +9,14 @@
   </div>
 
   <div class="team-body">
-    <div class="person-list" cdkDropList>
+    <div class="person-list"
+         cdkDropList
+         [cdkDropListData]="team().persons"
+         (cdkDropListDropped)="onDrop($event)"
+    >
       @for (person of team().persons; track person.id) {
         <div class="person-mini-view shadow-sm" cdkDrag>
+          <div class="person-placeholder" *cdkDragPlaceholder></div>
           <app-person-view [person]="person"
                            [showButtons]="false"
                            [showDragHandle]="true"/>

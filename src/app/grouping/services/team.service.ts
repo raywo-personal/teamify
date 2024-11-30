@@ -21,6 +21,15 @@ export class TeamService {
   }
 
 
+  public clearAllPersonsInTeams() {
+    this.teams.forEach(team => team.persons = []);
+    this.teams = this.teams.map(t => {
+      t.persons = []
+      return t;
+    });
+  }
+
+
   public addTeam(team: Team) {
     this.teams = this.teams.concat(team);
   }

@@ -9,22 +9,10 @@ import {BehaviorSubject} from 'rxjs';
 export class PriorKnowledgeService {
 
   private _knowledgeList: PriorKnowledge[] = [
-    createPriorKnowledge(
-      'Knowledge 1',
-      'Knowledge 1 description'
-    ),
-    createPriorKnowledge(
-      'Knowledge 2',
-      'Knowledge 2 description'
-    ),
-    createPriorKnowledge(
-      'Knowledge 3',
-      'Knowledge 3 description'
-    ),
-    createPriorKnowledge(
-      'Knowledge 4',
-      'Knowledge 4 description'
-    )
+    createPriorKnowledge("on Premise"),
+    createPriorKnowledge("Frontend"),
+    createPriorKnowledge("Backend"),
+    createPriorKnowledge("Testen")
   ];
 
   private knowledgeListSubject = new BehaviorSubject<PriorKnowledge[]>(this._knowledgeList);

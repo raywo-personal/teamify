@@ -1,32 +1,31 @@
-<div class="container-xxl app-layout">
-  <aside class="sidebar">
-    <div class="offcanvas offcanvas-start show bg-body-tertiary"
-         tabindex="-1"
-         id="navSidebar"
-         aria-labelledby="sidebarLabel">
-      <div class="offcanvas-header brand">
-        <i class="bi-people-fill brand-logo"></i>
-        <div class="text-logo" id="sidebarLabel">
-          <h2 class="offcanvas-title h5">Grouper</h2>
-          <small class="">Create groups of students</small>
-        </div>
-      </div>
-
-      <div class="offcanvas-body">
-        <app-navigation/>
-      </div>
-
-      <div class="offcanvas-footer">
-        <small>
-          Made by raywo with <i class="bi-heart-fill text-danger"></i>&nbsp;|&nbsp;
-          <a href="https://github.com/raywo/grouper" target="_blank">
-            <i class="bi-github"></i>
-            Source code
-          </a>
-        </small>
+<div class="container-fluid app-layout">
+  <nav class="sidebar"
+       tabindex="-1"
+       id="navSidebar"
+       role="navigation"
+       aria-labelledby="sidebarLabel">
+    <div class="sidebar-header brand">
+      <i class="bi-people-fill brand-logo"></i>
+      <div class="text-logo" id="sidebarLabel">
+        <h2 class="sidebar-title">Grouper</h2>
+        <small class="">Create groups of students</small>
       </div>
     </div>
-  </aside>
+
+    <div class="sidebar-body">
+      <app-navigation/>
+    </div>
+
+    <div class="sidebar-footer">
+      <small>
+        Made by raywo with <i class="bi-heart-fill text-danger"></i>&nbsp;|&nbsp;
+        <a href="https://github.com/raywo/grouper" target="_blank">
+          <i class="bi-github"></i>
+          Source code
+        </a>
+      </small>
+    </div>
+  </nav>
 
   <div class="main">
     <app-top-bar/>

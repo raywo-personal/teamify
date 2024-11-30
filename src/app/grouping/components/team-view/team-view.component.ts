@@ -24,12 +24,6 @@ export class TeamViewComponent {
 
 
   onDrop(dropEvent: CdkDragDrop<Person[], any>) {
-    console.log(
-      'Dropped',
-      dropEvent.previousContainer.id,
-      'in',
-      dropEvent.container.id)
-
     if (dropEvent.previousContainer === dropEvent.container) {
       moveItemInArray(dropEvent.container.data, dropEvent.previousIndex, dropEvent.currentIndex);
     } else {

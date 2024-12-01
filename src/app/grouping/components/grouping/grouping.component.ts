@@ -8,9 +8,8 @@ import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup,
 import {Person} from '../../../persons/models/person.model';
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {FormsModule} from '@angular/forms';
+import {SortOrder, stringCompare, timeCompare} from '../../../shared/helper/comparison';
 
-
-type SortOrder = "asc" | "desc" | "none";
 
 @Component({
   selector: 'app-grouping',
@@ -60,6 +59,8 @@ export class GroupingComponent {
     effect(() => {
       const nameSortOrder = this.nameSortOrder();
       const slotSortOrder = this.slotSortOrder();
+      console.log(
+        `Sorting by name: ${nameSortOrder}, sorting by slot: ${slotSortOrder}`)
       this.sortAvailablePersons(nameSortOrder, slotSortOrder);
     });
   }
@@ -135,38 +136,23 @@ export class GroupingComponent {
   private sortAvailablePersons(nameSortOrder: SortOrder,
                                slotSortOrder: SortOrder) {
     this.availablePersons.sort((a, b) => {
-      const aSlotDescription = a.timeSlots
-        .filter(s => s.priority === 1)
-        .map(s => s.timeSlot.description)
-        .reduce((smallest, current) => {
-          return smallest.localeCompare(current) < 0 ? smallest : current
-        });
+      const aEarliestStart = this.personService.earliestStartTime(a);
+      const bEarliestStart = this.personService.earliestStartTime(b);
 
-      const bSlotDescription = b.timeSlots
-        .filter(s => s.priority === 1)
-        .map(s => s.timeSlot.description)
-        .reduce((smallest, current) => {
-          return smallest.localeCompare(current) < 0 ? smallest : current
-        });
+      let slotComparison = timeCompare(
+        aEarliestStart,
+        bEarliestStart,
+        slotSortOrder
+      );
 
-      let slotComparison = 0;
-
-      if (slotSortOrder === "asc") {
-        slotComparison = aSlotDescription.localeCompare(bSlotDescription);
-      } else if (slotSortOrder === "desc") {
-        slotComparison = bSlotDescription.localeCompare(aSlotDescription);
+      if (slotComparison !== 0) {
+        return slotComparison;
       }
 
-      if (slotComparison === 0) {
-        if (nameSortOrder === "asc") {
-          slotComparison = a.name.localeCompare(b.name);
-        } else if (nameSortOrder === "desc") {
-          slotComparison = b.name.localeCompare(a.name);
-        }
-      }
-
-      return slotComparison;
+      return stringCompare(a.name, b.name, nameSortOrder);
     });
+
+    this.filterPersons(this.personFilter());
   }
 
 

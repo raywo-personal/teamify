@@ -2,6 +2,8 @@ import {inject, Injectable} from '@angular/core';
 import {Person} from '../models/person.model';
 import {BehaviorSubject} from 'rxjs';
 import {FakePersonDataService} from './fake-person-data.service';
+import {PersonTimeSlot} from '../models/person-timeslot.model';
+import {Time} from '../../timeslots/models/time.model';
 
 
 @Injectable({
@@ -16,6 +18,25 @@ export class PersonService {
   public readonly persons$ = this.personsSubject.asObservable();
 
 
+  public get persons() {
+    return this.personsSubject.getValue();
+  }
+
+
+  public earliestTimeSlot(person: Person): PersonTimeSlot {
+    return person.timeSlots
+      .filter(s => s.priority === 1)
+      .reduce((smallest, current) => {
+        return smallest.timeSlot.start.compareTo(current.timeSlot.start) < 0 ? smallest : current
+      });
+  }
+
+
+  public earliestStartTime(person: Person): Time {
+    return this.earliestTimeSlot(person).timeSlot.start;
+  }
+
+
   public addPerson(person: Person) {
     this.persons = this.persons.concat(person);
   }
@@ -28,11 +49,6 @@ export class PersonService {
 
   public removePerson(person: Person) {
     this.persons = this.persons.filter(p => p.id !== person.id);
-  }
-
-
-  public get persons() {
-    return this.personsSubject.getValue();
   }
 
 

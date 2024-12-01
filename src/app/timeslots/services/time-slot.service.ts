@@ -2,8 +2,8 @@ import {inject, Injectable} from '@angular/core';
 import {createTimeSlot, TimeSlot} from '../models/time-slot.model';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 import {Time} from '../models/time.model';
-import {TeamService} from '../../grouping/services/team.service';
-import {createTeam} from '../../grouping/models/team.model';
+import {TeamService} from '../../teams/services/team.service';
+import {createTeam} from '../../teams/models/team.model';
 
 
 @Injectable({

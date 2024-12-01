@@ -31,6 +31,14 @@
 
         <div class="btn-group-description" id="sort-label">Sort by</div>
       </div>
+
+      <div>
+        <button class="btn btn-outline-secondary btn-sm"
+                (click)="onCreateFakeData()">
+          <i class="bi-journal-plus me-2"></i>
+          <span>Create fake data</span>
+        </button>
+      </div>
     </div>
 
     <div class="grouping-toolbar-filter">
@@ -55,7 +63,7 @@
 
   <div class="grouping-main" cdkDropListGroup>
     <div class="grouping-persons">
-      <h3 class="mt-3">
+      <h3>
         Persons
         <ng-container *ngTemplateOutlet="nameSortSymbol"></ng-container>
         <ng-container *ngTemplateOutlet="slotSortSymbol"></ng-container>
@@ -71,16 +79,22 @@
                              [showButtons]="false"
                              [showDragHandle]="true"/>
           </div>
+        } @empty {
+          <app-data-not-available-view title="No persons found"
+                                       [messageTemplate]="personMessageTemplate"/>
         }
       </div>
     </div>
 
     <div class="grouping-teams">
-      <h3 class="mt-3">Teams</h3>
+      <h3>Teams</h3>
 
-      <div class="grouping-team-list">
+      <div class="grouping-team-list mt-3">
         @for (team of teams$ | async; track $index) {
           <app-team-view [team]="team" (personDropped)="onPersonDropped($event)"/>
+        } @empty {
+          <app-data-not-available-view title="No teams found"
+                                       [messageTemplate]="slotsMessageTemplate"/>
         }
       </div>
     </div>
@@ -109,4 +123,33 @@
       &nbsp;
     }
   </div>
+</ng-template>
+
+<ng-template #slotsMessageTemplate>
+  <p>
+    Start creating persons by clicking the button below.
+  </p>
+
+  @if ((slotCount$ | async) === 0) {
+    <app-data-not-available-info text="No time slots are available at the
+          moment. Please consider creating time slots prior to adding
+          individuals, so they can be assigned accordingly."/>
+  }
+
+  <a routerLink="/time-slots" class="btn btn-primary">
+    Manage time slots
+  </a>
+</ng-template>
+
+<ng-template #personMessageTemplate>
+  <p>
+    No persons have been created yet.
+  </p>
+  <p>
+    Begin creating persons using the button below.
+  </p>
+
+  <a routerLink="/persons" class="btn btn-primary">
+    Manage persons
+  </a>
 </ng-template>

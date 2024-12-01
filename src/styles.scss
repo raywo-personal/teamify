@@ -10,6 +10,7 @@
 @use "app/styles/persons";
 @use "app/styles/grouping";
 @use "app/styles/teams";
+@use "app/styles/info-box";
 
 small, .small {
   font-weight: 300;
@@ -77,3 +78,4 @@ $full-view-fr: $sidebar-fr + $main-fr;
 .badge {
   font-weight: 500;
 }
+

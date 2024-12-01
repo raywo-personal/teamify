@@ -13,6 +13,9 @@
         (delete)="onDelete($event)"
       />
     </li>
+  } @empty {
+    <app-data-not-available-view title="No persons found"
+                                 [messageTemplate]="messageTemplate"/>
   }
 </ul>
 
@@ -30,4 +33,23 @@
       (saved)="onEditSaved()"
     />
   </div>
+</ng-template>
+
+
+<ng-template #messageTemplate>
+  <p>
+    Start creating persons by clicking the button below.
+  </p>
+
+  @if ((slotCount$ | async) === 0) {
+    <app-data-not-available-info text="No time slots are available at the
+          moment. Please consider creating time slots prior to adding
+          individuals, so they can be assigned accordingly." />
+  }
+
+  <button type="button"
+          class="btn btn-primary"
+          (click)="onAdd(content)">
+    Add person
+  </button>
 </ng-template>

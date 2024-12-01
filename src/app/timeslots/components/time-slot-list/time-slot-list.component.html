@@ -12,6 +12,9 @@
                           (delete)="onDelete($event)"
       />
     </li>
+  } @empty {
+    <app-data-not-available-view title="No time slots found"
+                                 [messageTemplate]="messageTemplate"/>
   }
 </ul>
 
@@ -28,4 +31,19 @@
                         (saved)="onAddSaved()"
     />
   </div>
+</ng-template>
+
+
+<ng-template #messageTemplate>
+  <p>
+    Start creating time slots by clicking the button below.
+  </p>
+
+  <app-data-not-available-info text="Please note that a team will be created for each time slot." />
+
+  <button type="button"
+          class="btn btn-primary"
+          (click)="onAdd(content)">
+    Add time slot
+  </button>
 </ng-template>

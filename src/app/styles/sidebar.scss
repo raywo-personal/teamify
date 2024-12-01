@@ -1,15 +1,30 @@
 .sidebar {
-  grid-area: sidebar;
+  background: var(--bs-tertiary-bg);
+  border-right: var(--bs-border-width) solid var(--bs-light);
 
-  .offcanvas {
-    width: 35ch;
+  padding: 1rem 1rem 0.5rem;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--sidebar-width);
+
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+
+  &-header {
+    margin-bottom: 2rem;
   }
 
-  .offcanvas-footer {
-    //flex-grow: 1;
-    padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
-    padding-bottom: 0.5rem;
-    overflow-y: auto;
+  &-body {
+    flex-grow: 1;
+  }
+
+  .sidebar-footer {
+    font-size: 0.8rem;
+    font-weight: 300;
   }
 }
 

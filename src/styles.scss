@@ -8,20 +8,58 @@
 @use "app/styles/sidebar";
 @use "app/styles/drag-drop-support";
 @use "app/styles/persons";
+@use "app/styles/grouping";
+@use "app/styles/teams";
 
-small {
+small, .small {
   font-weight: 300;
 }
 
+$sidebar-fr: 1;
+$main-fr: 4;
+$full-view-fr: $sidebar-fr + $main-fr;
+
 .app-layout {
+  --sidebar-width: calc(#{$sidebar-fr} / #{$full-view-fr} * 100%);
+  --top-bar-height: 4.25rem;
+
   display: grid;
   grid-template-areas: "sidebar main";
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: #{$sidebar-fr}fr #{$main-fr}fr;
   gap: 1.5rem;
+}
+
+.sidebar {
+  grid-area: sidebar;
 }
 
 .main {
   grid-area: main;
+
+  padding-right: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  height: var(--top-bar-height);
+
+  display: flex;
+  align-items: center;
+
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+
+  background: var(--bs-body-bg);
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
 .pointer {
@@ -31,6 +69,7 @@ small {
 .grabber {
   cursor: grab;
 }
+
 .grabber:active {
   cursor: grabbing;
 }

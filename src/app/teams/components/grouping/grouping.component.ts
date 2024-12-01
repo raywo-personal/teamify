@@ -12,6 +12,7 @@ import {SortOrder, stringCompare, timeCompare} from '../../../shared/helper/comp
 import {RouterLink} from "@angular/router";
 import {DataNotAvailableViewComponent} from '../../../shared/components/data-not-available-view/data-not-available-view.component';
 import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not-available-info/data-not-available-info.component';
+import {TeamAssemblyService} from '../../services/team-assembly.service';
 
 
 @Component({
@@ -38,12 +39,14 @@ export class GroupingComponent {
   private timeSlotService = inject(TimeSlotService);
   private personService = inject(PersonService);
   private teamService = inject(TeamService);
+  private teamAssemblyService = inject(TeamAssemblyService);
 
   protected persons$ = this.personService.persons$;
   protected teams$ = this.teamService.teams$;
   protected timeSlots$ = this.timeSlotService.slots$;
   protected slotCount$ = this.timeSlotService.slotCount$;
 
+  // TODO: Move to persons service.
   protected availablePersons: Person[] = [];
   protected filteredPersons: Person[] = [];
   protected personFilter = model<string>("all");
@@ -103,7 +106,7 @@ export class GroupingComponent {
 
 
   protected onFillTeams() {
-
+    this.teamAssemblyService.assembleTeams();
   }
 
 

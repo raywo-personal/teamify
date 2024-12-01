@@ -13,7 +13,8 @@ export class TeamService {
   public teams$ = this.teamsSubject.asObservable();
 
 
-  constructor() {
+  public get teams(): Team[] {
+    return this.teamsSubject.getValue();
   }
 
 
@@ -55,11 +56,6 @@ export class TeamService {
 
   public removeTeamForSlot(slot: TimeSlot) {
     this.teams = this.teams.filter(t => t.timeSlot.id !== slot.id);
-  }
-
-
-  private get teams() {
-    return this.teamsSubject.getValue();
   }
 
 

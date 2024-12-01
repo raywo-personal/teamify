@@ -1,9 +1,16 @@
 <div class="person-view">
+  @if (showDragHandle()) {
+    <div class="me-2 grabber" cdkDragHandle>
+      <i class="bi-list"></i>
+    </div>
+  }
+
   <div class="person-view-body">
     <div class="person-view-header">
-      <h3>
-        {{ person().name }}
-      </h3>
+      <div>
+        <h3>{{ person().name }}</h3>
+        <p class="small">{{ person().info }}</p>
+      </div>
 
       <div class="person-view-slots">
         @for (slotPriority of slotKeys; track $index) {
@@ -17,11 +24,23 @@
           </div>
         }
       </div>
+
+      <div class="person-view-info"
+           [ngbPopover]="popoverTemplate"
+           triggers="mouseenter:mouseleave"
+           [openDelay]="300"
+           [closeDelay]="150">
+        <i class="bi-info-circle"></i>
+      </div>
     </div>
 
     <div class="person-view-knowledge">
       @for (knowledge of person().priorKnowledge; track knowledge.priorKnowledge.id) {
-        <div class="knowledge-pill">
+        <div class="knowledge-pill"
+             ngbPopover="{{ knowledge.remark }}"
+             triggers="mouseenter:mouseleave"
+             [openDelay]="300"
+             [closeDelay]="150">
           <div class="knowledge-pill-title">{{ knowledge.priorKnowledge.name }}</div>
           <div class="knowledge-pill-remark">{{ knowledge.remark }}</div>
         </div>
@@ -29,16 +48,29 @@
     </div>
   </div>
 
-  <div class="person-view-interaction">
-    <button class="btn btn-primary me-2" (click)="onEdit($event)">
-      <i class="bi-pencil"></i>
-      <span class="visually-hidden">Edit {{ person().name }}</span>
-    </button>
+  @if (showButtons()) {
+    <div class="person-view-interaction">
+      <button class="btn btn-primary me-2" (click)="onEdit($event)">
+        <i class="bi-pencil"></i>
+        <span class="visually-hidden">Edit {{ person().name }}</span>
+      </button>
 
-    <app-delete-button
-      confirmationTitle="Delete person"
-      confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
-      (deleteConfirmed)="onDelete()"
-    />
-  </div>
+      <app-delete-button
+        confirmationTitle="Delete person"
+        confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
+        (deleteConfirmed)="onDelete()"
+      />
+    </div>
+  }
 </div>
+
+
+<ng-template #popoverTemplate>
+  <h5>Preferred time slots:</h5>
+
+  @for (slot of person().timeSlots; track slot.timeSlot.id) {
+    <div class="badge bg-light text-primary rounded-pill me-2">
+      {{ slot.timeSlot.description }}
+    </div>
+  }
+</ng-template>

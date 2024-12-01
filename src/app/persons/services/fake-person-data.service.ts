@@ -14,9 +14,30 @@ export class FakePersonDataService {
   private timeSlotService = inject(TimeSlotService);
 
   private _persons: Person[] = [
-    createPerson("Peter"),
-    createPerson("Paul"),
-    createPerson("Mary"),
+    createPerson("Nikolaj", "on Premise"),
+    createPerson("Stefan"),
+    createPerson("Ute", "zOS"),
+    createPerson("Franziska", "Testen"),
+    createPerson("Thomas Frauenknecht"),
+    createPerson("Sascha", "kein Entwickler"),
+    createPerson("Michael Getrost", "on Premise"),
+    createPerson("Thomas Gundelwein", "on Premise"),
+    createPerson("Walther", "on Premise"),
+    createPerson("Fabian"),
+    createPerson("Birgit", "on Premise"),
+    createPerson("Norbert Pick", "kein Entwickler"),
+    createPerson("Dragan"),
+    createPerson("Thomas Raffel"),
+    createPerson("Arthur"),
+    createPerson("Markus"),
+    createPerson("Dmitry"),
+    createPerson("Michael Schacher"),
+    createPerson("Tanja"),
+    createPerson("Orkun"),
+    createPerson("Ralf"),
+    createPerson("Norbert Tausend"),
+    createPerson("Marius"),
+    createPerson("Emre")
   ];
 
 

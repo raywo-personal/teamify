@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
 
   public ngOnInit(): void {
     this.navItems = routes
-      .filter(route => route.path && (route.path !== ""))
+      .filter(route => route.path && route.path !== "" && route.path !== "**")
       .map(route => {
         const data = route.data || {title: "", icon: ""};
 

@@ -2,12 +2,17 @@ import {Component, computed, input, output} from '@angular/core';
 import {Person} from '../../models/person.model';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 import {PersonTimeSlot} from '../../models/person-timeslot.model';
+import {CdkDragHandle} from '@angular/cdk/drag-drop';
+import {NgbPopover} from '@ng-bootstrap/ng-bootstrap';
+import {timeCompare} from '../../../shared/helper/comparison';
 
 
 @Component({
   selector: 'app-person-view',
   imports: [
-    DeleteButtonComponent
+    DeleteButtonComponent,
+    CdkDragHandle,
+    NgbPopover
   ],
   templateUrl: './person-view.component.html',
   styleUrl: './person-view.component.scss'
@@ -15,6 +20,8 @@ import {PersonTimeSlot} from '../../models/person-timeslot.model';
 export class PersonViewComponent {
 
   public person = input.required<Person>();
+  public showButtons = input(true);
+  public showDragHandle = input(false);
   public edit = output<Person>();
   public delete = output<Person>();
 
@@ -27,7 +34,7 @@ export class PersonViewComponent {
       let slots = slotBuckets.get(priority) || [];
       slots.push(slot);
       slots = slots.sort((a, b) => {
-        return a.timeSlot.description.localeCompare(b.timeSlot.description)
+        return timeCompare(a.timeSlot.start, b.timeSlot.start);
       });
       slotBuckets.set(priority, slots);
     })

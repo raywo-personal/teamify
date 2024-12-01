@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {Team} from '../../models/team.model';
 import {TimePipe} from '../../../timeslots/pipes/time.pipe';
 import {PersonViewComponent} from '../../../persons/components/person-view/person-view.component';
@@ -21,6 +21,7 @@ import {Person} from '../../../persons/models/person.model';
 export class TeamViewComponent {
 
   public team = input.required<Team>();
+  public personDropped = output();
 
 
   onDrop(dropEvent: CdkDragDrop<Person[], any>) {
@@ -31,6 +32,8 @@ export class TeamViewComponent {
         dropEvent.container.data,
         dropEvent.previousIndex,
         dropEvent.currentIndex);
+
+      this.personDropped.emit();
     }
   }
 }

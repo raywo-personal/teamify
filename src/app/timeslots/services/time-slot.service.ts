@@ -1,14 +1,16 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {createTimeSlot, TimeSlot} from '../models/time-slot.model';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import {Time} from '../models/time.model';
+import {TeamService} from '../../grouping/services/team.service';
+import {createTeam} from '../../grouping/models/team.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeSlotService {
-  private _slots: TimeSlot[] = [
+  private fakeSlots: TimeSlot[] = [
     createTimeSlot(
       "Slot 1",
       new Time(9),
@@ -31,23 +33,40 @@ export class TimeSlotService {
     )
   ];
 
+  private teamService = inject(TeamService);
 
-  private slotsSubject = new BehaviorSubject<TimeSlot[]>(this._slots);
+  private slotsSubject = new BehaviorSubject<TimeSlot[]>([]);
   public readonly slots$ = this.slotsSubject.asObservable();
 
 
   public addSlot(slot: TimeSlot) {
     this.slots = this.slots.concat(slot);
+    this.teamService.addTeam(createTeam(slot.description, slot));
   }
 
 
   public updateSlot(slot: TimeSlot) {
     this.slots = this.slots.map(s => s.id === slot.id ? slot : s);
+    this.teamService.updateTeamForSlot(slot);
   }
 
 
   public removeSlot(slot: TimeSlot) {
     this.slots = this.slots.filter(s => s.id !== slot.id);
+    this.teamService.removeTeamForSlot(slot);
+  }
+
+
+  public createFakeData() {
+    this.fakeSlots.forEach(slot => this.addSlot(slot));
+  }
+
+
+  public get slotCount$(): Observable<number> {
+    return this.slots$
+      .pipe(
+        map(slots => slots.length)
+      );
   }
 
 

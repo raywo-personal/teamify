@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, effect, inject, model} from '@angular/core';
 import {AsyncPipe} from '@angular/common';
 import {PersonService} from '../../../persons/services/person.service';
 import {TeamViewComponent} from '../team-view/team-view.component';
@@ -6,6 +6,8 @@ import {TeamService} from '../../services/team.service';
 import {PersonViewComponent} from '../../../persons/components/person-view/person-view.component';
 import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Person} from '../../../persons/models/person.model';
+import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
+import {FormsModule} from '@angular/forms';
 
 
 @Component({
@@ -17,30 +19,34 @@ import {Person} from '../../../persons/models/person.model';
     CdkDropListGroup,
     CdkDropList,
     CdkDrag,
-    CdkDragPlaceholder
+    CdkDragPlaceholder,
+    FormsModule
   ],
   templateUrl: './grouping.component.html',
   styleUrl: './grouping.component.scss'
 })
 export class GroupingComponent {
 
-  // private timeSlotService = inject(TimeSlotService);
-  // private knowledgeService = inject(PriorKnowledgeService);
+  private timeSlotService = inject(TimeSlotService);
   private personService = inject(PersonService);
   private teamService = inject(TeamService);
 
-  private personsOriginal: Person[] = [];
-
   protected persons$ = this.personService.persons$;
   protected teams$ = this.teamService.teams$;
+  protected timeSlots$ = this.timeSlotService.slots$;
 
-  protected personSource: Person[] = [];
+  protected availablePersons: Person[] = [];
+  protected filteredPersons: Person[] = [];
+  protected personFilter = model<string>("all");
 
 
   constructor() {
     this.persons$.subscribe(persons => {
-      this.personSource = persons;
-      this.personsOriginal = [...persons];
+      this.availablePersons = persons;
+    });
+
+    effect(() => {
+      this.filterPersons(this.personFilter());
     });
   }
 
@@ -54,16 +60,32 @@ export class GroupingComponent {
         dropEvent.previousIndex,
         dropEvent.currentIndex);
     }
+
+    this.filterPersons(this.personFilter());
   }
 
 
   protected onClearTeams() {
     this.teamService.clearAllPersonsInTeams();
-    this.personSource = [...this.personsOriginal];
+    this.availablePersons = [...this.personService.persons];
   }
 
 
   protected onFillTeams() {
 
+  }
+
+
+  protected onPersonDropped() {
+    this.filterPersons(this.personFilter());
+  }
+
+
+  private filterPersons(filter: string) {
+    if (filter === "all") {
+      this.filteredPersons = [...this.availablePersons];
+    } else {
+      this.filteredPersons = this.availablePersons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
+    }
   }
 }

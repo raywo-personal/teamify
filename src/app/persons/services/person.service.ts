@@ -31,7 +31,7 @@ export class PersonService {
   }
 
 
-  private get persons() {
+  public get persons() {
     return this.personsSubject.getValue();
   }
 

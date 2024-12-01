@@ -1,6 +1,4 @@
 .sidebar {
-  --sidebar-width: 22.22%;
-
   background: var(--bs-tertiary-bg);
   border-right: var(--bs-border-width) solid var(--bs-light);
 
@@ -25,8 +23,8 @@
   }
 
   .sidebar-footer {
-    padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
-    overflow-y: auto;
+    font-size: 0.8rem;
+    font-weight: 300;
   }
 }
 

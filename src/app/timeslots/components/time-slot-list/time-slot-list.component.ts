@@ -6,6 +6,8 @@ import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
 import {TimeSlotEditComponent} from '../time-slot-edit/time-slot-edit.component';
 import {createTimeSlot, TimeSlot} from '../../models/time-slot.model';
 import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/add-header-bar.component';
+import {DataNotAvailableViewComponent} from "../../../shared/components/data-not-available-view/data-not-available-view.component";
+import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not-available-info/data-not-available-info.component';
 
 
 @Component({
@@ -14,7 +16,9 @@ import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/a
     TimeSlotViewComponent,
     AsyncPipe,
     TimeSlotEditComponent,
-    AddHeaderBarComponent
+    AddHeaderBarComponent,
+    DataNotAvailableViewComponent,
+    DataNotAvailableInfoComponent
   ],
   templateUrl: './time-slot-list.component.html',
   styleUrl: './time-slot-list.component.scss'

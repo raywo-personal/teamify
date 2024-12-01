@@ -1,0 +1,10 @@
+<div class="info-box-additional">
+  <i class="bi-info-square"></i>
+  <p class="">
+    @if (text()) {
+      {{ text()}}
+    } @else {
+      <ng-container *ngTemplateOutlet="textTemplate() || null" />
+    }
+  </p>
+</div>

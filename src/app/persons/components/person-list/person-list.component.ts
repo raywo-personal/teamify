@@ -6,6 +6,9 @@ import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
 import {createPerson, Person} from '../../models/person.model';
 import {PersonEditComponent} from '../person-edit/person-edit.component';
 import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/add-header-bar.component';
+import {TimeSlotService} from "../../../timeslots/services/time-slot.service";
+import {DataNotAvailableViewComponent} from "../../../shared/components/data-not-available-view/data-not-available-view.component";
+import {DataNotAvailableInfoComponent} from "../../../shared/components/data-not-available-info/data-not-available-info.component";
 
 
 @Component({
@@ -14,7 +17,9 @@ import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/a
     AsyncPipe,
     PersonViewComponent,
     PersonEditComponent,
-    AddHeaderBarComponent
+    AddHeaderBarComponent,
+    DataNotAvailableViewComponent,
+    DataNotAvailableInfoComponent
   ],
   templateUrl: './person-list.component.html',
   styleUrl: './person-list.component.scss'
@@ -22,9 +27,11 @@ import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/a
 export class PersonListComponent {
 
   private personService = inject(PersonService);
+  private slotService = inject(TimeSlotService);
   private offcanvas = inject(NgbOffcanvas);
 
   protected persons$ = this.personService.persons$;
+  protected slotCount$ = this.slotService.slotCount$;
   protected personToEdit?: Person;
   protected canvasTitle: string = "";
   protected edit = false;

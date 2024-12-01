@@ -15,9 +15,17 @@
 
   &-persons {
     grid-area: persons;
+    height: calc(var(--list-height) + 3rem);
+  }
+
+  &-teams {
+    grid-area: teams;
+    height: calc(var(--list-height) + 3rem);
   }
 
   &-person-list {
+    container-type: inline-size;
+
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -49,11 +57,9 @@
     }
   }
 
-  &-teams {
-    grid-area: teams;
-  }
-
   &-team-list {
+    container-type: inline-size;
+
     display: flex;
     flex-direction: column;
     gap: 1rem;

@@ -12,6 +12,9 @@
                                 (delete)="onDelete($event)"
       />
     </li>
+  } @empty {
+    <app-data-not-available-view title="No prior knowledge found"
+                                 [messageTemplate]="messageTemplate"/>
   }
 </ul>
 
@@ -29,4 +32,21 @@
       (saved)="onEditSaved()"
     />
   </div>
+</ng-template>
+
+
+<ng-template #messageTemplate>
+  <app-data-not-available-info text="A person's prior knowledge is utilized to
+        achieve a good mix of expertise within the team when assembling
+        teams later."/>
+
+  <p>
+    Begin creating prior knowledge by using the button below.
+  </p>
+
+  <button type="button"
+          class="btn btn-primary"
+          (click)="onAdd(content)">
+    Add prior knowledge
+  </button>
 </ng-template>

@@ -1,7 +1,7 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Team} from '../models/team.model';
-import {FakeTeamService} from './fake-team.service';
+import {TimeSlot} from "../../timeslots/models/time-slot.model";
 
 
 @Injectable({
@@ -9,11 +9,7 @@ import {FakeTeamService} from './fake-team.service';
 })
 export class TeamService {
 
-  // TODO: Remove once real data exist!
-  private fakeTeamService = inject(FakeTeamService);
-  private _teams: Team[] = this.fakeTeamService.teams;
-
-  private teamsSubject = new BehaviorSubject<Team[]>(this._teams);
+  private teamsSubject = new BehaviorSubject<Team[]>([]);
   public teams$ = this.teamsSubject.asObservable();
 
 
@@ -40,8 +36,25 @@ export class TeamService {
   }
 
 
+  public updateTeamForSlot(slot: TimeSlot) {
+    this.teams = this.teams.map(t => {
+      if (t.timeSlot.id === slot.id) {
+        t.timeSlot = slot;
+        t.name = slot.description;
+      }
+
+      return t;
+    })
+  }
+
+
   public removeTeam(team: Team) {
     this.teams = this.teams.filter(t => t.id !== team.id);
+  }
+
+
+  public removeTeamForSlot(slot: TimeSlot) {
+    this.teams = this.teams.filter(t => t.timeSlot.id !== slot.id);
   }
 
 

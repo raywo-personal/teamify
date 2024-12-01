@@ -9,6 +9,9 @@ import {Person} from '../../../persons/models/person.model';
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {FormsModule} from '@angular/forms';
 import {SortOrder, stringCompare, timeCompare} from '../../../shared/helper/comparison';
+import {RouterLink} from "@angular/router";
+import {DataNotAvailableViewComponent} from '../../../shared/components/data-not-available-view/data-not-available-view.component';
+import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not-available-info/data-not-available-info.component';
 
 
 @Component({
@@ -22,7 +25,10 @@ import {SortOrder, stringCompare, timeCompare} from '../../../shared/helper/comp
     CdkDrag,
     CdkDragPlaceholder,
     FormsModule,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    RouterLink,
+    DataNotAvailableViewComponent,
+    DataNotAvailableInfoComponent
   ],
   templateUrl: './grouping.component.html',
   styleUrl: './grouping.component.scss'
@@ -36,6 +42,7 @@ export class GroupingComponent {
   protected persons$ = this.personService.persons$;
   protected teams$ = this.teamService.teams$;
   protected timeSlots$ = this.timeSlotService.slots$;
+  protected slotCount$ = this.timeSlotService.slotCount$;
 
   protected availablePersons: Person[] = [];
   protected filteredPersons: Person[] = [];
@@ -59,8 +66,6 @@ export class GroupingComponent {
     effect(() => {
       const nameSortOrder = this.nameSortOrder();
       const slotSortOrder = this.slotSortOrder();
-      console.log(
-        `Sorting by name: ${nameSortOrder}, sorting by slot: ${slotSortOrder}`)
       this.sortAvailablePersons(nameSortOrder, slotSortOrder);
     });
   }
@@ -162,5 +167,13 @@ export class GroupingComponent {
     } else {
       this.filteredPersons = this.availablePersons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
     }
+  }
+
+
+  protected onCreateFakeData() {
+    this.timeSlotService.createFakeData();
+    this.personService.createFakeData();
+    // this.availablePersons = [...this.personService.persons];
+    // this.filterPersons(this.personFilter());
   }
 }

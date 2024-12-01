@@ -14,7 +14,7 @@ export class PersonService {
   private fakePersonDataService = inject(FakePersonDataService);
   private _persons: Person[] = this.fakePersonDataService.persons;
 
-  private personsSubject = new BehaviorSubject<Person[]>(this._persons);
+  private personsSubject = new BehaviorSubject<Person[]>([]);
   public readonly persons$ = this.personsSubject.asObservable();
 
 
@@ -49,6 +49,11 @@ export class PersonService {
 
   public removePerson(person: Person) {
     this.persons = this.persons.filter(p => p.id !== person.id);
+  }
+
+
+  public createFakeData() {
+    this._persons.forEach(person => this.addPerson(person));
   }
 
 

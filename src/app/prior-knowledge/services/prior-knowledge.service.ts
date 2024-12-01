@@ -15,7 +15,7 @@ export class PriorKnowledgeService {
     createPriorKnowledge("Testen")
   ];
 
-  private knowledgeListSubject = new BehaviorSubject<PriorKnowledge[]>(this._knowledgeList);
+  private knowledgeListSubject = new BehaviorSubject<PriorKnowledge[]>([]);
   public readonly knowledgeList$ = this.knowledgeListSubject.asObservable();
 
 
@@ -31,6 +31,11 @@ export class PriorKnowledgeService {
 
   public removeKnowledge(knowledge: PriorKnowledge) {
     this.knowledgeList = this.knowledgeList.filter(k => k.id !== knowledge.id);
+  }
+
+
+  public createFakeData() {
+    this._knowledgeList.forEach(knowledge => this.addKnowledge(knowledge));
   }
 
 

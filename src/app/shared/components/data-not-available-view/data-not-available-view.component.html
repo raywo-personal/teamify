@@ -1,0 +1,13 @@
+<div class="info-box">
+  <div class="info-box-header">
+    <i class="bi-exclamation-triangle-fill text-warning me-2"></i>
+    {{ title() }}
+  </div>
+  <div class="info-box-body">
+    @if (message()) {
+      {{ message() }}
+    } @else {
+      <ng-container *ngTemplateOutlet="messageTemplate() || null"></ng-container>
+    }
+  </div>
+</div>

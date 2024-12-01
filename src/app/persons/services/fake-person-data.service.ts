@@ -43,6 +43,8 @@ export class FakePersonDataService {
 
   // TODO: Remove once real data are available
   constructor() {
+    this.knowledgeService.createFakeData();
+
     this.knowledgeService.knowledgeList$
       .subscribe(knowledge => {
         this._persons.forEach(p => {
@@ -78,6 +80,7 @@ export class FakePersonDataService {
   public get persons() {
     return this._persons;
   }
+
 
   private randomNumber(max: number, min = 0): number {
     return Math.max(Math.floor(Math.random() * max), min);

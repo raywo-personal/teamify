@@ -1,5 +1,5 @@
 .grouping {
-  --grouping-tool-bar-height: 3rem;
+  --grouping-tool-bar-height: 4rem;
   --list-height: calc(100vh - var(--top-bar-height) - var(--grouping-tool-bar-height) - 4rem);
 
   &-main {
@@ -70,6 +70,8 @@
     align-items: center;
     gap: 0.5rem;
 
+    padding-top: 0.5rem;
+
     height: var(--grouping-tool-bar-height);
 
     .btn {
@@ -88,6 +90,10 @@
       font-weight: 500;
       color: var(--bs-gray-600);
     }
+
+    .sort-symbol {
+      width: 2ch;
+    }
   }
 
   &-toolbar-buttons {
@@ -103,5 +109,9 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: auto;
+  }
+
+  .sort-symbol {
+    display: inline-block;
   }
 }

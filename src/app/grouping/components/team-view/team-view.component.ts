@@ -21,7 +21,7 @@ import {Person} from '../../../persons/models/person.model';
 export class TeamViewComponent {
 
   public team = input.required<Team>();
-  public personDropped = output();
+  public personDropped = output<Person>();
 
 
   onDrop(dropEvent: CdkDragDrop<Person[], any>) {
@@ -33,7 +33,7 @@ export class TeamViewComponent {
         dropEvent.previousIndex,
         dropEvent.currentIndex);
 
-      this.personDropped.emit();
+      this.personDropped.emit(dropEvent.container.data[dropEvent.currentIndex]);
     }
   }
 }

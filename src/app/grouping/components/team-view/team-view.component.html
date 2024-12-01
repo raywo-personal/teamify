@@ -15,7 +15,9 @@
          (cdkDropListDropped)="onDrop($event)"
     >
       @for (person of team().persons; track person.id) {
-        <div class="person-mini-view shadow-sm" cdkDrag>
+        <div class="person-mini-view shadow-sm"
+             cdkDrag
+             [cdkDragData]="person">
           <div class="person-placeholder" *cdkDragPlaceholder></div>
           <app-person-view [person]="person"
                            [showButtons]="false"

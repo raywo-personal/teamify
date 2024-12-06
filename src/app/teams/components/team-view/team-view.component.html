@@ -1,6 +1,6 @@
 <section class="team">
   <div class="team-header">
-    <h4>{{ team().name }}</h4>
+    <h4>{{ team().name }} <small>({{team().persons.length}} members)</small></h4>
     <div>
       <small>
         {{ team().timeSlot.start | time }}–{{ team().timeSlot.end | time }}

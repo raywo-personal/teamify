@@ -39,7 +39,7 @@ export class PriorKnowledgeService {
   }
 
 
-  private get knowledgeList() {
+  public get knowledgeList() {
     return this.knowledgeListSubject.getValue();
   }
 

@@ -54,7 +54,7 @@ export class TimeSlotEditComponent {
     const start = new Time(this.startHour(), this.startMinute());
     const end = this.endTime();
     const timeSlot = {
-      id: this.timeSlot()?.id,
+      id: this.timeSlot()?.id || crypto.randomUUID(),
       description: this.description,
       start,
       end

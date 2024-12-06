@@ -3,7 +3,7 @@ import {Time} from './time.model';
 
 export interface TimeSlot {
 
-  id?: string;
+  id: string;
   description: string;
   start: Time;
   end: Time;

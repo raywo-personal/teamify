@@ -80,6 +80,7 @@
                              [showDragHandle]="true"/>
           </div>
         } @empty {
+<!--          TODO: Display different warning when no persons are found vs. no available persons are found. -->
           <app-data-not-available-view title="No persons found"
                                        [messageTemplate]="personMessageTemplate"/>
         }

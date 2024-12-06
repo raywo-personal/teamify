@@ -42,6 +42,7 @@ export class GroupingComponent {
   private teamAssemblyService = inject(TeamAssemblyService);
 
   protected persons$ = this.personService.persons$;
+  protected availablePersons$ = this.personService.availablePersons$;
   protected teams$ = this.teamService.teams$;
   protected timeSlots$ = this.timeSlotService.slots$;
   protected slotCount$ = this.timeSlotService.slotCount$;
@@ -56,10 +57,15 @@ export class GroupingComponent {
 
   constructor() {
     this.persons$.subscribe(persons => {
-      this.availablePersons = persons;
       this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
       this.filterPersons(this.personFilter());
     });
+
+    this.availablePersons$.subscribe(persons => {
+      this.availablePersons = persons;
+      this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
+      this.filterPersons(this.personFilter());
+    })
 
     effect(() => {
       const filter = this.personFilter();

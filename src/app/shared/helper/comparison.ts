@@ -3,31 +3,21 @@ import {Time} from '../../timeslots/models/time.model';
 
 export type SortOrder = "asc" | "desc" | "none";
 
+
 export function stringCompare(a: string,
                               b: string,
                               sortOrder: SortOrder = "asc"): number {
-  if (sortOrder === "asc") {
-    return a.localeCompare(b);
-  }
-
-  if (sortOrder === "desc") {
-    return b.localeCompare(a);
-  }
-
-  return 0;
+  return a.localeCompare(b) * direction(sortOrder);
 }
 
 
 export function timeCompare(a: Time,
                             b: Time,
                             sortOrder: SortOrder = "asc"): number {
-  if (sortOrder === "asc") {
-    return a.compareTo(b);
-  }
+  return a.compareTo(b) * direction(sortOrder);
+}
 
-  if (sortOrder === "desc") {
-    return b.compareTo(a);
-  }
 
-  return 0;
+function direction(sortOrder: SortOrder): number {
+  return sortOrder === "asc" || sortOrder === "none" ? 1 : -1;
 }

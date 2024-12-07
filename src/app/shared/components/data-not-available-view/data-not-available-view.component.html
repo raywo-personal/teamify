@@ -1,6 +1,14 @@
-<div class="info-box">
+<div class="info-box"
+     [class.warning]="mode() === 'warning'"
+     [class.error]="mode() === 'error'"
+     [class.info]="mode() === 'info'"
+     [class.success]="mode() === 'success'">
   <div class="info-box-header">
-    <i class="bi-exclamation-triangle-fill text-warning me-2"></i>
+    <i class="bi-exclamation-triangle-fill me-2"
+       [class.text-warning]="mode() === 'warning'"
+       [class.text-info]="mode() === 'info'"
+       [class.text-danger]="mode() === 'error'"
+       [class.text-success]="mode() === 'success'"></i>
     {{ title() }}
   </div>
   <div class="info-box-body">

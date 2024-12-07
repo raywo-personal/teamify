@@ -1,9 +1,11 @@
-import {Component, input, output} from '@angular/core';
+import {Component, inject, input, output} from '@angular/core';
 import {Team} from '../../models/team.model';
 import {TimePipe} from '../../../timeslots/pipes/time.pipe';
 import {PersonViewComponent} from '../../../persons/components/person-view/person-view.component';
-import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList} from '@angular/cdk/drag-drop';
 import {Person} from '../../../persons/models/person.model';
+import {TeamService} from '../../services/team.service';
+import {PersonService} from '../../../persons/services/person.service';
 
 
 @Component({
@@ -20,20 +22,25 @@ import {Person} from '../../../persons/models/person.model';
 })
 export class TeamViewComponent {
 
+  private teamService = inject(TeamService);
+  private personService = inject(PersonService);
+
   public team = input.required<Team>();
   public personDropped = output<Person>();
 
 
   onDrop(dropEvent: CdkDragDrop<Person[], any>) {
-    if (dropEvent.previousContainer === dropEvent.container) {
-      moveItemInArray(dropEvent.container.data, dropEvent.previousIndex, dropEvent.currentIndex);
-    } else {
-      transferArrayItem(dropEvent.previousContainer.data,
-        dropEvent.container.data,
-        dropEvent.previousIndex,
-        dropEvent.currentIndex);
+    const origin: string | undefined = dropEvent.item.data["origin"];
+    const originTeam: Team | undefined = dropEvent.item.data["originTeam"];
+    const person: Person = dropEvent.item.data["person"];
 
-      this.personDropped.emit(dropEvent.container.data[dropEvent.currentIndex]);
+    if (origin === "available") {
+      this.teamService.addToTeam(this.team(), person);
+      this.personService.removeAvailablePerson(person);
+    }
+
+    if (originTeam && person) {
+      this.teamService.moveBetweenTeams(originTeam, this.team(), person);
     }
   }
 }

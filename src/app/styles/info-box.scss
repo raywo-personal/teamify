@@ -2,7 +2,7 @@
 .info-box {
   background: var(--bs-tertiary-bg);
 
-  border: 2px solid var(--bs-warning);
+  border: 2px solid var(--bs-light);
   border-radius: 0.75rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
@@ -36,6 +36,22 @@
     p:last-child {
       margin-bottom: 0;
     }
+  }
+
+  &.success {
+    border: 2px solid var(--bs-success);
+  }
+
+  &.warning {
+    border: 2px solid var(--bs-warning);
+  }
+
+  &.info {
+    border: 2px solid var(--bs-info);
+  }
+
+  &.danger {
+    border: 2px solid var(--bs-danger);
   }
 }
 

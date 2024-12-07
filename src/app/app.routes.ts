@@ -3,7 +3,7 @@ import {TimeSlotListComponent} from './timeslots/components/time-slot-list/time-
 import {StartComponent} from './start/components/start/start.component';
 import {PriorKnowledgeListComponent} from './prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component';
 import {PersonListComponent} from './persons/components/person-list/person-list.component';
-import {GroupingComponent} from './grouping/components/grouping/grouping.component';
+import {GroupingComponent} from './teams/components/grouping/grouping.component';
 
 
 export const routes: Routes = [

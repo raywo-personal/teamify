@@ -1,6 +1,6 @@
 <section class="team">
   <div class="team-header">
-    <h4>{{ team().name }}</h4>
+    <h4>{{ team().name }} <small>({{team().persons.length}} members)</small></h4>
     <div>
       <small>
         {{ team().timeSlot.start | time }}–{{ team().timeSlot.end | time }}
@@ -11,13 +11,12 @@
   <div class="team-body">
     <div class="person-list"
          cdkDropList
-         [cdkDropListData]="team().persons"
          (cdkDropListDropped)="onDrop($event)"
     >
       @for (person of team().persons; track person.id) {
         <div class="person-mini-view shadow-sm"
              cdkDrag
-             [cdkDragData]="person">
+             [cdkDragData]="{originTeam: team(), person: person}">
           <div class="person-placeholder" *cdkDragPlaceholder></div>
           <app-person-view [person]="person"
                            [showButtons]="false"

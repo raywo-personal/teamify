@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Team} from '../models/team.model';
 import {TimeSlot} from "../../timeslots/models/time-slot.model";
+import {Person} from '../../persons/models/person.model';
 
 
 @Injectable({
@@ -13,21 +14,28 @@ export class TeamService {
   public teams$ = this.teamsSubject.asObservable();
 
 
-  constructor() {
+  public get teams(): Team[] {
+    return this.teamsSubject.getValue();
   }
 
 
   public clearAllPersonsInTeams() {
     this.teams.forEach(team => team.persons = []);
-    this.teams = this.teams.map(t => {
-      t.persons = []
-      return t;
-    });
   }
 
 
   public addTeam(team: Team) {
     this.teams = this.teams.concat(team);
+  }
+
+
+  public addToTeam(team: Team, person?: Person) {
+    if (!person) return;
+
+    team.persons = team.persons.filter(p => p.id !== person.id);
+    team.persons = team.persons
+      .concat(person)
+      .sort((a, b) => a.name.localeCompare(b.name));
   }
 
 
@@ -53,13 +61,19 @@ export class TeamService {
   }
 
 
+  public removeFromTeam(team: Team, person: Person) {
+    team.persons = team.persons.filter(p => p.id !== person.id);
+  }
+
+
   public removeTeamForSlot(slot: TimeSlot) {
     this.teams = this.teams.filter(t => t.timeSlot.id !== slot.id);
   }
 
 
-  private get teams() {
-    return this.teamsSubject.getValue();
+  public moveBetweenTeams(fromTeam: Team, toTeam: Team, person: Person) {
+    this.removeFromTeam(fromTeam, person);
+    this.addToTeam(toTeam, person);
   }
 
 

@@ -1,18 +1,18 @@
-import {Component, effect, inject, model, signal} from '@angular/core';
+import {Component, effect, inject, model} from '@angular/core';
 import {AsyncPipe, NgTemplateOutlet} from '@angular/common';
 import {PersonService} from '../../../persons/services/person.service';
 import {TeamViewComponent} from '../team-view/team-view.component';
 import {TeamService} from '../../services/team.service';
 import {PersonViewComponent} from '../../../persons/components/person-view/person-view.component';
-import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 import {Person} from '../../../persons/models/person.model';
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {FormsModule} from '@angular/forms';
-import {SortOrder, stringCompare, timeCompare} from '../../../shared/helper/comparison';
 import {RouterLink} from "@angular/router";
 import {DataNotAvailableViewComponent} from '../../../shared/components/data-not-available-view/data-not-available-view.component';
 import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not-available-info/data-not-available-info.component';
 import {TeamAssemblyService} from '../../services/team-assembly.service';
+import {Team} from '../../models/team.model';
 
 
 @Component({
@@ -42,72 +42,42 @@ export class GroupingComponent {
   private teamAssemblyService = inject(TeamAssemblyService);
 
   protected persons$ = this.personService.persons$;
-  protected availablePersons$ = this.personService.availablePersons$;
+  protected filteredPersons$ = this.personService.filteredPersons$;
   protected teams$ = this.teamService.teams$;
   protected timeSlots$ = this.timeSlotService.slots$;
   protected slotCount$ = this.timeSlotService.slotCount$;
 
-  // TODO: Move to persons service.
-  protected availablePersons: Person[] = [];
-  protected filteredPersons: Person[] = [];
   protected personFilter = model<string>("all");
-  protected nameSortOrder = signal<SortOrder>("asc");
-  protected slotSortOrder = signal<SortOrder>("asc");
+  protected nameSortOrder = this.personService.nameSortOrder;
+  protected slotSortOrder = this.personService.slotSortOrder;
 
 
   constructor() {
-    this.persons$.subscribe(persons => {
-      this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
-      this.filterPersons(this.personFilter());
-    });
-
-    this.availablePersons$.subscribe(persons => {
-      this.availablePersons = persons;
-      this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
-      this.filterPersons(this.personFilter());
-    })
-
     effect(() => {
       const filter = this.personFilter();
-      this.filterPersons(filter);
-    });
-
-    effect(() => {
-      const nameSortOrder = this.nameSortOrder();
-      const slotSortOrder = this.slotSortOrder();
-      this.sortAvailablePersons(nameSortOrder, slotSortOrder);
+      this.personService.personFilter.set(filter);
     });
   }
 
 
-  protected onDrop(dropEvent: CdkDragDrop<Person[], any>) {
-    if (dropEvent.previousContainer === dropEvent.container) {
-      moveItemInArray(dropEvent.container.data, dropEvent.previousIndex, dropEvent.currentIndex);
-    } else {
-      transferArrayItem(dropEvent.previousContainer.data,
-        dropEvent.container.data,
-        dropEvent.previousIndex,
-        dropEvent.currentIndex);
+  protected onDrop(dropEvent: CdkDragDrop<string, any>) {
+    const originTeam: Team | undefined = dropEvent.item.data["originTeam"];
+    const person: Person = dropEvent.item.data["person"];
 
-      const person = dropEvent.item.data;
-      this.availablePersons.push(person);
-      this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
+    if (originTeam && person) {
+      this.teamService.removeFromTeam(originTeam, person);
+      this.personService.addAvailablePerson(person);
     }
-
-    this.filterPersons(this.personFilter());
   }
 
 
   protected onPersonDropped(person: Person) {
     this.removeFromAvailablePersons(person);
-    this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
-    this.filterPersons(this.personFilter());
   }
 
 
   protected onClearTeams() {
-    this.teamService.clearAllPersonsInTeams();
-    this.availablePersons = [...this.personService.persons];
+    this.teamAssemblyService.resetTeams();
   }
 
 
@@ -117,72 +87,38 @@ export class GroupingComponent {
 
 
   protected onSortByName() {
-    switch (this.nameSortOrder()) {
+    switch (this.personService.nameSortOrder()) {
       case "asc":
-        this.nameSortOrder.set("desc");
+        this.personService.nameSortOrder.set("desc");
         break;
 
       case "desc":
-        this.nameSortOrder.set("asc");
+        this.personService.nameSortOrder.set("asc");
         break;
     }
   }
 
 
   protected onSortByTimeSlot() {
-    switch (this.slotSortOrder()) {
+    switch (this.personService.slotSortOrder()) {
       case "asc":
-        this.slotSortOrder.set("desc");
+        this.personService.slotSortOrder.set("desc");
         break;
 
       case "desc":
-        this.slotSortOrder.set("asc");
+        this.personService.slotSortOrder.set("asc");
         break;
     }
   }
 
 
   private removeFromAvailablePersons(person: Person) {
-    this.availablePersons = this.availablePersons.filter(p => p.id !== person.id);
-  }
-
-
-  private sortAvailablePersons(nameSortOrder: SortOrder,
-                               slotSortOrder: SortOrder) {
-    this.availablePersons.sort((a, b) => {
-      const aEarliestStart = this.personService.earliestStartTime(a);
-      const bEarliestStart = this.personService.earliestStartTime(b);
-
-      let slotComparison = timeCompare(
-        aEarliestStart,
-        bEarliestStart,
-        slotSortOrder
-      );
-
-      if (slotComparison !== 0) {
-        return slotComparison;
-      }
-
-      return stringCompare(a.name, b.name, nameSortOrder);
-    });
-
-    this.filterPersons(this.personFilter());
-  }
-
-
-  private filterPersons(filter: string) {
-    if (filter === "all") {
-      this.filteredPersons = [...this.availablePersons];
-    } else {
-      this.filteredPersons = this.availablePersons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
-    }
+    this.personService.removeAvailablePerson(person);
   }
 
 
   protected onCreateFakeData() {
     this.timeSlotService.createFakeData();
     this.personService.createFakeData();
-    // this.availablePersons = [...this.personService.persons];
-    // this.filterPersons(this.personFilter());
   }
 }

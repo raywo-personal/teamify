@@ -34,7 +34,8 @@
 
       <div>
         <button class="btn btn-outline-secondary btn-sm"
-                (click)="onCreateFakeData()">
+                (click)="onCreateFakeData()"
+                [disabled]="(persons$ | async)?.length !== 0">
           <i class="bi-journal-plus me-2"></i>
           <span>Create fake data</span>
         </button>
@@ -67,22 +68,29 @@
         Persons
         <ng-container *ngTemplateOutlet="nameSortSymbol"></ng-container>
         <ng-container *ngTemplateOutlet="slotSortSymbol"></ng-container>
+        <small class="ms-2">({{ (persons$ | async)?.length }} in total)</small>
       </h3>
       <div class="grouping-person-list mt-3"
            cdkDropList
-           [cdkDropListData]="filteredPersons"
            (cdkDropListDropped)="onDrop($event)">
-        @for (person of filteredPersons; track person.id) {
-          <div class="person-mini-view shadow-sm" cdkDrag>
+        @for (person of filteredPersons$ | async; track person.id) {
+          <div class="person-mini-view shadow-sm"
+               cdkDrag
+               [cdkDragData]="{origin: 'available', person: person}">
             <div class="person-placeholder" *cdkDragPlaceholder></div>
             <app-person-view [person]="person"
                              [showButtons]="false"
                              [showDragHandle]="true"/>
           </div>
         } @empty {
-<!--          TODO: Display different warning when no persons are found vs. no available persons are found. -->
-          <app-data-not-available-view title="No persons found"
-                                       [messageTemplate]="personMessageTemplate"/>
+          @if ((persons$ | async)?.length === 0) {
+            <app-data-not-available-view title="No persons found"
+                                         mode="warning"
+                                         [messageTemplate]="personMessageTemplate"/>
+          } @else if ((filteredPersons$ | async)?.length === 0) {
+            <app-data-not-available-view title="All persons assigned"
+                                         [messageTemplate]="availablePersonMessageTemplate"/>
+          }
         }
       </div>
     </div>
@@ -95,6 +103,7 @@
           <app-team-view [team]="team" (personDropped)="onPersonDropped($event)"/>
         } @empty {
           <app-data-not-available-view title="No teams found"
+                                       mode="warning"
                                        [messageTemplate]="slotsMessageTemplate"/>
         }
       </div>
@@ -153,4 +162,10 @@
   <a routerLink="/persons" class="btn btn-primary">
     Manage persons
   </a>
+</ng-template>
+
+<ng-template #availablePersonMessageTemplate>
+  <p>
+    All available persons have been assigned to teams.
+  </p>
 </ng-template>

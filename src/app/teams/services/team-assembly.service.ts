@@ -24,33 +24,29 @@ export class TeamAssemblyService {
 
     const personsPerTeam = Math.ceil(persons.length / teams.length);
     const buckets = this.buildPersonBuckets(persons);
-    let allTeamsFilled = false;
 
-    while (!allTeamsFilled) {
-      allTeamsFilled = true;
+    teams.forEach(team => {
+      knowledgeList.forEach(knowledge => {
+        const person = this.pickPersonByPriorKnowledge(team, buckets, knowledge);
+        this.teamService.addToTeam(team, person);
+      })
+    });
 
-      teams.forEach(team => {
-        knowledgeList.forEach(knowledge => {
-          while (team.persons.length < personsPerTeam) {
-            const person = this.pickPersonByPriorKnowledge(team, buckets, knowledge);
+    teams.forEach(team => {
+      while (team.persons.length < personsPerTeam) {
+        const person = this.personService.getRandomAvailablePerson(team);
 
-            if (person) {
-              team.persons.push(person);
-            } else {
-              // 4.2 If the team is not already full add a random person to the team
-              const randomPerson = this.personService.getRandomAvailablePerson();
-              if (randomPerson) {
-                team.persons.push(randomPerson);
-              }
-            }
-          }
-        });
+        if (!person) break;
 
-        if (team.persons.length < personsPerTeam) {
-          allTeamsFilled = false;
-        }
-      });
-    }
+        this.teamService.addToTeam(team, person);
+      }
+    })
+  }
+
+
+  public resetTeams() {
+    this.teamService.clearAllPersonsInTeams();
+    this.personService.resetAvailablePersons();
   }
 
 
@@ -98,7 +94,7 @@ export class TeamAssemblyService {
 
       if (pickedPersonIndex !== -1) {
         const [pickedPerson] = bucket.splice(pickedPersonIndex, 1);
-        this.removeFromAllBuckets(pickedPerson, buckets);
+        this.removePersonFromAvailableList(pickedPerson, buckets);
 
         return pickedPerson;
       }
@@ -108,7 +104,7 @@ export class TeamAssemblyService {
   }
 
 
-  private removeFromAllBuckets(person: Person, buckets: Map<string, Person[]>) {
+  private removePersonFromAvailableList(person: Person, buckets: Map<string, Person[]>) {
     buckets.forEach((persons, _) => {
       const personIndex = persons.findIndex(p => p.id === person.id);
       if (personIndex !== -1) {

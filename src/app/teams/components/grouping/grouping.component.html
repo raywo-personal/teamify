@@ -27,7 +27,10 @@
       </div>
     </div>
 
-    <app-person-slot-filter/>
+    <div class="d-flex gap-2">
+      <app-person-search [source]="filterSource$" (termUpdated)="onSearch($event)"/>
+      <app-person-slot-filter/>
+    </div>
   </div>
 
   <div class="grouping-main" cdkDropListGroup>

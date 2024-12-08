@@ -65,7 +65,7 @@ export class GroupingComponent {
     const person: Person = dropEvent.item.data["person"];
 
     if (originTeam && person) {
-      this.teamService.removeFromTeam(originTeam, person);
+      this.teamService.removePersonFromTeam(originTeam, person);
       this.personService.addAvailablePerson(person);
     }
   }

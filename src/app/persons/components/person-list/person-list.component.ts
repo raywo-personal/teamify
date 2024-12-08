@@ -12,6 +12,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AddButtonComponent} from '../../../shared/components/add-button/add-button.component';
 import {PersonSortButtonsComponent} from '../../../shared/components/person-sort-buttons/person-sort-buttons.component';
 import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-filter/person-slot-filter.component';
+import {PersonSearchComponent} from '../../../shared/components/person-search/person-search.component';
+import {map, mergeMap, Subject} from 'rxjs';
 
 
 @Component({
@@ -26,7 +28,8 @@ import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-
     FormsModule,
     AddButtonComponent,
     PersonSortButtonsComponent,
-    PersonSlotFilterComponent
+    PersonSlotFilterComponent,
+    PersonSearchComponent
   ],
   templateUrl: './person-list.component.html',
   styleUrl: './person-list.component.scss'
@@ -36,12 +39,27 @@ export class PersonListComponent {
   private personService = inject(PersonService);
   private slotService = inject(TimeSlotService);
   private offcanvas = inject(NgbOffcanvas);
+  private searchTerm = new Subject<string>();
 
   protected persons$ = this.personService.persons$;
-  protected filteredPersons$ = this.personService.filteredPersons$;
+  protected filteredPersons$ = this.personService.filteredPersons$
+    .pipe(
+      mergeMap(persons => {
+        return this.searchTerm
+          .pipe(
+            map((term) => {
+              if (term === "") {
+                return persons
+              }
+
+              return persons.filter((p) => p.name.toLowerCase().includes(term.toLowerCase()))
+            })
+          )
+      })
+    );
   protected slotCount$ = this.slotService.slotCount$;
   protected personToEdit?: Person;
-  protected canvasTitle: string = "";
+  protected offcanvasTitle: string = "";
   protected edit = false;
 
 
@@ -74,8 +92,13 @@ export class PersonListComponent {
   }
 
 
+  protected onSearch(term: string) {
+    this.searchTerm.next(term);
+  }
+
+
   private openOffcanvas(content: TemplateRef<any>, title: string) {
-    this.canvasTitle = title;
+    this.offcanvasTitle = title;
 
     const options: NgbOffcanvasOptions = {
       ariaLabelledBy: title,

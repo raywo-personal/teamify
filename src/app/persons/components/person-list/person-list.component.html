@@ -11,7 +11,7 @@
       <small class="">
         ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.persons$ | async)?.length }} persons)
       </small>
-      <app-person-search [persons]="filteredPersons$" (termUpdated)="onSearch($event)"/>
+      <app-person-search [source]="filterSource$" (termUpdated)="onSearch($event)"/>
     </div>
     <app-person-slot-filter/>
   </div>

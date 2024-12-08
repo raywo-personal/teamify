@@ -2,7 +2,6 @@ import {Component, effect, input, model, output, ViewChild} from '@angular/core'
 import {FormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, filter, map, merge, Observable, OperatorFunction, Subject, switchMap} from 'rxjs';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-import {Person} from '../../../persons/models/person.model';
 
 
 @Component({
@@ -11,10 +10,10 @@ import {Person} from '../../../persons/models/person.model';
     FormsModule,
     NgbTypeahead
   ],
-  templateUrl: './person-search.component.html',
-  styleUrl: './person-search.component.scss'
+  templateUrl: './search-field.component.html',
+  styleUrl: './search-field.component.scss'
 })
-export class PersonSearchComponent {
+export class SearchFieldComponent {
 
   private focus$ = new Subject<string>();
   private click$ = new Subject<string>();
@@ -22,8 +21,7 @@ export class PersonSearchComponent {
   @ViewChild('instance', {static: true})
   private instance!: NgbTypeahead;
 
-  // TODO: Make this an Observable<string[]>!
-  public persons = input.required<Observable<Person[]>>();
+  public source = input.required<Observable<string[]>>();
   public termUpdated = output<string>();
 
   protected searchTerm = model<string>("");
@@ -32,7 +30,7 @@ export class PersonSearchComponent {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopups$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focus$;
-    const persons$ = this.persons().pipe(map((persons) => persons.map((p) => p.name)));
+    const persons$ = this.source();
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopups$).pipe(
       switchMap(term => {

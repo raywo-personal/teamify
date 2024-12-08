@@ -19,6 +19,11 @@ export class TeamService {
   }
 
 
+  public getTeamForSlot(slot: TimeSlot): Team | undefined {
+    return this.teams.find(team => team.timeSlot.id === slot.id);
+  }
+
+
   public clearAllPersonsInTeams() {
     this.teams.forEach(team => team.persons = []);
   }
@@ -61,7 +66,7 @@ export class TeamService {
   }
 
 
-  public removeFromTeam(team: Team, person: Person) {
+  public removePersonFromTeam(team: Team, person: Person) {
     team.persons = team.persons.filter(p => p.id !== person.id);
   }
 
@@ -72,7 +77,7 @@ export class TeamService {
 
 
   public moveBetweenTeams(fromTeam: Team, toTeam: Team, person: Person) {
-    this.removeFromTeam(fromTeam, person);
+    this.removePersonFromTeam(fromTeam, person);
     this.addToTeam(toTeam, person);
   }
 

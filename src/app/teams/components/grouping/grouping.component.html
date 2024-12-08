@@ -68,7 +68,7 @@
         Persons
         <ng-container *ngTemplateOutlet="nameSortSymbol"></ng-container>
         <ng-container *ngTemplateOutlet="slotSortSymbol"></ng-container>
-        <small class="ms-2">({{ (persons$ | async)?.length }} in total)</small>
+        <small class="ms-2">({{ (filteredPersons$ | async)?.length }}/{{ (persons$ | async)?.length }})</small>
       </h3>
       <div class="grouping-person-list mt-3"
            cdkDropList

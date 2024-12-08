@@ -1,10 +1,21 @@
-<app-add-header-bar
-  caption="Add person"
-  (addClick)="onAdd(content)"
-/>
+<div class="toolbar"
+     role="toolbar"
+     aria-label="Toolbar for working with teams and persons">
+  <div class="toolbar-buttons">
+    <app-add-button caption="Add person" (addClick)="onAdd(content)"/>
+    <app-person-sort-buttons/>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <small class="me-2">
+      ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.persons$ | async)?.length }} persons)
+    </small>
+    <app-person-slot-filter/>
+  </div>
+</div>
 
 <ul class="list-group">
-  @for (person of persons$ | async; track person.id) {
+  @for (person of filteredPersons$ | async; track person.id) {
     <li class="list-group-item list-group-item-action pointer"
         (click)="onEdit(content, person)">
       <app-person-view
@@ -45,7 +56,7 @@
   @if ((slotCount$ | async) === 0) {
     <app-data-not-available-info text="No time slots are available at the
           moment. Please consider creating time slots prior to adding
-          individuals, so they can be assigned accordingly." />
+          individuals, so they can be assigned accordingly."/>
   }
 
   <button type="button"

@@ -20,15 +20,18 @@ export class PersonService {
   private personsSubject = new BehaviorSubject<Person[]>([]);
   public readonly persons$ = this.personsSubject.asObservable();
 
-  private availablePersonsSubject = new BehaviorSubject<Person[]>([]);
-  public readonly availablePersons$ = this.availablePersonsSubject.asObservable();
-
   private filteredPersonsSubject = new BehaviorSubject<Person[]>([]);
   public readonly filteredPersons$ = this.filteredPersonsSubject.asObservable();
 
+  private availablePersonsSubject = new BehaviorSubject<Person[]>([]);
+  public readonly availablePersons$ = this.availablePersonsSubject.asObservable();
+
+  private filteredAvailablePersonsSubject = new BehaviorSubject<Person[]>([]);
+  public readonly filteredAvailablePersons$ = this.filteredAvailablePersonsSubject.asObservable();
+
   public readonly nameSortOrder = signal<SortOrder>("asc");
   public readonly slotSortOrder = signal<SortOrder>("asc");
-  public readonly personFilter = signal<string>("");
+  public readonly personFilter = signal<string>("all");
 
   private personAddedSubject = new Subject<Person>();
   public readonly personAdded$ = this.personAddedSubject.asObservable();
@@ -39,19 +42,26 @@ export class PersonService {
 
 
   constructor() {
+    this.filteredPersons = [...this.persons];
+    this.filteredAvailablePersons = [...this.availablePersons];
+
+    this.sortPersons(this.nameSortOrder(), this.slotSortOrder());
+    this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
+
     effect(() => {
       const nameSortOrder = this.nameSortOrder();
       const timeSlotSortOrder = this.slotSortOrder();
 
+      this.sortPersons(nameSortOrder, timeSlotSortOrder);
       this.sortAvailablePersons(nameSortOrder, timeSlotSortOrder);
     });
 
     effect(() => {
       const personFilter = this.personFilter();
+
+      this.filterPersons(personFilter);
       this.filterAvailablePersons(personFilter);
     });
-
-    this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());
   }
 
 
@@ -67,6 +77,11 @@ export class PersonService {
 
   public get filteredPersons(): Person[] {
     return this.filteredPersonsSubject.getValue();
+  }
+
+
+  public get filteredAvailablePersons(): Person[] {
+    return this.filteredAvailablePersonsSubject.getValue();
   }
 
 
@@ -86,6 +101,7 @@ export class PersonService {
 
   public addPerson(person: Person) {
     this.persons = this.persons.concat(person);
+    this.filteredPersons = this.filteredPersons.concat(person);
     this.addAvailablePerson(person);
     this.personAddedSubject.next(person);
   }
@@ -93,6 +109,7 @@ export class PersonService {
 
   public updatePerson(person: Person) {
     this.persons = this.persons.map(p => p.id === person.id ? person : p);
+    this.filteredPersons = this.filteredPersons.map(p => p.id === person.id ? person : p);
     this.updateAvailablePerson(person);
     this.personUpdatedSubject.next(person);
   }
@@ -100,6 +117,7 @@ export class PersonService {
 
   public removePerson(person: Person) {
     this.persons = this.persons.filter(p => p.id !== person.id);
+    this.filteredPersons = this.filteredPersons.filter(p => p.id !== person.id);
     this.removeAvailablePerson(person);
     this.personRemovedSubject.next(person);
   }
@@ -147,34 +165,57 @@ export class PersonService {
   }
 
 
+  private sortPersons(nameSortOrder: SortOrder, slotSortOrder: SortOrder) {
+    this.filterPersons(this.personFilter());
+
+    this.filteredPersons.sort((a, b) => {
+      return this.compareByNameAndEarliestStart(a, b, slotSortOrder, nameSortOrder);
+    });
+  }
+
+
   private sortAvailablePersons(nameSortOrder: SortOrder,
                                slotSortOrder: SortOrder) {
-    this.availablePersons.sort((a, b) => {
-      const aEarliestStart = this.earliestStartTime(a);
-      const bEarliestStart = this.earliestStartTime(b);
-
-      let slotComparison = timeCompare(
-        aEarliestStart,
-        bEarliestStart,
-        slotSortOrder
-      );
-
-      if (slotComparison !== 0) {
-        return slotComparison;
-      }
-
-      return stringCompare(a.name, b.name, nameSortOrder);
-    });
-
     this.filterAvailablePersons(this.personFilter());
+
+    this.filteredAvailablePersons.sort((a, b) => {
+      return this.compareByNameAndEarliestStart(a, b, nameSortOrder, slotSortOrder);
+    });
+  }
+
+
+  private compareByNameAndEarliestStart(a: Person, b: Person, slotSortOrder: SortOrder, nameSortOrder: SortOrder): number {
+    const aEarliestStart = this.earliestStartTime(a);
+    const bEarliestStart = this.earliestStartTime(b);
+
+    let slotComparison = timeCompare(
+      aEarliestStart,
+      bEarliestStart,
+      slotSortOrder
+    );
+
+    if (slotComparison !== 0) {
+      return slotComparison;
+    }
+
+    return stringCompare(a.name, b.name, nameSortOrder);
+  }
+
+
+  private filterPersons(filter: string) {
+    if (filter === "all") {
+      this.filteredPersons = [...this.persons];
+    } else {
+      this.filteredPersons = this.persons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
+    }
   }
 
 
   private filterAvailablePersons(filter: string) {
     if (filter === "all") {
-      this.filteredPersons = [...this.availablePersons];
+      this.filteredAvailablePersons = [...this.availablePersons];
     } else {
-      this.filteredPersons = this.availablePersons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
+      this.filteredAvailablePersons = this.availablePersons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
     }
   }
 
@@ -196,5 +237,10 @@ export class PersonService {
 
   private set filteredPersons(value: Person[]) {
     this.filteredPersonsSubject.next(value);
+  }
+
+
+  private set filteredAvailablePersons(value: Person[]) {
+    this.filteredAvailablePersonsSubject.next(value);
   }
 }

@@ -1,6 +1,5 @@
 .grouping {
-  --grouping-tool-bar-height: 4rem;
-  --list-height: calc(100vh - var(--top-bar-height) - var(--grouping-tool-bar-height) - 4rem);
+  --list-height: calc(100vh - var(--top-bar-height) - var(--tool-bar-height) - 4rem);
 
   &-main {
     display: grid;
@@ -67,57 +66,5 @@
     height: 80vh;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-  }
-
-  &-toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-
-    padding-top: 0.5rem;
-
-    height: var(--grouping-tool-bar-height);
-
-    .btn {
-      height: fit-content;
-    }
-
-    .btn-group-with-description {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .btn-group-description {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--bs-gray-600);
-    }
-
-    .sort-symbol {
-      width: 2ch;
-    }
-  }
-
-  &-toolbar-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 0.5rem;
-  }
-
-  &-toolbar-filter {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: auto;
-  }
-
-  .sort-symbol {
-    display: inline-block;
   }
 }

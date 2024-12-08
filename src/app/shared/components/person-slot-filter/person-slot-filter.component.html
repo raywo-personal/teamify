@@ -1,0 +1,18 @@
+<div class="toolbar-filter">
+  <div class="col-auto me-2">
+    <label class="" for="filter">
+      <i class="bi-funnel me-2"></i> <span class="visually-hidden">Filter</span>
+    </label>
+  </div>
+  <div class="col-auto">
+    <select class="form-select form-select-sm"
+            id="filter"
+            aria-label="Filter for time slots"
+            [(ngModel)]="personFilter">
+      <option value="all">All</option>
+      @for (timeSlot of timeSlots$ | async; track timeSlot.id) {
+        <option value="{{ timeSlot.id }}">{{ timeSlot.description }}</option>
+      }
+    </select>
+  </div>
+</div>

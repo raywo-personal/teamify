@@ -1,15 +1,15 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {createTimeSlot, TimeSlot} from '../models/time-slot.model';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, map, Observable, Subject} from 'rxjs';
 import {Time} from '../models/time.model';
-import {TeamService} from '../../teams/services/team.service';
-import {createTeam} from '../../teams/models/team.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeSlotService {
+
+  // TODO: Remove fake data.
   private fakeSlots: TimeSlot[] = [
     createTimeSlot(
       "Slot 1",
@@ -33,27 +33,33 @@ export class TimeSlotService {
     )
   ];
 
-  private teamService = inject(TeamService);
 
   private slotsSubject = new BehaviorSubject<TimeSlot[]>([]);
   public readonly slots$ = this.slotsSubject.asObservable();
 
+  private slotAddedSubject = new Subject<TimeSlot>();
+  public readonly slotAdded$ = this.slotAddedSubject.asObservable();
+  private slotRemovedSubject = new Subject<TimeSlot>();
+  public readonly slotRemoved$ = this.slotRemovedSubject.asObservable();
+  private slotUpdatedSubject = new Subject<TimeSlot>();
+  public readonly slotUpdated$ = this.slotUpdatedSubject.asObservable();
+
 
   public addSlot(slot: TimeSlot) {
     this.slots = this.slots.concat(slot);
-    this.teamService.addTeam(createTeam(slot.description, slot));
+    this.slotAddedSubject.next(slot);
   }
 
 
   public updateSlot(slot: TimeSlot) {
     this.slots = this.slots.map(s => s.id === slot.id ? slot : s);
-    this.teamService.updateTeamForSlot(slot);
+    this.slotUpdatedSubject.next(slot);
   }
 
 
   public removeSlot(slot: TimeSlot) {
     this.slots = this.slots.filter(s => s.id !== slot.id);
-    this.teamService.removeTeamForSlot(slot);
+    this.slotRemovedSubject.next(slot);
   }
 
 

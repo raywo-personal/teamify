@@ -25,8 +25,10 @@ export class PersonViewComponent {
   public edit = output<Person>();
   public delete = output<Person>();
 
+
   protected slots = computed(() => {
     const person = this.person();
+
     let slotBuckets = new Map<number, PersonTimeSlot[]>();
 
     person.timeSlots.forEach(slot => {

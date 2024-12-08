@@ -1,6 +1,6 @@
 import {effect, inject, Injectable, signal} from '@angular/core';
 import {Person} from '../models/person.model';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {FakePersonDataService} from './fake-person-data.service';
 import {PersonTimeSlot} from '../models/person-timeslot.model';
 import {Time} from '../../timeslots/models/time.model';
@@ -29,6 +29,13 @@ export class PersonService {
   public readonly nameSortOrder = signal<SortOrder>("asc");
   public readonly slotSortOrder = signal<SortOrder>("asc");
   public readonly personFilter = signal<string>("");
+
+  private personAddedSubject = new Subject<Person>();
+  public readonly personAdded$ = this.personAddedSubject.asObservable();
+  private personUpdatedSubject = new Subject<Person>();
+  public readonly personUpdated$ = this.personUpdatedSubject.asObservable();
+  private personRemovedSubject = new Subject<Person>();
+  public readonly personRemoved$ = this.personRemovedSubject.asObservable();
 
 
   constructor() {
@@ -80,18 +87,21 @@ export class PersonService {
   public addPerson(person: Person) {
     this.persons = this.persons.concat(person);
     this.addAvailablePerson(person);
+    this.personAddedSubject.next(person);
   }
 
 
   public updatePerson(person: Person) {
     this.persons = this.persons.map(p => p.id === person.id ? person : p);
     this.updateAvailablePerson(person);
+    this.personUpdatedSubject.next(person);
   }
 
 
   public removePerson(person: Person) {
     this.persons = this.persons.filter(p => p.id !== person.id);
     this.removeAvailablePerson(person);
+    this.personRemovedSubject.next(person);
   }
 
 

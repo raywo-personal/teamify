@@ -20,5 +20,5 @@ export class AppComponent {
   // TODO: Maybe find a better way to instantiate this service.
   private domainLogic = inject(DomainLogicService);
 
-  protected title = 'Grouper';
+  public title = 'Grouper';
 }

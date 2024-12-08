@@ -18,8 +18,6 @@ export class PriorKnowledgeViewComponent {
   public edit = output<PriorKnowledge>();
   public delete = output<PriorKnowledge>();
 
-  protected canvasTitle: string = "";
-
 
   protected onEdit(event: MouseEvent) {
     event.stopPropagation();

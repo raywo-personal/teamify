@@ -12,8 +12,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AddButtonComponent} from '../../../shared/components/add-button/add-button.component';
 import {PersonSortButtonsComponent} from '../../../shared/components/person-sort-buttons/person-sort-buttons.component';
 import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-filter/person-slot-filter.component';
-import {PersonSearchComponent} from '../../../shared/components/person-search/person-search.component';
-import {map, mergeMap, Subject} from 'rxjs';
+import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
+import {combineLatest, map, Subject} from 'rxjs';
 
 
 @Component({
@@ -29,7 +29,7 @@ import {map, mergeMap, Subject} from 'rxjs';
     AddButtonComponent,
     PersonSortButtonsComponent,
     PersonSlotFilterComponent,
-    PersonSearchComponent
+    SearchFieldComponent
   ],
   templateUrl: './person-list.component.html',
   styleUrl: './person-list.component.scss'
@@ -42,21 +42,16 @@ export class PersonListComponent {
   private searchTerm = new Subject<string>();
 
   protected persons$ = this.personService.persons$;
-  protected filteredPersons$ = this.personService.filteredPersons$
+  protected filteredPersons$ = combineLatest([this.searchTerm, this.personService.filteredPersons$])
     .pipe(
-      mergeMap(persons => {
-        return this.searchTerm
-          .pipe(
-            map((term) => {
-              if (term === "") {
-                return persons
-              }
+      map(([term, persons]) => {
+        if (term === "") return persons;
 
-              return persons.filter((p) => p.name.toLowerCase().includes(term.toLowerCase()))
-            })
-          )
+        return persons.filter(p => p.name.toLowerCase().includes(term.toLowerCase()))
       })
     );
+  protected filterSource$ = this.filteredPersons$
+    .pipe(map(persons => persons.map(p => p.name)));
   protected slotCount$ = this.slotService.slotCount$;
   protected personToEdit?: Person;
   protected offcanvasTitle: string = "";

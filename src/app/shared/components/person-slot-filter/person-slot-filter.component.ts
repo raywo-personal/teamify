@@ -31,6 +31,7 @@ export class PersonSlotFilterComponent implements OnInit {
     });
   }
 
+
   public ngOnInit(): void {
     this.personFilter.set(this.personService.personFilter());
   }

@@ -4,7 +4,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
   gap: 0.5rem;
 
   padding-top: 0.5rem;
@@ -24,6 +23,10 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: auto;
+  }
+
+  .fit-height {
+    height: fit-content;
   }
 
   .btn {

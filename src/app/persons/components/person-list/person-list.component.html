@@ -1,4 +1,4 @@
-<div class="toolbar"
+<div class="toolbar mb-3"
      role="toolbar"
      aria-label="Toolbar for working with teams and persons">
   <div class="toolbar-buttons">
@@ -6,10 +6,13 @@
     <app-person-sort-buttons/>
   </div>
 
-  <div class="d-flex align-items-center">
-    <small class="me-2">
-      ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.persons$ | async)?.length }} persons)
-    </small>
+  <div class="d-flex gap-2">
+    <div class="d-flex align-items-center fit-height gap-2">
+      <small class="">
+        ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.persons$ | async)?.length }} persons)
+      </small>
+      <app-person-search [persons]="filteredPersons$" (termUpdated)="onSearch($event)"/>
+    </div>
     <app-person-slot-filter/>
   </div>
 </div>
@@ -33,7 +36,7 @@
 
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
-    <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ canvasTitle }}</h4>
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ offcanvasTitle }}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
 

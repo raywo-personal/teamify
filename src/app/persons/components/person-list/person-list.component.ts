@@ -39,10 +39,10 @@ export class PersonListComponent {
   private personService = inject(PersonService);
   private slotService = inject(TimeSlotService);
   private offcanvas = inject(NgbOffcanvas);
-  private searchTerm = new Subject<string>();
+  private searchTerm$ = new Subject<string>();
 
   protected persons$ = this.personService.persons$;
-  protected filteredPersons$ = combineLatest([this.searchTerm, this.personService.filteredPersons$])
+  protected filteredPersons$ = combineLatest([this.searchTerm$, this.personService.filteredPersons$])
     .pipe(
       map(([term, persons]) => {
         if (term === "") return persons;
@@ -88,7 +88,7 @@ export class PersonListComponent {
 
 
   protected onSearch(term: string) {
-    this.searchTerm.next(term);
+    this.searchTerm$.next(term);
   }
 
 

@@ -15,6 +15,8 @@ import {TeamAssemblyService} from '../../services/team-assembly.service';
 import {Team} from '../../models/team.model';
 import {PersonSortButtonsComponent} from '../../../shared/components/person-sort-buttons/person-sort-buttons.component';
 import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-filter/person-slot-filter.component';
+import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
+import {combineLatest, map, Subject} from 'rxjs';
 
 
 @Component({
@@ -32,7 +34,8 @@ import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-
     DataNotAvailableViewComponent,
     DataNotAvailableInfoComponent,
     PersonSortButtonsComponent,
-    PersonSlotFilterComponent
+    PersonSlotFilterComponent,
+    SearchFieldComponent
   ],
   templateUrl: './grouping.component.html',
   styleUrl: './grouping.component.scss'
@@ -43,9 +46,19 @@ export class GroupingComponent implements OnInit {
   private personService = inject(PersonService);
   private teamService = inject(TeamService);
   private teamAssemblyService = inject(TeamAssemblyService);
+  private searchTerm$ = new Subject<string>();
 
   protected persons$ = this.personService.persons$;
-  protected filteredPersons$ = this.personService.filteredAvailablePersons$;
+  protected filteredPersons$ = combineLatest([this.searchTerm$, this.personService.filteredAvailablePersons$])
+    .pipe(
+      map(([term, persons]) => {
+        if (term === "") return persons;
+
+        return persons.filter(p => p.name.toLowerCase().includes(term.toLowerCase()))
+      })
+    );
+  protected filterSource$ = this.filteredPersons$
+    .pipe(map(persons => persons.map(p => p.name)));
   protected teams$ = this.teamService.teams$;
   protected slotCount$ = this.timeSlotService.slotCount$;
 
@@ -80,6 +93,11 @@ export class GroupingComponent implements OnInit {
 
   protected onFillTeams() {
     this.teamAssemblyService.assembleTeams();
+  }
+
+
+  protected onSearch(term: string) {
+    this.searchTerm$.next(term);
   }
 
 

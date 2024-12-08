@@ -29,3 +29,6 @@ export const slot4: TimeSlot = {
   start: new Time(15, 0),
   end: new Time(16, 30)
 };
+
+
+export const allSlots: TimeSlot[] = [slot1, slot2, slot3, slot4];

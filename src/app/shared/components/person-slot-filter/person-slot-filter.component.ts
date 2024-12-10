@@ -27,13 +27,13 @@ export class PersonSlotFilterComponent implements OnInit {
   constructor() {
     effect(() => {
       const filter = this.personFilter();
-      this.personService.personFilter.set(filter);
+      this.personService.slotFilter.set(filter);
     });
   }
 
 
   public ngOnInit(): void {
-    this.personFilter.set(this.personService.personFilter());
+    this.personFilter.set(this.personService.slotFilter());
   }
 
 }

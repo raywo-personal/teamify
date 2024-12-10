@@ -20,7 +20,7 @@
       <div>
         <button class="btn btn-outline-secondary btn-sm"
                 (click)="onCreateFakeData()"
-                [disabled]="(persons$ | async)?.length !== 0">
+                [disabled]="(personsCount$ | async) !== 0">
           <i class="bi-journal-plus me-2"></i>
           <span>Create fake data</span>
         </button>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="d-flex gap-2">
-      <app-person-search [source]="filterSource$" (termUpdated)="onSearch($event)"/>
+      <app-person-search [source]="filterSource$"/>
       <app-person-slot-filter/>
     </div>
   </div>
@@ -37,7 +37,7 @@
     <div class="grouping-persons">
       <h3>
         Persons
-        <small class="ms-2">({{ (filteredPersons$ | async)?.length }}/{{ (persons$ | async)?.length }})</small>
+        <small class="ms-2">({{ (filteredPersons$ | async)?.length }}/{{ (personsCount$ | async) }})</small>
       </h3>
       <div class="grouping-person-list mt-3"
            cdkDropList
@@ -52,7 +52,7 @@
                              [showDragHandle]="true"/>
           </div>
         } @empty {
-          @if ((persons$ | async)?.length === 0) {
+          @if ((personsCount$ | async) === 0) {
             <app-data-not-available-view title="No persons found"
                                          mode="warning"
                                          [messageTemplate]="personMessageTemplate"/>

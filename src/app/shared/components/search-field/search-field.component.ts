@@ -1,7 +1,8 @@
-import {Component, effect, input, model, output, ViewChild} from '@angular/core';
+import {Component, effect, inject, input, model, OnInit, output, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, filter, map, merge, Observable, OperatorFunction, Subject, switchMap} from 'rxjs';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+import {PersonService} from '../../../persons/services/person.service';
 
 
 @Component({
@@ -13,7 +14,9 @@ import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './search-field.component.html',
   styleUrl: './search-field.component.scss'
 })
-export class SearchFieldComponent {
+export class SearchFieldComponent implements OnInit {
+
+  private personService = inject(PersonService);
 
   private focus$ = new Subject<string>();
   private click$ = new Subject<string>();
@@ -53,8 +56,14 @@ export class SearchFieldComponent {
   constructor() {
     effect(() => {
       const term = this.searchTerm();
+      this.personService.nameFilter.set(term);
       this.termUpdated.emit(term);
     })
+  }
+
+
+  public ngOnInit() {
+    this.searchTerm.set(this.personService.nameFilter());
   }
 
 

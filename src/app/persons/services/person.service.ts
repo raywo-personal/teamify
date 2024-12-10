@@ -1,6 +1,6 @@
 import {effect, inject, Injectable, signal} from '@angular/core';
 import {Person} from '../models/person.model';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, map, Subject} from 'rxjs';
 import {FakePersonDataService} from './fake-person-data.service';
 import {PersonTimeSlot} from '../models/person-timeslot.model';
 import {Time} from '../../timeslots/models/time.model';
@@ -31,7 +31,8 @@ export class PersonService {
 
   public readonly nameSortOrder = signal<SortOrder>("asc");
   public readonly slotSortOrder = signal<SortOrder>("asc");
-  public readonly personFilter = signal<string>("all");
+  public readonly slotFilter = signal<string>("all");
+  public readonly nameFilter = signal<string>("");
 
   private personAddedSubject = new Subject<Person>();
   public readonly personAdded$ = this.personAddedSubject.asObservable();
@@ -39,6 +40,9 @@ export class PersonService {
   public readonly personUpdated$ = this.personUpdatedSubject.asObservable();
   private personRemovedSubject = new Subject<Person>();
   public readonly personRemoved$ = this.personRemovedSubject.asObservable();
+
+  public readonly personCount$ = this.persons$.pipe(map(persons => persons.length));
+  public readonly availablePersonCount$ = this.availablePersons$.pipe(map(persons => persons.length));
 
 
   constructor() {
@@ -57,10 +61,11 @@ export class PersonService {
     });
 
     effect(() => {
-      const personFilter = this.personFilter();
+      const nameFilter = this.nameFilter();
+      const personFilter = this.slotFilter();
 
-      this.filterPersons(personFilter);
-      this.filterAvailablePersons(personFilter);
+      this.filterPersons(personFilter, nameFilter);
+      this.filterAvailablePersons(personFilter, nameFilter);
     });
   }
 
@@ -166,7 +171,7 @@ export class PersonService {
 
 
   private sortPersons(nameSortOrder: SortOrder, slotSortOrder: SortOrder) {
-    this.filterPersons(this.personFilter());
+    this.filterPersons(this.slotFilter(), this.nameFilter());
 
     this.filteredPersons.sort((a, b) => {
       return this.compareByNameAndEarliestStart(a, b, slotSortOrder, nameSortOrder);
@@ -176,7 +181,7 @@ export class PersonService {
 
   private sortAvailablePersons(nameSortOrder: SortOrder,
                                slotSortOrder: SortOrder) {
-    this.filterAvailablePersons(this.personFilter());
+    this.filterAvailablePersons(this.slotFilter(), this.nameFilter());
 
     this.filteredAvailablePersons.sort((a, b) => {
       return this.compareByNameAndEarliestStart(a, b, nameSortOrder, slotSortOrder);
@@ -202,21 +207,27 @@ export class PersonService {
   }
 
 
-  private filterPersons(filter: string) {
-    if (filter === "all") {
+  private filterPersons(filter: string, nameFilter: string) {
+    if (filter === "all" && nameFilter === "") {
       this.filteredPersons = [...this.persons];
-    } else {
-      this.filteredPersons = this.persons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
+      return;
     }
+
+    this.filteredPersons = this.persons
+      .filter(p => filter === "all" || p.timeSlots.some(t => t.timeSlot.id === filter))
+      .filter(p => nameFilter === "" || p.name.toLowerCase().includes(nameFilter.toLowerCase()));
   }
 
 
-  private filterAvailablePersons(filter: string) {
-    if (filter === "all") {
+  private filterAvailablePersons(filter: string, nameFilter: string) {
+    if (filter === "all" && nameFilter === "") {
       this.filteredAvailablePersons = [...this.availablePersons];
-    } else {
-      this.filteredAvailablePersons = this.availablePersons.filter(p => p.timeSlots.some(t => t.timeSlot.id === filter));
+      return;
     }
+
+    this.filteredAvailablePersons = this.availablePersons
+      .filter(p => filter === "all" || p.timeSlots.some(t => t.timeSlot.id === filter))
+      .filter(p => nameFilter === "" || p.name.toLowerCase().includes(nameFilter.toLowerCase()));
   }
 
 

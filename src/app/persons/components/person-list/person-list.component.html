@@ -9,9 +9,9 @@
   <div class="d-flex gap-2">
     <div class="d-flex align-items-center fit-height gap-2">
       <small class="">
-        ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.persons$ | async)?.length }} persons)
+        ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.personsCount$ | async) }} persons)
       </small>
-      <app-person-search [source]="filterSource$" (termUpdated)="onSearch($event)"/>
+      <app-person-search [source]="filterSource$"/>
     </div>
     <app-person-slot-filter/>
   </div>

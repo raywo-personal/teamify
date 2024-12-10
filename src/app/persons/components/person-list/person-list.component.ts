@@ -13,7 +13,7 @@ import {AddButtonComponent} from '../../../shared/components/add-button/add-butt
 import {PersonSortButtonsComponent} from '../../../shared/components/person-sort-buttons/person-sort-buttons.component';
 import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-filter/person-slot-filter.component';
 import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
-import {combineLatest, map, Subject} from 'rxjs';
+import {map} from 'rxjs';
 
 
 @Component({
@@ -39,17 +39,9 @@ export class PersonListComponent {
   private personService = inject(PersonService);
   private slotService = inject(TimeSlotService);
   private offcanvas = inject(NgbOffcanvas);
-  private searchTerm$ = new Subject<string>();
 
-  protected persons$ = this.personService.persons$;
-  protected filteredPersons$ = combineLatest([this.searchTerm$, this.personService.filteredPersons$])
-    .pipe(
-      map(([term, persons]) => {
-        if (term === "") return persons;
-
-        return persons.filter(p => p.name.toLowerCase().includes(term.toLowerCase()))
-      })
-    );
+  protected personsCount$ = this.personService.personCount$;
+  protected filteredPersons$ = this.personService.filteredPersons$;
   protected filterSource$ = this.filteredPersons$
     .pipe(map(persons => persons.map(p => p.name)));
   protected slotCount$ = this.slotService.slotCount$;
@@ -84,11 +76,6 @@ export class PersonListComponent {
 
   protected onDelete(person: Person) {
     this.personService.removePerson(person);
-  }
-
-
-  protected onSearch(term: string) {
-    this.searchTerm$.next(term);
   }
 
 

@@ -1,0 +1,40 @@
+<div class="btn-group-with-description">
+  <div class="btn-group btn-group-sm" role="group"
+       aria-labelledby="sort-label">
+    <button class="btn btn-outline-secondary" (click)="onSortByName()">
+      <ng-container *ngTemplateOutlet="nameSortSymbol"></ng-container>
+      <span>name</span>
+    </button>
+
+    <button class="btn btn-outline-secondary" (click)="onSortByTimeSlot()">
+      <ng-container *ngTemplateOutlet="slotSortSymbol"></ng-container>
+      <span>time slot</span>
+    </button>
+  </div>
+
+  <div class="btn-group-description" id="sort-label">Sort by</div>
+</div>
+
+<ng-template #nameSortSymbol>
+  <div class="sort-symbol ms-2">
+    @if (nameSortOrder() === 'asc') {
+      <i class="bi-sort-alpha-down"></i>
+    } @else if (nameSortOrder() === 'desc') {
+      <i class="bi-sort-alpha-up"></i>
+    } @else {
+      &nbsp;
+    }
+  </div>
+</ng-template>
+
+<ng-template #slotSortSymbol>
+  <div class="sort-symbol ms-2">
+    @if (slotSortOrder() === 'asc') {
+      <i class="bi-sort-numeric-down"></i>
+    } @else if (slotSortOrder() === 'desc') {
+      <i class="bi-sort-numeric-up"></i>
+    } @else {
+      &nbsp;
+    }
+  </div>
+</ng-template>

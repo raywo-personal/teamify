@@ -1,0 +1,53 @@
+.toolbar {
+  --tool-bar-height: 4rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  padding-top: 0.5rem;
+
+  height: var(--tool-bar-height);
+
+  &-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  &-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: auto;
+  }
+
+  .fit-height {
+    height: fit-content;
+  }
+
+  .btn {
+    height: fit-content;
+  }
+
+  .btn-group-with-description {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-group-description {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--bs-gray-600);
+  }
+
+  .sort-symbol {
+    display: inline-block;
+    width: 2ch;
+  }
+}

@@ -1,9 +1,12 @@
 import {Component, input, output} from '@angular/core';
+import {AddButtonComponent} from '../add-button/add-button.component';
 
 
 @Component({
   selector: 'app-add-header-bar',
-  imports: [],
+  imports: [
+    AddButtonComponent
+  ],
   templateUrl: './add-header-bar.component.html',
   styleUrl: './add-header-bar.component.scss'
 })

@@ -1,10 +1,24 @@
-<app-add-header-bar
-  caption="Add person"
-  (addClick)="onAdd(content)"
-/>
+<div class="toolbar mb-3"
+     role="toolbar"
+     aria-label="Toolbar for working with teams and persons">
+  <div class="toolbar-buttons">
+    <app-add-button caption="Add person" (addClick)="onAdd(content)"/>
+    <app-person-sort-buttons/>
+  </div>
+
+  <div class="d-flex gap-2">
+    <div class="d-flex align-items-center fit-height gap-2">
+      <small class="">
+        ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.personsCount$ | async) }} persons)
+      </small>
+      <app-person-search [source]="filterSource$"/>
+    </div>
+    <app-person-slot-filter/>
+  </div>
+</div>
 
 <ul class="list-group">
-  @for (person of persons$ | async; track person.id) {
+  @for (person of filteredPersons$ | async; track person.id) {
     <li class="list-group-item list-group-item-action pointer"
         (click)="onEdit(content, person)">
       <app-person-view
@@ -22,7 +36,7 @@
 
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
-    <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ canvasTitle }}</h4>
+    <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ offcanvasTitle }}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
 
@@ -45,7 +59,7 @@
   @if ((slotCount$ | async) === 0) {
     <app-data-not-available-info text="No time slots are available at the
           moment. Please consider creating time slots prior to adding
-          individuals, so they can be assigned accordingly." />
+          individuals, so they can be assigned accordingly."/>
   }
 
   <button type="button"

@@ -1,5 +1,5 @@
-import {Component, effect, inject, model} from '@angular/core';
-import {AsyncPipe, NgTemplateOutlet} from '@angular/common';
+import {Component, inject} from '@angular/core';
+import {AsyncPipe} from '@angular/common';
 import {PersonService} from '../../../persons/services/person.service';
 import {TeamViewComponent} from '../team-view/team-view.component';
 import {TeamService} from '../../services/team.service';
@@ -13,6 +13,10 @@ import {DataNotAvailableViewComponent} from '../../../shared/components/data-not
 import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not-available-info/data-not-available-info.component';
 import {TeamAssemblyService} from '../../services/team-assembly.service';
 import {Team} from '../../models/team.model';
+import {PersonSortButtonsComponent} from '../../../shared/components/person-sort-buttons/person-sort-buttons.component';
+import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-filter/person-slot-filter.component';
+import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
+import {map} from 'rxjs';
 
 
 @Component({
@@ -26,10 +30,12 @@ import {Team} from '../../models/team.model';
     CdkDrag,
     CdkDragPlaceholder,
     FormsModule,
-    NgTemplateOutlet,
     RouterLink,
     DataNotAvailableViewComponent,
-    DataNotAvailableInfoComponent
+    DataNotAvailableInfoComponent,
+    PersonSortButtonsComponent,
+    PersonSlotFilterComponent,
+    SearchFieldComponent
   ],
   templateUrl: './grouping.component.html',
   styleUrl: './grouping.component.scss'
@@ -41,23 +47,14 @@ export class GroupingComponent {
   private teamService = inject(TeamService);
   private teamAssemblyService = inject(TeamAssemblyService);
 
-  protected persons$ = this.personService.persons$;
-  protected filteredPersons$ = this.personService.filteredPersons$;
+  protected personsCount$ = this.personService.personCount$;
+  protected filteredPersons$ = this.personService.filteredAvailablePersons$;
+  protected filterSource$ = this.filteredPersons$
+    .pipe(map(persons => persons.map(p => p.name)));
   protected teams$ = this.teamService.teams$;
-  protected timeSlots$ = this.timeSlotService.slots$;
   protected slotCount$ = this.timeSlotService.slotCount$;
 
-  protected personFilter = model<string>("all");
-  protected nameSortOrder = this.personService.nameSortOrder;
-  protected slotSortOrder = this.personService.slotSortOrder;
-
-
-  constructor() {
-    effect(() => {
-      const filter = this.personFilter();
-      this.personService.personFilter.set(filter);
-    });
-  }
+  protected personFilter = this.personService.nameFilter;
 
 
   protected onDrop(dropEvent: CdkDragDrop<string, any>) {
@@ -83,32 +80,6 @@ export class GroupingComponent {
 
   protected onFillTeams() {
     this.teamAssemblyService.assembleTeams();
-  }
-
-
-  protected onSortByName() {
-    switch (this.personService.nameSortOrder()) {
-      case "asc":
-        this.personService.nameSortOrder.set("desc");
-        break;
-
-      case "desc":
-        this.personService.nameSortOrder.set("asc");
-        break;
-    }
-  }
-
-
-  protected onSortByTimeSlot() {
-    switch (this.personService.slotSortOrder()) {
-      case "asc":
-        this.personService.slotSortOrder.set("desc");
-        break;
-
-      case "desc":
-        this.personService.slotSortOrder.set("asc");
-        break;
-    }
   }
 
 

@@ -56,9 +56,12 @@
             <app-data-not-available-view title="No persons found"
                                          mode="warning"
                                          [messageTemplate]="personMessageTemplate"/>
-          } @else if ((filteredPersons$ | async)?.length === 0) {
+          } @else if ((filteredPersons$ | async)?.length === 0 && personFilter() === "") {
             <app-data-not-available-view title="All persons assigned"
                                          [messageTemplate]="availablePersonMessageTemplate"/>
+          } @else {
+            <app-data-not-available-view title="No persons found"
+                                         [messageTemplate]="noPersonFoundTemplate"/>
           }
         }
       </div>
@@ -112,5 +115,11 @@
 <ng-template #availablePersonMessageTemplate>
   <p>
     All available persons have been assigned to teams.
+  </p>
+</ng-template>
+
+<ng-template #noPersonFoundTemplate>
+  <p>
+    No persons found with this name.
   </p>
 </ng-template>

@@ -1,4 +1,4 @@
-import {Component, inject, model, OnInit} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {AsyncPipe} from '@angular/common';
 import {PersonService} from '../../../persons/services/person.service';
 import {TeamViewComponent} from '../team-view/team-view.component';
@@ -40,7 +40,7 @@ import {map} from 'rxjs';
   templateUrl: './grouping.component.html',
   styleUrl: './grouping.component.scss'
 })
-export class GroupingComponent implements OnInit {
+export class GroupingComponent {
 
   private timeSlotService = inject(TimeSlotService);
   private personService = inject(PersonService);
@@ -54,12 +54,7 @@ export class GroupingComponent implements OnInit {
   protected teams$ = this.teamService.teams$;
   protected slotCount$ = this.timeSlotService.slotCount$;
 
-  protected personFilter = model<string>("all");
-
-
-  public ngOnInit(): void {
-    this.personFilter.set(this.personService.slotFilter());
-  }
+  protected personFilter = this.personService.nameFilter;
 
 
   protected onDrop(dropEvent: CdkDragDrop<string, any>) {

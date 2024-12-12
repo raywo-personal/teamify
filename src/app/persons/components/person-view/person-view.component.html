@@ -25,12 +25,13 @@
         }
       </div>
 
-      <div class="person-view-info"
-           [ngbPopover]="popoverTemplate"
-           triggers="mouseenter:mouseleave"
-           [openDelay]="300"
-           [closeDelay]="150">
-        <i class="bi-info-circle"></i>
+      <div class="person-view-info">
+        @for (slot of person().timeSlots; track slot.timeSlot.id) {
+          <div class="badge bg-light text-primary rounded-pill me-2"
+               [class.preferred]="(slot.priority || 0) === 1">
+            {{ slot.timeSlot.description }}
+          </div>
+        }
       </div>
     </div>
 
@@ -63,14 +64,3 @@
     </div>
   }
 </div>
-
-
-<ng-template #popoverTemplate>
-  <h5>Preferred time slots:</h5>
-
-  @for (slot of person().timeSlots; track slot.timeSlot.id) {
-    <div class="badge bg-light text-primary rounded-pill me-2">
-      {{ slot.timeSlot.description }}
-    </div>
-  }
-</ng-template>

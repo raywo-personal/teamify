@@ -1,10 +1,10 @@
 .toolbar {
-  --tool-bar-height: 4rem;
-
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem;
+
+  background: var(--bs-body-bg);
 
   padding-top: 0.5rem;
 

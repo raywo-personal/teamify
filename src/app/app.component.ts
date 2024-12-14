@@ -17,7 +17,6 @@ import {DomainLogicService} from './shared/services/domain-logic.service';
 })
 export class AppComponent implements OnInit {
 
-  // TODO: Maybe find a better way to instantiate this service.
   private domainLogic = inject(DomainLogicService);
 
   protected title = 'Grouper';

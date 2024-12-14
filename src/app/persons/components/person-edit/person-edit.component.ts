@@ -140,7 +140,6 @@ export class PersonEditComponent {
       .map(k => createPersonKnowledge(k.knowledge, k.remark));
     let personTimeSlots: PersonTimeSlot[] = this.timeSlots
       .map((s, index) => {
-        // TODO: Set time slot priority without gaps.
         return s.map(slot => createPersonTimeSlot(slot, index + 1))
       })
       .flat();

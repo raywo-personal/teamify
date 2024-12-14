@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {createPriorKnowledge, PriorKnowledge} from '../models/prior-knowledge.model';
+import {PriorKnowledge} from '../models/prior-knowledge.model';
 import {BehaviorSubject, Subject} from 'rxjs';
 
 
@@ -7,14 +7,6 @@ import {BehaviorSubject, Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class PriorKnowledgeService {
-
-  // TODO: Remove fake data.
-  private _knowledgeList: PriorKnowledge[] = [
-    createPriorKnowledge("on Premise"),
-    createPriorKnowledge("Frontend"),
-    createPriorKnowledge("Backend"),
-    createPriorKnowledge("Testen")
-  ];
 
   private knowledgeListSubject = new BehaviorSubject<PriorKnowledge[]>([]);
   public readonly knowledgeList$ = this.knowledgeListSubject.asObservable();
@@ -27,9 +19,10 @@ export class PriorKnowledgeService {
   public readonly knowledgeUpdated$ = this.knowledgeUpdatedSubject.asObservable();
 
 
-  public addKnowledge(knowledge: PriorKnowledge) {
+  public addKnowledge(knowledge: PriorKnowledge, isRestore: boolean = false) {
     this.knowledgeList = this.knowledgeList.concat(knowledge);
-    this.knowledgeAddedSubject.next(knowledge);
+
+    if (!isRestore) this.knowledgeAddedSubject.next(knowledge);
   }
 
 
@@ -45,11 +38,6 @@ export class PriorKnowledgeService {
   }
 
 
-  public createFakeData() {
-    this._knowledgeList.forEach(knowledge => this.addKnowledge(knowledge));
-  }
-
-
   public get knowledgeList() {
     return this.knowledgeListSubject.getValue();
   }
@@ -58,4 +46,5 @@ export class PriorKnowledgeService {
   private set knowledgeList(value: PriorKnowledge[]) {
     this.knowledgeListSubject.next(value);
   }
+
 }

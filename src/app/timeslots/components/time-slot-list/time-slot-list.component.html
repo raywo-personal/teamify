@@ -3,21 +3,23 @@
   (addClick)="onAdd(content)"
 />
 
-<ul class="list-group">
-  @for (timeSlot of slots$ | async; track timeSlot.id) {
-    <li class="list-group-item list-group-item-action pointer"
-        (click)="onEdit(content, timeSlot)">
-      <app-time-slot-view [timeSlot]="timeSlot"
-                          (edit)="onEdit(content, $event)"
-                          (delete)="onDelete($event)"
-      />
-    </li>
-  } @empty {
-    <app-data-not-available-view title="No time slots found"
-                                 mode="warning"
-                                 [messageTemplate]="messageTemplate"/>
-  }
-</ul>
+<div class="content-area">
+  <ul class="list-group scrollable-area">
+    @for (timeSlot of slots$ | async; track timeSlot.id) {
+      <li class="list-group-item list-group-item-action pointer"
+          (click)="onEdit(content, timeSlot)">
+        <app-time-slot-view [timeSlot]="timeSlot"
+                            (edit)="onEdit(content, $event)"
+                            (delete)="onDelete($event)"
+        />
+      </li>
+    } @empty {
+      <app-data-not-available-view title="No time slots found"
+                                   mode="warning"
+                                   [messageTemplate]="messageTemplate"/>
+    }
+  </ul>
+</div>
 
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
@@ -40,7 +42,7 @@
     Start creating time slots by clicking the button below.
   </p>
 
-  <app-data-not-available-info text="Please note that a team will be created for each time slot." />
+  <app-data-not-available-info text="Please note that a team will be created for each time slot."/>
 
   <button type="button"
           class="btn btn-primary"

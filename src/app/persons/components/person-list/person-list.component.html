@@ -17,22 +17,24 @@
   </div>
 </div>
 
-<ul class="list-group">
-  @for (person of filteredPersons$ | async; track person.id) {
-    <li class="list-group-item list-group-item-action pointer"
-        (click)="onEdit(content, person)">
-      <app-person-view
-        [person]="person"
-        (edit)="onEdit(content, $event)"
-        (delete)="onDelete($event)"
-      />
-    </li>
-  } @empty {
-    <app-data-not-available-view title="No persons found"
-                                 mode="warning"
-                                 [messageTemplate]="messageTemplate"/>
-  }
-</ul>
+<div class="content-area">
+  <ul class="list-group scrollable-area">
+    @for (person of filteredPersons$ | async; track person.id) {
+      <li class="list-group-item list-group-item-action pointer"
+          (click)="onEdit(content, person)">
+        <app-person-view
+          [person]="person"
+          (edit)="onEdit(content, $event)"
+          (delete)="onDelete($event)"
+        />
+      </li>
+    } @empty {
+      <app-data-not-available-view title="No persons found"
+                                   mode="warning"
+                                   [messageTemplate]="messageTemplate"/>
+    }
+  </ul>
+</div>
 
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">

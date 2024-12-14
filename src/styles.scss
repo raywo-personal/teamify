@@ -24,11 +24,19 @@ $full-view-fr: $sidebar-fr + $main-fr;
 .app-layout {
   --sidebar-width: calc(#{$sidebar-fr} / #{$full-view-fr} * 100%);
   --top-bar-height: 4.25rem;
+  --tool-bar-height: 4rem;
+  --list-height: calc(100vh - var(--top-bar-height) - var(--tool-bar-height) - 4rem);
 
   display: grid;
-  grid-template-areas: "sidebar main";
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar main";
   grid-template-columns: #{$sidebar-fr}fr #{$main-fr}fr;
-  gap: 1.5rem;
+  grid-template-rows: var(--top-bar-height) 1fr;
+  gap: 0 1.5rem;
+
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -39,16 +47,14 @@ $full-view-fr: $sidebar-fr + $main-fr;
   grid-area: main;
 
   padding-right: 1rem;
+  padding-bottom: 1.5rem;
 
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - var(--top-bar-height));
+  overflow: hidden;
 }
 
 .top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 1020;
+  grid-area: topbar;
   height: var(--top-bar-height);
 
   display: flex;
@@ -62,6 +68,17 @@ $full-view-fr: $sidebar-fr + $main-fr;
   h2 {
     font-size: 1.5rem;
   }
+}
+
+.content-area {
+  height: calc(var(--list-height) + 2rem);
+  overflow: hidden;
+}
+
+.scrollable-area {
+  max-height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .pointer {

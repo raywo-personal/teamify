@@ -66,6 +66,15 @@
 
   .person-view-info {
     display: block;
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .preferred {
+      border: 1px solid var(--bs-gray-600);
+    }
   }
 
   .popover {

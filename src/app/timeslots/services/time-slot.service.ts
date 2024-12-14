@@ -1,38 +1,12 @@
 import {Injectable} from '@angular/core';
-import {createTimeSlot, TimeSlot} from '../models/time-slot.model';
+import {TimeSlot} from '../models/time-slot.model';
 import {BehaviorSubject, map, Observable, Subject} from 'rxjs';
-import {Time} from '../models/time.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimeSlotService {
-
-  // TODO: Remove fake data.
-  private fakeSlots: TimeSlot[] = [
-    createTimeSlot(
-      "Slot 1",
-      new Time(9),
-      new Time(10, 30)
-    ),
-    createTimeSlot(
-      "Slot 2",
-      new Time(10, 45),
-      new Time(12, 15)
-    ),
-    createTimeSlot(
-      "Slot 3",
-      new Time(13, 15),
-      new Time(14, 45)
-    ),
-    createTimeSlot(
-      "Slot 4",
-      new Time(15),
-      new Time(16, 30)
-    )
-  ];
-
 
   private slotsSubject = new BehaviorSubject<TimeSlot[]>([]);
   public readonly slots$ = this.slotsSubject.asObservable();
@@ -45,9 +19,10 @@ export class TimeSlotService {
   public readonly slotUpdated$ = this.slotUpdatedSubject.asObservable();
 
 
-  public addSlot(slot: TimeSlot) {
+  public addSlot(slot: TimeSlot, isRestore: boolean = false) {
     this.slots = this.slots.concat(slot);
-    this.slotAddedSubject.next(slot);
+
+    if (!isRestore) this.slotAddedSubject.next(slot);
   }
 
 
@@ -63,11 +38,6 @@ export class TimeSlotService {
   }
 
 
-  public createFakeData() {
-    this.fakeSlots.forEach(slot => this.addSlot(slot));
-  }
-
-
   public get slotCount$(): Observable<number> {
     return this.slots$
       .pipe(
@@ -76,7 +46,12 @@ export class TimeSlotService {
   }
 
 
-  private get slots() {
+  public restoreSlots(slots: TimeSlot[]) {
+    this.slots = slots;
+  }
+
+
+  public get slots() {
     return this.slotsSubject.getValue();
   }
 

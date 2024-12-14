@@ -87,9 +87,4 @@ export class GroupingComponent {
     this.personService.removeAvailablePerson(person);
   }
 
-
-  protected onCreateFakeData() {
-    this.timeSlotService.createFakeData();
-    this.personService.createFakeData();
-  }
 }

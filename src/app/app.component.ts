@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NavigationComponent} from './navigation/components/navigation/navigation.component';
 import {TopBarComponent} from './navigation/components/top-bar/top-bar.component';
 import {RouterOutlet} from '@angular/router';
@@ -15,10 +15,15 @@ import {DomainLogicService} from './shared/services/domain-logic.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   // TODO: Maybe find a better way to instantiate this service.
   private domainLogic = inject(DomainLogicService);
 
   protected title = 'Grouper';
+
+
+  public ngOnInit() {
+    this.domainLogic.loadData();
+  }
 }

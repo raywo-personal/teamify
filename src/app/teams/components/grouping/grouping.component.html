@@ -16,15 +16,6 @@
       </button>
 
       <app-person-sort-buttons/>
-
-      <div>
-        <button class="btn btn-outline-secondary btn-sm"
-                (click)="onCreateFakeData()"
-                [disabled]="(personsCount$ | async) !== 0">
-          <i class="bi-journal-plus me-2"></i>
-          <span>Create fake data</span>
-        </button>
-      </div>
     </div>
 
     <div class="d-flex gap-2">

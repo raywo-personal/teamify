@@ -1,7 +1,6 @@
-import {effect, inject, Injectable, signal} from '@angular/core';
+import {effect, Injectable, signal} from '@angular/core';
 import {Person} from '../models/person.model';
 import {BehaviorSubject, map, Subject} from 'rxjs';
-import {FakePersonDataService} from './fake-person-data.service';
 import {PersonTimeSlot} from '../models/person-timeslot.model';
 import {Time} from '../../timeslots/models/time.model';
 import {randomNumber} from '../../shared/helper/random';
@@ -13,9 +12,6 @@ import {Team} from '../../teams/models/team.model';
   providedIn: 'root'
 })
 export class PersonService {
-
-  private fakePersonDataService = inject(FakePersonDataService);
-  private _persons: Person[] = this.fakePersonDataService.persons;
 
   private personsSubject = new BehaviorSubject<Person[]>([]);
   public readonly persons$ = this.personsSubject.asObservable();
@@ -104,11 +100,12 @@ export class PersonService {
   }
 
 
-  public addPerson(person: Person) {
+  public addPerson(person: Person, isRestore: boolean = false) {
     this.persons = this.persons.concat(person);
     this.filteredPersons = this.filteredPersons.concat(person);
     this.addAvailablePerson(person);
-    this.personAddedSubject.next(person);
+
+    if (!isRestore) this.personAddedSubject.next(person);
   }
 
 
@@ -162,6 +159,14 @@ export class PersonService {
     }
 
     return person;
+  }
+
+
+  public updateAvailablePersons(alreadyAssignedPersons: Person[]) {
+    this.availablePersons = this.persons.filter(p => {
+      return !alreadyAssignedPersons.some(ap => ap.id === p.id);
+    });
+    this.filterAvailablePersons(this.slotFilter(), this.nameFilter());
   }
 
 
@@ -229,11 +234,6 @@ export class PersonService {
     this.filteredAvailablePersons = this.availablePersons
       .filter(p => filter === "all" || p.timeSlots.some(t => t.timeSlot.id === filter))
       .filter(p => nameFilter === "" || p.name.toLowerCase().includes(nameFilter.toLowerCase()));
-  }
-
-
-  public createFakeData() {
-    this._persons.forEach(person => this.addPerson(person));
   }
 
 

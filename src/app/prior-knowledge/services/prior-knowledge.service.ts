@@ -27,9 +27,10 @@ export class PriorKnowledgeService {
   public readonly knowledgeUpdated$ = this.knowledgeUpdatedSubject.asObservable();
 
 
-  public addKnowledge(knowledge: PriorKnowledge) {
+  public addKnowledge(knowledge: PriorKnowledge, isRestore: boolean = false) {
     this.knowledgeList = this.knowledgeList.concat(knowledge);
-    this.knowledgeAddedSubject.next(knowledge);
+
+    if (!isRestore) this.knowledgeAddedSubject.next(knowledge);
   }
 
 

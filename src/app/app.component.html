@@ -25,10 +25,9 @@
     </footer>
   </nav>
 
-  <div class="main">
-    <app-top-bar/>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </div>
+  <header class="top-bar" app-top-bar></header>
+
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
 </div>

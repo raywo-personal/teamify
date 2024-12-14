@@ -39,7 +39,7 @@
         Persons
         <small class="ms-2">({{ (filteredPersons$ | async)?.length }}/{{ (personsCount$ | async) }})</small>
       </h3>
-      <div class="grouping-person-list mt-3"
+      <div class="grouping-person-list scrollable-area"
            cdkDropList
            (cdkDropListDropped)="onDrop($event)">
         @for (person of filteredPersons$ | async; track person.id) {
@@ -70,7 +70,7 @@
     <div class="grouping-teams">
       <h3>Teams</h3>
 
-      <div class="grouping-team-list mt-3">
+      <div class="grouping-team-list scrollable-area">
         @for (team of teams$ | async; track $index) {
           <app-team-view [team]="team" (personDropped)="onPersonDropped($event)"/>
         } @empty {

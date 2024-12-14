@@ -167,6 +167,7 @@ export class PersonService {
 
   public resetAvailablePersons() {
     this.availablePersons = this.persons;
+    this.filterAvailablePersons(this.slotFilter(), this.nameFilter());
   }
 
 

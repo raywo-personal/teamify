@@ -14,6 +14,7 @@ import {PersonSortButtonsComponent} from '../../../shared/components/person-sort
 import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-filter/person-slot-filter.component';
 import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
 import {map} from 'rxjs';
+import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 
 
 @Component({
@@ -29,7 +30,8 @@ import {map} from 'rxjs';
     AddButtonComponent,
     PersonSortButtonsComponent,
     PersonSlotFilterComponent,
-    SearchFieldComponent
+    SearchFieldComponent,
+    DeleteButtonComponent
   ],
   templateUrl: './person-list.component.html',
   styleUrl: './person-list.component.scss'
@@ -76,6 +78,11 @@ export class PersonListComponent {
 
   protected onDelete(person: Person) {
     this.personService.removePerson(person);
+  }
+
+
+  protected onDeleteAll() {
+    this.personService.removeAllPersons();
   }
 
 

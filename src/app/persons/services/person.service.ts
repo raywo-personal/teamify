@@ -86,18 +86,19 @@ export class PersonService {
   }
 
 
-  public earliestTimeSlot(person: Person): PersonTimeSlot {
-    // TODO: Fix reduce for cases when dealing with an empty Array.
+  public earliestTimeSlot(person: Person): PersonTimeSlot | undefined {
     return person.timeSlots
       .filter(s => s.priority === 1)
-      .reduce((smallest, current) => {
+      .reduce((smallest: PersonTimeSlot | undefined, current) => {
+        if (!smallest) return current;
+
         return smallest.timeSlot.start.compareTo(current.timeSlot.start) < 0 ? smallest : current
-      });
+      }, undefined);
   }
 
 
   public earliestStartTime(person: Person): Time {
-    return this.earliestTimeSlot(person).timeSlot.start;
+    return this.earliestTimeSlot(person)?.timeSlot.start || new Time(9, 0);
   }
 
 

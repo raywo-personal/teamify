@@ -15,11 +15,11 @@
         <span class="visually-hidden">Edit {{ knowledge().name }}</span>
       </button>
 
-      <app-delete-button
-        confirmationTitle="Delete knowledge item"
-        confirmationMessage="Are you sure you want to delete knowledge item “{{knowledge().name}}”?"
-        (deleteConfirmed)="onDelete()"
-      />
+      <button app-delete-button
+              confirmationTitle="Delete knowledge item"
+              confirmationMessage="Are you sure you want to delete knowledge item “{{knowledge().name}}”?"
+              (deleteConfirmed)="onDelete()">
+      </button>
     </div>
   }
 </div>

@@ -17,6 +17,8 @@ export class PriorKnowledgeService {
   public readonly knowledgeRemoved$ = this.knowledgeRemovedSubject.asObservable();
   private knowledgeUpdatedSubject = new Subject<PriorKnowledge>();
   public readonly knowledgeUpdated$ = this.knowledgeUpdatedSubject.asObservable();
+  private knowledgeResetSubject = new Subject<void>();
+  public readonly knowledgeReset$ = this.knowledgeResetSubject.asObservable();
 
 
   public addKnowledge(knowledge: PriorKnowledge, isRestore: boolean = false) {
@@ -35,6 +37,12 @@ export class PriorKnowledgeService {
   public removeKnowledge(knowledge: PriorKnowledge) {
     this.knowledgeList = this.knowledgeList.filter(k => k.id !== knowledge.id);
     this.knowledgeRemovedSubject.next(knowledge);
+  }
+
+
+  public removeAllKnowledge() {
+    this.knowledgeList = [];
+    this.knowledgeResetSubject.next();
   }
 
 

@@ -87,6 +87,7 @@ export class PersonService {
 
 
   public earliestTimeSlot(person: Person): PersonTimeSlot {
+    // TODO: Fix reduce for cases when dealing with an empty Array.
     return person.timeSlots
       .filter(s => s.priority === 1)
       .reduce((smallest, current) => {
@@ -173,6 +174,20 @@ export class PersonService {
   public resetAvailablePersons() {
     this.availablePersons = this.persons;
     this.filterAvailablePersons(this.slotFilter(), this.nameFilter());
+  }
+
+
+  public resetPriorKnowledge() {
+    this.persons.forEach(p => {
+      p.priorKnowledge = [];
+    });
+  }
+
+
+  public resetPersonsTimeSlots() {
+    this.persons.forEach(p => {
+      p.timeSlots = [];
+    });
   }
 
 

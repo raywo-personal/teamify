@@ -56,11 +56,11 @@
         <span class="visually-hidden">Edit {{ person().name }}</span>
       </button>
 
-      <app-delete-button
-        confirmationTitle="Delete person"
-        confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
-        (deleteConfirmed)="onDelete()"
-      />
+      <button app-delete-button
+              confirmationTitle="Delete person"
+              confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
+              (deleteConfirmed)="onDelete()"
+      ></button>
     </div>
   }
 </div>

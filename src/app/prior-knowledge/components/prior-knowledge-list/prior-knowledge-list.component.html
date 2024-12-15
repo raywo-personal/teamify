@@ -2,11 +2,15 @@
      role="toolbar"
      aria-label="Toolbar for working with teams and persons">
   <div class="toolbar-buttons">
-    <app-add-button caption="Add knowledge item" (addClick)="onAdd(content)"/>
+    <button app-add-button
+            caption="Add knowledge item"
+            (click)="onAdd(content)">
+    </button>
 
-    <app-delete-button caption="Clear all prior knowledge"
-                       confirmationMessage="Are you sure you want to clear all prior knowledge?"
-                       (deleteConfirmed)="onDeleteAll()"/>
+    <button app-delete-button caption="Clear all prior knowledge"
+            confirmationMessage="Are you sure you want to clear all prior knowledge?"
+            (deleteConfirmed)="onDeleteAll()">
+    </button>
   </div>
 </div>
 

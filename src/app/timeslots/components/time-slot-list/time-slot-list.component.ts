@@ -20,7 +20,7 @@ import {DeleteButtonComponent} from '../../../shared/components/delete-button/de
     DataNotAvailableViewComponent,
     DataNotAvailableInfoComponent,
     AddButtonComponent,
-    DeleteButtonComponent,
+    DeleteButtonComponent
   ],
   templateUrl: './time-slot-list.component.html',
   styleUrl: './time-slot-list.component.scss'
@@ -87,4 +87,5 @@ export class TimeSlotListComponent {
 
     this.offcanvas.open(content, options);
   }
+
 }

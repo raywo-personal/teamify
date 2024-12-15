@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" class="person-form" #form="ngForm">
+<form class="person-form" #form="ngForm">
   <h3>Person</h3>
   <div class="row">
     <div class="col">
@@ -155,12 +155,15 @@
       Cancel
     </button>
 
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    <button [type]="edit() ? 'submit' : 'button'"
+            class="btn btn-primary"
+            [disabled]="form.invalid"
+            (click)="onSubmit()">
       Save
     </button>
 
     @if (!edit()) {
-      <button type="button" class="btn btn-primary ms-3"
+      <button type="submit" class="btn btn-primary ms-3"
               [disabled]="form.invalid"
               (click)="onNextAdd()">
         Add next person <i class="bi-chevron-right"></i>

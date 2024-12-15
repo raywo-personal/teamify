@@ -40,6 +40,7 @@ export class PersonEditComponent {
 
   private _priorKnowledgeSource: PriorKnowledge[] = [];
   private _timeSlotSource: TimeSlot[] = [];
+  private personId?: string;
 
   public person = input<Person>();
   public edit = input<boolean>(false);
@@ -60,9 +61,11 @@ export class PersonEditComponent {
       const person = this.person();
 
       if (!person) {
+        this.personId = undefined;
         return;
       }
 
+      this.personId = person.id;
       this.name = person.name;
       this.info = person.info;
 
@@ -82,7 +85,7 @@ export class PersonEditComponent {
 
 
   protected onSubmit() {
-    const person = this.createPerson();
+    const person = this.createPersonFromEntries();
 
     if (this.edit()) {
       this.personService.updatePerson(person);
@@ -100,8 +103,9 @@ export class PersonEditComponent {
 
 
   protected onNextAdd() {
-    const createdPerson = this.createPerson();
+    const createdPerson = this.createPersonFromEntries();
     this.personService.addPerson(createdPerson);
+    this.personId = crypto.randomUUID();
 
     const emptyPerson = createPerson("");
     this.name = "";
@@ -134,7 +138,7 @@ export class PersonEditComponent {
   }
 
 
-  private createPerson(): Person {
+  private createPersonFromEntries(): Person {
     let priorKnowledge: PersonKnowledge[] = this.knowledge
       .filter(k => k.selected)
       .map(k => createPersonKnowledge(k.knowledge, k.remark));
@@ -145,7 +149,7 @@ export class PersonEditComponent {
       .flat();
 
     return {
-      id: this.person()?.id,
+      id: this.personId,
       name: this.name,
       info: this.info,
       priorKnowledge: priorKnowledge,

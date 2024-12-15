@@ -2,11 +2,28 @@
      role="toolbar"
      aria-label="Toolbar for working with teams and persons">
   <div class="toolbar-buttons">
-    <app-add-button caption="Add time slot" (addClick)="onAdd(content)"/>
+    <button app-add-button
+            caption="Add time slot"
+            (click)="onAdd(content)">
+    </button>
+  </div>
+  <div class="toolbar-buttons">
+    <div class="btn-group">
+      @if ((timeSlotCount$ | async) === 0) {
+        <button type="button"
+                class="btn btn-outline-secondary"
+                (click)="onAddDefaultSet()">
+          <i class="bi-file-earmark-arrow-up me-2"></i>
+          <span>Load default set</span>
+        </button>
+      }
 
-    <app-delete-button caption="Clear all time slots"
-                       confirmationMessage="Are you sure you want to clear all time slots?"
-                       (deleteConfirmed)="onDeleteAll()"/>
+      <button app-delete-button
+              caption="Clear all time slots"
+              confirmationMessage="Are you sure you want to clear all time slots?"
+              (deleteConfirmed)="onDeleteAll()">
+      </button>
+    </div>
   </div>
 </div>
 

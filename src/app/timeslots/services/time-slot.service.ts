@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {TimeSlot} from '../models/time-slot.model';
 import {BehaviorSubject, map, Observable, Subject} from 'rxjs';
+import {defaultTimeSlots} from './default-time-slots.data';
 
 
 @Injectable({
@@ -43,6 +44,11 @@ export class TimeSlotService {
   public removeAllSlots() {
     this.slots = [];
     this.slotResetSubject.next()
+  }
+
+
+  public addDefaultSet() {
+    defaultTimeSlots.forEach(slot => this.addSlot(slot));
   }
 
 

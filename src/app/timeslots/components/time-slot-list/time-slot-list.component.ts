@@ -5,9 +5,10 @@ import {AsyncPipe} from '@angular/common';
 import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
 import {TimeSlotEditComponent} from '../time-slot-edit/time-slot-edit.component';
 import {createTimeSlot, TimeSlot} from '../../models/time-slot.model';
-import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/add-header-bar.component';
 import {DataNotAvailableViewComponent} from "../../../shared/components/data-not-available-view/data-not-available-view.component";
 import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not-available-info/data-not-available-info.component';
+import {AddButtonComponent} from '../../../shared/components/add-button/add-button.component';
+import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 
 
 @Component({
@@ -16,9 +17,10 @@ import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not
     TimeSlotViewComponent,
     AsyncPipe,
     TimeSlotEditComponent,
-    AddHeaderBarComponent,
     DataNotAvailableViewComponent,
-    DataNotAvailableInfoComponent
+    DataNotAvailableInfoComponent,
+    AddButtonComponent,
+    DeleteButtonComponent
   ],
   templateUrl: './time-slot-list.component.html',
   styleUrl: './time-slot-list.component.scss'
@@ -63,6 +65,11 @@ export class TimeSlotListComponent {
   }
 
 
+  protected onDeleteAll() {
+    this.slotService.removeAllSlots();
+  }
+
+
   private openOffcanvas(content: TemplateRef<any>, title: string) {
     this.canvasTitle = title;
 
@@ -74,5 +81,4 @@ export class TimeSlotListComponent {
 
     this.offcanvas.open(content, options);
   }
-
 }

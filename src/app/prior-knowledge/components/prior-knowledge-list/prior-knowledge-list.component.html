@@ -1,7 +1,14 @@
-<app-add-header-bar
-  caption="Add knowledge item"
-  (addClick)="onAdd(content)"
-/>
+<div class="toolbar mb-3"
+     role="toolbar"
+     aria-label="Toolbar for working with teams and persons">
+  <div class="toolbar-buttons">
+    <app-add-button caption="Add knowledge item" (addClick)="onAdd(content)"/>
+
+    <app-delete-button caption="Clear all prior knowledge"
+                       confirmationMessage="Are you sure you want to clear all prior knowledge?"
+                       (deleteConfirmed)="onDeleteAll()"/>
+  </div>
+</div>
 
 <div class="content-area">
   <ul class="list-group scrollable-area">

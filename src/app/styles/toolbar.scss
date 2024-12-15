@@ -33,6 +33,18 @@
     height: fit-content;
   }
 
+  .btn-danger {
+    --bs-btn-padding-y: 0.25rem;
+    --bs-btn-padding-x: 0.5rem;
+    --bs-btn-font-size: 0.875rem;
+    --bs-btn-border-radius: var(--bs-border-radius-sm);
+
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #dc3545;
+    --bs-btn-color: #dc3545;
+    --bs-btn-bg: transparent;
+  }
+
   .btn-group-with-description {
     display: flex;
     flex-wrap: wrap;

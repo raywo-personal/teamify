@@ -176,6 +176,20 @@ export class PersonService {
   }
 
 
+  public resetPriorKnowledge() {
+    this.persons.forEach(p => {
+      p.priorKnowledge = [];
+    });
+  }
+
+
+  public resetPersonsTimeSlots() {
+    this.persons.forEach(p => {
+      p.timeSlots = [];
+    });
+  }
+
+
   private sortPersons(nameSortOrder: SortOrder, slotSortOrder: SortOrder) {
     this.filterPersons(this.slotFilter(), this.nameFilter());
 

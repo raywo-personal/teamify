@@ -5,9 +5,10 @@ import {PriorKnowledgeViewComponent} from '../prior-knowledge-view/prior-knowled
 import {createPriorKnowledge, PriorKnowledge} from '../../models/prior-knowledge.model';
 import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
 import {PriorKnowledgeEditComponent} from '../prior-knowledge-edit/prior-knowledge-edit.component';
-import {AddHeaderBarComponent} from '../../../shared/components/add-header-bar/add-header-bar.component';
 import {DataNotAvailableInfoComponent} from "../../../shared/components/data-not-available-info/data-not-available-info.component";
 import {DataNotAvailableViewComponent} from '../../../shared/components/data-not-available-view/data-not-available-view.component';
+import {AddButtonComponent} from "../../../shared/components/add-button/add-button.component";
+import {DeleteButtonComponent} from "../../../shared/components/delete-button/delete-button.component";
 
 
 @Component({
@@ -16,9 +17,10 @@ import {DataNotAvailableViewComponent} from '../../../shared/components/data-not
     AsyncPipe,
     PriorKnowledgeViewComponent,
     PriorKnowledgeEditComponent,
-    AddHeaderBarComponent,
     DataNotAvailableInfoComponent,
-    DataNotAvailableViewComponent
+    DataNotAvailableViewComponent,
+    AddButtonComponent,
+    DeleteButtonComponent
   ],
   templateUrl: './prior-knowledge-list.component.html',
   styleUrl: './prior-knowledge-list.component.scss'
@@ -50,6 +52,11 @@ export class PriorKnowledgeListComponent {
 
   protected onDelete(knowledge: PriorKnowledge) {
     this.knowledgeService.removeKnowledge(knowledge);
+  }
+
+
+  protected onDeleteAll() {
+    this.knowledgeService.removeAllKnowledge();
   }
 
 

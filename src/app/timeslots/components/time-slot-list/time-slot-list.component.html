@@ -1,7 +1,14 @@
-<app-add-header-bar
-  caption="Add time slot"
-  (addClick)="onAdd(content)"
-/>
+<div class="toolbar mb-3"
+     role="toolbar"
+     aria-label="Toolbar for working with teams and persons">
+  <div class="toolbar-buttons">
+    <app-add-button caption="Add time slot" (addClick)="onAdd(content)"/>
+
+    <app-delete-button caption="Clear all time slots"
+                       confirmationMessage="Are you sure you want to clear all time slots?"
+                       (deleteConfirmed)="onDeleteAll()"/>
+  </div>
+</div>
 
 <div class="content-area">
   <ul class="list-group scrollable-area">

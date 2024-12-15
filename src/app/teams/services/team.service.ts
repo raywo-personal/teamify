@@ -19,6 +19,8 @@ export class TeamService {
   public readonly teamRemoved$ = this.teamRemovedSubject.asObservable();
   private teamUpdatedSubject = new Subject<Team>();
   public readonly teamUpdated$ = this.teamUpdatedSubject.asObservable();
+  private teamResetSubject = new Subject<void>();
+  public readonly teamReset$ = this.teamResetSubject.asObservable();
 
 
   public get teams(): Team[] {
@@ -81,6 +83,12 @@ export class TeamService {
   public removeTeam(team: Team) {
     this.teams = this.teams.filter(t => t.id !== team.id);
     this.teamRemovedSubject.next(team);
+  }
+
+
+  public removeAllTeams() {
+    this.teams = [];
+    this.teamResetSubject.next();
   }
 
 

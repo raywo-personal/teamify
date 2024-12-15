@@ -7,6 +7,7 @@ import {TimeSlotService} from '../../timeslots/services/time-slot.service';
 import {Team} from '../../teams/models/team.model';
 import {TimeSlot} from '../../timeslots/models/time-slot.model';
 import {PriorKnowledge} from '../../prior-knowledge/models/prior-knowledge.model';
+import {Time} from '../../timeslots/models/time.model';
 
 
 @Injectable({
@@ -97,6 +98,8 @@ export class PersistenceService {
     const slots = JSON.parse(rawSlots) as TimeSlot[];
 
     slots.forEach(slot => {
+      slot.start = new Time(slot.start.hour, slot.start.minute);
+      slot.end = new Time(slot.end.hour, slot.end.minute);
       this.slotService.addSlot(slot, true);
     });
   }

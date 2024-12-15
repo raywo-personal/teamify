@@ -20,7 +20,7 @@ import {DeleteButtonComponent} from '../../../shared/components/delete-button/de
     DataNotAvailableViewComponent,
     DataNotAvailableInfoComponent,
     AddButtonComponent,
-    DeleteButtonComponent,
+    DeleteButtonComponent
   ],
   templateUrl: './time-slot-list.component.html',
   styleUrl: './time-slot-list.component.scss'
@@ -31,6 +31,7 @@ export class TimeSlotListComponent {
   private offcanvas = inject(NgbOffcanvas);
 
   protected slots$ = this.slotService.slots$;
+  protected timeSlotCount$ = this.slotService.slotCount$;
   protected timeSlotToEdit?: TimeSlot;
   protected canvasTitle: string = "";
   protected edit = false;
@@ -70,8 +71,8 @@ export class TimeSlotListComponent {
   }
 
 
-  protected onTest() {
-    console.log("test clicked")
+  protected onAddDefaultSet() {
+    this.slotService.addDefaultSet();
   }
 
 

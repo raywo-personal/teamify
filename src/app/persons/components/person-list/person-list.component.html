@@ -2,7 +2,10 @@
      role="toolbar"
      aria-label="Toolbar for working with teams and persons">
   <div class="toolbar-buttons">
-    <app-add-button caption="Add person" (addClick)="onAdd(content)"/>
+    <button app-add-button
+            caption="Add person"
+            (click)="onAdd(content)">
+    </button>
     <app-person-sort-buttons/>
   </div>
 

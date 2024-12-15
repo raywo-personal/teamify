@@ -21,11 +21,11 @@
         <span class="visually-hidden">Edit {{ timeSlot().description }}</span>
       </button>
 
-      <app-delete-button
-        confirmationTitle="Delete time slot"
-        confirmationMessage="Are you sure you want to delete time slot “{{timeSlot().description}}”"
-        (deleteConfirmed)="onDelete()"
-      />
+      <button app-delete-button
+              confirmationTitle="Delete time slot"
+              confirmationMessage="Are you sure you want to delete time slot “{{timeSlot().description}}”"
+              (deleteConfirmed)="onDelete()">
+      </button>
     </div>
   }
 </div>

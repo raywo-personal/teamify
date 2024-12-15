@@ -1,11 +1,14 @@
-import {Component, input, output} from '@angular/core';
+import {Component, HostListener, input, output} from '@angular/core';
 
 
 @Component({
-  selector: 'app-add-button',
+  selector: 'button[app-add-button]',
   imports: [],
   templateUrl: './add-button.component.html',
-  styleUrl: './add-button.component.scss'
+  styleUrl: './add-button.component.scss',
+  host: {
+    class: "btn btn-primary"
+  }
 })
 export class AddButtonComponent {
 
@@ -13,7 +16,9 @@ export class AddButtonComponent {
   public addClick = output();
 
 
-  protected onAdd() {
+  @HostListener("click", ["$event"])
+  protected onAdd(event: MouseEvent) {
+    event.stopPropagation();
     this.addClick.emit();
   }
 

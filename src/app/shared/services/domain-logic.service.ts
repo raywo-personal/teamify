@@ -75,6 +75,11 @@ export class DomainLogicService {
     this.teamService.teamUpdated$.subscribe(team => {
       this.persistenceService.saveAllData();
     });
+
+    this.teamService.teamReset$.subscribe(team => {
+      this.personService.resetAvailablePersons();
+      this.persistenceService.saveAllData();
+    });
   }
 
 
@@ -90,7 +95,12 @@ export class DomainLogicService {
 
     this.priorKnowledgeService.knowledgeUpdated$.subscribe(knowledge => {
       this.persistenceService.saveAllData();
-    })
+    });
+
+    this.priorKnowledgeService.knowledgeReset$.subscribe(() => {
+      this.personService.resetPriorKnowledge();
+      this.persistenceService.saveAllData();
+    });
   }
 
 
@@ -109,6 +119,12 @@ export class DomainLogicService {
       this.handleSlotRemoval(slot);
       this.persistenceService.saveAllData();
     });
+
+    this.slotService.slotsReset$.subscribe(() => {
+      this.teamService.removeAllTeams();
+      this.personService.resetPersonsTimeSlots();
+      this.persistenceService.saveAllData();
+    })
   }
 
 

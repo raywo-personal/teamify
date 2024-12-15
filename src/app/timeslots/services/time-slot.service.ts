@@ -17,6 +17,8 @@ export class TimeSlotService {
   public readonly slotRemoved$ = this.slotRemovedSubject.asObservable();
   private slotUpdatedSubject = new Subject<TimeSlot>();
   public readonly slotUpdated$ = this.slotUpdatedSubject.asObservable();
+  private slotResetSubject = new Subject<void>();
+  public readonly slotsReset$ = this.slotResetSubject.asObservable();
 
 
   public addSlot(slot: TimeSlot, isRestore: boolean = false) {
@@ -35,6 +37,12 @@ export class TimeSlotService {
   public removeSlot(slot: TimeSlot) {
     this.slots = this.slots.filter(s => s.id !== slot.id);
     this.slotRemovedSubject.next(slot);
+  }
+
+
+  public removeAllSlots() {
+    this.slots = [];
+    this.slotResetSubject.next()
   }
 
 

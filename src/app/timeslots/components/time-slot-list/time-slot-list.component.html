@@ -18,11 +18,13 @@
         </button>
       }
 
-      <button app-delete-button
-              caption="Clear all time slots"
-              confirmationMessage="Are you sure you want to clear all time slots?"
-              (deleteConfirmed)="onDeleteAll()">
-      </button>
+      @if ((timeSlotCount$ | async)! > 0) {
+        <button app-delete-button
+                caption="Clear all time slots"
+                confirmationMessage="Are you sure you want to clear all time slots?"
+                (deleteConfirmed)="onDeleteAll()">
+        </button>
+      }
     </div>
   </div>
 </div>

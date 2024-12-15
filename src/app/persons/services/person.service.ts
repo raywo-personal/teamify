@@ -127,6 +127,11 @@ export class PersonService {
   }
 
 
+  public removeAllPersons() {
+    this.persons.forEach(p => this.removePerson(p));
+  }
+
+
   public addAvailablePerson(person: Person) {
     this.availablePersons = this.availablePersons.concat(person);
     this.sortAvailablePersons(this.nameSortOrder(), this.slotSortOrder());

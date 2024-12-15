@@ -7,10 +7,12 @@
             (click)="onAdd(content)">
     </button>
 
-    <button app-delete-button caption="Clear all prior knowledge"
-            confirmationMessage="Are you sure you want to clear all prior knowledge?"
-            (deleteConfirmed)="onDeleteAll()">
-    </button>
+    @if ((knowledgeList$ | async)!.length > 0) {
+      <button app-delete-button caption="Clear all prior knowledge"
+              confirmationMessage="Are you sure you want to clear all prior knowledge?"
+              (deleteConfirmed)="onDeleteAll()">
+      </button>
+    }
   </div>
 </div>
 

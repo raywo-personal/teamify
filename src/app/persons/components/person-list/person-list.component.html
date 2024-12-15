@@ -6,7 +6,16 @@
             caption="Add person"
             (click)="onAdd(content)">
     </button>
+
     <app-person-sort-buttons/>
+
+    @if ((personsCount$ | async)! > 0) {
+      <button app-delete-button
+              caption="Clear all persons"
+              confirmationMessage="Are you sure you want to clear all persons?"
+              (deleteConfirmed)="onDeleteAll()">
+      </button>
+    }
   </div>
 
   <div class="d-flex gap-2">

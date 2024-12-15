@@ -1,6 +1,5 @@
 import {Component, inject, TemplateRef} from '@angular/core';
 import {PriorKnowledgeService} from '../../services/prior-knowledge.service';
-import {AsyncPipe} from '@angular/common';
 import {PriorKnowledgeViewComponent} from '../prior-knowledge-view/prior-knowledge-view.component';
 import {createPriorKnowledge, PriorKnowledge} from '../../models/prior-knowledge.model';
 import {NgbOffcanvas, NgbOffcanvasOptions} from '@ng-bootstrap/ng-bootstrap';
@@ -9,18 +8,19 @@ import {DataNotAvailableInfoComponent} from "../../../shared/components/data-not
 import {DataNotAvailableViewComponent} from '../../../shared/components/data-not-available-view/data-not-available-view.component';
 import {AddButtonComponent} from "../../../shared/components/add-button/add-button.component";
 import {DeleteButtonComponent} from "../../../shared/components/delete-button/delete-button.component";
+import {AsyncPipe} from '@angular/common';
 
 
 @Component({
   selector: 'app-prior-knowledge-list',
   imports: [
-    AsyncPipe,
     PriorKnowledgeViewComponent,
     PriorKnowledgeEditComponent,
     DataNotAvailableInfoComponent,
     DataNotAvailableViewComponent,
     AddButtonComponent,
-    DeleteButtonComponent
+    DeleteButtonComponent,
+    AsyncPipe
   ],
   templateUrl: './prior-knowledge-list.component.html',
   styleUrl: './prior-knowledge-list.component.scss'

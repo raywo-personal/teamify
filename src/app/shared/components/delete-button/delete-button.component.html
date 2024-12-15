@@ -1,16 +1,14 @@
-<button class="btn btn-danger" (click)="onClick(content, $event)">
-  @if (showIcon()) {
-    <i class="bi-trash"></i>
-  }
+@if (showIcon()) {
+  <i class="bi-trash"></i>
+}
 
-  @if (caption()) {
-    {{ caption() }}
-  } @else {
-    <span class="visually-hidden">Delete</span>
-  }
-</button>
+@if (caption()) {
+  {{ caption() }}
+} @else {
+  <span class="visually-hidden">Delete</span>
+}
 
-<ng-template #content let-modal>
+<ng-template #modalContent let-modal>
   <div class="modal-header">
     @if (confirmationTitle()) {
       <h3 class="modal-title">{{ confirmationTitle() }}</h3>

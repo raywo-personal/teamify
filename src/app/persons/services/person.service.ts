@@ -5,7 +5,6 @@ import {PersonTimeSlot} from '../models/person-timeslot.model';
 import {Time} from '../../timeslots/models/time.model';
 import {randomNumber} from '../../shared/helper/random';
 import {SortOrder, stringCompare, timeCompare} from '../../shared/helper/comparison';
-import {Team} from '../../teams/models/team.model';
 
 
 @Injectable({
@@ -150,14 +149,14 @@ export class PersonService {
   }
 
 
-  public getRandomAvailablePerson(team: Team): Person | undefined {
+  public getRandomAvailablePerson(timeSlotId: string): Person | undefined {
     if (this.availablePersons.length === 0) {
       return undefined;
     }
 
     const candidates = this.availablePersons
       .filter(p =>
-        p.timeSlots.some(t => t.timeSlot.id === team.timeSlot.id));
+        p.timeSlots.some(t => t.timeSlot.id === timeSlotId));
     const randomIndex = randomNumber(candidates.length - 1);
     const person = candidates[randomIndex];
 

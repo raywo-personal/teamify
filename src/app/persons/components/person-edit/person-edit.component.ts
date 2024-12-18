@@ -7,9 +7,10 @@ import {PriorKnowledgeService} from '../../../prior-knowledge/services/prior-kno
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {PersonService} from '../../services/person.service';
 import {TimeSlotViewComponent} from '../../../timeslots/components/time-slot-view/time-slot-view.component';
-import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 import {createPersonKnowledge, PersonKnowledge} from '../../models/person-knowledge.model';
 import {createPersonTimeSlot, PersonTimeSlot} from '../../models/person-timeslot.model';
+import {ListMustNotBeEmptyDirective} from '../../directives/list-must-not-be-empty.directive';
 
 
 interface PriorKnowledgeSelection {
@@ -27,7 +28,8 @@ interface PriorKnowledgeSelection {
     CdkDropList,
     CdkDrag,
     CdkDropListGroup,
-    CdkDragPlaceholder
+    CdkDragPlaceholder,
+    ListMustNotBeEmptyDirective
   ],
   templateUrl: './person-edit.component.html',
   styleUrl: './person-edit.component.scss'
@@ -49,9 +51,12 @@ export class PersonEditComponent {
 
   protected name: string = "";
   protected info: string = "";
+  // This is just needed to make the form valid or invalid according to the
+  // time slot list for priority 1.
+  protected timeSlotListState: string = "";
 
   protected knowledge: PriorKnowledgeSelection[] = [];
-  protected timeSlots: TimeSlot[][] = [];
+  protected priorityTimeSlots: TimeSlot[][] = [];
   protected timeSlotsSource: TimeSlot[] = [];
 
 
@@ -115,15 +120,33 @@ export class PersonEditComponent {
   }
 
 
-  protected onSlotDropped(dropEvent: CdkDragDrop<TimeSlot[], any>) {
-    if (dropEvent.previousContainer === dropEvent.container) {
-      moveItemInArray(dropEvent.container.data, dropEvent.previousIndex, dropEvent.currentIndex);
-    } else {
-      transferArrayItem(dropEvent.previousContainer.data,
-        dropEvent.container.data,
-        dropEvent.previousIndex,
-        dropEvent.currentIndex);
+  protected onSlotDropped(dropEvent: CdkDragDrop<number, any>) {
+    const targetIndex = dropEvent.container.data;
+    const data = dropEvent.item.data;
+    const sourceIndex = data.index;
+    const slot = data.slot;
+    // console.log("dragged data", data, "target index", targetIndex, "source index", sourceIndex, "slot", slot, "event", dropEvent);
+
+    if (targetIndex === sourceIndex) return;
+
+    if (sourceIndex === -1) {
+      this.timeSlotsSource = this.timeSlotsSource.filter(s => s.id !== slot.id);
+      this.priorityTimeSlots[targetIndex] = [...this.priorityTimeSlots[targetIndex], slot]
+        .sort((a, b) => a.start.compareTo(b.start));
+      return;
     }
+
+    if (targetIndex === -1) {
+      this.priorityTimeSlots[sourceIndex] = this.priorityTimeSlots[sourceIndex].filter(s => s.id !== slot.id);
+      this.timeSlotsSource = [...this.timeSlotsSource, slot]
+        .sort((a, b) => a.start.compareTo(b.start));
+      return;
+    }
+
+    this.priorityTimeSlots[sourceIndex] = this.priorityTimeSlots[sourceIndex].filter(s => s.id !== slot.id);
+    this.priorityTimeSlots[targetIndex] = [...this.priorityTimeSlots[targetIndex], slot]
+      .sort((a, b) => a.start.compareTo(b.start));
+
   }
 
 
@@ -132,8 +155,8 @@ export class PersonEditComponent {
       return true;
     }
 
-    return this.timeSlots
-      .slice(index - 1, this.timeSlots.length)
+    return this.priorityTimeSlots
+      .slice(index - 1, this.priorityTimeSlots.length)
       .some(slot => slot.length !== 0);
   }
 
@@ -142,7 +165,7 @@ export class PersonEditComponent {
     let priorKnowledge: PersonKnowledge[] = this.knowledge
       .filter(k => k.selected)
       .map(k => createPersonKnowledge(k.knowledge, k.remark));
-    let personTimeSlots: PersonTimeSlot[] = this.timeSlots
+    let personTimeSlots: PersonTimeSlot[] = this.priorityTimeSlots
       .map((s, index) => {
         return s.map(slot => createPersonTimeSlot(slot, index + 1))
       })
@@ -172,14 +195,20 @@ export class PersonEditComponent {
 
   private fillTimeSlots(person: Person) {
     const length = this._timeSlotSource.length
-    this.timeSlots = new Array(length).fill(0).map(() => []);
+    this.priorityTimeSlots = new Array(length).fill(0).map(() => []);
 
     person.timeSlots.forEach(ts => {
       const priority = ts.priority || 1;
-      this.timeSlots[priority - 1].push(ts.timeSlot);
+      this.priorityTimeSlots[priority - 1].push(ts.timeSlot);
     });
 
+    if (this.priorityTimeSlots[0].length > 0) {
+      this.timeSlotListState = "not empty";
+    }
+
     const personTimeSlots = person.timeSlots.map(t => t.timeSlot);
-    this.timeSlotsSource = this._timeSlotSource.filter(s => !personTimeSlots.includes(s));
+    this.timeSlotsSource = this._timeSlotSource.filter(s => {
+      return !personTimeSlots.some(pts => pts.id === s.id);
+    });
   }
 }

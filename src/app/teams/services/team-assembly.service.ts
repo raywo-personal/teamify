@@ -34,7 +34,7 @@ export class TeamAssemblyService {
 
     teams.forEach(team => {
       while (team.persons.length < personsPerTeam) {
-        const person = this.personService.getRandomAvailablePerson(team);
+        const person = this.personService.getRandomAvailablePerson(team.timeSlot.id);
 
         if (!person) break;
 

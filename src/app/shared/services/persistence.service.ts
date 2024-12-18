@@ -58,6 +58,13 @@ export class PersistenceService {
     const persons = JSON.parse(rawPersons) as Person[];
 
     persons.forEach(person => {
+      person.timeSlots
+        .map(ts => ts.timeSlot)
+        .forEach(slot => {
+            slot.start = Time.fromSimpleTime(slot.start);
+            slot.end = Time.fromSimpleTime(slot.end);
+          }
+        );
       this.personService.addPerson(person, true);
     });
   }
@@ -98,8 +105,8 @@ export class PersistenceService {
     const slots = JSON.parse(rawSlots) as TimeSlot[];
 
     slots.forEach(slot => {
-      slot.start = new Time(slot.start.hour, slot.start.minute);
-      slot.end = new Time(slot.end.hour, slot.end.minute);
+      slot.start = Time.fromSimpleTime(slot.start);
+      slot.end = Time.fromSimpleTime(slot.end);
       this.slotService.addSlot(slot, true);
     });
   }

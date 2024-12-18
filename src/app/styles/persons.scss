@@ -3,6 +3,19 @@
   width: 75% !important;
 }
 
+.slot-pill {
+  border: 1px solid var(--bs-light);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 0.5rem;
+
+  background: var(--bs-body-bg);
+
+  .slot-pill-title {
+    font-size: var(--bs-font-size);
+    font-weight: bold;
+  }
+}
 
 .person-form {
   h3 {
@@ -46,19 +59,19 @@
     border-radius: 0.5rem;
     padding: 0.5rem 0.5rem 1rem;
     min-height: 5rem;
-  }
 
-  .slot-pill {
-    border: 1px solid var(--bs-light);
-    border-radius: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    margin-bottom: 0.5rem;
+    &.invalid-list {
+      .invalid-feedback {
+        display: block;
+      }
 
-    background: var(--bs-body-bg);
+      .empty-list-hint {
+        display: none;
+      }
+    }
 
-    .slot-pill-title {
-      font-size: var(--bs-font-size);
-      font-weight: bold;
+    .empty-list-hint {
+      display: block;
     }
   }
 }
@@ -146,7 +159,6 @@
   border: 1px solid var(--bs-light);
   border-radius: 0.5rem;
   background-color: var(--bs-tertiary-bg);
-
   padding: 0.5rem;
 
   .popover {

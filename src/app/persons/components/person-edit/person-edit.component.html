@@ -101,26 +101,46 @@
     <div class="col-8 slot-target">
       <h4 class="h6">Preferred time slots</h4>
 
+      <input type="hidden"
+             id="priority-1-state"
+             name="priority-1-state"
+             required
+             minlength="1"
+             [(ngModel)]="timeSlotListState"
+             #priority1ListState="ngModel">
+
       <div class="row">
-        @for (slots of timeSlots; track $index) {
+        @for (slots of priorityTimeSlots; track $index) {
+          @let index = $index;
           <div class="col" [class.hidden]="!showTimeSlotPriority($index)">
-            <h5>Priority {{ $index + 1 }}</h5>
+            <h5>Priority {{ index + 1 }}</h5>
 
             <div
               cdkDropList
-              [cdkDropListData]="slots"
+              [cdkDropListData]="index"
               (cdkDropListDropped)="onSlotDropped($event)"
               class="slot-list"
+              [listMustNotBeEmpty]="slots"
+              [referenceControl]="priority1ListState"
+              [apply]="index === 0"
             >
+
               @for (slot of slots; track slot.id) {
-                <div class="slot-pill" cdkDrag>
+                <div class="slot-pill"
+                     cdkDrag
+                     [cdkDragData]="{index: index, slot: slot}">
                   <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
                   <app-time-slot-view [timeSlot]="slot"
                                       [showButtons]="false"
                                       [showDragHandle]="true"/>
                 </div>
               } @empty {
-                <small class="text-muted">No preference given</small>
+                <div class="invalid-feedback">
+                  Please select at least one time slot for this priority.
+                </div>
+                <div class="empty-list-hint">
+                  <small class="text-muted">No preference given</small>
+                </div>
               }
             </div>
           </div>
@@ -134,12 +154,14 @@
       <div
         cdkDropList
         cdkDropListSortingDisabled
-        [cdkDropListData]="timeSlotsSource"
+        [cdkDropListData]="-1"
         (cdkDropListDropped)="onSlotDropped($event)"
         class="slot-list"
       >
         @for (slot of timeSlotsSource; track slot.id) {
-          <div class="slot-pill" cdkDrag>
+          <div class="slot-pill"
+               cdkDrag
+               [cdkDragData]="{index: -1, slot: slot}">
             <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
             <app-time-slot-view [timeSlot]="slot"
                                 [showButtons]="false"

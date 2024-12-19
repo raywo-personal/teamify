@@ -1,6 +1,8 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {PriorKnowledge} from '../models/prior-knowledge.model';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
+import {EventBusService} from '../../shared/event-bus/event-bus.service';
+import {createBusEvent, EventType} from '../../shared/event-bus/event.model';
 
 
 @Injectable({
@@ -11,38 +13,31 @@ export class PriorKnowledgeService {
   private knowledgeListSubject = new BehaviorSubject<PriorKnowledge[]>([]);
   public readonly knowledgeList$ = this.knowledgeListSubject.asObservable();
 
-  private knowledgeAddedSubject = new Subject<PriorKnowledge>();
-  public readonly knowledgeAdded$ = this.knowledgeAddedSubject.asObservable();
-  private knowledgeRemovedSubject = new Subject<PriorKnowledge>();
-  public readonly knowledgeRemoved$ = this.knowledgeRemovedSubject.asObservable();
-  private knowledgeUpdatedSubject = new Subject<PriorKnowledge>();
-  public readonly knowledgeUpdated$ = this.knowledgeUpdatedSubject.asObservable();
-  private knowledgeResetSubject = new Subject<void>();
-  public readonly knowledgeReset$ = this.knowledgeResetSubject.asObservable();
+  private eventBus = inject(EventBusService);
 
 
   public addKnowledge(knowledge: PriorKnowledge, isRestore: boolean = false) {
     this.knowledgeList = this.knowledgeList.concat(knowledge);
 
-    if (!isRestore) this.knowledgeAddedSubject.next(knowledge);
+    if (!isRestore) this.eventBus.emit(createBusEvent(EventType.PRIOR_KNOWLEDGE_CREATED, knowledge));
   }
 
 
   public updateKnowledge(knowledge: PriorKnowledge) {
     this.knowledgeList = this.knowledgeList.map(k => k.id === knowledge.id ? knowledge : k);
-    this.knowledgeUpdatedSubject.next(knowledge);
+    this.eventBus.emit(createBusEvent(EventType.PRIOR_KNOWLEDGE_UPDATED, knowledge));
   }
 
 
   public removeKnowledge(knowledge: PriorKnowledge) {
     this.knowledgeList = this.knowledgeList.filter(k => k.id !== knowledge.id);
-    this.knowledgeRemovedSubject.next(knowledge);
+    this.eventBus.emit(createBusEvent(EventType.PRIOR_KNOWLEDGE_DELETED, knowledge));
   }
 
 
   public removeAllKnowledge() {
     this.knowledgeList = [];
-    this.knowledgeResetSubject.next();
+    this.eventBus.emit(createBusEvent(EventType.PRIOR_KNOWLEDGE_RESET));
   }
 
 

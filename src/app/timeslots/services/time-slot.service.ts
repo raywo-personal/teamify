@@ -1,7 +1,9 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {TimeSlot} from '../models/time-slot.model';
-import {BehaviorSubject, map, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, map, Observable} from 'rxjs';
 import {defaultTimeSlots} from './default-time-slots.data';
+import {EventBusService} from '../../shared/event-bus/event-bus.service';
+import {createBusEvent, EventType} from '../../shared/event-bus/event.model';
 
 
 @Injectable({
@@ -12,38 +14,33 @@ export class TimeSlotService {
   private slotsSubject = new BehaviorSubject<TimeSlot[]>([]);
   public readonly slots$ = this.slotsSubject.asObservable();
 
-  private slotAddedSubject = new Subject<TimeSlot>();
-  public readonly slotAdded$ = this.slotAddedSubject.asObservable();
-  private slotRemovedSubject = new Subject<TimeSlot>();
-  public readonly slotRemoved$ = this.slotRemovedSubject.asObservable();
-  private slotUpdatedSubject = new Subject<TimeSlot>();
-  public readonly slotUpdated$ = this.slotUpdatedSubject.asObservable();
-  private slotResetSubject = new Subject<void>();
-  public readonly slotsReset$ = this.slotResetSubject.asObservable();
+  private eventBus = inject(EventBusService);
 
 
   public addSlot(slot: TimeSlot, isRestore: boolean = false) {
     this.slots = this.slots.concat(slot);
 
-    if (!isRestore) this.slotAddedSubject.next(slot);
+    if (!isRestore) {
+      this.eventBus.emit(createBusEvent(EventType.SLOT_CREATED, slot));
+    }
   }
 
 
   public updateSlot(slot: TimeSlot) {
     this.slots = this.slots.map(s => s.id === slot.id ? slot : s);
-    this.slotUpdatedSubject.next(slot);
+    this.eventBus.emit(createBusEvent(EventType.SLOT_UPDATED, slot));
   }
 
 
   public removeSlot(slot: TimeSlot) {
     this.slots = this.slots.filter(s => s.id !== slot.id);
-    this.slotRemovedSubject.next(slot);
+    this.eventBus.emit(createBusEvent(EventType.SLOT_DELETED, slot));
   }
 
 
   public removeAllSlots() {
     this.slots = [];
-    this.slotResetSubject.next()
+    this.eventBus.emit(createBusEvent(EventType.SLOTS_RESET));
   }
 
 
@@ -57,11 +54,6 @@ export class TimeSlotService {
       .pipe(
         map(slots => slots.length)
       );
-  }
-
-
-  public restoreSlots(slots: TimeSlot[]) {
-    this.slots = slots;
   }
 
 

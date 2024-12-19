@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {PersonService} from '../../persons/services/person.service';
 import {TeamService} from './team.service';
-import {Team} from '../models/team.model';
 import {Person} from '../../persons/models/person.model';
 import {PriorKnowledgeService} from '../../prior-knowledge/services/prior-knowledge.service';
 import {PriorKnowledge} from '../../prior-knowledge/models/prior-knowledge.model';
@@ -27,7 +26,7 @@ export class TeamAssemblyService {
 
     teams.forEach(team => {
       knowledgeList.forEach(knowledge => {
-        const person = this.pickPersonByPriorKnowledge(team, buckets, knowledge);
+        const person = this.pickPersonByPriorKnowledge(team.timeSlot.id, buckets, knowledge);
         this.teamService.addToTeam(team, person);
       })
     });
@@ -80,27 +79,26 @@ export class TeamAssemblyService {
   }
 
 
-  private pickPersonByPriorKnowledge(team: Team,
+  private pickPersonByPriorKnowledge(timeSlotId: string,
                                      buckets: Map<string, Person[]>,
                                      knowledge: PriorKnowledge): Person | undefined {
-    const bucket = buckets.get(team.timeSlot.id)!;
+    const bucket = buckets.get(timeSlotId);
 
-    if (bucket.length > 0) {
-      const pickedPersonIndex = bucket
-        .findIndex(tmpPerson => {
-            return tmpPerson.priorKnowledge.some(pK => pK.priorKnowledge.id === knowledge.id)
-          }
-        );
+    if (!bucket || bucket.length <= 0) return undefined;
 
-      if (pickedPersonIndex !== -1) {
-        const [pickedPerson] = bucket.splice(pickedPersonIndex, 1);
-        this.removePersonFromAvailableList(pickedPerson, buckets);
+    const pickedPersonIndex = bucket
+      .findIndex(tmpPerson => {
+          return tmpPerson.priorKnowledge.some(pK => pK.priorKnowledge.id === knowledge.id)
+        }
+      );
 
-        return pickedPerson;
-      }
-    }
+    if (pickedPersonIndex === -1) return undefined;
 
-    return undefined;
+
+    const [pickedPerson] = bucket.splice(pickedPersonIndex, 1);
+    this.removePersonFromAvailableList(pickedPerson, buckets);
+
+    return pickedPerson;
   }
 
 

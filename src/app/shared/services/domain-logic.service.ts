@@ -1,14 +1,16 @@
 import {inject, Injectable} from '@angular/core';
-import {TimeSlotService} from '../../timeslots/services/time-slot.service';
-import {PersonService} from '../../persons/services/person.service';
-import {TeamService} from '../../teams/services/team.service';
-import {TeamAssemblyService} from '../../teams/services/team-assembly.service';
-import {PriorKnowledgeService} from '../../prior-knowledge/services/prior-knowledge.service';
-import {createTeam} from '../../teams/models/team.model';
-import {TimeSlot} from '../../timeslots/models/time-slot.model';
-import {PriorKnowledge} from '../../prior-knowledge/models/prior-knowledge.model';
-import {Person} from '../../persons/models/person.model';
 import {PersistenceService} from './persistence.service';
+import {EventBusService} from '../event-bus/event-bus.service';
+import {SlotCreatedHandler} from '../event-handler/slots/slot-created.handler';
+import {EventPayload} from '../event-bus/event.model';
+import {EventHandler} from '../event-handler/event.handler';
+import {SlotUpdatedHandler} from '../event-handler/slots/slot-updated.handler';
+import {SlotDeletedHandler} from '../event-handler/slots/slot-deleted.handler';
+import {PersonDeletedHandler} from '../event-handler/persons/person-deleted.handler';
+import {PriorKnowledgeDeletedHandler} from '../event-handler/prior-knowledge/prior-knowledge-deleted.handler';
+import {PriorKnowledgeResetHandler} from '../event-handler/prior-knowledge/prior-knowledge-reset.handler';
+import {TeamsResetHandler} from '../event-handler/teams/teams-reset.handler';
+import {SlotResetHandler} from '../event-handler/slots/slot-reset.handler';
 
 
 @Injectable({
@@ -16,19 +18,30 @@ import {PersistenceService} from './persistence.service';
 })
 export class DomainLogicService {
 
-  private personService = inject(PersonService);
-  private slotService = inject(TimeSlotService);
-  private priorKnowledgeService = inject(PriorKnowledgeService);
-  private teamService = inject(TeamService);
-  private teamAssemblyService = inject(TeamAssemblyService);
+  private eventBus = inject(EventBusService);
+  private events$ = this.eventBus.events$;
+
   private persistenceService = inject(PersistenceService);
+
+  private handler: EventHandler<EventPayload>[] = [
+    inject(SlotCreatedHandler),
+    inject(SlotUpdatedHandler),
+    inject(SlotDeletedHandler),
+    inject(SlotResetHandler),
+    inject(PersonDeletedHandler),
+    inject(PriorKnowledgeDeletedHandler),
+    inject(PriorKnowledgeResetHandler),
+    inject(TeamsResetHandler)
+  ];
 
 
   constructor() {
-    this.handlePersonEvents();
-    this.handlePriorKnowledgeEvents();
-    this.handleSlotEvents();
-    this.handleTeamEvents();
+    this.events$.subscribe(event => {
+      this.handler
+        .filter(handler => handler.eventType === event.type)
+        .map(handler => handler.handle(event.payload));
+      this.persistenceService.saveAllData();
+    });
   }
 
 
@@ -44,123 +57,5 @@ export class DomainLogicService {
 
   public resetData() {
     this.persistenceService.clearAllData();
-  }
-
-
-  private handlePersonEvents() {
-    this.personService.personAdded$.subscribe(person => {
-      this.persistenceService.saveAllData();
-    });
-
-    this.personService.personRemoved$.subscribe(person => {
-      this.handlePersonRemoval(person);
-      this.persistenceService.saveAllData();
-    });
-
-    this.personService.personUpdated$.subscribe(person => {
-      this.persistenceService.saveAllData();
-    });
-  }
-
-
-  private handleTeamEvents() {
-    this.teamService.teamAdded$.subscribe(team => {
-      this.persistenceService.saveAllData();
-    });
-
-    this.teamService.teamRemoved$.subscribe(team => {
-      this.persistenceService.saveAllData();
-    });
-
-    this.teamService.teamUpdated$.subscribe(team => {
-      this.persistenceService.saveAllData();
-    });
-
-    this.teamService.teamReset$.subscribe(team => {
-      this.personService.resetAvailablePersons();
-      this.persistenceService.saveAllData();
-    });
-  }
-
-
-  private handlePriorKnowledgeEvents() {
-    this.priorKnowledgeService.knowledgeAdded$.subscribe(knowledge => {
-      this.persistenceService.saveAllData();
-    });
-
-    this.priorKnowledgeService.knowledgeRemoved$.subscribe(knowledge => {
-      this.handleKnowledgeRemoval(knowledge);
-      this.persistenceService.saveAllData();
-    });
-
-    this.priorKnowledgeService.knowledgeUpdated$.subscribe(knowledge => {
-      this.persistenceService.saveAllData();
-    });
-
-    this.priorKnowledgeService.knowledgeReset$.subscribe(() => {
-      this.personService.resetPriorKnowledge();
-      this.persistenceService.saveAllData();
-    });
-  }
-
-
-  private handleSlotEvents() {
-    this.slotService.slotAdded$.subscribe(slot => {
-      this.handleSlotAddition(slot);
-      this.persistenceService.saveAllData();
-    });
-
-    this.slotService.slotUpdated$.subscribe(slot => {
-      this.handleSlotUpdate(slot);
-      this.persistenceService.saveAllData();
-    });
-
-    this.slotService.slotRemoved$.subscribe(slot => {
-      this.handleSlotRemoval(slot);
-      this.persistenceService.saveAllData();
-    });
-
-    this.slotService.slotsReset$.subscribe(() => {
-      this.teamService.removeAllTeams();
-      this.personService.resetPersonsTimeSlots();
-      this.persistenceService.saveAllData();
-    })
-  }
-
-
-  private handlePersonRemoval(person: Person) {
-    this.teamService.teams.forEach(team => {
-      this.teamService.removePersonFromTeam(team, person);
-    });
-  }
-
-
-  private handleKnowledgeRemoval(knowledge: PriorKnowledge) {
-    this.personService.persons.forEach(person => {
-      person.priorKnowledge = person.priorKnowledge.filter(pK => pK.priorKnowledge.id !== knowledge.id);
-    })
-  }
-
-
-  private handleSlotAddition(slot: TimeSlot) {
-    this.teamService.addTeam(createTeam(slot.description, slot));
-  }
-
-
-  private handleSlotRemoval(slot: TimeSlot) {
-    this.teamService.getTeamForSlot(slot)?.persons.forEach(person => {
-      this.personService.addAvailablePerson(person);
-    });
-
-    this.teamService.removeTeamForSlot(slot);
-
-    this.personService.persons.forEach(person => {
-      person.timeSlots = person.timeSlots.filter(ts => ts.timeSlot.id !== slot.id);
-    })
-  }
-
-
-  private handleSlotUpdate(slot: TimeSlot) {
-    this.teamService.updateTeamForSlot(slot);
   }
 }

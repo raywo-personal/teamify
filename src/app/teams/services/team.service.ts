@@ -1,8 +1,10 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {inject, Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import {Team} from '../models/team.model';
 import {TimeSlot} from "../../timeslots/models/time-slot.model";
 import {Person} from '../../persons/models/person.model';
+import {EventBusService} from '../../shared/event-bus/event-bus.service';
+import {createBusEvent, EventType} from '../../shared/event-bus/event.model';
 
 
 @Injectable({
@@ -13,14 +15,7 @@ export class TeamService {
   private teamsSubject = new BehaviorSubject<Team[]>([]);
   public teams$ = this.teamsSubject.asObservable();
 
-  private teamAddedSubject = new Subject<Team>();
-  public readonly teamAdded$ = this.teamAddedSubject.asObservable();
-  private teamRemovedSubject = new Subject<Team>();
-  public readonly teamRemoved$ = this.teamRemovedSubject.asObservable();
-  private teamUpdatedSubject = new Subject<Team>();
-  public readonly teamUpdated$ = this.teamUpdatedSubject.asObservable();
-  private teamResetSubject = new Subject<void>();
-  public readonly teamReset$ = this.teamResetSubject.asObservable();
+  private eventBus = inject(EventBusService);
 
 
   public get teams(): Team[] {
@@ -36,7 +31,7 @@ export class TeamService {
   public clearAllPersonsInTeams() {
     this.teams.forEach(team => {
       team.persons = [];
-      this.teamUpdatedSubject.next(team);
+      this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
     });
   }
 
@@ -44,7 +39,7 @@ export class TeamService {
   public addTeam(team: Team, isRestore: boolean = false) {
     this.teams = this.teams.concat(team);
 
-    if (!isRestore) this.teamAddedSubject.next(team);
+    if (!isRestore) this.eventBus.emit(createBusEvent(EventType.TEAM_CREATED, team));
   }
 
 
@@ -56,13 +51,13 @@ export class TeamService {
       .concat(person)
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    this.teamUpdatedSubject.next(team);
+    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
   }
 
 
   public updateTeam(team: Team) {
     this.teams = this.teams.map(t => t.id === team.id ? team : t);
-    this.teamUpdatedSubject.next(team);
+    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
   }
 
 
@@ -76,31 +71,33 @@ export class TeamService {
       return t;
     });
 
-    this.teamUpdatedSubject.next(this.teams.find(t => t.timeSlot.id === slot.id)!);
+    const team = this.teams.find(t => t.timeSlot.id === slot.id)!;
+    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
   }
 
 
   public removeTeam(team: Team) {
     this.teams = this.teams.filter(t => t.id !== team.id);
-    this.teamRemovedSubject.next(team);
+    this.eventBus.emit(createBusEvent(EventType.TEAM_DELETED, team));
   }
 
 
   public removeAllTeams() {
     this.teams = [];
-    this.teamResetSubject.next();
+    this.eventBus.emit(createBusEvent(EventType.TEAMS_RESET));
   }
 
 
   public removePersonFromTeam(team: Team, person: Person) {
     team.persons = team.persons.filter(p => p.id !== person.id);
-    this.teamUpdatedSubject.next(team);
+    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
   }
 
 
   public removeTeamForSlot(slot: TimeSlot) {
     this.teams = this.teams.filter(t => t.timeSlot.id !== slot.id);
-    this.teamRemovedSubject.next(this.teams.find(t => t.timeSlot.id === slot.id)!);
+    const team = this.teams.find(t => t.timeSlot.id === slot.id)!;
+    this.eventBus.emit(createBusEvent(EventType.TEAM_DELETED, team));
   }
 
 
@@ -108,8 +105,8 @@ export class TeamService {
     this.removePersonFromTeam(fromTeam, person);
     this.addToTeam(toTeam, person);
 
-    this.teamUpdatedSubject.next(fromTeam);
-    this.teamUpdatedSubject.next(toTeam);
+    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, fromTeam));
+    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, toTeam));
   }
 
 

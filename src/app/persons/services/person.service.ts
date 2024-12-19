@@ -1,10 +1,12 @@
-import {effect, Injectable, signal} from '@angular/core';
+import {effect, inject, Injectable, signal} from '@angular/core';
 import {Person} from '../models/person.model';
-import {BehaviorSubject, map, Subject} from 'rxjs';
+import {BehaviorSubject, map} from 'rxjs';
 import {PersonTimeSlot} from '../models/person-timeslot.model';
 import {Time} from '../../timeslots/models/time.model';
 import {randomNumber} from '../../shared/helper/random';
 import {SortOrder, stringCompare, timeCompare} from '../../shared/helper/comparison';
+import {EventBusService} from '../../shared/event-bus/event-bus.service';
+import {createBusEvent, EventType} from '../../shared/event-bus/event.model';
 
 
 @Injectable({
@@ -29,12 +31,7 @@ export class PersonService {
   public readonly slotFilter = signal<string>("all");
   public readonly nameFilter = signal<string>("");
 
-  private personAddedSubject = new Subject<Person>();
-  public readonly personAdded$ = this.personAddedSubject.asObservable();
-  private personUpdatedSubject = new Subject<Person>();
-  public readonly personUpdated$ = this.personUpdatedSubject.asObservable();
-  private personRemovedSubject = new Subject<Person>();
-  public readonly personRemoved$ = this.personRemovedSubject.asObservable();
+  private eventBus = inject(EventBusService);
 
   public readonly personCount$ = this.persons$.pipe(map(persons => persons.length));
   public readonly availablePersonCount$ = this.availablePersons$.pipe(map(persons => persons.length));
@@ -106,7 +103,7 @@ export class PersonService {
     this.filteredPersons = this.filteredPersons.concat(person);
     this.addAvailablePerson(person);
 
-    if (!isRestore) this.personAddedSubject.next(person);
+    if (!isRestore) this.eventBus.emit(createBusEvent(EventType.PERSON_CREATED, person));
   }
 
 
@@ -114,7 +111,7 @@ export class PersonService {
     this.persons = this.persons.map(p => p.id === person.id ? person : p);
     this.filteredPersons = this.filteredPersons.map(p => p.id === person.id ? person : p);
     this.updateAvailablePerson(person);
-    this.personUpdatedSubject.next(person);
+    this.eventBus.emit(createBusEvent(EventType.PERSON_UPDATED, person));
   }
 
 
@@ -122,7 +119,7 @@ export class PersonService {
     this.persons = this.persons.filter(p => p.id !== person.id);
     this.filteredPersons = this.filteredPersons.filter(p => p.id !== person.id);
     this.removeAvailablePerson(person);
-    this.personRemovedSubject.next(person);
+    this.eventBus.emit(createBusEvent(EventType.PERSON_DELETED, person));
   }
 
 

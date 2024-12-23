@@ -1,0 +1,39 @@
+<div [formGroup]="timeSlotForm()">
+  <h5>Priority {{ priority }}</h5>
+
+  <input type="text"
+         id="validity-{{priority}}"
+         name="validity-{{priority}}"
+         class="hidden"
+         formControlName="validity"
+         setCustomValidity
+         #validity>
+  validity: {{ validity.checkValidity() }}
+
+  <div
+    cdkDropList
+    [cdkDropListData]="priority"
+    (cdkDropListDropped)="onSlotDropped($event)"
+    class="slot-list"
+    [class.border-danger]="!validity.checkValidity()"
+    [class.invalid-list]="!validity.checkValidity()"
+  >
+    @for (slot of slots; track slot.id) {
+      <div class="slot-pill"
+           cdkDrag
+           [cdkDragData]="{ priority, slot}">
+        <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
+        <app-time-slot-view [timeSlot]="slot"
+                            [showButtons]="false"
+                            [showDragHandle]="true"/>
+      </div>
+    } @empty {
+      <div class="invalid-feedback">
+        Please select at least one time slot for this priority.
+      </div>
+      <div class="empty-list-hint">
+        <small class="text-muted">No preference given</small>
+      </div>
+    }
+  </div>
+</div>

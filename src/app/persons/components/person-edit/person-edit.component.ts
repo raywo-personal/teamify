@@ -100,12 +100,8 @@ export class PersonEditComponent {
     const createdPerson = this.createPersonFromEntries();
     this.personService.addPerson(createdPerson);
 
-    const emptyPerson = createPerson("");
-    this.personId = crypto.randomUUID();
-    this.personForm.controls.name.patchValue("");
-    this.personForm.controls.info.patchValue("");
-    this.fillKnowledge(emptyPerson)
-    this.fillTimeSlots(emptyPerson);
+    this.personForm.reset();
+    this.updatePersonForm(createPerson(""));
   }
 
 
@@ -148,7 +144,7 @@ export class PersonEditComponent {
     this.addTimeSlotToBucket(targetPriority, slot);
     this.addNextBucket();
     this.cleanUpBuckets();
-    this.validateSlotList(sourcePriority);
+    this.validateAllSlotLists();
     this.personForm.updateValueAndValidity();
   }
 
@@ -185,7 +181,7 @@ export class PersonEditComponent {
 
   private createNewBucket(priority: number, timeSlots: TimeSlot[] = []): FormGroup<PersonTimeSlotBucketForm> {
     return this.formBuilder.group({
-      validity: this.formBuilder.control("ok", [Validators.required, Validators.pattern("ok")]),
+      validity: this.formBuilder.control("", [Validators.required, Validators.pattern("ok")]),
       priority: priority,
       slots: this.formBuilder.control(timeSlots)
     });
@@ -201,6 +197,8 @@ export class PersonEditComponent {
       const newBuckets = buckets.concat(nextBucket);
       this.personForm.controls.timeSlots = this.formBuilder.array(newBuckets);
     }
+
+    this.validateSlotList(buckets.length + 1);
   }
 
 
@@ -277,9 +275,9 @@ export class PersonEditComponent {
     const priorKnowledge: PersonKnowledge[] = this.personForm.controls.priorKnowledge.controls
       .filter(k => k.value.selected)
       .map(k => createPersonKnowledge(k.value.priorKnowledge!, k.value.remark));
-    const personTimeSlots: PersonTimeSlot[] = this.priorityTimeSlots
-      .map((s, index) => {
-        return s.value.slots!.map(slot => createPersonTimeSlot(slot, index + 1))
+    let personTimeSlots: PersonTimeSlot[] = this.priorityTimeSlots
+      .map(s => {
+        return s.value.slots!.map(slot => createPersonTimeSlot(slot, s.controls.priority.value))
       })
       .flat();
 
@@ -293,15 +291,18 @@ export class PersonEditComponent {
   }
 
 
-  private fillKnowledge(person: Person): FormGroup<PersonKnowledgeForm>[] {
-    return this._priorKnowledgeSource.map(k => {
+  private fillKnowledge(person: Person): void {
+    const knowledge = this._priorKnowledgeSource.map(k => {
       const priorKnowledge = person.priorKnowledge.find(pK => pK.priorKnowledge.id === k.id)
+
       return this.formBuilder.group({
         priorKnowledge: this.formBuilder.control(k),
         remark: this.formBuilder.control(priorKnowledge?.remark || ""),
         selected: this.formBuilder.control(priorKnowledge !== undefined)
       })
     });
+
+    this.personForm.controls.priorKnowledge = this.formBuilder.array(knowledge);
   }
 
 
@@ -310,27 +311,31 @@ export class PersonEditComponent {
 
     if (length === 0) {
       const firstBucketForm = this.createNewBucket(1);
+      this.personForm.controls.timeSlots = this.formBuilder.array([firstBucketForm]);
       firstBucketForm.controls.validity.setValue("");
       firstBucketForm.controls.validity.updateValueAndValidity();
-      this.personForm.controls.timeSlots = this.formBuilder.array([firstBucketForm]);
       this.updateTimeSlotSource(person);
+      this.validateAllSlotLists();
 
       return;
     }
 
-    const timeSlotBuckets: TimeSlot[][] = new Array(length).fill(0).map(() => []);
+    const slotsMap = new Map<number, TimeSlot[]>();
+    person.timeSlots.forEach(t => {
+      const priorityKey = t.priority || 1;
+      const slots = slotsMap.get(priorityKey) || [];
+      slots.push(t.timeSlot);
+      slotsMap.set(priorityKey, slots)
+    });
 
-    const timeSlots: FormGroup<PersonTimeSlotBucketForm>[] = person.timeSlots
-      .map(t => {
-        const priority = t.priority || 1;
-        console.log("priority", priority)
-        timeSlotBuckets[priority - 1].push(t.timeSlot);
-
-        return this.createNewBucket(priority, timeSlotBuckets[priority - 1]);
-      });
+    const timeSlots: FormGroup<PersonTimeSlotBucketForm>[] = [];
+    slotsMap.forEach((slots, priority) => {
+      timeSlots.push(this.createNewBucket(priority, slots));
+    });
 
     this.personForm.controls.timeSlots = this.formBuilder.array(timeSlots);
     this.updateTimeSlotSource(person);
+    this.addNextBucket();
   }
 
 
@@ -366,7 +371,7 @@ export class PersonEditComponent {
     this.knowledgeService.knowledgeList$
       .subscribe(knowledge => {
         this._priorKnowledgeSource = knowledge;
-        this.personForm.controls.priorKnowledge = this.formBuilder.array(this.fillKnowledge(person));
+        this.fillKnowledge(person);
       });
 
     this.timeSlotService.slots$

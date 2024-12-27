@@ -23,7 +23,6 @@ import {SetCustomValidityDirective} from '../../../shared/directives/set-custom-
 export class PersonTimeSlotBucketEditComponent {
 
   public timeSlotForm = input.required<FormGroup<PersonTimeSlotBucketForm>>();
-  public needsValidation = input.required<boolean>();
   public slotDropped = output<CdkDragDrop<number, any, TimeSlotDragData>>();
 
 
@@ -38,18 +37,6 @@ export class PersonTimeSlotBucketEditComponent {
 
 
   protected onSlotDropped(dragEvent: CdkDragDrop<number, any, TimeSlotDragData>) {
-    const dragData = dragEvent.item.data;
-
-    if (this.slots.includes(dragData.slot)) return;
-
-    const newSlots = this.slots.concat(dragData.slot);
-    this.timeSlotForm().controls.slots.patchValue(newSlots);
-
-    if (this.needsValidation()) {
-      this.timeSlotForm().controls.validity.patchValue(newSlots.length > 0 ? "ok" : "");
-      this.timeSlotForm().controls.validity.updateValueAndValidity();
-    }
-
     this.slotDropped.emit(dragEvent);
   }
 }

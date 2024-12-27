@@ -13,6 +13,11 @@ import {PersonKnowledgeEditComponent} from '../person-knowledge-edit/person-know
 import {TimeSlotViewComponent} from '../../../timeslots/components/time-slot-view/time-slot-view.component';
 import {PersonTimeSlotBucketEditComponent} from '../person-time-slot-bucket-edit/person-time-slot-bucket-edit.component';
 import {TimeSlotDragData} from '../../models/time-slot-drag-data.model';
+import {createPersonKnowledge, PersonKnowledge} from '../../models/person-knowledge.model';
+import {createPersonTimeSlot, PersonTimeSlot} from '../../models/person-timeslot.model';
+
+
+const AVAILABLE_SLOTS_PRIORITY = -1;
 
 
 @Component({
@@ -47,19 +52,11 @@ export class PersonEditComponent {
   public saved = output<Person>();
   public cancelled = output();
 
+  protected readonly AVAILABLE_SLOTS_PRIORITY = AVAILABLE_SLOTS_PRIORITY;
   protected personForm: FormGroup<PersonForm>;
-  // protected name: string = "";
-  // protected info: string = "";
-  // This is just needed to make the form valid or invalid according to the
-  // time slot list for priority 1.
-  // protected timeSlotListState: string = "";
-
-  // protected knowledge: PriorKnowledgeSelection[] = [];
-  // protected priorityTimeSlots: TimeSlot[][] = [];
   protected timeSlotsSource: TimeSlot[] = [];
 
 
-  // TODO: Validate that time slots must not be empty.
   constructor() {
     this.personForm = this.emptyPersonForm()
 
@@ -71,23 +68,7 @@ export class PersonEditComponent {
         return;
       }
 
-      this.personId = person.id;
-      this.personForm.patchValue({
-        name: person.name,
-        info: person.info
-      });
-
-      this.knowledgeService.knowledgeList$
-        .subscribe(knowledge => {
-          this._priorKnowledgeSource = knowledge;
-          this.personForm.controls.priorKnowledge = this.formBuilder.array(this.fillKnowledge(person));
-        });
-
-      this.timeSlotService.slots$
-        .subscribe(slots => {
-          this._timeSlotSource = slots;
-          this.fillTimeSlots(person);
-        });
+      this.updatePersonForm(person);
     });
   }
 
@@ -116,25 +97,20 @@ export class PersonEditComponent {
 
 
   protected onNextAdd() {
-    // const createdPerson = this.createPersonFromEntries();
-    // this.personService.addPerson(createdPerson);
-    //
-    // const emptyPerson = createPerson("");
-    // this.personId = crypto.randomUUID();
-    // this.name = "";
-    // this.info = "";
-    // this.fillKnowledge(emptyPerson)
-    // this.fillTimeSlots(emptyPerson);
+    const createdPerson = this.createPersonFromEntries();
+    this.personService.addPerson(createdPerson);
+
+    const emptyPerson = createPerson("");
+    this.personId = crypto.randomUUID();
+    this.personForm.controls.name.patchValue("");
+    this.personForm.controls.info.patchValue("");
+    this.fillKnowledge(emptyPerson)
+    this.fillTimeSlots(emptyPerson);
   }
 
 
   /**
    * Handles the logic when a drag-and-drop operation is completed for a time slot.
-   *
-   * If drag origin and drag target are the same nothing is to be done.
-   * If a slot is dragged onto a priority bucket the respective child component
-   * is responsible for adding the element to its array. The removal from the
-   * origin is handled here.
    *
    * @param {CdkDragDrop<number, any, TimeSlotDragData>} dropEvent - The event containing information about
    *        the dragged item, its source, and the target container.
@@ -145,30 +121,34 @@ export class PersonEditComponent {
     const data = dropEvent.item.data;
     const sourcePriority = data.priority;
     const slot = data.slot;
-    const availableSlotsPriority = -1;
-    // console.log("dragged data", data, "target index", targetPriority, "source index", sourcePriority, "slot", slot, "event", dropEvent);
 
     if (targetPriority === sourcePriority) return;
 
-    if (sourcePriority === availableSlotsPriority) {
+    if (sourcePriority === AVAILABLE_SLOTS_PRIORITY) {
       this.timeSlotsSource = this.timeSlotsSource.filter(s => s.id !== slot.id);
+      this.addTimeSlotToBucket(targetPriority, slot);
       this.addNextBucket();
       this.personForm.updateValueAndValidity();
 
       return;
     }
 
-    if (targetPriority === -1) {
+    if (targetPriority === AVAILABLE_SLOTS_PRIORITY) {
       this.removeSlotFromBucket(sourcePriority, slot);
-
       this.timeSlotsSource = this.timeSlotsSource.concat(slot)
         .sort((a, b) => a.start.compareTo(b.start));
+      this.cleanUpBuckets();
+      this.validateAllSlotLists();
       this.personForm.updateValueAndValidity();
 
       return;
     }
 
     this.removeSlotFromBucket(sourcePriority, slot);
+    this.addTimeSlotToBucket(targetPriority, slot);
+    this.addNextBucket();
+    this.cleanUpBuckets();
+    this.validateSlotList(sourcePriority);
     this.personForm.updateValueAndValidity();
   }
 
@@ -180,9 +160,26 @@ export class PersonEditComponent {
   }
 
 
-  // TODO: Implement correctly.
-  protected slotNeedsValidation(slot: FormGroup<PersonTimeSlotBucketForm>) {
-    return true;
+  private addTimeSlotToBucket(targetPriority: number, slot: TimeSlot) {
+    const targetBucket = this.personForm.controls.timeSlots.controls.find(t => t.controls.priority.value === targetPriority)!;
+    const targetSlots = targetBucket.controls.slots.value;
+    targetBucket.controls.slots.patchValue(
+      targetSlots
+        .concat(slot)
+        .sort((a, b) => a.start.compareTo(b.start))
+    );
+    targetBucket.controls.validity.setValue("ok");
+    targetBucket.controls.validity.updateValueAndValidity();
+  }
+
+
+  private bucketNeedsValidation(priority: number) {
+    if (priority === 1) return true;
+
+    const length = this.priorityTimeSlots.length;
+    const index = this.priorityTimeSlots.findIndex(t => t.controls.priority.value === priority);
+
+    return index > 0 && index < length - 1;
   }
 
 
@@ -207,6 +204,36 @@ export class PersonEditComponent {
   }
 
 
+  private removeBucket(priority: number) {
+    const buckets = this.personForm.controls.timeSlots.controls;
+    const newBuckets = buckets.filter(t => t.controls.priority.value !== priority);
+    this.personForm.controls.timeSlots = this.formBuilder.array(newBuckets);
+  }
+
+
+  private cleanUpBuckets() {
+    const buckets = this.personForm.controls.timeSlots.controls;
+    const length = buckets.length;
+
+    if (length === 1) return;
+
+    let lastFilledBucket = -1;
+
+    buckets.forEach((bucket, index) => {
+      const slots = bucket.controls.slots.value;
+      const slotsLength = slots.length;
+
+      if (slotsLength > 0) {
+        lastFilledBucket = index;
+      }
+    });
+
+    for (let i = lastFilledBucket + 2; i < length; i++) {
+      this.removeBucket(buckets[i].controls.priority.value);
+    }
+  }
+
+
   private removeSlotFromBucket(sourcePriority: number, slot: TimeSlot) {
     const bucket = this.personForm.controls.timeSlots.controls
       .find(t => t.controls.priority.value === sourcePriority)!;
@@ -215,31 +242,54 @@ export class PersonEditComponent {
       .filter(s => s.id !== slot.id);
     bucket.controls.slots.patchValue(timeSlots);
 
-    const validity = bucket.controls.validity;
-    validity.setValue(timeSlots.length > 0 ? "ok" : "");
-    validity.updateValueAndValidity();
+    this.validateSlotList(sourcePriority);
   }
 
 
-  // TODO: Revitalise!
+  private validateAllSlotLists() {
+    this.priorityTimeSlots.forEach(t => {
+      this.validateSlotList(t.controls.priority.value)
+    });
+  }
+
+
+  private validateSlotList(priority: number) {
+    const bucket = this.personForm.controls.timeSlots.controls
+      .find(t => t.controls.priority.value === priority);
+
+    if (!bucket) return;
+
+    const slots = bucket.controls.slots.value;
+    const slotsLength = slots.length;
+    const validityField = bucket.controls.validity;
+
+    if (this.bucketNeedsValidation(priority)) {
+      validityField.setValue(slotsLength > 0 ? "ok" : "");
+      validityField.updateValueAndValidity();
+    } else {
+      validityField.setValue("ok");
+      validityField.updateValueAndValidity();
+    }
+  }
+
+
   private createPersonFromEntries(): Person {
-    // let priorKnowledge: PersonKnowledge[] = this.knowledge
-    //   .filter(k => k.selected)
-    //   .map(k => createPersonKnowledge(k.knowledge, k.remark));
-    // let personTimeSlots: PersonTimeSlot[] = this.priorityTimeSlots
-    //   .map((s, index) => {
-    //     return s.map(slot => createPersonTimeSlot(slot, index + 1))
-    //   })
-    //   .flat();
-    //
-    // return {
-    //   id: this.personId,
-    //   name: this.name,
-    //   info: this.info,
-    //   priorKnowledge: priorKnowledge,
-    //   timeSlots: personTimeSlots
-    // };
-    return createPerson("");
+    const priorKnowledge: PersonKnowledge[] = this.personForm.controls.priorKnowledge.controls
+      .filter(k => k.value.selected)
+      .map(k => createPersonKnowledge(k.value.priorKnowledge!, k.value.remark));
+    const personTimeSlots: PersonTimeSlot[] = this.priorityTimeSlots
+      .map((s, index) => {
+        return s.value.slots!.map(slot => createPersonTimeSlot(slot, index + 1))
+      })
+      .flat();
+
+    return {
+      id: this.personId,
+      name: this.personForm.controls.name.value,
+      info: this.personForm.controls.info.value,
+      priorKnowledge: priorKnowledge,
+      timeSlots: personTimeSlots
+    };
   }
 
 
@@ -303,5 +353,26 @@ export class PersonEditComponent {
       priorKnowledge: priorKnowledgeFormArray,
       timeSlots: this.formBuilder.array(timeSlots)
     });
+  }
+
+
+  private updatePersonForm(person: Person) {
+    this.personId = person.id;
+    this.personForm.patchValue({
+      name: person.name,
+      info: person.info
+    });
+
+    this.knowledgeService.knowledgeList$
+      .subscribe(knowledge => {
+        this._priorKnowledgeSource = knowledge;
+        this.personForm.controls.priorKnowledge = this.formBuilder.array(this.fillKnowledge(person));
+      });
+
+    this.timeSlotService.slots$
+      .subscribe(slots => {
+        this._timeSlotSource = slots;
+        this.fillTimeSlots(person);
+      });
   }
 }

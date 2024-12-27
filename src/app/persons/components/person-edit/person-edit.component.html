@@ -71,7 +71,6 @@
           <div class="col">
             <app-person-time-slot-bucket-edit
               [timeSlotForm]="slot"
-              [needsValidation]="slotNeedsValidation(slot)"
               (slotDropped)="onSlotDropped($event)"
             />
           </div>
@@ -91,7 +90,7 @@
         @for (slot of timeSlotsSource; track slot.id) {
           <div class="slot-pill"
                cdkDrag
-               [cdkDragData]="{priority: -1, slot: slot}">
+               [cdkDragData]="{priority: AVAILABLE_SLOTS_PRIORITY, slot: slot}">
             <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
             <app-time-slot-view [timeSlot]="slot"
                                 [showButtons]="false"

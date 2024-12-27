@@ -23,19 +23,20 @@ $full-view-fr: $sidebar-fr + $main-fr;
 
 .app-layout {
   --sidebar-width: calc(#{$sidebar-fr} / #{$full-view-fr} * 100%);
-  --top-bar-height: 4.25rem;
+  --top-bar-height: 3.25rem;
+  --main-margin: 0.5rem;
   --tool-bar-height: 4rem;
-  --list-height: calc(100vh - var(--top-bar-height) - var(--tool-bar-height) - 4rem);
+  --main-height: calc(100vh - 2 * var(--main-margin));
+  --list-height: calc(var(--main-height) - var(--top-bar-height) - var(--tool-bar-height) - 3rem);
 
   display: grid;
   grid-template-areas:
-    "sidebar topbar"
     "sidebar main";
   grid-template-columns: #{$sidebar-fr}fr #{$main-fr}fr;
   grid-template-rows: var(--top-bar-height) 1fr;
-  gap: 0 1.5rem;
 
   height: 100vh;
+  background: var(--bs-tertiary-bg);
   overflow: hidden;
 }
 
@@ -46,32 +47,36 @@ $full-view-fr: $sidebar-fr + $main-fr;
 .main {
   grid-area: main;
 
-  padding-right: 1rem;
-  padding-bottom: 1.5rem;
+  margin: var(--main-margin);
+  margin-left: 0;
+  padding: 1rem 2rem;
+  height: var(--main-height);
 
-  height: calc(100vh - var(--top-bar-height));
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: 0.75rem;
+  background: var(--bs-body-bg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
   overflow: hidden;
 }
 
 .top-bar {
   grid-area: topbar;
-  height: var(--top-bar-height);
 
   display: flex;
-  align-items: center;
 
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
+  height: var(--top-bar-height);
 
   background: var(--bs-body-bg);
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
   }
 }
 
 .content-area {
-  height: calc(var(--list-height) + 2rem);
+  height: var(--list-height);
   overflow: hidden;
 }
 
@@ -91,9 +96,5 @@ $full-view-fr: $sidebar-fr + $main-fr;
 
 .grabber:active {
   cursor: grabbing;
-}
-
-.badge {
-  font-weight: 500;
 }
 

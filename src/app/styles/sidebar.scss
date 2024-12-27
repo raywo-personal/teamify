@@ -1,6 +1,6 @@
 .sidebar {
+  --bs-nav-link-color: red;
   background: var(--bs-tertiary-bg);
-  border-right: var(--bs-border-width) solid var(--bs-light);
 
   padding: 1rem 1rem 0.5rem;
 
@@ -23,6 +23,8 @@
   }
 
   .sidebar-footer {
+    --bs-link-color-rgb: var(--bs-gray-600);
+    color: var(--bs-gray-600);
     font-size: 0.8rem;
     font-weight: 300;
   }
@@ -42,7 +44,7 @@
     height: 3rem;
     aspect-ratio: 1;
 
-    font-size: 1.75rem;
+    font-size: 1.9rem;
     text-align: center;
   }
 

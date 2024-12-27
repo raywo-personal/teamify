@@ -1,0 +1,32 @@
+<div [formGroup]="knowledgeForm()">
+  <div class="form-check form-switch mb-3">
+    <input
+      id="knowledge_{{ knowledgeId }}"
+      type="checkbox"
+      class="form-check-input"
+      formControlName="selected"
+    >
+    <label class="form-check-label d-flex flex-column" for="knowledge_{{ knowledgeId }}">
+      {{ knowledge?.name }}
+      <small class="text-muted">{{ knowledge?.description }}</small>
+    </label>
+  </div>
+
+  @if (knowledgeForm().controls.selected.value) {
+    <div class="form-floating mb-3"
+         [class.was-validated]="isRemarkUsed">
+      <input
+        type="text"
+        class="form-control"
+        id="knowledge-remark-{{ knowledgeId }}"
+        name="knowledge-remark-{{ knowledgeId }}"
+        formControlName="remark"
+        setCustomValidity
+      >
+      <label for="knowledge-remark-{{knowledgeId}}">Remark</label>
+      <div class="invalid-feedback">
+        Please enter a remark (2-160 characters).
+      </div>
+    </div>
+  }
+</div>

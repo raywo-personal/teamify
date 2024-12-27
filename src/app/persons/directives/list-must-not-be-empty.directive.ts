@@ -1,7 +1,7 @@
 import {Directive, effect, ElementRef, inject, input, OnInit, Renderer2} from '@angular/core';
 import {NgModel} from '@angular/forms';
 
-
+// TODO: Delete as it is no longer needed!
 @Directive({
   selector: '[listMustNotBeEmpty]'
 })

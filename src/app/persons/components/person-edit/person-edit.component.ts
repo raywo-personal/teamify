@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, output} from '@angular/core';
+import {Component, effect, ElementRef, inject, input, output, ViewChild} from '@angular/core';
 import {createPerson, Person} from '../../models/person.model';
 import {FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {PriorKnowledge} from '../../../prior-knowledge/models/prior-knowledge.model';
@@ -46,6 +46,8 @@ export class PersonEditComponent {
   private _priorKnowledgeSource: PriorKnowledge[] = [];
   private _timeSlotSource: TimeSlot[] = [];
   private personId?: string;
+  @ViewChild("nameField")
+  private nameField!: ElementRef;
 
   public person = input<Person>();
   public edit = input<boolean>(false);
@@ -102,6 +104,10 @@ export class PersonEditComponent {
 
     this.personForm.reset();
     this.updatePersonForm(createPerson(""));
+
+    this.nameField.nativeElement.focus();
+    this.nameField.nativeElement.select();
+    this.nameField.nativeElement.scrollIntoView({behavior: "smooth", block: "nearest"});
   }
 
 

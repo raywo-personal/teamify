@@ -5,20 +5,37 @@ $fonts: "Inter", system-ui;
   $font-family-sans-serif: $fonts,
 
   // Colors
-  $primary: #05263f, // #c73e1d; // #53131e; //#09203f;
+  $primary: #05263f, // #F96400, #c73e1d; // #53131e; //#09203f;
   $secondary: #293f51,
+  $light: #dee2e6,
+  $nav-link-color: var(--bs-gray-700),
 
-  //$primary: #c73e1d, // #53131e; //#09203f;
-  //$primary: #53131e, //#09203f;
-
-  //$primary: #36494E,
-  //$secondary: #A9CEF4,
-
-  //$primary: #14213D,
-  //$secondary: #FCA311,
-  $light: #dee2e6
+  // Radii
+  $border-radius: 0.75rem,
+  $border-radius-sm: 0.5rem,
+  $input-border-radius: 0.75rem,
+  $list-group-border-radius: 0
 );
 
 // In order to avoid errors regarding the order of @use and @import
 // we do the import after the use.
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.list-group-item {
+  border: none;
+  border-top: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+  border-bottom: var(--bs-list-group-border-width) solid var(--bs-list-group-border-color);
+}
+
+.badge {
+  font-weight: 500;
+}
+
+.nav-pills {
+  --bs-nav-pills-link-active-color: var(--bs-primary);
+  --bs-nav-pills-link-active-bg: var(--bs-gray-200);
+}
+
+.nav-link.active {
+  font-weight: 600;
+}

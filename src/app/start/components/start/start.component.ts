@@ -8,5 +8,4 @@ import {Component} from '@angular/core';
   styleUrl: './start.component.scss'
 })
 export class StartComponent {
-
 }

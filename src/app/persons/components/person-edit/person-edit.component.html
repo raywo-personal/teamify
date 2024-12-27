@@ -1,20 +1,18 @@
-<form class="person-form" #form="ngForm">
+<form class="person-form" [formGroup]="personForm">
   <h3>Person</h3>
   <div class="row">
     <div class="col">
       <div class="form-floating mb-3"
-           [class.was-validated]="nameInput.dirty || nameInput.touched">
+           [class.was-validated]="isNameFieldUsed">
         <input
           type="text"
           class="form-control"
           id="name"
           name="name"
-          [(ngModel)]="name"
-          required
-          minlength="2"
-          maxlength="50"
-          #nameInput="ngModel"
+          formControlName="name"
           autofocus
+          setCustomValidity
+          #nameField
         >
         <label for="name">Name</label>
         <div class="invalid-feedback">
@@ -32,9 +30,7 @@
           class="form-control"
           id="info"
           name="info"
-          [(ngModel)]="info"
-          minlength="2"
-          maxlength="150"
+          formControlName="info"
         >
         <label for="info">Information</label>
         <div class="invalid-feedback">
@@ -50,40 +46,10 @@
       State what prior knowledge the person already has. This will have
       influence on the creation of groups.
     </small>
-    @for (k of knowledge; track k.knowledge.id) {
-      <div class="col">
-        <div class="form-check form-switch mb-3">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="knowledge_{{ k.knowledge.id }}"
-            name="knowledge_{{ k.knowledge.id }}"
-            [(ngModel)]="knowledge[$index].selected"
-            #knowledgeInput$index="ngModel"
-          >
-          <label class="form-check-label d-flex flex-column" for="knowledge_{{ k.knowledge.id }}">
-            {{ k.knowledge.name }}
-            <small class="text-muted">{{ k.knowledge.description }}</small>
-          </label>
-        </div>
 
-        @if (knowledgeInput$index.value) {
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="knowledge-remark-{{$index}}"
-              name="knowledge-remark-{{$index}}"
-              minlength="2"
-              maxlength="160"
-              [(ngModel)]="knowledge[$index].remark"
-            >
-            <label for="knowledge-remark-{{$index}}">Remark</label>
-            <div class="invalid-feedback">
-              Please enter a remark (2-160 characters).
-            </div>
-          </div>
-        }
+    @for (k of personForm.controls.priorKnowledge.controls; track $index) {
+      <div class="col">
+        <app-person-knowledge-edit [knowledgeForm]="k"/>
       </div>
     }
   </div>
@@ -101,52 +67,16 @@
     <div class="col-8 slot-target">
       <h4 class="h6">Preferred time slots</h4>
 
-      <input type="hidden"
-             id="priority-1-state"
-             name="priority-1-state"
-             required
-             minlength="1"
-             [(ngModel)]="timeSlotListState"
-             #priority1ListState="ngModel">
-
       <div class="row">
-        @for (slots of priorityTimeSlots; track $index) {
-          @let index = $index;
-          <div class="col" [class.hidden]="!showTimeSlotPriority($index)">
-            <h5>Priority {{ index + 1 }}</h5>
-
-            <div
-              cdkDropList
-              [cdkDropListData]="index"
-              (cdkDropListDropped)="onSlotDropped($event)"
-              class="slot-list"
-              [listMustNotBeEmpty]="slots"
-              [referenceControl]="priority1ListState"
-              [apply]="index === 0"
-            >
-
-              @for (slot of slots; track slot.id) {
-                <div class="slot-pill"
-                     cdkDrag
-                     [cdkDragData]="{index: index, slot: slot}">
-                  <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
-                  <app-time-slot-view [timeSlot]="slot"
-                                      [showButtons]="false"
-                                      [showDragHandle]="true"/>
-                </div>
-              } @empty {
-                <div class="invalid-feedback">
-                  Please select at least one time slot for this priority.
-                </div>
-                <div class="empty-list-hint">
-                  <small class="text-muted">No preference given</small>
-                </div>
-              }
-            </div>
+        @for (slot of priorityTimeSlots; track $index) {
+          <div class="col">
+            <app-person-time-slot-bucket-edit
+              [timeSlotForm]="slot"
+              (slotDropped)="onSlotDropped($event)"
+            />
           </div>
         }
       </div>
-
     </div>
 
     <div class="col-4">
@@ -161,7 +91,7 @@
         @for (slot of timeSlotsSource; track slot.id) {
           <div class="slot-pill"
                cdkDrag
-               [cdkDragData]="{index: -1, slot: slot}">
+               [cdkDragData]="{priority: AVAILABLE_SLOTS_PRIORITY, slot: slot}">
             <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
             <app-time-slot-view [timeSlot]="slot"
                                 [showButtons]="false"
@@ -179,14 +109,14 @@
 
     <button [type]="edit() ? 'submit' : 'button'"
             class="btn btn-primary"
-            [disabled]="form.invalid"
+            [disabled]="personForm.invalid"
             (click)="onSubmit()">
       Save
     </button>
 
     @if (!edit()) {
       <button type="submit" class="btn btn-primary ms-3"
-              [disabled]="form.invalid"
+              [disabled]="personForm.invalid"
               (click)="onNextAdd()">
         Add next person <i class="bi-chevron-right"></i>
       </button>

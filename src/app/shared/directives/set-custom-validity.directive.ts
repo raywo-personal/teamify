@@ -1,4 +1,4 @@
-import {Directive, ElementRef, OnDestroy, OnInit} from '@angular/core';
+import {Directive, ElementRef, inject, OnDestroy, OnInit} from '@angular/core';
 import {filter, Subscription} from 'rxjs';
 import {NgControl} from '@angular/forms';
 
@@ -8,11 +8,10 @@ import {NgControl} from '@angular/forms';
 })
 export class SetCustomValidityDirective implements OnInit, OnDestroy {
 
+  private elem = inject(ElementRef);
+  private control = inject(NgControl);
+
   private subscription?: Subscription;
-
-
-  constructor(private control: NgControl, private elem: ElementRef) {
-  }
 
 
   public ngOnInit(): void {

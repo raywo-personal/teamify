@@ -342,6 +342,7 @@ export class PersonEditComponent {
     this.personForm.controls.timeSlots = this.formBuilder.array(timeSlots);
     this.updateTimeSlotSource(person);
     this.addNextBucket();
+    this.validateAllSlotLists();
   }
 
 

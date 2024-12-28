@@ -1,5 +1,6 @@
 $fonts: "Inter", system-ui;
 
+
 @use "bootstrap/scss/bootstrap" with (
   // Fonts
   $font-family-sans-serif: $fonts,
@@ -21,19 +22,19 @@ $fonts: "Inter", system-ui;
   // Dropdowns
   $dropdown-bg: var(--bs-tertiary-bg),
   $dropdown-border-color: var(--bs-gray-400),
-  $dropdown-link-hover-bg: var(--bs-gray-300),
+  $dropdown-link-hover-bg: var(--bs-gray-400),
   $dropdown-item-padding-y: 0.375rem,
 
   // Shadows
   $box-shadow: 0 .25rem 0.75rem rgba(black, .15),
 
   // Modals + Offcanvas
-  $modal-content-border-color: var(--bs-gray-300),
+  $modal-content-border-color: var(--bs-tertiary-bg),
   $modal-content-border-width: 0.375rem,
   $modal-content-border-radius: var(--bs-border-radius),
   $modal-header-border-width: 0,
-  $modal-footer-bg: var(--bs-gray-300),
-  $offcanvas-bg-color: var(--bs-gray-300),
+  $modal-footer-bg: var(--bs-tertiary-bg),
+  $offcanvas-bg-color: var(--bs-tertiary-bg),
 );
 
 // In order to avoid errors regarding the order of @use and @import
@@ -52,7 +53,7 @@ $fonts: "Inter", system-ui;
 
 .nav-pills {
   --bs-nav-pills-link-active-color: var(--bs-primary);
-  --bs-nav-pills-link-active-bg: var(--bs-gray-300);
+  --bs-nav-pills-link-active-bg: var(--bs-gray-400);
 }
 
 .nav-link.active {
@@ -60,7 +61,7 @@ $fonts: "Inter", system-ui;
 }
 
 .modal-content {
-  background: var(--bs-gray-300);
+  background: var(--bs-tertiary-bg);
 }
 
 .modal-header,

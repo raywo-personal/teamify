@@ -17,12 +17,9 @@ small, .small {
   font-weight: 300;
 }
 
-$sidebar-fr: 1;
-$main-fr: 4;
-$full-view-fr: $sidebar-fr + $main-fr;
 
 .app-layout {
-  --sidebar-width: calc(#{$sidebar-fr} / #{$full-view-fr} * 100%);
+  --sidebar-width: 30ch;
   --top-bar-height: 3.25rem;
   --main-margin: 0.5rem;
   --tool-bar-height: 4rem;
@@ -32,7 +29,7 @@ $full-view-fr: $sidebar-fr + $main-fr;
   display: grid;
   grid-template-areas:
     "sidebar main";
-  grid-template-columns: #{$sidebar-fr}fr #{$main-fr}fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: var(--top-bar-height) 1fr;
 
   height: 100vh;
@@ -98,3 +95,8 @@ $full-view-fr: $sidebar-fr + $main-fr;
   cursor: grabbing;
 }
 
+.minimalistic-dropdown {
+  .dropdown-toggle::after {
+    content: none;
+  }
+}

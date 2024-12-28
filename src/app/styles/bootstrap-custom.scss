@@ -14,7 +14,14 @@ $fonts: "Inter", system-ui;
   $border-radius: 0.75rem,
   $border-radius-sm: 0.5rem,
   $input-border-radius: 0.75rem,
-  $list-group-border-radius: 0
+  $list-group-border-radius: 0,
+
+  // Dropdowns
+  $dropdown-border-color: var(--bs-gray-400),
+  $dropdown-link-hover-bg: var(--bs-gray-200),
+
+  // Shadows
+  $box-shadow: 0 .25rem 0.75rem rgba(black, .15)
 );
 
 // In order to avoid errors regarding the order of @use and @import
@@ -38,4 +45,16 @@ $fonts: "Inter", system-ui;
 
 .nav-link.active {
   font-weight: 600;
+}
+
+.dropdown-menu {
+  box-shadow: var(--bs-box-shadow);
+}
+
+.dropdown-item {
+  text-align: left;
+}
+
+.dropdown-item.btn-danger {
+  color: var(--bs-danger);
 }

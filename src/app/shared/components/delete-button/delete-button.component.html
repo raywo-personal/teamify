@@ -3,9 +3,9 @@
 }
 
 @if (caption()) {
-  {{ caption() }}
+  <span class="ms-3">{{ caption() }}</span>
 } @else {
-  <span class="visually-hidden">Delete</span>
+  <span class="visually-hidden ms-3">Delete</span>
 }
 
 <ng-template #modalContent let-modal>

@@ -13,6 +13,7 @@
 @use "app/styles/info-box";
 @use "app/styles/toolbar";
 @use "app/styles/dropdowns";
+@use "app/styles/offcanvas";
 
 small, .small {
   font-weight: 300;
@@ -94,4 +95,8 @@ small, .small {
 
 .grabber:active {
   cursor: grabbing;
+}
+
+.max-height {
+  flex-grow: 1;
 }

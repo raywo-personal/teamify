@@ -6,7 +6,8 @@ $fonts: "Inter", system-ui;
 
   // Colors
   $primary: #05263f, // #F96400, #c73e1d; // #53131e; //#09203f;
-  $secondary: #293f51,
+  //$secondary: #293f51,
+  $secondary: #7b8faa,
   $light: #dee2e6,
   $nav-link-color: var(--bs-gray-700),
   $body-tertiary-bg: #edf0f2,
@@ -24,7 +25,12 @@ $fonts: "Inter", system-ui;
   $dropdown-item-padding-y: 0.375rem,
 
   // Shadows
-  $box-shadow: 0 .25rem 0.75rem rgba(black, .15)
+  $box-shadow: 0 .25rem 0.75rem rgba(black, .15),
+
+  // Offcanvas
+  //$offcanvas-vertical-height: 90%,
+  $offcanvas-border-width: 0.375rem,
+  $offcanvas-border-color: var(--bs-gray-300),
 );
 
 // In order to avoid errors regarding the order of @use and @import

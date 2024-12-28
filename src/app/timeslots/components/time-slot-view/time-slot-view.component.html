@@ -28,13 +28,13 @@
 
       <div ngbDropdownMenu
            [attr.aria-labelledby]="'dropDownToggle-' + timeSlot().id">
-        <button class="btn btn-primary"
-                (click)="onEdit($event)"
-                ngbDropdownItem>
-          <i class="bi-pencil me-3"></i>Edit {{ timeSlot().description }}
-        </button>
-
-        <hr class="dropdown-divider">
+        <div class="dropdown-main-content">
+          <button class="btn btn-primary"
+                  (click)="onEdit($event)"
+                  ngbDropdownItem>
+            <i class="bi-pencil me-2"></i>Edit {{ timeSlot().description }}
+          </button>
+        </div>
 
         <button app-delete-button
                 caption="Delete {{timeSlot().description}}"

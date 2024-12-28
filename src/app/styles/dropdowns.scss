@@ -1,0 +1,26 @@
+
+.minimalistic-dropdown {
+  .dropdown-toggle::after {
+    content: none;
+  }
+}
+
+.dropdown-main-content {
+  background: var(--bs-body-bg);
+  border-radius: var(--bs-border-radius);
+  margin-top: calc(var(--bs-dropdown-padding-y) * -1);
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+}
+
+.dropdown-menu {
+  box-shadow: var(--bs-box-shadow);
+}
+
+.dropdown-item {
+  text-align: left;
+}
+
+.dropdown-item.btn-danger {
+  color: var(--bs-danger);
+}

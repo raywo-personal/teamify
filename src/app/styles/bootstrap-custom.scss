@@ -9,6 +9,7 @@ $fonts: "Inter", system-ui;
   $secondary: #293f51,
   $light: #dee2e6,
   $nav-link-color: var(--bs-gray-700),
+  $body-tertiary-bg: #edf0f2,
 
   // Radii
   $border-radius: 0.75rem,
@@ -17,8 +18,10 @@ $fonts: "Inter", system-ui;
   $list-group-border-radius: 0,
 
   // Dropdowns
+  $dropdown-bg: var(--bs-tertiary-bg),
   $dropdown-border-color: var(--bs-gray-400),
-  $dropdown-link-hover-bg: var(--bs-gray-200),
+  $dropdown-link-hover-bg: var(--bs-gray-300),
+  $dropdown-item-padding-y: 0.375rem,
 
   // Shadows
   $box-shadow: 0 .25rem 0.75rem rgba(black, .15)
@@ -40,21 +43,9 @@ $fonts: "Inter", system-ui;
 
 .nav-pills {
   --bs-nav-pills-link-active-color: var(--bs-primary);
-  --bs-nav-pills-link-active-bg: var(--bs-gray-200);
+  --bs-nav-pills-link-active-bg: var(--bs-gray-300);
 }
 
 .nav-link.active {
   font-weight: 600;
-}
-
-.dropdown-menu {
-  box-shadow: var(--bs-box-shadow);
-}
-
-.dropdown-item {
-  text-align: left;
-}
-
-.dropdown-item.btn-danger {
-  color: var(--bs-danger);
 }

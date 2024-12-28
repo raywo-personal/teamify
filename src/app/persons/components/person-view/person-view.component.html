@@ -63,13 +63,13 @@
 
       <div ngbDropdownMenu
            [attr.aria-labelledby]="'dropDownToggle-' + person().id">
-        <button class="btn btn-primary"
-                (click)="onEdit($event)"
-                ngbDropdownItem>
-          <i class="bi-pencil me-3"></i>Edit {{ person().name }}
-        </button>
-
-        <hr class="dropdown-divider">
+        <div class="dropdown-main-content">
+          <button class="btn btn-primary"
+                  (click)="onEdit($event)"
+                  ngbDropdownItem>
+            <i class="bi-pencil me-3"></i>Edit {{ person().name }}
+          </button>
+        </div>
 
         <button app-delete-button
                 caption="Delete {{person().name}}"

@@ -12,6 +12,7 @@
 @use "app/styles/teams";
 @use "app/styles/info-box";
 @use "app/styles/toolbar";
+@use "app/styles/dropdowns";
 
 small, .small {
   font-weight: 300;
@@ -93,10 +94,4 @@ small, .small {
 
 .grabber:active {
   cursor: grabbing;
-}
-
-.minimalistic-dropdown {
-  .dropdown-toggle::after {
-    content: none;
-  }
 }

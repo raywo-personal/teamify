@@ -40,14 +40,13 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
 
-  <div class="offcanvas-body">
-    <app-prior-knowledge-edit
-      [knowledge]="knowledgeToEdit"
-      [edit]="edit"
-      (cancelled)="onEditCancelled()"
-      (saved)="onEditSaved()"
-    />
-  </div>
+  <app-prior-knowledge-edit
+    class="offcanvas-form"
+    [knowledge]="knowledgeToEdit"
+    [edit]="edit"
+    (cancelled)="onEditCancelled()"
+    (saved)="onEditSaved()"
+  />
 </ng-template>
 
 

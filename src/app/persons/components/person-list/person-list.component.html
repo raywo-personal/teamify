@@ -54,14 +54,13 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
 
-  <div class="offcanvas-body">
-    <app-person-edit
-      [person]="personToEdit"
-      [edit]="edit"
-      (cancelled)="onEditCancelled()"
-      (saved)="onEditSaved()"
-    />
-  </div>
+  <app-person-edit
+    class="offcanvas-form"
+    [person]="personToEdit"
+    [edit]="edit"
+    (cancelled)="onEditCancelled()"
+    (saved)="onEditSaved()"
+  />
 </ng-template>
 
 

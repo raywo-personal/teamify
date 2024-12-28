@@ -1,5 +1,6 @@
 <form (ngSubmit)="onSubmit()" #form="ngForm"
-      class="h-100 d-flex flex-column">
+      class="offcanvas-form">
+  <div class="offcanvas-body">
   <div class="form-floating mb-3"
        [class.was-validated]="nameInput.dirty || nameInput.touched">
     <input
@@ -28,7 +29,6 @@
       id="description"
       name="description"
       [(ngModel)]="description"
-      required
       minlength="2"
       maxlength="160"
       placeholder="Description"
@@ -41,8 +41,9 @@
   </div>
 
   <div class="max-height"></div>
+  </div>
 
-  <div class="d-flex justify-content-between border-top pt-2 mt-2">
+  <div class="offcanvas-footer">
     <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancel()">
       Cancel
     </button>

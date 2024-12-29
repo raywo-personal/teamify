@@ -38,9 +38,8 @@
     gap: 1rem;
 
     .person-mini-view {
-      border: 1px solid var(--bs-light);
+      border: var(--bs-border-width) solid var(--bs-light);
       border-radius: 0.5rem;
-      background-color: var(--bs-tertiary-bg);
 
       padding: 0.5rem;
 

@@ -1,5 +1,7 @@
 .offcanvas {
   --offcanvas-offset-y: 2rem;
+
+  min-width: 45ch;
 }
 
 .offcanvas.offcanvas-end {

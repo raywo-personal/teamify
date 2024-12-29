@@ -2,7 +2,7 @@ import {effect, inject, Injectable, signal} from '@angular/core';
 import {Person} from '../models/person.model';
 import {BehaviorSubject, map} from 'rxjs';
 import {PersonTimeSlot} from '../models/person-timeslot.model';
-import {Time} from '../../timeslots/models/time.model';
+import {createTime, Time} from '../../shared/models/time.model';
 import {randomNumber} from '../../shared/helper/random';
 import {SortOrder, stringCompare, timeCompare} from '../../shared/helper/comparison';
 import {EventBusService} from '../../shared/event-bus/event-bus.service';
@@ -88,13 +88,13 @@ export class PersonService {
       .reduce((smallest: PersonTimeSlot | undefined, current) => {
         if (!smallest) return current;
 
-        return smallest.timeSlot.start.compareTo(current.timeSlot.start) < 0 ? smallest : current
+        return timeCompare(smallest.timeSlot.start, current.timeSlot.start) < 0 ? smallest : current
       }, undefined);
   }
 
 
   public earliestStartTime(person: Person): Time {
-    return this.earliestTimeSlot(person)?.timeSlot.start || new Time(9, 0);
+    return this.earliestTimeSlot(person)?.timeSlot.start || createTime(9);
   }
 
 

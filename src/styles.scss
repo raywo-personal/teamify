@@ -100,3 +100,12 @@ small, .small {
 .max-height {
   flex-grow: 1;
 }
+
+.btn-icon.btn-sm {
+  line-height: 1;
+  padding: 0;
+
+  i {
+    font-size: 2rem;
+  }
+}

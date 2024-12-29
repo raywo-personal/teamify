@@ -1,0 +1,34 @@
+<form class="row row-cols-lg-auto g-2 mb-2 align-items-center">
+  <div class="col-12" [class.was-validated]="nameInput.touched || nameInput.dirty">
+    <label for="team-name" class="visually-hidden">Name</label>
+    <input type="text"
+           id="team-name"
+           name="name"
+           class="form-control form-control-sm"
+           minlength="2"
+           maxlength="50"
+           [(ngModel)]="teamName"
+           placeholder="Team name"
+           setCustomValidity
+           #nameInput="ngModel"
+           #nameField>
+    <div class="invalid-feedback">
+      Please enter a name (2-50 characters).
+    </div>
+  </div>
+
+  <div class="col-12">
+    <button type="submit"
+            class="btn text-success btn-icon btn-sm"
+            (click)="onSubmit()">
+      <i class="bi-check"></i>
+      <span class="visually-hidden">Save</span>
+    </button>
+    <button type="button"
+            class="btn text-danger btn-icon btn-sm"
+            (click)="onCancel()">
+      <i class="bi-x"></i>
+      <span class="visually-hidden">Cancel</span>
+    </button>
+  </div>
+</form>

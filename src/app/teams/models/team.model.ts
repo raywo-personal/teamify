@@ -12,8 +12,8 @@ export interface Team {
 }
 
 
-export function createTeam(name: string,
-                           timeSlot: TimeSlot,
+export function createTeam(timeSlot: TimeSlot,
+                           name: string = "",
                            persons: Person[] = []): Team {
   return {
     id: crypto.randomUUID(),

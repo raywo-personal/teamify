@@ -65,7 +65,6 @@ export class TeamService {
     this.teams = this.teams.map(t => {
       if (t.timeSlot.id === slot.id) {
         t.timeSlot = slot;
-        t.name = slot.description;
       }
 
       return t;

@@ -15,6 +15,7 @@ import {PersonTimeSlotBucketEditComponent} from '../person-time-slot-bucket-edit
 import {TimeSlotDragData} from '../../models/time-slot-drag-data.model';
 import {createPersonKnowledge, PersonKnowledge} from '../../models/person-knowledge.model';
 import {createPersonTimeSlot, PersonTimeSlot} from '../../models/person-timeslot.model';
+import {timeCompare} from '../../../shared/helper/comparison';
 
 
 const AVAILABLE_SLOTS_PRIORITY = -1;
@@ -138,7 +139,7 @@ export class PersonEditComponent {
     if (targetPriority === AVAILABLE_SLOTS_PRIORITY) {
       this.removeSlotFromBucket(sourcePriority, slot);
       this.timeSlotsSource = this.timeSlotsSource.concat(slot)
-        .sort((a, b) => a.start.compareTo(b.start));
+        .sort((a, b) => timeCompare(a.start, b.start));
       this.cleanUpBuckets();
       this.validateAllSlotLists();
       this.personForm.updateValueAndValidity();
@@ -168,7 +169,7 @@ export class PersonEditComponent {
     targetBucket.controls.slots.patchValue(
       targetSlots
         .concat(slot)
-        .sort((a, b) => a.start.compareTo(b.start))
+        .sort((a, b) => timeCompare(a.start, b.start))
     );
     targetBucket.controls.validity.setValue("ok");
     targetBucket.controls.validity.updateValueAndValidity();

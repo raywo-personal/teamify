@@ -1,4 +1,4 @@
-import {Time} from '../../timeslots/models/time.model';
+import {Time} from '../models/time.model';
 
 
 export type SortOrder = "asc" | "desc" | "none";
@@ -14,7 +14,15 @@ export function stringCompare(a: string,
 export function timeCompare(a: Time,
                             b: Time,
                             sortOrder: SortOrder = "asc"): number {
-  return a.compareTo(b) * direction(sortOrder);
+  if (a.hour !== b.hour) {
+    return (a.hour - b.hour) * direction(sortOrder);
+  }
+
+  if (a.minute !== b.minute) {
+    return (a.minute - b.minute) * direction(sortOrder);
+  }
+
+  return 0;
 }
 
 

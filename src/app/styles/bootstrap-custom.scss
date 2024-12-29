@@ -35,6 +35,7 @@ $fonts: "Inter", system-ui;
   $modal-header-border-width: 0,
   $modal-footer-bg: var(--bs-tertiary-bg),
   $offcanvas-bg-color: var(--bs-tertiary-bg),
+  $offcanvas-horizontal-width: 25%
 );
 
 // In order to avoid errors regarding the order of @use and @import

@@ -37,7 +37,12 @@
 <ng-template #content let-offcanvas>
   <div class="offcanvas-header">
     <h4 class="offcanvas-title" id="offcanvas-basic-title">{{ canvasTitle }}</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+    <button type="button"
+            tabindex="-1"
+            class="btn-close"
+            aria-label="Close"
+            (click)="offcanvas.dismiss('Cross click')">
+    </button>
   </div>
 
   <app-prior-knowledge-edit

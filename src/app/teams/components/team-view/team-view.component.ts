@@ -6,6 +6,7 @@ import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList} from '@angular/cd
 import {Person} from '../../../persons/models/person.model';
 import {TeamService} from '../../services/team.service';
 import {PersonService} from '../../../persons/services/person.service';
+import {TeamNameEditComponent} from '../team-name-edit/team-name-edit.component';
 
 
 @Component({
@@ -15,7 +16,8 @@ import {PersonService} from '../../../persons/services/person.service';
     PersonViewComponent,
     CdkDropList,
     CdkDrag,
-    CdkDragPlaceholder
+    CdkDragPlaceholder,
+    TeamNameEditComponent
   ],
   templateUrl: './team-view.component.html',
   styleUrl: './team-view.component.scss'
@@ -28,8 +30,10 @@ export class TeamViewComponent {
   public team = input.required<Team>();
   public personDropped = output<Person>();
 
+  protected isEditing = false;
 
-  onDrop(dropEvent: CdkDragDrop<Person[], any>) {
+
+  protected onDrop(dropEvent: CdkDragDrop<Person[], any>) {
     const origin: string | undefined = dropEvent.item.data["origin"];
     const originTeam: Team | undefined = dropEvent.item.data["originTeam"];
     const person: Person = dropEvent.item.data["person"];
@@ -42,5 +46,22 @@ export class TeamViewComponent {
     if (originTeam && person) {
       this.teamService.moveBetweenTeams(originTeam, this.team(), person);
     }
+  }
+
+
+  protected onEdit() {
+    this.isEditing = true;
+  }
+
+
+  protected onEditConfirmed(newName: string) {
+    this.isEditing = false;
+    this.team().name = newName;
+    this.teamService.updateTeam(this.team());
+  }
+
+
+  protected onEditCancelled() {
+    this.isEditing = false;
   }
 }

@@ -1,6 +1,26 @@
 <section class="team">
   <div class="team-header">
-    <h4>{{ team().name }} <small>({{team().persons.length}} members)</small></h4>
+    <h4>{{ team().timeSlot.description }} <small>({{ team().persons.length }} members)</small></h4>
+
+    <div class="d-flex align-items-center">
+      @if (!isEditing) {
+        @if (team().name && team().name !== "") {
+          <strong>{{ team().name }}</strong>
+        } @else {
+          No name given
+        }
+
+        <button class="btn btn-link btn-sm" (click)="onEdit()">
+          <i class="bi-pencil ms-2"></i>
+          <span class="visually-hidden">Edit</span>
+        </button>
+      } @else {
+        <app-team-name-edit [name]="team().name || ''"
+                            (editCancelled)="onEditCancelled()"
+                            (editConfirmed)="onEditConfirmed($event)"/>
+      }
+    </div>
+
     <div>
       <small>
         {{ team().timeSlot.start | time }}–{{ team().timeSlot.end | time }}

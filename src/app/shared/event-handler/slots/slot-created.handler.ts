@@ -17,7 +17,7 @@ export class SlotCreatedHandler implements EventHandler<TimeSlot> {
 
 
   public handle(slot: TimeSlot) {
-    this.teamService.addTeam(createTeam(slot.description, slot));
+    this.teamService.addTeam(createTeam(slot));
   }
 
 }

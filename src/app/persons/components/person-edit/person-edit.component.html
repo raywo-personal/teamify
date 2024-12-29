@@ -1,127 +1,132 @@
-<form class="person-form" [formGroup]="personForm">
-  <h3>Person</h3>
-  <div class="row">
-    <div class="col">
-      <div class="form-floating mb-3"
-           [class.was-validated]="isNameFieldUsed">
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          name="name"
-          formControlName="name"
-          autofocus
-          setCustomValidity
-          #nameField
-        >
-        <label for="name">Name</label>
-        <div class="invalid-feedback">
-          Please enter a name (2-50 characters).
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <div class="col">
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="info"
-          name="info"
-          formControlName="info"
-        >
-        <label for="info">Information</label>
-        <div class="invalid-feedback">
-          Please enter information (2-150 characters).
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <h3>Prior knowledge</h3>
-    <small class="mb-2">
-      State what prior knowledge the person already has. This will have
-      influence on the creation of groups.
-    </small>
-
-    @for (k of personForm.controls.priorKnowledge.controls; track $index) {
+<form class="person-form offcanvas-form"
+      [formGroup]="personForm">
+  <div class="offcanvas-body scrollable-area">
+    <h3>Person</h3>
+    <div class="row">
       <div class="col">
-        <app-person-knowledge-edit [knowledgeForm]="k"/>
-      </div>
-    }
-  </div>
-
-  <div class="row mb-4" cdkDropListGroup>
-    <h3>Time slots</h3>
-    <small class="mb-2">
-      <p>Select the preferred time slots for the person.</p>
-      <p>
-        Place them into the buckets according to the person’s preference. If
-        the person has no specific preference, put the time slots into the
-        first bucket.
-      </p>
-    </small>
-    <div class="col-8 slot-target">
-      <h4 class="h6">Preferred time slots</h4>
-
-      <div class="row">
-        @for (slot of priorityTimeSlots; track $index) {
-          <div class="col">
-            <app-person-time-slot-bucket-edit
-              [timeSlotForm]="slot"
-              (slotDropped)="onSlotDropped($event)"
-            />
+        <div class="form-floating mb-3"
+             [class.was-validated]="isNameFieldUsed">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            formControlName="name"
+            autofocus
+            setCustomValidity
+            #nameField
+          >
+          <label for="name">Name</label>
+          <div class="invalid-feedback">
+            Please enter a name (2-50 characters).
           </div>
-        }
+        </div>
       </div>
     </div>
 
-    <div class="col-4">
-      <h4 class="h6">Available time slots</h4>
-      <div
-        cdkDropList
-        cdkDropListSortingDisabled
-        [cdkDropListData]="-1"
-        (cdkDropListDropped)="onSlotDropped($event)"
-        class="slot-list"
-      >
-        @for (slot of timeSlotsSource; track slot.id) {
-          <div class="slot-pill"
-               cdkDrag
-               [cdkDragData]="{priority: AVAILABLE_SLOTS_PRIORITY, slot: slot}">
-            <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
-            <app-time-slot-view [timeSlot]="slot"
-                                [showButtons]="false"
-                                [showDragHandle]="true"/>
+    <div class="row mb-3">
+      <div class="col">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="info"
+            name="info"
+            formControlName="info"
+          >
+          <label for="info">Information</label>
+          <div class="invalid-feedback">
+            Please enter information (2-150 characters).
           </div>
-        }
+        </div>
       </div>
     </div>
+
+    <div class="row mb-3">
+      <h3>Prior knowledge</h3>
+      <small class="mb-2">
+        State what prior knowledge the person already has. This will have
+        influence on the creation of groups.
+      </small>
+
+      @for (k of personForm.controls.priorKnowledge.controls; track $index) {
+        <div class="col">
+          <app-person-knowledge-edit [knowledgeForm]="k"/>
+        </div>
+      }
+    </div>
+
+    <div class="row mb-4" cdkDropListGroup>
+      <h3>Time slots</h3>
+      <small class="mb-2">
+        <p>Select the preferred time slots for the person.</p>
+        <p>
+          Place them into the buckets according to the person’s preference. If
+          the person has no specific preference, put the time slots into the
+          first bucket.
+        </p>
+      </small>
+      <div class="col-8 slot-target">
+        <h4 class="h6">Preferred time slots</h4>
+
+        <div class="row">
+          @for (slot of priorityTimeSlots; track $index) {
+            <div class="col">
+              <app-person-time-slot-bucket-edit
+                [timeSlotForm]="slot"
+                (slotDropped)="onSlotDropped($event)"
+              />
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="col-4">
+        <h4 class="h6">Available time slots</h4>
+        <div
+          cdkDropList
+          cdkDropListSortingDisabled
+          [cdkDropListData]="-1"
+          (cdkDropListDropped)="onSlotDropped($event)"
+          class="slot-list"
+        >
+          @for (slot of timeSlotsSource; track slot.id) {
+            <div class="slot-pill"
+                 cdkDrag
+                 [cdkDragData]="{priority: AVAILABLE_SLOTS_PRIORITY, slot: slot}">
+              <div class="slot-pill-placeholder" *cdkDragPlaceholder></div>
+              <app-time-slot-view [timeSlot]="slot"
+                                  [showButtons]="false"
+                                  [showDragHandle]="true"/>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="max-height"></div>
   </div>
 
-  <div class="d-flex justify-content-end border-top pt-2 mt-2">
+  <div class="offcanvas-footer">
     <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancel()">
       Cancel
     </button>
 
-    <button [type]="edit() ? 'submit' : 'button'"
-            class="btn btn-primary"
-            [disabled]="personForm.invalid"
-            (click)="onSubmit()">
-      Save
-    </button>
-
-    @if (!edit()) {
-      <button type="submit" class="btn btn-primary ms-3"
+    <div>
+      <button [type]="edit() ? 'submit' : 'button'"
+              class="btn btn-primary"
               [disabled]="personForm.invalid"
-              (click)="onNextAdd()">
-        Add next person <i class="bi-chevron-right"></i>
+              (click)="onSubmit()">
+        Save
       </button>
-    }
+
+      @if (!edit()) {
+        <button type="submit" class="btn btn-primary ms-3"
+                [disabled]="personForm.invalid"
+                (click)="onNextAdd()">
+          Add next person <i class="bi-chevron-right"></i>
+        </button>
+      }
+    </div>
   </div>
-
-
 </form>

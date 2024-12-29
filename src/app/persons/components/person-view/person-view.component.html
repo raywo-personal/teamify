@@ -8,7 +8,7 @@
   <div class="person-view-body">
     <div class="person-view-header">
       <div>
-        <h3>{{ person().name }}</h3>
+        <h3 class="person-view-title">{{ person().name }}</h3>
         <p class="small">{{ person().info }}</p>
       </div>
 
@@ -50,17 +50,35 @@
   </div>
 
   @if (showButtons()) {
-    <div class="person-view-interaction">
-      <button class="btn btn-primary me-2" (click)="onEdit($event)">
-        <i class="bi-pencil"></i>
-        <span class="visually-hidden">Edit {{ person().name }}</span>
+    <div ngbDropdown class="person-view-interaction minimalistic-dropdown">
+      <button class="btn btn-link"
+              id="dropDownToggle-{{person().id}}"
+              ngbDropdownToggle
+              aria-expanded="false"
+              aria-label="More actions"
+              (click)="$event.stopPropagation()">
+        <i class="bi-three-dots-vertical"></i>
+        <span class="visually-hidden">More actions</span>
       </button>
 
-      <button app-delete-button
-              confirmationTitle="Delete person"
-              confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
-              (deleteConfirmed)="onDelete()"
-      ></button>
+      <div ngbDropdownMenu
+           [attr.aria-labelledby]="'dropDownToggle-' + person().id">
+        <div class="dropdown-main-content">
+          <button class="btn btn-primary"
+                  (click)="onEdit($event)"
+                  ngbDropdownItem>
+            <i class="bi-pencil me-3"></i>Edit {{ person().name }}
+          </button>
+        </div>
+
+        <button app-delete-button
+                caption="Delete {{person().name}}"
+                confirmationTitle="Delete person"
+                confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
+                (deleteConfirmed)="onDelete()"
+                ngbDropdownItem
+        ></button>
+      </div>
     </div>
   }
 </div>

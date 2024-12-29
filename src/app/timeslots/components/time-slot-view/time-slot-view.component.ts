@@ -3,6 +3,7 @@ import {TimeSlot} from '../../models/time-slot.model';
 import {TimePipe} from '../../pipes/time.pipe';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 import {CdkDragHandle} from '@angular/cdk/drag-drop';
+import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -10,7 +11,11 @@ import {CdkDragHandle} from '@angular/cdk/drag-drop';
   imports: [
     TimePipe,
     DeleteButtonComponent,
-    CdkDragHandle
+    CdkDragHandle,
+    NgbDropdown,
+    NgbDropdownToggle,
+    NgbDropdownMenu,
+    NgbDropdownItem
   ],
   templateUrl: './time-slot-view.component.html',
   styleUrl: './time-slot-view.component.scss'

@@ -1,114 +1,115 @@
 @if (timeSlot()) {
   <form (ngSubmit)="onSubmit()" #form="ngForm"
-        novalidate
-        class="time-slot-edit">
-    <div class="form-floating mb-3"
-         [class.was-validated]="descriptionInput.dirty || descriptionInput.touched">
-      <input type="text"
-             class="form-control"
-             id="descriptionInput"
-             name="description"
-             placeholder="Description"
-             [(ngModel)]="description"
-             minlength="2"
-             maxlength="100"
-             required
-             autofocus
-             #descriptionInput="ngModel">
-      <label for="descriptionInput">Description</label>
-      <div class="invalid-feedback">
-        Please enter a description (2-100 characters).
+        class="offcanvas-form">
+    <div class="offcanvas-body">
+      <div class="form-floating mb-3"
+           [class.was-validated]="descriptionInput.dirty || descriptionInput.touched">
+        <input type="text"
+               class="form-control"
+               id="descriptionInput"
+               name="description"
+               placeholder="Description"
+               [(ngModel)]="description"
+               minlength="2"
+               maxlength="100"
+               required
+               autofocus
+               #descriptionInput="ngModel">
+        <label for="descriptionInput">Description</label>
+        <div class="invalid-feedback">
+          Please enter a description (2-100 characters).
+        </div>
       </div>
-    </div>
 
-    <div>
-      <div class="d-flex gap-2 justify-content-between">
-        <div [class.was-validated]="startHourInput.dirty || startHourInput.touched">
-          <strong>Start time</strong>
-          <div class="d-flex gap-2">
-            <div>
-              <label for="startHourInput" class="form-label">Hours</label>
-              <input type="number"
-                     class="form-control"
-                     id="startHourInput"
-                     name="startHour"
-                     placeholder="HH"
-                     min="0"
-                     max="23"
-                     required
-                     [(ngModel)]="startHour"
-                     #startHourInput="ngModel">
+      <div>
+        <div class="d-flex gap-2 justify-content-between">
+          <div [class.was-validated]="startHourInput.dirty || startHourInput.touched">
+            <strong>Start time</strong>
+            <div class="d-flex gap-2">
+              <div>
+                <label for="startHourInput" class="form-label">Hours</label>
+                <input type="number"
+                       class="form-control"
+                       id="startHourInput"
+                       name="startHour"
+                       placeholder="HH"
+                       min="0"
+                       max="23"
+                       required
+                       [(ngModel)]="startHour"
+                       #startHourInput="ngModel">
+              </div>
+
+              <div>
+                <label for="startMinuteInput" class="form-label">Minutes</label>
+                <input type="number"
+                       class="form-control"
+                       id="startMinuteInput"
+                       name="startMinute"
+                       placeholder="MM"
+                       min="0"
+                       max="59"
+                       required
+                       [(ngModel)]="startMinute"
+                       #startMinuteInput="ngModel">
+              </div>
             </div>
+          </div>
 
-            <div>
-              <label for="startMinuteInput" class="form-label">Minutes</label>
-              <input type="number"
-                     class="form-control"
-                     id="startMinuteInput"
-                     name="startMinute"
-                     placeholder="MM"
-                     min="0"
-                     max="59"
-                     required
-                     [(ngModel)]="startMinute"
-                     #startMinuteInput="ngModel">
+          <div [class.was-validated]="durationHourInput.dirty || durationMinuteInput.touched">
+            <strong>Duration</strong>
+            <div class="d-flex gap-2">
+              <div>
+                <label for="durationHourInput" class="form-label">Hour</label>
+                <input type="number"
+                       class="form-control"
+                       id="durationHourInput"
+                       name="durationHour"
+                       placeholder="HH"
+                       min="0"
+                       max="8"
+                       required
+                       [(ngModel)]="durationHour"
+                       #durationHourInput="ngModel">
+              </div>
+
+              <div>
+                <label for="durationMinuteInput" class="form-label">Minute</label>
+                <input type="number"
+                       class="form-control"
+                       id="durationMinuteInput"
+                       name="durationMinute"
+                       placeholder="MM"
+                       min="0"
+                       max="59"
+                       required
+                       [(ngModel)]="durationMinute"
+                       #durationMinuteInput="ngModel">
+              </div>
             </div>
           </div>
         </div>
 
-        <div [class.was-validated]="durationHourInput.dirty || durationMinuteInput.touched">
-          <strong>Duration</strong>
-          <div class="d-flex gap-2">
-            <div>
-              <label for="durationHourInput" class="form-label">Hour</label>
-              <input type="number"
-                     class="form-control"
-                     id="durationHourInput"
-                     name="durationHour"
-                     placeholder="HH"
-                     min="0"
-                     max="8"
-                     required
-                     [(ngModel)]="durationHour"
-                     #durationHourInput="ngModel">
+        <div class="mb-3">
+          @if (startHourInput.invalid || startMinuteInput.invalid) {
+            <div class="text-danger small">
+              Please enter a valid start time (hour: 0–23, minute: 0-59).
             </div>
+          }
 
-            <div>
-              <label for="durationMinuteInput" class="form-label">Minute</label>
-              <input type="number"
-                     class="form-control"
-                     id="durationMinuteInput"
-                     name="durationMinute"
-                     placeholder="MM"
-                     min="0"
-                     max="59"
-                     required
-                     [(ngModel)]="durationMinute"
-                     #durationMinuteInput="ngModel">
+          @if (durationHourInput.invalid || durationMinuteInput.invalid) {
+            <div class="text-danger small">
+              Please enter a valid duration (hour: 0–8, minute: 0-59).
             </div>
-          </div>
+          }
         </div>
       </div>
 
-      <div class="mb-3">
-        @if (startHourInput.invalid || startMinuteInput.invalid) {
-          <div class="text-danger small">
-            Please enter a valid start time (hour: 0–23, minute: 0-59).
-          </div>
-        }
-
-        @if (durationHourInput.invalid || durationMinuteInput.invalid) {
-          <div class="text-danger small">
-            Please enter a valid duration (hour: 0–8, minute: 0-59).
-          </div>
-        }
-      </div>
+      <strong>End time: </strong>{{ endTime() | time }}
     </div>
 
-    <strong>End time: </strong><br>{{ endTime() | time }}
-
-    <div class="d-flex justify-content-end border-top pt-2 mt-2">
-      <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancel()">
+    <div class="offcanvas-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">
         Cancel
       </button>
 

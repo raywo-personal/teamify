@@ -1,4 +1,4 @@
-import {Time} from './time.model';
+import {addToTime, createTime, Time} from '../../shared/models/time.model';
 
 
 export interface TimeSlot {
@@ -15,8 +15,8 @@ export function createTimeSlot(description: string,
                                start?: Time,
                                end?: Time): TimeSlot {
   const now = new Date();
-  const startTime = start || new Time(now.getHours(), now.getMinutes());
-  const endTime = end || startTime.plus({hour: 1, minute: 30});
+  const startTime = start || createTime(now.getHours(), now.getMinutes());
+  const endTime = end || addToTime(startTime, createTime(1, 30));
 
   return {
     id: crypto.randomUUID(),

@@ -1,7 +1,7 @@
 import {Component, computed, effect, inject, input, output, signal} from '@angular/core';
 import {TimeSlot} from '../../models/time-slot.model';
 import {FormsModule} from '@angular/forms';
-import {Time} from '../../models/time.model';
+import {addToTime, createTime} from '../../../shared/models/time.model';
 import {TimePipe} from '../../pipes/time.pipe';
 import {TimeSlotService} from '../../services/time-slot.service';
 
@@ -28,10 +28,10 @@ export class TimeSlotEditComponent {
   protected durationHour = signal(1);
   protected durationMinute = signal(30);
   protected endTime = computed(() => {
-    const start = new Time(this.startHour(), this.startMinute());
-    const duration = new Time(this.durationHour(), this.durationMinute());
+    const start = createTime(this.startHour(), this.startMinute());
+    const duration = createTime(this.durationHour(), this.durationMinute());
 
-    return start.plus(duration)
+    return addToTime(start, duration);
   });
 
   private timeSlotService = inject(TimeSlotService);
@@ -51,7 +51,7 @@ export class TimeSlotEditComponent {
 
 
   protected onSubmit() {
-    const start = new Time(this.startHour(), this.startMinute());
+    const start = createTime(this.startHour(), this.startMinute());
     const end = this.endTime();
     const timeSlot = {
       id: this.timeSlot()?.id || crypto.randomUUID(),

@@ -1,12 +1,17 @@
 import {Component, input, output} from '@angular/core';
 import {PriorKnowledge} from '../../models/prior-knowledge.model';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
+import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-prior-knowledge-view',
   imports: [
-    DeleteButtonComponent
+    DeleteButtonComponent,
+    NgbDropdown,
+    NgbDropdownToggle,
+    NgbDropdownMenu,
+    NgbDropdownItem
   ],
   templateUrl: './prior-knowledge-view.component.html',
   styleUrl: './prior-knowledge-view.component.scss'

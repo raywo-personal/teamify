@@ -3,7 +3,7 @@ import {Person} from '../../models/person.model';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 import {PersonTimeSlot} from '../../models/person-timeslot.model';
 import {CdkDragHandle} from '@angular/cdk/drag-drop';
-import {NgbPopover} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle, NgbPopover} from '@ng-bootstrap/ng-bootstrap';
 import {timeCompare} from '../../../shared/helper/comparison';
 
 
@@ -12,7 +12,11 @@ import {timeCompare} from '../../../shared/helper/comparison';
   imports: [
     DeleteButtonComponent,
     CdkDragHandle,
-    NgbPopover
+    NgbPopover,
+    NgbDropdown,
+    NgbDropdownToggle,
+    NgbDropdownMenu,
+    NgbDropdownItem
   ],
   templateUrl: './person-view.component.html',
   styleUrl: './person-view.component.scss'

@@ -4,22 +4,40 @@
       {{ knowledge().name }}
     </div>
     <div>
-      <small>{{ knowledge().description }}</small>
+      <small>{{ knowledge().description }}&nbsp;</small>
     </div>
   </div>
 
   @if (showButtons()) {
-    <div>
-      <button class="btn btn-primary me-2" (click)="onEdit($event)">
-        <i class="bi-pencil"></i>
-        <span class="visually-hidden">Edit {{ knowledge().name }}</span>
+    <div ngbDropdown class="minimalistic-dropdown">
+      <button class="btn btn-link"
+              id="dropDownToggle-{{knowledge().id}}"
+              ngbDropdownToggle
+              aria-expanded="false"
+              aria-label="More actions"
+              (click)="$event.stopPropagation()">
+        <i class="bi-three-dots-vertical"></i>
+        <span class="visually-hidden">More actions</span>
       </button>
 
-      <button app-delete-button
-              confirmationTitle="Delete knowledge item"
-              confirmationMessage="Are you sure you want to delete knowledge item “{{knowledge().name}}”?"
-              (deleteConfirmed)="onDelete()">
-      </button>
+      <div ngbDropdownMenu
+           [attr.aria-labelledby]="'dropDownToggle-' + knowledge().id">
+        <div class="dropdown-main-content">
+          <button class="btn btn-primary"
+                  (click)="onEdit($event)"
+                  ngbDropdownItem>
+            <i class="bi-pencil me-3"></i>Edit {{ knowledge().name }}
+          </button>
+        </div>
+
+        <button app-delete-button
+                caption="Delete {{knowledge().name}}"
+                confirmationTitle="Delete knowledge item"
+                confirmationMessage="Are you sure you want to delete knowledge item “{{knowledge().name}}”?"
+                (deleteConfirmed)="onDelete()"
+                ngbDropdownItem>
+        </button>
+      </div>
     </div>
   }
 </div>

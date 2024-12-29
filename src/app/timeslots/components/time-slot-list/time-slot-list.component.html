@@ -53,13 +53,13 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
   </div>
 
-  <div class="offcanvas-body">
-    <app-time-slot-edit [timeSlot]="timeSlotToEdit"
-                        [edit]="edit"
-                        (cancelled)="onAddCancelled()"
-                        (saved)="onAddSaved()"
-    />
-  </div>
+  <app-time-slot-edit
+    class="offcanvas-form"
+    [timeSlot]="timeSlotToEdit"
+    [edit]="edit"
+    (cancelled)="onAddCancelled()"
+    (saved)="onAddSaved()"
+  />
 </ng-template>
 
 

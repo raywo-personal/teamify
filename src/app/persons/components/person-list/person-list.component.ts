@@ -1,4 +1,4 @@
-import {Component, inject, TemplateRef} from '@angular/core';
+import {AfterViewInit, Component, inject, TemplateRef, ViewChild} from '@angular/core';
 import {PersonService} from '../../services/person.service';
 import {AsyncPipe} from '@angular/common';
 import {PersonViewComponent} from '../person-view/person-view.component';
@@ -15,6 +15,7 @@ import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-
 import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
 import {map} from 'rxjs';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -36,11 +37,15 @@ import {DeleteButtonComponent} from '../../../shared/components/delete-button/de
   templateUrl: './person-list.component.html',
   styleUrl: './person-list.component.scss'
 })
-export class PersonListComponent {
+export class PersonListComponent implements AfterViewInit {
 
   private personService = inject(PersonService);
   private slotService = inject(TimeSlotService);
   private offcanvas = inject(NgbOffcanvas);
+  private route = inject(ActivatedRoute);
+
+  @ViewChild("content")
+  protected content!: TemplateRef<any>;
 
   protected personsCount$ = this.personService.personCount$;
   protected filteredPersons$ = this.personService.filteredPersons$;
@@ -50,6 +55,14 @@ export class PersonListComponent {
   protected personToEdit?: Person;
   protected offcanvasTitle: string = "";
   protected edit = false;
+
+
+  public ngAfterViewInit() {
+    if (this.route.snapshot.queryParams["new"]) {
+      this.resetPath();
+      this.onAdd(this.content);
+    }
+  }
 
 
   protected onEditCancelled() {
@@ -98,4 +111,10 @@ export class PersonListComponent {
 
     this.offcanvas.open(content, options);
   }
+
+
+  private resetPath() {
+    window.history.replaceState(null, "", window.location.pathname);
+  }
+
 }

@@ -1,0 +1,8 @@
+<h2>Teams</h2>
+
+<div class="row row-cols-lg-4 team-presentation">
+  @for (team of (teams$ | async); track team.id) {
+    <app-team-view [team]="team" />
+  }
+
+</div>

@@ -64,7 +64,7 @@
     display: none;
   }
 
-  .person-view-info {
+  .person-view-timeslots-info {
     display: block;
 
     .badge {
@@ -81,6 +81,26 @@
     h5 {
       font-size: 0.8rem;
       font-weight: 500;
+    }
+  }
+}
+
+.team-presentation {
+  .person-mini-view {
+    .person-view {
+      align-items: center;
+    }
+
+    .person-view-header {
+      margin-bottom: 0;
+    }
+
+    .person-view-timeslots-info {
+      display: none;
+    }
+
+    .person-view-info {
+      display: none;
     }
   }
 }

@@ -1,4 +1,4 @@
-import {Component, inject, TemplateRef} from '@angular/core';
+import {AfterViewInit, Component, inject, TemplateRef, ViewChild} from '@angular/core';
 import {TimeSlotViewComponent} from '../time-slot-view/time-slot-view.component';
 import {TimeSlotService} from '../../services/time-slot.service';
 import {AsyncPipe} from '@angular/common';
@@ -9,6 +9,7 @@ import {DataNotAvailableViewComponent} from "../../../shared/components/data-not
 import {DataNotAvailableInfoComponent} from '../../../shared/components/data-not-available-info/data-not-available-info.component';
 import {AddButtonComponent} from '../../../shared/components/add-button/add-button.component';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -25,16 +26,28 @@ import {DeleteButtonComponent} from '../../../shared/components/delete-button/de
   templateUrl: './time-slot-list.component.html',
   styleUrl: './time-slot-list.component.scss'
 })
-export class TimeSlotListComponent {
+export class TimeSlotListComponent implements AfterViewInit {
 
   private slotService = inject(TimeSlotService);
   private offcanvas = inject(NgbOffcanvas);
+  private route = inject(ActivatedRoute);
+
+  @ViewChild("content")
+  protected content!: TemplateRef<any>;
 
   protected slots$ = this.slotService.slots$;
   protected timeSlotCount$ = this.slotService.slotCount$;
   protected timeSlotToEdit?: TimeSlot;
   protected canvasTitle: string = "";
   protected edit = false;
+
+
+  public ngAfterViewInit() {
+    if (this.route.snapshot.queryParams["new"]) {
+      this.resetPath();
+      this.onAdd(this.content);
+    }
+  }
 
 
   protected onAdd(content: TemplateRef<any>) {
@@ -86,6 +99,11 @@ export class TimeSlotListComponent {
     };
 
     this.offcanvas.open(content, options);
+  }
+
+
+  private resetPath() {
+    window.history.replaceState(null, "", window.location.pathname);
   }
 
 }

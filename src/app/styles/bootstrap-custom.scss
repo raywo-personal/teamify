@@ -1,13 +1,13 @@
-$fonts: "Inter", system-ui;
-
+@use "./variables" as vars;
 
 @use "bootstrap/scss/bootstrap" with (
   // Fonts
-  $font-family-sans-serif: $fonts,
+  $font-family-sans-serif: vars.$fonts,
 
   // Colors
-  $primary: #05263f, // #F96400, #c73e1d; // #53131e; //#09203f;
-  $secondary: #7b8faa,
+  $primary: vars.$primary, // #F96400, #c73e1d; // #53131e; //#09203f;
+  $secondary: vars.$secondary,
+  //$secondary: #7b8faa,
   //$secondary: #293f51,
   $light: #dee2e6,
   $nav-link-color: var(--bs-gray-700),
@@ -35,7 +35,12 @@ $fonts: "Inter", system-ui;
   $modal-header-border-width: 0,
   $modal-footer-bg: var(--bs-tertiary-bg),
   $offcanvas-bg-color: var(--bs-tertiary-bg),
-  $offcanvas-horizontal-width: 25%
+  $offcanvas-horizontal-width: 25%,
+
+  // Cards
+  $card-bg: var(--bs-secondary),
+  $card-cap-bg: var(--bs-secondary),
+  $card-border-width: 0,
 );
 
 // In order to avoid errors regarding the order of @use and @import

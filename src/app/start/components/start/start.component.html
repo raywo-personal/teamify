@@ -18,7 +18,7 @@
                 class="h-100 w-100"
                 stepTitle="Create time slots"
                 stepDescription="In order to create a team, you need to create time slots."
-                [stepIsDone]="false"
+                [stepIsDone]="step1IsDone"
                 buttonCaption="time slots"
                 routingTarget="/time-slots"/>
 
@@ -31,7 +31,7 @@
                   class="h-100 w-100"
                   stepTitle="Create prior knowledge"
                   stepDescription="Teams are created based on prior knowledge."
-                  [stepIsDone]="false"
+                  [stepIsDone]="step2IsDone"
                   buttonCaption="prior knowledge"
                   routingTarget="/prior-knowledge"/>
 
@@ -44,7 +44,7 @@
                 class="h-100 w-100"
                 stepTitle="Create persons"
                 stepDescription="Teams are made up of persons."
-                [stepIsDone]="false"
+                [stepIsDone]="step3IsDone"
                 buttonCaption="persons"
                 routingTarget="/persons"/>
 
@@ -56,7 +56,7 @@
                 class="h-100 w-100"
                 stepTitle="Team up"
                 stepDescription="If you have completed all steps, you can now create teams."
-                [stepIsDone]="false"
+                [stepIsDone]="step4IsDone"
                 buttonCaption="teams"
                 routingTarget="/grouping"/>
     </div>

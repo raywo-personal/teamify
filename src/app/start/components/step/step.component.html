@@ -2,11 +2,11 @@
   <div class="card-body">
     <div class="d-flex justify-content-between">
       <h3 class="card-title">Step {{ stepNo() }}</h3>
-      <div>
+      <div class="icon">
         @if (stepIsDone()) {
-          <i class="bi-bookmark-check text-success"></i>
+          <i class="bi-bookmark-check-fill text-success"></i>
         } @else {
-          <i class="bi-bookmark-x text-danger"></i>
+          <i class="bi-bookmark-x-fill text-danger"></i>
         }
       </div>
     </div>
@@ -21,7 +21,7 @@
        [queryParams]="queryParams()"
        class="btn btn-primary w-100"
        [class.btn-primary]="!stepIsDone()"
-       [class.btn-outline-secondary]="stepIsDone()">
+       [class.btn-outline-primary]="stepIsDone()">
       @if (stepIsDone()) {
         Go to {{ buttonCaption() }}
       } @else {

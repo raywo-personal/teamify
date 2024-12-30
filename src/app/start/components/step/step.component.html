@@ -1,0 +1,32 @@
+<div class="card step">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h3 class="card-title">Step {{ stepNo() }}</h3>
+      <div class="icon">
+        @if (stepIsDone()) {
+          <i class="bi-bookmark-check-fill text-success"></i>
+        } @else {
+          <i class="bi-bookmark-x-fill text-danger"></i>
+        }
+      </div>
+    </div>
+    <h4 class="card-subtitle">{{ stepTitle() }}</h4>
+    <p class="card-text">
+      {{ stepDescription() }}
+    </p>
+  </div>
+
+  <div class="card-footer">
+    <a [routerLink]="routingTarget()"
+       [queryParams]="queryParams()"
+       class="btn btn-primary w-100"
+       [class.btn-primary]="!stepIsDone()"
+       [class.btn-outline-primary]="stepIsDone()">
+      @if (stepIsDone()) {
+        Go to {{ buttonCaption() }}
+      } @else {
+        Create {{ buttonCaption() }}&nbsp;<i class="bi-chevron-right"></i>
+      }
+    </a>
+  </div>
+</div>

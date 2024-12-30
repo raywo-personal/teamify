@@ -14,6 +14,8 @@
 @use "app/styles/toolbar";
 @use "app/styles/dropdowns";
 @use "app/styles/offcanvas";
+@use "app/styles/cards";
+@use "app/styles/start";
 
 small, .small {
   font-weight: 300;
@@ -21,7 +23,7 @@ small, .small {
 
 
 .app-layout {
-  --sidebar-width: 30ch;
+  --sidebar-width: 28ch;
   --top-bar-height: 3.25rem;
   --main-margin: 0.5rem;
   --tool-bar-height: 4rem;

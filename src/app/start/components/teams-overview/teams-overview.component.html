@@ -1,0 +1,21 @@
+<h2 class="text-center mb-3">Teams</h2>
+
+@if (!(teamsAreAssembled$ | async)) {
+  <div class="start-container lead text-muted text-center d-flex flex-column align-items-center">
+    <div>
+      <i class="bi-info-circle"></i>
+      Start assembling your teams by completing step 4 or clicking the button.
+    </div>
+
+    <a routerLink="/grouping"
+       class="btn btn-primary mt-3 col-3">
+      Create teams&nbsp;<i class="bi-chevron-right"></i>
+    </a>
+  </div>
+} @else {
+  <div class="row row-cols-lg-4 team-presentation" cdkDropListGroup>
+    @for (team of (teams$ | async); track team.id) {
+      <app-team-view [team]="team"/>
+    }
+  </div>
+}

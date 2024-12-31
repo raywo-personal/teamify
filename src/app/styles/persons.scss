@@ -101,6 +101,9 @@
     margin-bottom: 0;
   }
 
+  &-info {
+  }
+
   &-interaction {
     width: fit-content;
   }
@@ -112,7 +115,7 @@
     align-items: flex-start;
   }
 
-  &-info {
+  &-timeslots-info {
     display: none;
   }
 
@@ -167,5 +170,83 @@
 
   .popover {
     display: block;
+  }
+}
+
+.team {
+  .person-mini-view {
+    background: var(--bs-body-bg);
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .small {
+      font-size: 0.8rem;
+    }
+
+    .knowledge-pill {
+      border: 1px solid var(--bs-light);
+
+      padding: 0.1rem 0.5rem;
+
+      display: -webkit-box;
+      -webkit-line-clamp: var(--line-clamp, 1);
+      -webkit-box-orient: vertical;
+      word-break: var(--word-break, 'none');
+      overflow: hidden;
+      hyphens: auto;
+      text-align: var(--align, left);
+    }
+
+    .person-view-slots {
+      display: none;
+    }
+
+    .person-view-timeslots-info {
+      display: block;
+
+      .badge {
+        font-size: 0.7rem;
+        font-weight: 500;
+      }
+
+      .preferred {
+        border: var(--bs-border-width) solid var(--bs-gray-600);
+      }
+    }
+
+    .popover {
+      h5 {
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.team-presentation {
+  .person-mini-view {
+    .person-view {
+      align-items: center;
+    }
+
+    .person-view-header {
+      margin-bottom: 0;
+    }
+
+    .person-view-timeslots-info,
+    .person-view-info,
+    .knowledge-pill {
+      display: none;
+    }
+  }
+}
+
+.cdk-drag-preview.person-mini-view {
+  .person-view-slots,
+  .person-view-timeslots-info,
+  .person-view-info {
+    display: none;
   }
 }

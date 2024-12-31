@@ -45,4 +45,9 @@ export class StepsComponent {
     });
   }
 
+
+  protected get allDone(): boolean {
+    return this.step1IsDone && this.step2IsDone && this.step3IsDone && this.step4IsDone;
+  }
+
 }

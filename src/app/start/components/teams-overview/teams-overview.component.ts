@@ -3,6 +3,7 @@ import {TeamService} from '../../../teams/services/team.service';
 import {AsyncPipe} from '@angular/common';
 import {TeamViewComponent} from '../../../teams/components/team-view/team-view.component';
 import {RouterLink} from '@angular/router';
+import {CdkDropListGroup} from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -10,7 +11,8 @@ import {RouterLink} from '@angular/router';
   imports: [
     AsyncPipe,
     TeamViewComponent,
-    RouterLink
+    RouterLink,
+    CdkDropListGroup
   ],
   templateUrl: './teams-overview.component.html',
   styleUrl: './teams-overview.component.scss'

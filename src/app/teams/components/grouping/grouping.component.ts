@@ -17,6 +17,7 @@ import {PersonSortButtonsComponent} from '../../../shared/components/person-sort
 import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-filter/person-slot-filter.component';
 import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
 import {map} from 'rxjs';
+import {PersonDragData} from '../../../shared/models/person-drag-data';
 
 
 @Component({
@@ -57,9 +58,9 @@ export class GroupingComponent {
   protected personFilter = this.personService.nameFilter;
 
 
-  protected onDrop(dropEvent: CdkDragDrop<string, any>) {
-    const originTeam: Team | undefined = dropEvent.item.data["originTeam"];
-    const person: Person = dropEvent.item.data["person"];
+  protected onDrop(dropEvent: CdkDragDrop<string, any, PersonDragData>) {
+    const originTeam: Team | undefined = dropEvent.item.data.originTeam;
+    const person: Person = dropEvent.item.data.person;
 
     if (originTeam && person) {
       this.teamService.removePersonFromTeam(originTeam, person);

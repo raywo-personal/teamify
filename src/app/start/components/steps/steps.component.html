@@ -12,53 +12,55 @@
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-lg-2 row-cols-xxl-4 g-3 align-items-stretch">
-    <div class="col d-flex align-items-center">
-      <app-step [stepNo]="1"
-                class="h-100 w-100"
-                stepTitle="Create time slots"
-                stepDescription="In order to create a team, you need to create time slots."
-                [stepIsDone]="step1IsDone"
-                buttonCaption="time slots"
-                routingTarget="/time-slots"/>
-
-      <div class="chevron">&#10095;</div>
-    </div>
-
-    <div class="col outline">
-      <div class="d-flex align-items-center">
-        <app-step [stepNo]="2"
+  @if (!allDone) {
+    <div class="row row-cols-1 row-cols-lg-2 row-cols-xxl-4 g-3 align-items-stretch">
+      <div class="col d-flex align-items-center">
+        <app-step [stepNo]="1"
                   class="h-100 w-100"
-                  stepTitle="Create prior knowledge"
-                  stepDescription="Teams are created based on prior knowledge."
-                  [stepIsDone]="step2IsDone"
-                  buttonCaption="prior knowledge"
-                  routingTarget="/prior-knowledge"/>
+                  stepTitle="Create time slots"
+                  stepDescription="In order to create a team, you need to create time slots."
+                  [stepIsDone]="step1IsDone"
+                  buttonCaption="time slots"
+                  routingTarget="/time-slots"/>
 
         <div class="chevron">&#10095;</div>
       </div>
-    </div>
 
-    <div class="col d-flex align-items-center">
-      <app-step [stepNo]="3"
-                class="h-100 w-100"
-                stepTitle="Create persons"
-                stepDescription="Teams are made up of persons."
-                [stepIsDone]="step3IsDone"
-                buttonCaption="persons"
-                routingTarget="/persons"/>
+      <div class="col outline">
+        <div class="d-flex align-items-center">
+          <app-step [stepNo]="2"
+                    class="h-100 w-100"
+                    stepTitle="Create prior knowledge"
+                    stepDescription="Teams are created based on prior knowledge."
+                    [stepIsDone]="step2IsDone"
+                    buttonCaption="prior knowledge"
+                    routingTarget="/prior-knowledge"/>
 
-      <div class="chevron">&#10095;</div>
-    </div>
+          <div class="chevron">&#10095;</div>
+        </div>
+      </div>
 
-    <div class="col d-flex align-items-center">
-      <app-step [stepNo]="4"
-                class="h-100 w-100"
-                stepTitle="Team up"
-                stepDescription="If you have completed all steps, you can now create teams."
-                [stepIsDone]="step4IsDone"
-                buttonCaption="teams"
-                routingTarget="/grouping"/>
+      <div class="col d-flex align-items-center">
+        <app-step [stepNo]="3"
+                  class="h-100 w-100"
+                  stepTitle="Create persons"
+                  stepDescription="Teams are made up of persons."
+                  [stepIsDone]="step3IsDone"
+                  buttonCaption="persons"
+                  routingTarget="/persons"/>
+
+        <div class="chevron">&#10095;</div>
+      </div>
+
+      <div class="col d-flex align-items-center">
+        <app-step [stepNo]="4"
+                  class="h-100 w-100"
+                  stepTitle="Team up"
+                  stepDescription="If you have completed all steps, you can now create teams."
+                  [stepIsDone]="step4IsDone"
+                  buttonCaption="teams"
+                  routingTarget="/grouping"/>
+      </div>
     </div>
-  </div>
+  }
 </div>

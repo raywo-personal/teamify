@@ -7,6 +7,7 @@ import {Person} from '../../../persons/models/person.model';
 import {TeamService} from '../../services/team.service';
 import {PersonService} from '../../../persons/services/person.service';
 import {TeamNameEditComponent} from '../team-name-edit/team-name-edit.component';
+import {PersonDragData} from '../../../shared/models/person-drag-data';
 
 
 @Component({
@@ -33,10 +34,10 @@ export class TeamViewComponent {
   protected isEditing = false;
 
 
-  protected onDrop(dropEvent: CdkDragDrop<Person[], any>) {
-    const origin: string | undefined = dropEvent.item.data["origin"];
-    const originTeam: Team | undefined = dropEvent.item.data["originTeam"];
-    const person: Person = dropEvent.item.data["person"];
+  protected onDrop(dropEvent: CdkDragDrop<Person[], any, PersonDragData>) {
+    const origin: string | undefined = dropEvent.item.data.origin;
+    const originTeam: Team = dropEvent.item.data.originTeam;
+    const person: Person = dropEvent.item.data.person;
 
     if (origin === "available") {
       this.teamService.addToTeam(this.team(), person);

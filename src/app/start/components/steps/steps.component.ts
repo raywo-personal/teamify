@@ -40,8 +40,8 @@ export class StepsComponent {
       this.step3IsDone = count > 0;
     });
 
-    this.teamService.teams$.subscribe(teams => {
-      this.step4IsDone = teams.length > 0;
+    this.teamService.teamsAreAssembled$.subscribe(isAssembled => {
+      this.step4IsDone = isAssembled;
     });
   }
 

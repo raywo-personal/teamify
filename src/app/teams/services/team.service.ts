@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, scan} from 'rxjs';
 import {Team} from '../models/team.model';
 import {TimeSlot} from "../../timeslots/models/time-slot.model";
 import {Person} from '../../persons/models/person.model';
@@ -12,10 +12,17 @@ import {createBusEvent, EventType} from '../../shared/event-bus/event.model';
 })
 export class TeamService {
 
-  private teamsSubject = new BehaviorSubject<Team[]>([]);
-  public teams$ = this.teamsSubject.asObservable();
-
   private eventBus = inject(EventBusService);
+
+  private teamsSubject = new BehaviorSubject<Team[]>([]);
+  public readonly teams$ = this.teamsSubject.asObservable();
+
+  public readonly teamsAreAssembled$ = this.teams$
+    .pipe(
+      scan((hasAPerson, teams) => {
+        return hasAPerson || teams.some(team => team.persons.length > 0);
+      }, false)
+    );
 
 
   public get teams(): Team[] {

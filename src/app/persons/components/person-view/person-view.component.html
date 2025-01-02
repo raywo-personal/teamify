@@ -7,9 +7,9 @@
 
   <div class="person-view-body">
     <div class="person-view-header">
-      <div>
-        <h3 class="person-view-title">{{ person().name }}</h3>
-        <p class="person-view-info small">{{ person().info }}</p>
+      <div class="person-view-info-container">
+        <h4 class="person-view-title">{{ person().name }}</h4>
+        <p class="person-view-info">{{ person().info }}</p>
       </div>
 
       <div class="person-view-slots">
@@ -24,15 +24,15 @@
           </div>
         }
       </div>
+    </div>
 
-      <div class="person-view-timeslots-info">
-        @for (slot of person().timeSlots; track slot.timeSlot.id) {
-          <div class="badge bg-light text-primary rounded-pill me-2"
-               [class.preferred]="(slot.priority || 0) === 1">
-            {{ slot.timeSlot.description }}
-          </div>
-        }
-      </div>
+    <div class="person-view-timeslots-info">
+      @for (slot of person().timeSlots; track slot.timeSlot.id) {
+        <div class="badge bg-light text-primary rounded-pill me-2"
+             [class.preferred]="(slot.priority || 0) === 1">
+          {{ slot.timeSlot.description }}
+        </div>
+      }
     </div>
 
     <div class="person-view-knowledge">

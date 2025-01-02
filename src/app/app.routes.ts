@@ -37,9 +37,9 @@ export const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: "grouping",
+    path: "build-teams",
     component: GroupingComponent,
-    data: {title: "Grouping", icon: "people-fill"},
+    data: {title: "Build teams", icon: "people-fill"},
     pathMatch: "full"
   },
   {

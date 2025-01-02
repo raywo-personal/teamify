@@ -1,27 +1,6 @@
 .grouping {
-
-  &-main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "persons teams";
-    gap: 1rem;
-  }
-
   h3 {
     font-size: 1.1rem;
-  }
-
-  &-persons {
-    grid-area: persons;
-  }
-
-  &-teams {
-    grid-area: teams;
-  }
-
-  &-persons,
-  &-teams {
-    height: calc(var(--list-height) + 1.5rem);
   }
 
   &-person-list,
@@ -37,26 +16,6 @@
     flex-direction: column;
     gap: 1rem;
 
-    .person-mini-view {
-      border: var(--bs-border-width) solid var(--bs-light);
-      border-radius: 0.5rem;
-
-      padding: 0.5rem;
-
-      .person-view {
-        .knowledge-pill-title {
-          font-weight: 400;
-        }
-
-        .knowledge-pill-remark {
-          display: none;
-        }
-
-        .popover {
-          display: block;
-        }
-      }
-    }
   }
 
   &-team-list {

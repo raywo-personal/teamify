@@ -24,51 +24,52 @@
     </div>
   </div>
 
-  <div class="grouping-main" cdkDropListGroup>
-    <div class="grouping-persons">
-      <h3>
-        Persons
-        <small class="ms-2">({{ (filteredPersons$ | async)?.length }}/{{ (personsCount$ | async) }})</small>
-      </h3>
-      <div class="grouping-person-list scrollable-area"
-           cdkDropList
-           (cdkDropListDropped)="onDrop($event)">
-        @for (person of filteredPersons$ | async; track person.id) {
-          <div class="person-mini-view shadow-sm"
-               cdkDrag
-               [cdkDragData]="{origin: 'available', person: person}">
-            <div class="person-placeholder" *cdkDragPlaceholder></div>
-            <app-person-view [person]="person"
-                             [showButtons]="false"
-                             [showDragHandle]="true"/>
-          </div>
-        } @empty {
-          @if ((personsCount$ | async) === 0) {
-            <app-data-not-available-view title="No persons found"
-                                         mode="warning"
-                                         [messageTemplate]="personMessageTemplate"/>
-          } @else if ((filteredPersons$ | async)?.length === 0 && personFilter() === "") {
-            <app-data-not-available-view title="All persons assigned"
-                                         [messageTemplate]="availablePersonMessageTemplate"/>
-          } @else {
-            <app-data-not-available-view title="No persons found"
-                                         [messageTemplate]="noPersonFoundTemplate"/>
-          }
-        }
-      </div>
-    </div>
-
-    <div class="grouping-teams">
+  <div class="content-area scrollable-area" cdkDropListGroup>
+    <div class="row scrollable-area">
       <h3>Teams</h3>
 
-      <div class="grouping-team-list scrollable-area">
-        @for (team of teams$ | async; track $index) {
-          <app-team-view [team]="team" (personDropped)="onPersonDropped($event)"/>
-        } @empty {
-          <app-data-not-available-view title="No teams found"
-                                       mode="warning"
-                                       [messageTemplate]="slotsMessageTemplate"/>
-        }
+      @for (team of teams$ | async; track $index) {
+        <app-team-view [team]="team" (personDropped)="onPersonDropped($event)"
+                       class="col"/>
+      } @empty {
+        <app-data-not-available-view title="No teams found"
+                                     mode="warning"
+                                     [messageTemplate]="slotsMessageTemplate"/>
+      }
+    </div>
+
+    <div class="row mt-3 scrollable-area">
+      <div class="col">
+        <h3>
+          Persons
+          <small class="ms-2">({{ (filteredPersons$ | async)?.length }}/{{ (personsCount$ | async) }})</small>
+        </h3>
+        <div class="grouping-person-list scrollable-area"
+             cdkDropList
+             (cdkDropListDropped)="onDrop($event)">
+          @for (person of filteredPersons$ | async; track person.id) {
+            <div class="person-mini-view shadow-sm"
+                 cdkDrag
+                 [cdkDragData]="{origin: 'available', person: person}">
+              <div class="person-placeholder" *cdkDragPlaceholder></div>
+              <app-person-view [person]="person"
+                               [showButtons]="false"
+                               [showDragHandle]="true"/>
+            </div>
+          } @empty {
+            @if ((personsCount$ | async) === 0) {
+              <app-data-not-available-view title="No persons found"
+                                           mode="warning"
+                                           [messageTemplate]="personMessageTemplate"/>
+            } @else if ((filteredPersons$ | async)?.length === 0 && personFilter() === "") {
+              <app-data-not-available-view title="All persons assigned"
+                                           [messageTemplate]="availablePersonMessageTemplate"/>
+            } @else {
+              <app-data-not-available-view title="No persons found"
+                                           [messageTemplate]="noPersonFoundTemplate"/>
+            }
+          }
+        </div>
       </div>
     </div>
   </div>

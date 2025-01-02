@@ -77,6 +77,9 @@
 }
 
 .person-view {
+  --person-view-primary-font-size: 1.05rem;
+  --person-view-secondary-font-size: 0.9rem;
+
   display: flex;
   justify-content: space-between;
 
@@ -88,7 +91,7 @@
   &-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
 
     p {
       margin-bottom: 0;
@@ -96,12 +99,13 @@
   }
 
   &-title {
-    font-size: 1.05rem;
+    font-size: var(--person-view-primary-font-size);
     font-weight: 600;
     margin-bottom: 0;
   }
 
   &-info {
+    font-size: var(--person-view-secondary-font-size);
   }
 
   &-interaction {
@@ -113,10 +117,30 @@
     flex-direction: row;
     gap: 0.75rem;
     align-items: flex-start;
+    margin-top: 0.5rem;
   }
 
   &-timeslots-info {
     display: none;
+  }
+
+  &-slots {
+    display: flex;
+    gap: 0.5rem;
+    height: fit-content;
+
+    .person-view-slot {
+      background: var(--bs-light-bg-subtle);
+      padding: 0.25rem;
+      border: 1px solid var(--bs-light);
+      border-radius: var(--bs-border-radius-sm);
+    }
+
+    .slot-priority {
+      color: var(--bs-gray-600);
+      margin-left: 0.25rem;
+      margin-right: 0.75rem;
+    }
   }
 
   .knowledge-pill {
@@ -127,7 +151,7 @@
     padding: 0.25rem 0.75rem;
     max-width: 30ch;
 
-    font-size: 0.8rem;
+    font-size: var(--person-view-secondary-font-size);
 
     .knowledge-pill-title {
       font-weight: bold;
@@ -143,28 +167,14 @@
   }
 }
 
-.person-view-slots {
-  display: flex;
-  gap: 0.5rem;
-  height: fit-content;
-
-  .person-view-slot {
-    background: var(--bs-light-bg-subtle);
-    padding: 0.25rem;
-    border: 1px solid var(--bs-light);
-    border-radius: var(--bs-border-radius-sm);
-  }
-
-  .slot-priority {
-    color: var(--bs-gray-600);
-    margin-left: 0.25rem;
-    margin-right: 0.75rem;
-  }
-}
-
 .person-mini-view {
-  border: 1px solid var(--bs-light);
-  border-radius: 0.5rem;
+  .person-view {
+    --person-view-primary-font-size: 1rem;
+    --person-view-secondary-font-size: 0.8rem;
+  }
+
+  border: var(--bs-border-width) solid var(--bs-light);
+  border-radius: var(--bs-border-radius);
   background-color: var(--bs-body-bg);
   padding: 0.5rem;
 
@@ -239,6 +249,42 @@
     .person-view-info,
     .knowledge-pill {
       display: none;
+    }
+  }
+}
+
+.grouping {
+  .team {
+    .person-mini-view {
+
+      border: var(--bs-border-width) solid var(--bs-light);
+      border-radius: 0.5rem;
+
+      padding: 0.5rem;
+
+      .person-view {
+        &-knowledge {
+          display: none;
+        }
+
+        &-info-container {
+          display: flex;
+          align-items: baseline;
+          gap: 0.5rem;
+        }
+
+        .knowledge-pill-title {
+          font-weight: 400;
+        }
+
+        .knowledge-pill-remark {
+          display: none;
+        }
+
+        .popover {
+          display: block;
+        }
+      }
     }
   }
 }

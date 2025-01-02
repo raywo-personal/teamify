@@ -1,59 +1,46 @@
-# Grouper
+# Teamify: Where Talent Meets Timing
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
+Teamify is a powerful and intuitive tool designed to streamline team creation. Whether 
+you’re organizing teams for projects, events, or other collaborative tasks, Teamify 
+ensures optimal team composition by matching skills, knowledge, and time preferences.
 
-## Development server
+## Features
 
-To start a local development server, run:
+*	Skill-Based Team Formation: Build diverse teams by balancing prior knowledge and expertise.
+*	Time Slot Matching: Assign individuals to teams based on their preferred availability.
+*	Customizable Team Composition: Manually adjust team members to meet unique requirements.
+*	Intuitive Interface: Simple and user-friendly design for effortless team management.
 
-```bash
-ng serve
-```
+## Installation
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1.	Clone the repository:
 
 ```bash
-ng generate --help
+git clone https://github.com/your-username/teamify.git  
+cd teamify  
 ```
 
-## Building
-
-To build the project run:
+2.	Install dependencies:
 
 ```bash
-ng build
+npm install  
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+3. Start the application
 
 ```bash
-ng test
+npm start
 ```
 
-## Running end-to-end tests
+## Usage
 
-For end-to-end (e2e) testing, run:
+1.	Input participant information, including skills, prior knowledge, and time preferences.
+2.	Generate teams based on the provided data.
+3.	Fine-tune team compositions manually as needed.
+4.	Export or save team assignments for further use.
 
-```bash
-ng e2e
-```
+## License
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+This project is licensed under the MIT License.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Happy team building with Teamify! 🎉

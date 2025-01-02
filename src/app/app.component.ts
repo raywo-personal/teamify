@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   private domainLogic = inject(DomainLogicService);
 
-  protected title = 'Grouper';
+  protected title = 'Teamify';
 
 
   public ngOnInit() {

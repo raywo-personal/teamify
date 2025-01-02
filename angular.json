@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "grouper": {
+    "teamify": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/grouper",
+            "outputPath": "dist/teamify",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "grouper:build:production"
+              "buildTarget": "teamify:build:production"
             },
             "development": {
-              "buildTarget": "grouper:build:development"
+              "buildTarget": "teamify:build:development"
             }
           },
           "defaultConfiguration": "development"

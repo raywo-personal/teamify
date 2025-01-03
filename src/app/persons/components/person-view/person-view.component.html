@@ -12,18 +12,35 @@
         <p class="person-view-info">{{ person().info }}</p>
       </div>
 
-      <div class="person-view-knowledge">
-        @for (knowledge of person().priorKnowledge; track knowledge.priorKnowledge.id) {
-          <div [class]="dotCSSClass(knowledge.priorKnowledge.color)"
-               [ngbTooltip]="tooltip"
-               [tooltipClass]="tooltipCSSClass(knowledge.priorKnowledge.color)">
+      <div class="flex-grow-1"></div>
+
+      <div class="hstack gap-2">
+        @if (person().priorKnowledge.length > 0) {
+          <div class="person-view-knowledge">
+            @for (knowledge of person().priorKnowledge; track knowledge.priorKnowledge.id) {
+              <div [class]="dotCSSClass(knowledge.priorKnowledge.color)"
+                   [ngbTooltip]="tooltip"
+                   [tooltipClass]="tooltipCSSClass(knowledge.priorKnowledge.color)">
+              </div>
+
+              <ng-template #tooltip>
+                <div><strong>{{ knowledge.priorKnowledge.name }}: </strong></div>
+                <div>{{ knowledge.remark }}</div>
+              </ng-template>
+            }
           </div>
 
-          <ng-template #tooltip>
-            <div><strong>{{ knowledge.priorKnowledge.name }}: </strong></div>
-            <div>{{ knowledge.remark }}</div>
-          </ng-template>
+          <div class="vr"></div>
         }
+
+        <div class="person-view-timeslots-info">
+          @for (slot of person().timeSlots; track slot.timeSlot.id) {
+            <div [class]="dotCSSClass(slot.timeSlot.color)"
+                 [ngbTooltip]="slot.timeSlot.description"
+                 [tooltipClass]="tooltipCSSClass(slot.timeSlot.color)">
+            </div>
+          }
+        </div>
       </div>
 
       <div class="person-view-slots">
@@ -31,9 +48,8 @@
           <div class="person-view-slot">
             <span class="slot-priority">{{ slotPriority }}</span>
             @for (slot of slots().get(slotPriority); track slot.timeSlot.id) {
-              <div class="badge bg-light text-primary rounded-pill me-2">
-                {{ slot.timeSlot.description }}
-              </div>
+              <app-time-slot-pill [timeSlot]="slot.timeSlot"
+                                  class="me-2"/>
             }
           </div>
         }
@@ -42,9 +58,9 @@
 
     <div class="person-view-timeslots-info">
       @for (slot of person().timeSlots; track slot.timeSlot.id) {
-        <div class="badge bg-light text-primary rounded-pill me-2"
-             [class.preferred]="(slot.priority || 0) === 1">
-          {{ slot.timeSlot.description }}
+        <div [class]="dotCSSClass(slot.timeSlot.color)"
+             [ngbTooltip]="slot.timeSlot.description"
+             [tooltipClass]="tooltipCSSClass(slot.timeSlot.color)">
         </div>
       }
     </div>

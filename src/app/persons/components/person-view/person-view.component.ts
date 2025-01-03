@@ -7,6 +7,7 @@ import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle, NgbToo
 import {timeCompare} from '../../../shared/helper/comparison';
 import {PriorKnowledgePillComponent} from '../../../prior-knowledge/components/prior-knowledge-pill/prior-knowledge-pill.component';
 import {dotCSSClass, tooltipCSSClass} from '../../../shared/data/default-colors.data';
+import {TimeSlotPillComponent} from '../../../timeslots/components/time-slot-pill/time-slot-pill.component';
 
 
 @Component({
@@ -19,7 +20,8 @@ import {dotCSSClass, tooltipCSSClass} from '../../../shared/data/default-colors.
     NgbDropdownMenu,
     NgbDropdownItem,
     PriorKnowledgePillComponent,
-    NgbTooltip
+    NgbTooltip,
+    TimeSlotPillComponent
   ],
   templateUrl: './person-view.component.html',
   styleUrl: './person-view.component.scss'

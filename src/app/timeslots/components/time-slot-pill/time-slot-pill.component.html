@@ -1,0 +1,9 @@
+<div class=""
+     [class]="badgeCSSClass(timeSlot().color)"
+     ngbTooltip="{{ timeSlot().start | time: 'HH:mm' }}–{{ timeSlot().end | time: 'HH:mm' }}"
+     [tooltipClass]="tooltipCSSClass(timeSlot().color)"
+     triggers="mouseenter:mouseleave"
+     [openDelay]="300"
+     [closeDelay]="150">
+  {{ timeSlot().description }}
+</div>

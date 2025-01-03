@@ -16,6 +16,10 @@
 @use "app/styles/offcanvas";
 @use "app/styles/cards";
 @use "app/styles/start";
+@use "app/styles/variables";
+@use "app/styles/colors";
+@use "app/styles/prior-knowledge";
+
 
 small, .small {
   font-weight: 300;
@@ -79,11 +83,13 @@ small, .small {
 .content-area {
   height: var(--list-height);
   overflow: hidden;
+  padding-inline-end: 0.1rem;
 }
 
 .scrollable-area {
   max-height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
   -webkit-overflow-scrolling: touch;
 }
 

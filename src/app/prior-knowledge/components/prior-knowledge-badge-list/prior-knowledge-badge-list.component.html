@@ -1,0 +1,6 @@
+<div class="knowledge-badge-list">
+  @for (knowledge of knowledgeList$ | async; track knowledge.id) {
+    <app-prior-knowledge-pill [knowledge]="knowledge"
+                              [remark]="knowledge.description"/>
+  }
+</div>

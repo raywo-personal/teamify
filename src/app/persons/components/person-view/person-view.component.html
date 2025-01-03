@@ -12,6 +12,20 @@
         <p class="person-view-info">{{ person().info }}</p>
       </div>
 
+      <div class="person-view-knowledge">
+        @for (knowledge of person().priorKnowledge; track knowledge.priorKnowledge.id) {
+          <div [class]="dotCSSClass(knowledge.priorKnowledge.color)"
+               [ngbTooltip]="tooltip"
+               [tooltipClass]="tooltipCSSClass(knowledge.priorKnowledge.color)">
+          </div>
+
+          <ng-template #tooltip>
+            <div><strong>{{ knowledge.priorKnowledge.name }}: </strong></div>
+            <div>{{ knowledge.remark }}</div>
+          </ng-template>
+        }
+      </div>
+
       <div class="person-view-slots">
         @for (slotPriority of slotKeys; track $index) {
           <div class="person-view-slot">
@@ -37,14 +51,8 @@
 
     <div class="person-view-knowledge">
       @for (knowledge of person().priorKnowledge; track knowledge.priorKnowledge.id) {
-        <div class="knowledge-pill"
-             ngbPopover="{{ knowledge.remark }}"
-             triggers="mouseenter:mouseleave"
-             [openDelay]="300"
-             [closeDelay]="150">
-          <div class="knowledge-pill-title">{{ knowledge.priorKnowledge.name }}</div>
-          <div class="knowledge-pill-remark">{{ knowledge.remark }}</div>
-        </div>
+        <app-prior-knowledge-pill [knowledge]="knowledge.priorKnowledge"
+                                  [remark]="knowledge.remark"/>
       }
     </div>
   </div>

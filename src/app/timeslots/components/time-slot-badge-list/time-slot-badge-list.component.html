@@ -1,0 +1,5 @@
+<div class="badge-list">
+  @for (slot of slots$ | async; track slot.id) {
+    <app-time-slot-pill [timeSlot]="slot"/>
+  }
+</div>

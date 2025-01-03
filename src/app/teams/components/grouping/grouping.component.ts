@@ -19,6 +19,7 @@ import {SearchFieldComponent} from '../../../shared/components/search-field/sear
 import {map} from 'rxjs';
 import {PersonDragData} from '../../../shared/models/person-drag-data';
 import {PriorKnowledgeBadgeListComponent} from '../../../prior-knowledge/components/prior-knowledge-badge-list/prior-knowledge-badge-list.component';
+import {TimeSlotBadgeListComponent} from '../../../timeslots/components/time-slot-badge-list/time-slot-badge-list.component';
 
 
 @Component({
@@ -38,7 +39,8 @@ import {PriorKnowledgeBadgeListComponent} from '../../../prior-knowledge/compone
     PersonSortButtonsComponent,
     PersonSlotFilterComponent,
     SearchFieldComponent,
-    PriorKnowledgeBadgeListComponent
+    PriorKnowledgeBadgeListComponent,
+    TimeSlotBadgeListComponent
   ],
   templateUrl: './grouping.component.html',
   styleUrl: './grouping.component.scss'

@@ -4,6 +4,7 @@ import {TimePipe} from '../../pipes/time.pipe';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 import {CdkDragHandle} from '@angular/cdk/drag-drop';
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
+import {badgeCSSClass, dotCSSClass} from '../../../shared/data/default-colors.data';
 
 
 @Component({
@@ -38,4 +39,8 @@ export class TimeSlotViewComponent {
   protected onDelete() {
     this.delete.emit(this.timeSlot());
   }
+
+
+  protected readonly badgeCSSClass = badgeCSSClass;
+  protected readonly dotCSSClass = dotCSSClass;
 }

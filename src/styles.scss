@@ -117,3 +117,12 @@ small, .small {
     font-size: 2rem;
   }
 }
+
+.badge-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.fit-height {
+  height: fit-content;
+}

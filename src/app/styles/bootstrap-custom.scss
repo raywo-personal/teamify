@@ -41,6 +41,9 @@
   $card-bg: var(--bs-secondary),
   $card-cap-bg: var(--bs-secondary),
   $card-border-width: 0,
+
+  // Vertical ruler
+  $vr-border-width: 2px
 );
 
 // In order to avoid errors regarding the order of @use and @import

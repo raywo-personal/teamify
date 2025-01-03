@@ -26,10 +26,14 @@
 
   <div class="content-area scrollable-area" cdkDropListGroup>
     <div class="row scrollable-area">
-      <div class="d-flex justify-content-between gap-2">
+      <div class="hstack gap-2 mb-3">
         <h3>Teams</h3>
 
-        <app-prior-knowledge-badge-list/>
+        <div class="hstack gap-3 ms-auto">
+          <app-time-slot-badge-list/>
+          <div class="vr"></div>
+          <app-prior-knowledge-badge-list/>
+        </div>
       </div>
 
       @for (team of teams$ | async; track $index) {

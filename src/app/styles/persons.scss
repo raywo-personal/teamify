@@ -96,6 +96,10 @@
     p {
       margin-bottom: 0;
     }
+
+    .person-view-knowledge {
+      display: none;
+    }
   }
 
   &-title {
@@ -141,10 +145,6 @@
       margin-left: 0.25rem;
       margin-right: 0.75rem;
     }
-  }
-
-  .popover {
-    display: none;
   }
 }
 
@@ -213,6 +213,7 @@
     }
 
     .person-view-timeslots-info,
+    .person-view-knowledge,
     .person-view-info,
     .knowledge-pill {
       display: none;
@@ -223,34 +224,27 @@
 .grouping {
   .team {
     .person-mini-view {
-
       border: var(--bs-border-width) solid var(--bs-light);
       border-radius: 0.5rem;
 
       padding: 0.5rem;
 
-      .person-view {
-        &-knowledge {
-          display: none;
-        }
-
-        &-info-container {
+      .person-view-header {
+        .person-view-knowledge {
           display: flex;
-          align-items: baseline;
           gap: 0.5rem;
+          margin-top: 0;
         }
+      }
 
-        .knowledge-pill-title {
-          font-weight: 400;
-        }
+      .person-view-knowledge {
+        display: none;
+      }
 
-        .knowledge-pill-remark {
-          display: none;
-        }
-
-        .popover {
-          display: block;
-        }
+      .person-view-info-container {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
       }
     }
   }

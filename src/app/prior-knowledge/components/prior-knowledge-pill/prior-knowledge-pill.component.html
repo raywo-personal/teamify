@@ -1,0 +1,9 @@
+<div class="knowledge-pill"
+     [class]="badgeCSSClass(knowledge().color)"
+     ngbTooltip="{{ remark() }}"
+     [tooltipClass]="tooltipCSSClass(knowledge().color)"
+     triggers="mouseenter:mouseleave"
+     [openDelay]="300"
+     [closeDelay]="150">
+  <div class="knowledge-pill-title">{{ knowledge().name }}</div>
+</div>

@@ -7,8 +7,10 @@
       formControlName="selected"
     >
     <label class="form-check-label d-flex flex-column" for="knowledge_{{ knowledgeId }}">
-      {{ knowledge?.name }}
-      <small class="text-muted">{{ knowledge?.description }}</small>
+      <div [class]="badgeCSSClass(knowledge?.color || 'gray')">
+        <div class="fw-bold">{{ knowledge?.name }}</div>
+        <span class="text-muted">{{ knowledge?.description }}</span>
+      </div>
     </label>
   </div>
 

@@ -33,6 +33,7 @@ $t-colors: (
     background-color: opaque(#fff, rgba($value, 0.35));
 
     border: var(--bs-border-width) solid $value;
+    border-radius: 20rem;
   }
 }
 
@@ -49,6 +50,17 @@ $t-colors: (
     width: var(--dot-width);
     height: var(--dot-width);
     line-height: 1rem;
+  }
+}
+
+@each $color, $value in $t-colors {
+  .tooltip-colored-#{$color} {
+    $bg-color: opaque(#fff, rgba($value, 0.35));
+
+    --bs-tooltip-bg: #{$bg-color};
+    --bs-tooltip-color: #{$value};
+
+    font-weight: 500;
   }
 }
 

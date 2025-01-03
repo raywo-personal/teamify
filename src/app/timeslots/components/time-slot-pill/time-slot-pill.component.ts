@@ -1,22 +1,24 @@
-import {Component, HostBinding, input, OnInit} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {TimeSlot} from '../../models/time-slot.model';
-import {badgeCSSClass} from '../../../shared/data/default-colors.data';
+import {badgeCSSClass, tooltipCSSClass} from '../../../shared/data/default-colors.data';
+import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
+import {TimePipe} from '../../pipes/time.pipe';
 
 
 @Component({
   selector: 'app-time-slot-pill',
-  imports: [],
+  imports: [
+    NgbTooltip,
+    TimePipe
+  ],
   templateUrl: './time-slot-pill.component.html',
   styleUrl: './time-slot-pill.component.scss'
 })
-export class TimeSlotPillComponent implements OnInit {
+export class TimeSlotPillComponent {
 
   public timeSlot = input.required<TimeSlot>();
 
-  @HostBinding('class')
-  public cssClass = "";
+  protected readonly badgeCSSClass = badgeCSSClass;
+  protected readonly tooltipCSSClass = tooltipCSSClass;
 
-  public ngOnInit() {
-    this.cssClass = badgeCSSClass(this.timeSlot().color);
-  }
 }

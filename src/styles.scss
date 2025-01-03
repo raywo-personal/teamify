@@ -16,6 +16,10 @@
 @use "app/styles/offcanvas";
 @use "app/styles/cards";
 @use "app/styles/start";
+@use "app/styles/variables";
+@use "app/styles/colors";
+@use "app/styles/prior-knowledge";
+
 
 small, .small {
   font-weight: 300;

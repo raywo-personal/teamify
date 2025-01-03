@@ -1,5 +1,5 @@
-import {createTimeSlot, TimeSlot} from '../models/time-slot.model';
-import {createTime} from '../../shared/models/time.model';
+import {createTimeSlot, TimeSlot} from '../../timeslots/models/time-slot.model';
+import {createTime} from '../models/time.model';
 
 
 export const defaultTimeSlots: TimeSlot[] = [

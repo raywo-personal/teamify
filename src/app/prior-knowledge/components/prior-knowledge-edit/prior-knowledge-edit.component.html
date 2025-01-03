@@ -1,46 +1,62 @@
 <form (ngSubmit)="onSubmit()" #form="ngForm"
       class="offcanvas-form">
   <div class="offcanvas-body">
-  <div class="form-floating mb-3"
-       [class.was-validated]="nameInput.dirty || nameInput.touched">
-    <input
-      type="text"
-      class="form-control"
-      id="name"
-      name="name"
-      [(ngModel)]="name"
-      required
-      minlength="2"
-      maxlength="50"
-      placeholder="Name"
-      autofocus
-      #nameInput="ngModel"
-    />
-    <label for="name">Name</label>
-    <div class="invalid-feedback">
-      Please enter a name (2-50 characters).
+    <div class="form-floating mb-3"
+         [class.was-validated]="nameInput.dirty || nameInput.touched">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="name"
+        required
+        minlength="2"
+        maxlength="50"
+        placeholder="Name"
+        autofocus
+        #nameInput="ngModel"
+      />
+      <label for="name">Name</label>
+      <div class="invalid-feedback">
+        Please enter a name (2-50 characters).
+      </div>
     </div>
-  </div>
 
-  <div class="form-floating mb-3"
-       [class.was-validated]="descriptionInput.dirty || descriptionInput.touched">
-    <input
-      class="form-control"
-      id="description"
-      name="description"
-      [(ngModel)]="description"
-      minlength="2"
-      maxlength="160"
-      placeholder="Description"
-      #descriptionInput="ngModel"
-    />
-    <label for="description">Description</label>
-    <div class="invalid-feedback">
-      Please enter a description (2-160 characters).
+    <div class="form-floating mb-3"
+         [class.was-validated]="descriptionInput.dirty || descriptionInput.touched">
+      <input
+        class="form-control"
+        id="description"
+        name="description"
+        [(ngModel)]="description"
+        minlength="2"
+        maxlength="160"
+        placeholder="Description"
+        #descriptionInput="ngModel"
+      />
+      <label for="description">Description</label>
+      <div class="invalid-feedback">
+        Please enter a description (2-160 characters).
+      </div>
     </div>
-  </div>
 
-  <div class="max-height"></div>
+    <label for="color" class="mb-2">Color</label>
+    <div id="color" class="row gap-2">
+      @for (clr of colors.keys(); track $index) {
+        <div class="col mb-2">
+          <div [class]="dotCSSClass(clr)"
+               class="color-picker-dot focus-ring text-center align-items-center pt-1 pointer"
+               [ngbTooltip]="colors.get(clr)?.name"
+               tabindex="0"
+               (keyup)="onColorKeySelected($event, clr)"
+               (click)="onColorSelected(clr)">
+            @if (clr === color) {
+              <i class="bi-check fs-1" [class]="fgCSSClass(clr)"></i>
+            }
+          </div>
+        </div>
+      }
+    </div>
   </div>
 
   <div class="offcanvas-footer">

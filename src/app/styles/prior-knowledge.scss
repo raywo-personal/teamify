@@ -1,0 +1,40 @@
+
+.knowledge-badge-list {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.knowledge-pill {
+  max-width: 30ch;
+
+  .knowledge-pill-title {
+    font-weight: 600;
+  }
+}
+
+.team {
+  .person-mini-view {
+    .knowledge-pill {
+      border: var(--bs-border-width) solid var(--bs-light);
+
+      padding: 0.1rem 0.5rem;
+
+      display: -webkit-box;
+      -webkit-line-clamp: var(--line-clamp, 1);
+      -webkit-box-orient: vertical;
+      word-break: var(--word-break, 'none');
+      overflow: hidden;
+      hyphens: auto;
+      text-align: var(--align, left);
+
+      .knowledge-pill-title {
+        font-weight: 400;
+      }
+    }
+
+    .popover {
+      display: block;
+    }
+  }
+}

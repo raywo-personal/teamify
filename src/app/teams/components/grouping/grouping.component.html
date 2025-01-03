@@ -26,7 +26,11 @@
 
   <div class="content-area scrollable-area" cdkDropListGroup>
     <div class="row scrollable-area">
-      <h3>Teams</h3>
+      <div class="d-flex justify-content-between gap-2">
+        <h3>Teams</h3>
+
+        <app-prior-knowledge-badge-list/>
+      </div>
 
       @for (team of teams$ | async; track $index) {
         <app-team-view [team]="team" (personDropped)="onPersonDropped($event)"

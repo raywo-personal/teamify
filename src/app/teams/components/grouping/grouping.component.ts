@@ -18,6 +18,7 @@ import {PersonSlotFilterComponent} from '../../../shared/components/person-slot-
 import {SearchFieldComponent} from '../../../shared/components/search-field/search-field.component';
 import {map} from 'rxjs';
 import {PersonDragData} from '../../../shared/models/person-drag-data';
+import {PriorKnowledgeBadgeListComponent} from '../../../prior-knowledge/components/prior-knowledge-badge-list/prior-knowledge-badge-list.component';
 
 
 @Component({
@@ -36,7 +37,8 @@ import {PersonDragData} from '../../../shared/models/person-drag-data';
     DataNotAvailableInfoComponent,
     PersonSortButtonsComponent,
     PersonSlotFilterComponent,
-    SearchFieldComponent
+    SearchFieldComponent,
+    PriorKnowledgeBadgeListComponent
   ],
   templateUrl: './grouping.component.html',
   styleUrl: './grouping.component.scss'

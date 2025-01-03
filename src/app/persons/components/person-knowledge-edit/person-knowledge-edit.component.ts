@@ -3,6 +3,7 @@ import {PersonKnowledgeForm} from '../../models/person-form.model';
 import {FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {SetCustomValidityDirective} from '../../../shared/directives/set-custom-validity.directive';
 import {PriorKnowledge} from '../../../prior-knowledge/models/prior-knowledge.model';
+import {badgeCSSClass} from "../../../shared/data/default-colors.data";
 
 
 @Component({
@@ -20,6 +21,8 @@ export class PersonKnowledgeEditComponent {
 
   protected knowledgeId: string = "";
   protected knowledge?: PriorKnowledge;
+
+  protected readonly badgeCSSClass = badgeCSSClass;
 
 
   constructor() {
@@ -40,4 +43,5 @@ export class PersonKnowledgeEditComponent {
 
     return remarkControl.touched || remarkControl.dirty;
   }
+
 }

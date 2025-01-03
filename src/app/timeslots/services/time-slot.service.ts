@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {TimeSlot} from '../models/time-slot.model';
 import {BehaviorSubject, map, Observable} from 'rxjs';
-import {defaultTimeSlots} from './default-time-slots.data';
+import {defaultTimeSlots} from '../../shared/data/default-time-slots.data';
 import {EventBusService} from '../../shared/event-bus/event-bus.service';
 import {createBusEvent, EventType} from '../../shared/event-bus/event.model';
 

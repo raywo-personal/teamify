@@ -2,6 +2,7 @@ import {Component, input, output} from '@angular/core';
 import {PriorKnowledge} from '../../models/prior-knowledge.model';
 import {DeleteButtonComponent} from '../../../shared/components/delete-button/delete-button.component';
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
+import {dotCSSClass} from '../../../shared/data/default-colors.data';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class PriorKnowledgeViewComponent {
   public edit = output<PriorKnowledge>();
   public delete = output<PriorKnowledge>();
 
-  protected canvasTitle: string = "";
+  protected readonly dotCSSClass = dotCSSClass;
 
 
   protected onEdit(event: MouseEvent) {
@@ -35,4 +36,5 @@ export class PriorKnowledgeViewComponent {
   protected onDelete() {
     this.delete.emit(this.knowledge());
   }
+
 }

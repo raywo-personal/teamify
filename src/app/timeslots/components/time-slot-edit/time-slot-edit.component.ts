@@ -4,13 +4,16 @@ import {FormsModule} from '@angular/forms';
 import {addToTime, createTime} from '../../../shared/models/time.model';
 import {TimePipe} from '../../pipes/time.pipe';
 import {TimeSlotService} from '../../services/time-slot.service';
+import {dotCSSClass, fgCSSClass, timeSlotColors} from '../../../shared/data/default-colors.data';
+import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-time-slot-edit',
   imports: [
     FormsModule,
-    TimePipe
+    TimePipe,
+    NgbTooltip
   ],
   templateUrl: './time-slot-edit.component.html',
   styleUrl: './time-slot-edit.component.scss'
@@ -33,6 +36,11 @@ export class TimeSlotEditComponent {
 
     return addToTime(start, duration);
   });
+  protected color: string = "noon";
+
+  protected readonly fgCSSClass = fgCSSClass;
+  protected readonly dotCSSClass = dotCSSClass;
+  protected readonly colors = timeSlotColors;
 
   private timeSlotService = inject(TimeSlotService);
 
@@ -57,7 +65,8 @@ export class TimeSlotEditComponent {
       id: this.timeSlot()?.id || crypto.randomUUID(),
       description: this.description,
       start,
-      end
+      end,
+      color: this.color,
     }
 
     if (this.edit()) {
@@ -72,5 +81,25 @@ export class TimeSlotEditComponent {
 
   protected onCancel() {
     this.cancelled.emit();
+  }
+
+
+  protected onColorKeySelected(keyboardEvent: KeyboardEvent, color: string) {
+    if (keyboardEvent.code === "Space") {
+      this.onColorSelected(color);
+    }
+
+    if (keyboardEvent.code === "Escape") {
+      this.onCancel();
+    }
+
+    if (keyboardEvent.code === "Enter") {
+      this.onSubmit();
+    }
+  }
+
+
+  protected onColorSelected(color: string) {
+    this.color = color;
   }
 }

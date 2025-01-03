@@ -1,4 +1,5 @@
-<section class="team">
+<section class="team"
+         [class]="bgCSSClass(team().timeSlot.color)">
   <div class="team-header">
     <h4>{{ team().timeSlot.description }} <small>({{ team().persons.length }} members)</small></h4>
 

@@ -7,11 +7,13 @@ export interface TimeSlot {
   description: string;
   start: Time;
   end: Time;
+  color: string;
 
 }
 
 
 export function createTimeSlot(description: string,
+                               color: string = "noon",
                                start?: Time,
                                end?: Time): TimeSlot {
   const now = new Date();
@@ -22,6 +24,7 @@ export function createTimeSlot(description: string,
     id: crypto.randomUUID(),
     description,
     start: startTime,
-    end: endTime
+    end: endTime,
+    color,
   };
 }

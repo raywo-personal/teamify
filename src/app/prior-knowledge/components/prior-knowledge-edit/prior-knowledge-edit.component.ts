@@ -78,5 +78,13 @@ export class PriorKnowledgeEditComponent {
     if (keyboardEvent.code === "Space") {
       this.onColorSelected(color);
     }
+
+    if (keyboardEvent.code === "Escape") {
+      this.onCancel();
+    }
+
+    if (keyboardEvent.code === "Enter") {
+      this.onSubmit();
+    }
   }
 }

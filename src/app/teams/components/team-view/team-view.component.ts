@@ -8,6 +8,7 @@ import {TeamService} from '../../services/team.service';
 import {PersonService} from '../../../persons/services/person.service';
 import {TeamNameEditComponent} from '../team-name-edit/team-name-edit.component';
 import {PersonDragData} from '../../../shared/models/person-drag-data';
+import {bgCSSClass} from '../../../shared/data/default-colors.data';
 
 
 @Component({
@@ -32,6 +33,8 @@ export class TeamViewComponent {
   public personDropped = output<Person>();
 
   protected isEditing = false;
+
+  protected readonly bgCSSClass = bgCSSClass;
 
 
   protected onDrop(dropEvent: CdkDragDrop<Person[], any, PersonDragData>) {
@@ -65,4 +68,5 @@ export class TeamViewComponent {
   protected onEditCancelled() {
     this.isEditing = false;
   }
+
 }

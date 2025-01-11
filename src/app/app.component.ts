@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {NavigationComponent} from './navigation/components/navigation/navigation.component';
 import {TopBarComponent} from './navigation/components/top-bar/top-bar.component';
 import {RouterOutlet} from '@angular/router';
-import {DomainLogicService} from './shared/services/domain-logic.service';
+import {PersistenceService} from './shared/services/persistence.service';
 
 
 @Component({
@@ -17,12 +17,12 @@ import {DomainLogicService} from './shared/services/domain-logic.service';
 })
 export class AppComponent implements OnInit {
 
-  private domainLogic = inject(DomainLogicService);
+  private persistenceService = inject(PersistenceService);
 
   protected title = 'Teamify';
 
 
   public ngOnInit() {
-    this.domainLogic.loadData();
+    this.persistenceService.readAllData();
   }
 }

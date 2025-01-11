@@ -131,4 +131,74 @@ export class PersistenceService {
   public clearKnowledge() {
     localStorage.removeItem(this.knowledgeKey);
   }
+
+
+  public slotsExportURL(): string {
+    const exportable = {
+      slots: this.slotService.slots
+    };
+    const data = JSON.stringify(exportable);
+    const blob = new Blob([data], {type: 'application/json'});
+
+    return URL.createObjectURL(blob);
+  }
+
+
+  public knowledgeExportURL(): string {
+    const exportable = {
+      knowledge: this.knowledgeService.knowledgeList
+    };
+    const data = JSON.stringify(exportable);
+    const blob = new Blob([data], {type: 'application/json'});
+
+    return URL.createObjectURL(blob);
+  }
+
+
+  public personsExportURL(): string {
+    const exportable = {
+      persons: this.personService.persons
+        .map(person => {
+          return {
+            id: person.id,
+            name: person.name
+          }
+        })
+    };
+    const data = JSON.stringify(exportable);
+    const blob = new Blob([data], {type: 'application/json'});
+
+    return URL.createObjectURL(blob);
+  }
+
+
+  public personsOfTeamExportURL(team: Team) {
+    const exportable = {
+      persons: team.persons
+        .map(person => {
+          return {
+            id: person.id,
+            name: person.name
+          }
+        })
+    };
+    const data = JSON.stringify(exportable);
+    const blob = new Blob([data], {type: 'application/json'});
+
+    return URL.createObjectURL(blob);
+  }
+
+
+  public allDataExportURL(): string {
+    const exportable = {
+      slots: this.slotService.slots,
+      knowledge: this.knowledgeService.knowledgeList,
+      persons: this.personService.persons,
+      teams: this.teamService.teams
+    };
+    const data = JSON.stringify(exportable);
+    const blob = new Blob([data], {type: 'application/json'});
+
+    return URL.createObjectURL(blob);
+  }
 }

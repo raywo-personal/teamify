@@ -1,0 +1,61 @@
+<div class="my-5 card">
+  <div class="card-body">
+    <h2 class="h5"><i class="bi-download me-3"></i>Export data</h2>
+
+    <p>What data do you want to export?</p>
+
+    <p class="text-muted mb-0">
+      Please keep in mind when exporting persons, no associations to time slots,
+      prior knowledge or teams will be exported. Only names (and IDs) are
+      exported. If you need to be able to restore all associations, please
+      use &ldquo;All data&rdquo; instead.
+    </p>
+  </div>
+
+  <div class="card-footer">
+    <div class="d-flex gap-2" role="group" aria-label="Basic example">
+      <button type="button"
+              class="btn btn-outline-primary"
+              (click)="exportAllData()">
+        All data
+      </button>
+
+      <button type="button"
+              class="btn btn-outline-primary"
+              (click)="exportTimeSlotData()">
+        Time slot data
+      </button>
+
+      <button type="button"
+              class="btn btn-outline-primary"
+              (click)="exportKnowledgeData()">
+        Prior knowledge data
+      </button>
+
+      <div ngbDropdown class="btn-group">
+        <button type="button"
+                class="btn btn-outline-primary"
+                id="personExportDropdown"
+                (click)="exportAllPersonData()">
+          Person data
+        </button>
+        <button type="button"
+                class="btn btn-outline-primary dropdown-toggle-split"
+                ngbDropdownToggle>
+        </button>
+
+        <div ngbDropdownMenu aria-labelledby="personExportDropdown">
+          <span class="dropdown-header">Export persons in team:</span>
+
+          @for (team of teams$ | async; track team.id) {
+            <button type="button"
+                    (click)="exportTeamPersonData(team)"
+                    ngbDropdownItem>
+              {{ nameForTeam(team) }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

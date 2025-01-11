@@ -5,6 +5,10 @@
     orientation="vertical">
 
   @for (navItem of navItems; track navItem) {
+    @if (navItem.link === 'settings') {
+      <li class="vertical-separator"><hr></li>
+    }
+
     <li [ngbNavItem]="navItem.title">
       <a ngbNavLink
          [routerLink]="navItem.link"

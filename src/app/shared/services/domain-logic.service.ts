@@ -44,18 +44,4 @@ export class DomainLogicService {
     });
   }
 
-
-  public loadData() {
-    this.persistenceService.readAllData();
-  }
-
-
-  public saveData() {
-    this.persistenceService.saveAllData();
-  }
-
-
-  public resetData() {
-    this.persistenceService.clearAllData();
-  }
 }

@@ -4,6 +4,7 @@ import {StartComponent} from './start/components/start/start.component';
 import {PriorKnowledgeListComponent} from './prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component';
 import {PersonListComponent} from './persons/components/person-list/person-list.component';
 import {GroupingComponent} from './teams/components/grouping/grouping.component';
+import {SettingsComponent} from './settings/components/settings/settings.component';
 
 
 export const routes: Routes = [
@@ -40,6 +41,12 @@ export const routes: Routes = [
     path: "build-teams",
     component: GroupingComponent,
     data: {title: "Build teams", icon: "people-fill"},
+    pathMatch: "full"
+  },
+  {
+    path: "settings",
+    component: SettingsComponent,
+    data: {title: "Settings", icon: "gear"},
     pathMatch: "full"
   },
   {

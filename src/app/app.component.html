@@ -1,20 +1,18 @@
 <div class="app-layout">
-  <nav class="sidebar"
+  <aside class="sidebar"
        tabindex="-1"
        id="navSidebar"
-       role="navigation"
+       role="region"
        aria-labelledby="sidebarLabel">
-    <div class="sidebar-header brand">
+    <hgroup class="sidebar-header brand">
       <i class="bi-people-fill brand-logo"></i>
       <div class="text-logo" id="sidebarLabel">
         <h2 class="sidebar-title">Teamify</h2>
         <small class="">Where Talent Meets Timing</small>
       </div>
-    </div>
+    </hgroup>
 
-    <div class="sidebar-body">
-      <app-navigation/>
-    </div>
+    <nav class="sidebar-body" app-navigation></nav>
 
     <footer class="sidebar-footer">
       Made by raywo with <i class="bi-heart-fill text-danger"></i>&nbsp;|&nbsp;
@@ -23,7 +21,7 @@
         Source code
       </a>
     </footer>
-  </nav>
+  </aside>
 
 
   <div class="main">

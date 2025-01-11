@@ -6,7 +6,7 @@ import {routes} from '../../../app.routes';
 
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'nav:[app-navigation]',
   imports: [
     NgbNavModule,
     RouterLink,
@@ -32,7 +32,7 @@ export class NavigationComponent implements OnInit {
           link: route.path || "",
           icon: data["icon"]
         }
-      })
+      });
   }
 
 }

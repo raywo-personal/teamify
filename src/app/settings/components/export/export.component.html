@@ -1,0 +1,27 @@
+<div class="my-5 card">
+  <div class="card-body">
+    <h2 class="h5"><i class="bi-download me-3"></i>Export data</h2>
+
+    <span>What data do you want to export?</span>
+  </div>
+
+  <div class="card-footer">
+    <div class="d-flex gap-2" role="group" aria-label="Basic example">
+      <button class="btn btn-outline-primary" (click)="exportAllData()">
+        All data
+      </button>
+
+      <button class="btn btn-outline-primary" (click)="exportTimeSlotData()">
+        Time slot data
+      </button>
+
+      <button class="btn btn-outline-primary" (click)="exportKnowledgeData()">
+        Prior knowledge data
+      </button>
+
+      <button class="btn btn-outline-primary" (click)="exportAllPersonData()">
+        Person data
+      </button>
+    </div>
+  </div>
+</div>

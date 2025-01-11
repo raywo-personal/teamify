@@ -172,6 +172,23 @@ export class PersistenceService {
   }
 
 
+  public personsOfTeamExportURL(team: Team) {
+    const exportable = {
+      persons: team.persons
+        .map(person => {
+          return {
+            id: person.id,
+            name: person.name
+          }
+        })
+    };
+    const data = JSON.stringify(exportable);
+    const blob = new Blob([data], {type: 'application/json'});
+
+    return URL.createObjectURL(blob);
+  }
+
+
   public allDataExportURL(): string {
     const exportable = {
       slots: this.slotService.slots,

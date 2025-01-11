@@ -86,3 +86,11 @@
   border-bottom-left-radius: var(--bs-border-radius);
   border-bottom-right-radius: var(--bs-border-radius);
 }
+
+.dropdown-header {
+  --bs-dropdown-header-color: var(--bs-gray-500);
+
+  letter-spacing: 0.075rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}

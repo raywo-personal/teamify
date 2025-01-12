@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-
-
-export type ImportType = "prior-knowledge" | "timeslots" | "persons" | "all" | null;
+import {ExportImportType} from '../models/export-import.model';
 
 
 @Injectable({
@@ -14,7 +12,7 @@ export class ImportService {
   }
 
 
-  public determineImportType(json: JSON): ImportType {
+  public determineImportType(json: JSON): ExportImportType {
     if (json.hasOwnProperty("teams")) {
       return 'all';
     }

@@ -1,9 +1,9 @@
 import {Component, inject} from '@angular/core';
-import {PersistenceService} from '../../../shared/services/persistence.service';
 import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from '@ng-bootstrap/ng-bootstrap';
 import {TeamService} from '../../../teams/services/team.service';
 import {AsyncPipe} from '@angular/common';
 import {Team} from '../../../teams/models/team.model';
+import {ExportService} from "../../services/export.service";
 
 
 @Component({
@@ -20,38 +20,38 @@ import {Team} from '../../../teams/models/team.model';
 })
 export class ExportComponent {
 
-  private persistenceService = inject(PersistenceService);
+  private exportService = inject(ExportService);
   private teamService = inject(TeamService);
 
   protected teams$ = this.teamService.teams$;
 
 
   protected exportAllData() {
-    const url = this.persistenceService.allDataExportURL();
+    const url = this.exportService.allDataExportURL();
     this.startDownload(url, "all-data.json");
   }
 
 
   protected exportTimeSlotData() {
-    const url = this.persistenceService.slotsExportURL();
+    const url = this.exportService.slotsExportURL();
     this.startDownload(url, "timeslots.json");
   }
 
 
   protected exportKnowledgeData() {
-    const url = this.persistenceService.knowledgeExportURL();
+    const url = this.exportService.knowledgeExportURL();
     this.startDownload(url, "knowledge.json");
   }
 
 
   protected exportAllPersonData() {
-    const url = this.persistenceService.personsExportURL();
+    const url = this.exportService.personsExportURL();
     this.startDownload(url, "all-persons.json");
   }
 
 
   protected exportTeamPersonData(team: Team) {
-    const url = this.persistenceService.personsOfTeamExportURL(team);
+    const url = this.exportService.personsOfTeamExportURL(team);
     this.startDownload(url, `${this.nameForTeam(team)}-persons.json`);
   }
 

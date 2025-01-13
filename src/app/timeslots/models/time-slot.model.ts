@@ -1,4 +1,5 @@
 import {addToTime, createTime, Time} from '../../shared/models/time.model';
+import {ObjectValidator, validateObject} from '../../shared/helper/validate-object';
 
 
 export interface TimeSlot {
@@ -27,4 +28,20 @@ export function createTimeSlot(description: string,
     end: endTime,
     color,
   };
+}
+
+
+export const timeSlotValidator: ObjectValidator<TimeSlot> = {
+  id: (value: any) => typeof value === "string",
+  description: (value: any) => typeof value === "string",
+  start: (value: any) => typeof value === "object",
+  end: (value: any) => typeof value === "object",
+  color: (value: any) => typeof value === "string",
+}
+
+
+export function isTimeSlotArray(value: any): value is TimeSlot[] {
+  if (!value || !Array.isArray(value)) return false;
+
+  return value.every(item => validateObject<TimeSlot>(item, timeSlotValidator));
 }

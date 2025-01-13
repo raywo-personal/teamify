@@ -2,24 +2,30 @@
   <div class="card-body">
     <h2 class="h5"><i class="bi-upload me-3"></i>Import data</h2>
 
-    <p>What data do you want to import?</p>
+    <div class="text-muted">
+      <p>What data do you want to import?</p>
 
-    <p class="text-muted">
-      When importing persons, please note that associations with time slots,
-      prior knowledge, or teams will not be included. Only names (and IDs) will
-      be imported. To restore all associations, consider using the
-      &ldquo;All data&rdquo; option instead.
-    </p>
+      <p>
+        When importing persons, please note that associations with time slots,
+        prior knowledge, or teams will not be included. Only names (and IDs) will
+        be imported. To restore all associations, consider using the
+        &ldquo;All data&rdquo; option instead.
+      </p>
 
-    <p class="text-muted mb-0">
-      Files must be in JSON format, previously exported from the application.
-      Alternatively, you can import names using a text file, with each name on
-      a separate line.
-    </p>
+      <p>
+        Files must be in JSON format, previously exported from the application.
+        Alternatively, you can import names using a text file, with each name on
+        a separate line.
+      </p>
 
+      <p>
+        <strong class="text-danger">Note:</strong>
+        Importing data will overwrite existing data.
+      </p>
+    </div>
 
     <div class="row">
-      <div class="col">
+      <div class="col-5">
         <div class="upload-area"
              (dragover)="onDragOver($event)"
              (dragleave)="onDragLeave($event)"
@@ -68,18 +74,65 @@
 
       <div class="col">
         <div class="upload-preview-container">
-          @if (fileType === "txt") {
-            <h3 class="h6">Importing names</h3>
-            <strong class="text-muted">
-              The following names will be imported:
-            </strong>
+          <h3 class="h6">Preview</h3>
+
+          @if (dropError === "invalidJSON") {
+            <div class="upload-error">
+              <i class="bi-file-earmark-x h2"></i>
+              <p class="mb-0">
+                <strong>Invalid JSON file</strong><br>
+                Please check the file and try again.
+              </p>
+            </div>
           }
 
-          <div class="upload-preview">
-            @for (name of contentToImport; track $index) {
-              <div class="upload-preview-item">{{ name }}</div>
+          @if (dropError === "invalidFormat") {
+            <div class="upload-error">
+              <i class="bi-file-earmark-x h2"></i>
+              <p class="mb-0">
+                <strong>Wrong format</strong><br>
+                Please check the file and try again.
+              </p>
+            </div>
+          }
+
+          @if (fileType === "txt") {
+            <strong class="text-muted">
+              The following persons will be imported:
+            </strong>
+
+            <div class="upload-preview">
+              @for (name of contentToImport; track $index) {
+                <div class="upload-preview-item">{{ name }}</div>
+              }
+            </div>
+          }
+
+          @if (fileType === "json") {
+            @switch (importType) {
+              @case ("timeslots") {
+                <strong class="text-muted">
+                  The following time slots will be imported:
+                </strong>
+                <app-preview-time-slot-list [slots$]="contentToImport$"/>
+              }
+              @case ("prior-knowledge") {
+                <strong class="text-muted">
+                  The following prior knowledge will be imported:
+                </strong>
+              }
+              @case ("persons") {
+                <strong class="text-muted">
+                  The following persons will be imported:
+                </strong>
+              }
+              @case ("all") {
+                <strong class="text-muted">
+                  The following complete set will be imported:
+                </strong>
+              }
             }
-          </div>
+          }
         </div>
       </div>
     </div>

@@ -5,6 +5,13 @@
     </div>
   }
 
+  @if (person().timeSlots.length === 0) {
+    <div ngbTooltip="This person has no time slots assigned"
+         tooltipClass="tooltip-danger">
+      <i class="bi-exclamation-triangle text-danger me-3"></i>
+    </div>
+  }
+
   <div class="person-view-body">
     <div class="person-view-header">
       <div class="person-view-info-container">

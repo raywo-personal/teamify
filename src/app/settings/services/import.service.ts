@@ -93,6 +93,9 @@ export class ImportService {
         (data as AllData).persons.forEach(p => this.personService.addPerson(p, true));
         (data as AllData).teams.forEach(team => this.teamService.addTeam(team, true));
 
+        const alreadyAssignedPersons = this.teamService.teams.flatMap(team => team.persons);
+        this.personService.updateAvailablePersons(alreadyAssignedPersons);
+
         break;
     }
 

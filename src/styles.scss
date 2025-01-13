@@ -136,3 +136,8 @@ small, .small {
 .vertical-separator {
   height: 1.75rem;
 }
+
+.tooltip-danger {
+  --bs-tooltip-bg: var(--bs-danger);
+  --bs-tooltip-opacity: 1;
+}

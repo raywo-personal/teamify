@@ -19,6 +19,7 @@
 @use "app/styles/variables";
 @use "app/styles/colors";
 @use "app/styles/prior-knowledge";
+@use "app/styles/uploading";
 
 
 small, .small {
@@ -27,18 +28,19 @@ small, .small {
 
 
 .app-layout {
-  --sidebar-width: 28ch;
-  --top-bar-height: 3.25rem;
-  --main-margin: 0.5rem;
-  --tool-bar-height: 4rem;
-  --main-height: calc(100vh - 2 * var(--main-margin));
-  --list-height: calc(var(--main-height) - var(--top-bar-height) - var(--tool-bar-height) - 3rem);
+  --t-sidebar-width: 28ch;
+  --t-top-bar-height: 3.25rem;
+  --t-main-margin: 0.5rem;
+  --t-tool-bar-height: 4rem;
+  --t-main-height: calc(100vh - 2 * var(--t-main-margin));
+  --t-list-height: calc(var(--t-main-height) - var(--t-top-bar-height) - var(--t-tool-bar-height) - 3rem);
+  --t-preview-height: 17rem;
 
   display: grid;
   grid-template-areas:
     "sidebar main";
-  grid-template-columns: var(--sidebar-width) 1fr;
-  grid-template-rows: var(--top-bar-height) 1fr;
+  grid-template-columns: var(--t-sidebar-width) 1fr;
+  grid-template-rows: var(--t-top-bar-height) 1fr;
 
   height: 100vh;
   background: var(--bs-tertiary-bg);
@@ -52,10 +54,10 @@ small, .small {
 .main {
   grid-area: main;
 
-  margin: var(--main-margin);
+  margin: var(--t-main-margin);
   margin-left: 0;
   padding: 1rem 2rem;
-  height: var(--main-height);
+  height: var(--t-main-height);
 
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: 0.75rem;
@@ -70,7 +72,7 @@ small, .small {
 
   display: flex;
 
-  height: var(--top-bar-height);
+  height: var(--t-top-bar-height);
 
   background: var(--bs-body-bg);
 
@@ -80,8 +82,12 @@ small, .small {
   }
 }
 
+.settings {
+  --t-list-height: calc(var(--t-main-height) - var(--t-top-bar-height) - 3rem);
+}
+
 .content-area {
-  height: var(--list-height);
+  height: var(--t-list-height);
   overflow: hidden;
   padding-inline-end: 0.1rem;
 }
@@ -129,4 +135,9 @@ small, .small {
 
 .vertical-separator {
   height: 1.75rem;
+}
+
+.tooltip-danger {
+  --bs-tooltip-bg: var(--bs-danger);
+  --bs-tooltip-opacity: 1;
 }

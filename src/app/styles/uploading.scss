@@ -10,11 +10,12 @@ input[type="file"].upload-area {
       var(--bs-gray-100),
       rgba(var(--bs-white-rgb), 50%)
   );
+  --t-preview-height: 17rem;
 
   border: calc(2.5 * var(--bs-border-width)) dashed var(--t-upload-area-border-color);
   border-radius: var(--bs-border-radius);
 
-  min-height: 8ch;
+  height: var(--t-preview-height);
   margin-block-start: 1rem;
   padding: 2rem;
 
@@ -78,4 +79,24 @@ input[type="file"].upload-area {
 
     background: var(--bs-tertiary-bg);
   }
+
+  .upload-error {
+    color: var(--bs-form-invalid-color);
+
+    margin-top: 0.5rem;
+
+    font-size: 0.875em;
+    font-weight: 500;
+    text-align: center;
+
+    background: var(--bs-tertiary-bg);
+    border: var(--bs-border-width) solid var(--bs-form-invalid-border-color);
+    border-radius: var(--bs-border-radius);
+    padding: 1rem;
+  }
+}
+
+.import-content-area {
+  height: calc(var(--t-preview-height) - 3.5rem);
+  overflow: hidden;
 }

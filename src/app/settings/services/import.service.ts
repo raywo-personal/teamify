@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ExportImportType} from '../models/export-import.model';
+import {dataValidator, ExportImportData, ExportImportType} from '../models/export-import.model';
+import {validateObject} from '../../shared/helper/validate-object';
+import {DataFormatError} from '../../shared/helper/DataFormatError';
 
 
 @Injectable({
@@ -12,23 +14,12 @@ export class ImportService {
   }
 
 
-  public determineImportType(json: JSON): ExportImportType {
-    if (json.hasOwnProperty("teams")) {
-      return 'all';
+  public determineImportType(data: any): ExportImportType {
+    if (!validateObject<ExportImportData>(data, dataValidator)) {
+      throw new DataFormatError('Invalid data format');
     }
 
-    if (json.hasOwnProperty('knowledge')) {
-      return 'prior-knowledge';
-    }
-
-    if (json.hasOwnProperty('slots')) {
-      return 'timeslots';
-    }
-
-    if (json.hasOwnProperty('persons')) {
-      return 'persons';
-    }
-
-    return null;
+    return data.type;
   }
+
 }

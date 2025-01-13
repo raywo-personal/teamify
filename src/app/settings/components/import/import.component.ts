@@ -1,12 +1,17 @@
 import {Component, ElementRef, inject, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ImportService} from '../../services/import.service';
+import {Observable, of} from 'rxjs';
+import {PreviewTimeSlotListComponent} from '../preview-time-slot-list/preview-time-slot-list.component';
+import {ExportImportType} from '../../models/export-import.model';
+import {DataFormatError} from '../../../shared/helper/DataFormatError';
 
 
 @Component({
   selector: 'app-import',
   imports: [
-    FormsModule
+    FormsModule,
+    PreviewTimeSlotListComponent
   ],
   templateUrl: './import.component.html',
   styleUrl: './import.component.scss'
@@ -22,11 +27,28 @@ export class ImportComponent {
 
   protected readonly allowedFileTypes = ["application/json", "text/plain"];
 
-  protected fileName: string = "";
+  protected importType: ExportImportType = null;
   protected file: File | null = null;
   protected fileType: "json" | "txt" | null = null;
-  protected dropError: "unsupported" | null = null;
+  protected dropError: "unsupported" | "invalidJSON" | "invalidFormat" | null = null;
   protected contentToImport: any[] = [];
+  protected contentToImport$: Observable<any[]> = of([]);
+
+
+  protected get importTypeName(): string {
+    switch (this.importType) {
+      case "all":
+        return "complete data set";
+      case "timeslots":
+        return "time slots";
+      case "prior-knowledge":
+        return "prior knowledge";
+      case "persons":
+        return "persons";
+      default:
+        return "";
+    }
+  }
 
 
   protected onDragOver(dragEvent: DragEvent) {
@@ -113,8 +135,10 @@ export class ImportComponent {
   private reset() {
     this.file = null;
     this.fileType = null;
+    this.importType = null;
     this.fileInput.nativeElement.value = null;
     this.contentToImport = [];
+    this.dropError = null;
   }
 
 
@@ -141,11 +165,15 @@ export class ImportComponent {
     if (this.fileType === "json") {
       try {
         const json = JSON.parse(data as string);
-        const importType = this.importService.determineImportType(json);
-        this.contentToImport = json.persons;
-        console.log(importType, json);
+        this.importType = this.importService.determineImportType(json);
+        this.contentToImport$ = of(json.data);
+        console.log(this.importType, json);
       } catch (e) {
-        console.error("Error while parsing the file: ", e);
+        if (e instanceof DataFormatError) {
+          this.dropError = "invalidFormat";
+        } else {
+          this.dropError = "invalidJSON";
+        }
       }
     }
   }

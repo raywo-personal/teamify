@@ -4,12 +4,14 @@ import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {PriorKnowledgeService} from '../../../prior-knowledge/services/prior-knowledge.service';
 import {PersonService} from '../../../persons/services/person.service';
 import {TeamService} from '../../../teams/services/team.service';
+import {RouterLink} from '@angular/router';
 
 
 @Component({
   selector: 'app-steps',
   imports: [
-    StepComponent
+    StepComponent,
+    RouterLink
   ],
   templateUrl: './steps.component.html',
   styleUrl: './steps.component.scss'

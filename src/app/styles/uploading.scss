@@ -68,9 +68,8 @@ input[type="file"].upload-area {
     margin-top: 0.5rem;
   }
 
+  .upload-success,
   .upload-error {
-    color: var(--bs-form-invalid-color);
-
     margin-top: 0.5rem;
 
     font-size: 0.875em;
@@ -81,6 +80,16 @@ input[type="file"].upload-area {
     border: var(--bs-border-width) solid var(--bs-form-invalid-border-color);
     border-radius: var(--bs-border-radius);
     padding: 1rem;
+  }
+
+  .upload-error {
+    color: var(--bs-form-invalid-color);
+    border-color: var(--bs-form-invalid-border-color);
+  }
+
+  .upload-success {
+    color: var(--bs-success);
+    border-color: var(--bs-success);
   }
 }
 

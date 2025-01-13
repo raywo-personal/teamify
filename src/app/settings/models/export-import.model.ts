@@ -3,6 +3,7 @@ import {isTimeSlotArray, TimeSlot} from '../../timeslots/models/time-slot.model'
 import {isTeamsArray, Team} from '../../teams/models/team.model';
 import {ObjectValidator, validateObject} from '../../shared/helper/validate-object';
 import {ExportImportPerson, isPersonsArray} from './export-import-person.model';
+import {Person} from '../../persons/models/person.model';
 
 
 export type ExportImportType = typeof ExportImportTypes[number];
@@ -12,7 +13,7 @@ export type ExportImportDataType = TimeSlot[] | PriorKnowledge[] | ExportImportP
 export interface AllData {
   timeSlots: TimeSlot[];
   priorKnowledge: PriorKnowledge[];
-  persons: ExportImportPerson[];
+  persons: Person[];
   teams: Team[];
 }
 

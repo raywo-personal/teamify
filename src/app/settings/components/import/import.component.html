@@ -96,6 +96,16 @@
             </div>
           }
 
+          @if(importStatus === "complete") {
+            <div class="upload-success">
+              <i class="bi-check-circle-fill h2"></i>
+              <p class="mb-0">
+                <strong>Import complete</strong><br>
+                The data has been imported successfully.
+              </p>
+            </div>
+          }
+
           @switch (importType) {
             @case ("timeslots") {
               <p class="text-muted">
@@ -135,7 +145,8 @@
     </button>
     <button type="button"
             class="btn btn-primary"
-            [disabled]="!file">
+            [disabled]="!file"
+            (click)="onImport()">
       Import data
     </button>
   </div>

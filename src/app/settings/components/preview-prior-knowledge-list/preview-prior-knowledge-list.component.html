@@ -1,0 +1,11 @@
+<div class="import-content-area">
+  <ul class="list-group scrollable-area">
+    @for (knowledge of knowledge$() | async; track knowledge.id) {
+      <li class="list-group-item list-group-item-action pointer">
+        <app-prior-knowledge-view [knowledge]="knowledge" [showButtons]="false"/>
+      </li>
+    } @empty {
+      Nothing to import here.
+    }
+  </ul>
+</div>

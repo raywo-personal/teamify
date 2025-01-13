@@ -5,13 +5,19 @@ import {Observable, of} from 'rxjs';
 import {PreviewTimeSlotListComponent} from '../preview-time-slot-list/preview-time-slot-list.component';
 import {ExportImportType} from '../../models/export-import.model';
 import {DataFormatError} from '../../../shared/helper/DataFormatError';
+import {PreviewPersonListComponent} from '../preview-person-list/preview-person-list.component';
+import {PreviewPriorKnowledgeListComponent} from '../preview-prior-knowledge-list/preview-prior-knowledge-list.component';
+import {PreviewTeamListComponent} from '../preview-team-list/preview-team-list.component';
 
 
 @Component({
   selector: 'app-import',
   imports: [
     FormsModule,
-    PreviewTimeSlotListComponent
+    PreviewTimeSlotListComponent,
+    PreviewPersonListComponent,
+    PreviewPriorKnowledgeListComponent,
+    PreviewTeamListComponent
   ],
   templateUrl: './import.component.html',
   styleUrl: './import.component.scss'
@@ -30,7 +36,7 @@ export class ImportComponent {
   protected importType: ExportImportType = null;
   protected file: File | null = null;
   protected fileType: "json" | "txt" | null = null;
-  protected dropError: "unsupported" | "invalidJSON" | "invalidFormat" | null = null;
+  protected dropError: "unsupported" | "invalidJSON" | "invalidFormat" | "empty" | null = null;
   protected contentToImport: any[] = [];
   protected contentToImport$: Observable<any[]> = of([]);
 
@@ -98,6 +104,16 @@ export class ImportComponent {
   }
 
 
+  protected reset() {
+    this.file = null;
+    this.fileType = null;
+    this.importType = null;
+    this.fileInput.nativeElement.value = null;
+    this.contentToImport = [];
+    this.dropError = null;
+  }
+
+
   private handleFile(file: File) {
     this.reset();
 
@@ -132,16 +148,6 @@ export class ImportComponent {
   }
 
 
-  private reset() {
-    this.file = null;
-    this.fileType = null;
-    this.importType = null;
-    this.fileInput.nativeElement.value = null;
-    this.contentToImport = [];
-    this.dropError = null;
-  }
-
-
   private getFileReader(): FileReader {
     const reader = new FileReader();
 
@@ -155,10 +161,14 @@ export class ImportComponent {
 
 
   private handleReadData(data: string | undefined) {
-    if (!data) return; // TODO Maybe better throw an error?
+    if (!data) {
+      this.dropError = "empty";
+      return;
+    }
 
     if (this.fileType === "txt") {
-      this.contentToImport = this.importService.namesToImport(data as string);
+      this.importType = "persons";
+      this.contentToImport$ = of(this.importService.personsToImportFromTxt(data as string));
       return;
     }
 
@@ -166,9 +176,11 @@ export class ImportComponent {
       try {
         const json = JSON.parse(data as string);
         this.importType = this.importService.determineImportType(json);
-        this.contentToImport$ = of(json.data);
+        this.contentToImport = this.importService.contentToImportFromJson(json);
+        this.contentToImport$ = of(this.contentToImport);
         console.log(this.importType, json);
       } catch (e) {
+        console.error(e);
         if (e instanceof DataFormatError) {
           this.dropError = "invalidFormat";
         } else {

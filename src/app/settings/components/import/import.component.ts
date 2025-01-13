@@ -3,7 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {ImportService} from '../../services/import.service';
 import {Observable, of} from 'rxjs';
 import {PreviewTimeSlotListComponent} from '../preview-time-slot-list/preview-time-slot-list.component';
-import {ExportImportType} from '../../models/export-import.model';
+import {AllData, ExportImportDataType, ExportImportType} from '../../models/export-import.model';
 import {DataFormatError} from '../../../shared/helper/DataFormatError';
 import {PreviewPersonListComponent} from '../preview-person-list/preview-person-list.component';
 import {PreviewPriorKnowledgeListComponent} from '../preview-prior-knowledge-list/preview-prior-knowledge-list.component';
@@ -37,24 +37,9 @@ export class ImportComponent {
   protected file: File | null = null;
   protected fileType: "json" | "txt" | null = null;
   protected dropError: "unsupported" | "invalidJSON" | "invalidFormat" | "empty" | null = null;
-  protected contentToImport: any[] = [];
+  protected contentToImport: ExportImportDataType = [];
   protected contentToImport$: Observable<any[]> = of([]);
-
-
-  protected get importTypeName(): string {
-    switch (this.importType) {
-      case "all":
-        return "complete data set";
-      case "timeslots":
-        return "time slots";
-      case "prior-knowledge":
-        return "prior knowledge";
-      case "persons":
-        return "persons";
-      default:
-        return "";
-    }
-  }
+  protected importStatus: "none" | "complete" = "none";
 
 
   protected onDragOver(dragEvent: DragEvent) {
@@ -76,7 +61,7 @@ export class ImportComponent {
   }
 
 
-  protected onDragLeave(dragEvent: DragEvent) {
+  protected onDragLeave(_: DragEvent) {
     this.dropZone.nativeElement.classList.remove("drag-over");
   }
 
@@ -104,6 +89,14 @@ export class ImportComponent {
   }
 
 
+  protected onImport() {
+    this.importService.importContent(this.importType, this.contentToImport);
+    this.reset();
+    this.importStatus = "complete";
+    setTimeout(() => this.importStatus = "none", 5000);
+  }
+
+
   protected reset() {
     this.file = null;
     this.fileType = null;
@@ -111,6 +104,7 @@ export class ImportComponent {
     this.fileInput.nativeElement.value = null;
     this.contentToImport = [];
     this.dropError = null;
+    this.importStatus = "none";
   }
 
 
@@ -177,10 +171,8 @@ export class ImportComponent {
         const json = JSON.parse(data as string);
         this.importType = this.importService.determineImportType(json);
         this.contentToImport = this.importService.contentToImportFromJson(json);
-        this.contentToImport$ = of(this.contentToImport);
-        console.log(this.importType, json);
+        this.contentToImport$ = of(this.importType === "all" ? (this.contentToImport as AllData).teams : (this.contentToImport as any[]));
       } catch (e) {
-        console.error(e);
         if (e instanceof DataFormatError) {
           this.dropError = "invalidFormat";
         } else {
@@ -189,5 +181,4 @@ export class ImportComponent {
       }
     }
   }
-
 }

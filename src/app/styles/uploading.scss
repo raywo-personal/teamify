@@ -68,18 +68,6 @@ input[type="file"].upload-area {
     margin-top: 0.5rem;
   }
 
-  .upload-preview-item {
-    border: var(--bs-border-width) solid var(--bs-gray-200);
-    border-radius: var(--bs-border-radius);
-
-    width: fit-content;
-    font-size: 0.9rem;
-
-    padding: 0.25rem 0.75rem;
-
-    background: var(--bs-tertiary-bg);
-  }
-
   .upload-error {
     color: var(--bs-form-invalid-color);
 
@@ -97,6 +85,6 @@ input[type="file"].upload-area {
 }
 
 .import-content-area {
-  height: calc(var(--t-preview-height) - 3.5rem);
+  height: calc(var(--t-preview-height) - 4.5rem);
   overflow: hidden;
 }

@@ -1,0 +1,11 @@
+<div class="import-content-area">
+  <ul class="list-group scrollable-area">
+    @for (person of persons$() | async; track person.id) {
+      <li class="list-group-item list-group-item-action pointer">
+        <app-person-view [person]="person" [showButtons]="false"/>
+      </li>
+    } @empty {
+      Nothing to import here.
+    }
+  </ul>
+</div>

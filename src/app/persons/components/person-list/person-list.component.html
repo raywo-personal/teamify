@@ -5,6 +5,7 @@
     <div class="toolbar-buttons">
       <button app-add-button
               caption="Add person"
+              i18n-caption="@@t.addPerson"
               (click)="onAdd(content)">
       </button>
 
@@ -13,7 +14,9 @@
       @if ((personsCount$ | async)! > 0) {
         <button app-delete-button
                 caption="Clear all persons"
+                i18n-caption="@@t.clear-all-persons"
                 confirmationMessage="Are you sure you want to clear all persons?"
+                i18n-confirmationMessage="@@t.clearAllPersonsConfirmationMessage"
                 (deleteConfirmed)="onDeleteAll()">
         </button>
       }
@@ -21,8 +24,9 @@
 
     <div class="d-flex gap-2">
       <div class="d-flex align-items-center fit-height gap-2">
-        <small class="">
-          ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.personsCount$ | async) }} persons)
+        <small class="" i18n="x of y persons|@@t.xOfYPersons">
+          ({{ (this.filteredPersons$ | async)?.length }} of
+          {{ (this.personsCount$ | async) }} persons)
         </small>
         <app-person-search [source]="filterSource$"/>
       </div>
@@ -43,6 +47,7 @@
         </li>
       } @empty {
         <app-data-not-available-view title="No persons found"
+                                     i18n-title="@@t.no-persons-found"
                                      mode="warning"
                                      [messageTemplate]="messageTemplate"/>
       }
@@ -72,19 +77,21 @@
 
 
 <ng-template #messageTemplate>
-  <p>
+  <p i18n="|@@t.startCreatingPersons">
     Start creating persons by clicking the button below.
   </p>
 
   @if ((slotCount$ | async) === 0) {
     <app-data-not-available-info text="No time slots are available at the
           moment. Please consider creating time slots prior to adding
-          individuals, so they can be assigned accordingly."/>
+          individuals, so they can be assigned accordingly."
+                                 i18n="|@@t.noTimeSlotsAvailableInfoMessage"/>
   }
 
   <button type="button"
           class="btn btn-primary"
-          (click)="onAdd(content)">
+          (click)="onAdd(content)"
+          i18n="Add person|@@t.addPerson">
     Add person
   </button>
 </ng-template>

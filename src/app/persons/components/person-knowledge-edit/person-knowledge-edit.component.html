@@ -25,8 +25,11 @@
         formControlName="remark"
         setCustomValidity
       >
-      <label for="knowledge-remark-{{knowledgeId}}">Remark</label>
-      <div class="invalid-feedback">
+      <label for="knowledge-remark-{{knowledgeId}}"
+             i18n="|@@t.remarkLabel">
+        Remark
+      </label>
+      <div class="invalid-feedback" i18n="|@@t.remarkInvalidFeedback">
         Please enter a remark (2-160 characters).
       </div>
     </div>

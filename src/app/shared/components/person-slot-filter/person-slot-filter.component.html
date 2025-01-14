@@ -9,7 +9,7 @@
             id="filter"
             aria-label="Filter for time slots"
             [(ngModel)]="personFilter">
-      <option value="all">All</option>
+      <option value="all" i18n="all options in a select|@@t.allOptions">All</option>
       @for (timeSlot of timeSlots$ | async; track timeSlot.id) {
         <option value="{{ timeSlot.id }}">{{ timeSlot.description }}</option>
       }

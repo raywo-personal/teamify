@@ -267,7 +267,7 @@
       </trans-unit>
       <trans-unit id="t.timeslots-menu" datatype="html">
         <source>Time slots</source>
-        <target>Zeiten</target>
+        <target>Zeitfenster</target>
         <note priority="1" from="description">time slots menu title</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.routes.ts</context>
@@ -308,6 +308,357 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.routes.ts</context>
           <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.personName" datatype="html">
+        <source>Name</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/person-sort-buttons/person-sort-buttons.component.html</context>
+          <context context-type="linenumber">6,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.personNameError" datatype="html">
+        <source>Please enter a name (2-50 characters).</source>
+        <target>Bitte gib einen Namen ein (2-50 Zeichen lang).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">20,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.personInformation" datatype="html">
+        <source>Information</source>
+        <target>Informationen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.personInformationError" datatype="html">
+        <source>Please enter information (2-150 characters).</source>
+        <target>Bitte gib Informationen zur Person ein (2-50 Zeichen).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">38,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledge" datatype="html">
+        <source>Prior knowledge</source>
+        <target>Vorkenntnisse</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeExplanation" datatype="html">
+        <source>State what prior knowledge the person already has. This will have influence on the creation of groups.</source>
+        <target>Gib an, welche Vorkenntnisse die Person bereits hat. Das wird Einfluss auf die Zuteilung zu Teams haben.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">47,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeEmpty" datatype="html">
+        <source>There is no prior knowledge stored yet. Consider adding some by</source>
+        <target>Es sind bisher noch keine Vorkenntnisse erfasst. Ziehe in Betracht, einige hinzuzufügen, indem du </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">59,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.byClickingHere" datatype="html">
+        <source>clicking here</source>
+        <target>hier klickst</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeslots" datatype="html">
+        <source>Time slots</source>
+        <target>Zeitfenster</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/person-sort-buttons/person-sort-buttons.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotExplanation1" datatype="html">
+        <source>Select the preferred time slots for the person.</source>
+        <target>Wähle die bevorzugten Zeiten der Person aus.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">76,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotExplanation2" datatype="html">
+        <source>Place them into the buckets according to the person’s preference. If the person has no specific preference, put the time slots into the first bucket.</source>
+        <target>Ordne die Zeiten den Prioritäten  entsprechend der Präferenz der Person zu. Falls die Person gar keine spezifische Präferenz hat, lege die alle Zeiten in die erste Priorität ab.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">78,81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotEmpty" datatype="html">
+        <source>There is no time slot stored yet. Persons can only be saved if they have a time slot assigned.</source>
+        <target>Du hast noch keine Zeitfenster erfasst. Personen können nur gespeichert sein, wenn sie einem Zeitfenster zugeordnet wurden.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">87,89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.addTimeSlots" datatype="html">
+        <source>Add time slots</source>
+        <target>Füge Zeitfenster hinzu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">93,94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.preferredTimeSlots" datatype="html">
+        <source>Preferred time slots</source>
+        <target>Bevorzugte Zeitfenster</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">103,106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.availableTimeslots" datatype="html">
+        <source>Available time slots</source>
+        <target>Verfügbare Zeitfenster</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">118,120</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.cancel" datatype="html">
+        <source>Cancel</source>
+        <target>Abbrechen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">146,149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.save" datatype="html">
+        <source>Save</source>
+        <target>Speichern</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">155,156</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.addNextPerson" datatype="html">
+        <source>Add next person</source>
+        <target>Füge nächste Person hinzu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
+          <context context-type="linenumber">162,163</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.remarkLabel" datatype="html">
+        <source>Remark</source>
+        <target>Bemerkung</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-knowledge-edit/person-knowledge-edit.component.html</context>
+          <context context-type="linenumber">30,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.remarkInvalidFeedback" datatype="html">
+        <source>Please enter a remark (2-160 characters).</source>
+        <target>Bitte gib eine Bemerkung ein (2-160 Zeichen).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-knowledge-edit/person-knowledge-edit.component.html</context>
+          <context context-type="linenumber">33,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clear-all-persons" datatype="html">
+        <source>Clear all persons</source>
+        <target>Lösche alle Personen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clearAllPersonsConfirmationMessage" datatype="html">
+        <source>Are you sure you want to clear all persons?</source>
+        <target>Bist du sicher, dass du alle Personen löschen möchtest?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.no-persons-found" datatype="html">
+        <source>No persons found</source>
+        <target>keine Personen gefunden</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.startCreatingPersons" datatype="html">
+        <source>Start creating persons by clicking the button below.</source>
+        <target>Füge Personen hinzu, indem du auf den Knopf klickst.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">81,84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.addPerson" datatype="html">
+        <source>Add person</source>
+        <target>Füge Person hinzu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">95,98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priority" datatype="html">
+        <source>Priority</source>
+        <target>Priorität</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-time-slot-bucket-edit/person-time-slot-bucket-edit.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotEmptyFeedback" datatype="html">
+        <source>Please select at least one time slot for this priority.</source>
+        <target>Bitte wähle mindestens ein Zeitfenster aus.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-time-slot-bucket-edit/person-time-slot-bucket-edit.component.html</context>
+          <context context-type="linenumber">33,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noPreferenceGivenHint" datatype="html">
+        <source>No preference given</source>
+        <target>Keine Vorlieben angegeben</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-time-slot-bucket-edit/person-time-slot-bucket-edit.component.html</context>
+          <context context-type="linenumber">36,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noTimeSlotsAssignedTooltip" datatype="html">
+        <source>This person has no time slots assigned</source>
+        <target>Dieser Person wurden keine Zeitfenster zugewiesen.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.moreActions" datatype="html">
+        <source>More actions</source>
+        <target>Mehr</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
+          <context context-type="linenumber">93,96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.delete" datatype="html">
+        <source>Delete <x id="INTERPOLATION" equiv-text="{{person().name}}"/></source>
+        <target>Lösche <x id="INTERPOLATION" equiv-text="{{person().name}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
+          <context context-type="linenumber">109,110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteConfirmationTitle" datatype="html">
+        <source>Delete person</source>
+        <target>Lösche Person</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
+          <context context-type="linenumber">111,112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteConfirmationMessage" datatype="html">
+        <source>Are you sure you want to delete person “<x id="INTERPOLATION" equiv-text="{{person().name}}"/>”?</source>
+        <target>Bist du sicher, dass du „<x id="INTERPOLATION" equiv-text="{{person().name}}"/>“ löschen möchtest?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
+          <context context-type="linenumber">113,114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.edit" datatype="html">
+        <source>Edit</source>
+        <target>Bearbeite</target>
+        <note priority="1" from="meaning">edit person X</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
+          <context context-type="linenumber">103,104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteButtonCaption" datatype="html">
+        <source> Delete </source>
+        <target>Löschen</target>
+        <note priority="1" from="meaning">button caption</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/delete-button/delete-button.component.html</context>
+          <context context-type="linenumber">9,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/delete-button/delete-button.component.html</context>
+          <context context-type="linenumber">39,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteHeading" datatype="html">
+        <source>Delete</source>
+        <target>Löschen</target>
+        <note priority="1" from="meaning">heading</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/delete-button/delete-button.component.html</context>
+          <context context-type="linenumber">19,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteAreYouSure" datatype="html">
+        <source>Are you sure you want to delete this item?</source>
+        <target>Bist du sicher, dass du dieses Element löschen möchtest?</target>
+        <note priority="1" from="meaning">generic question</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/delete-button/delete-button.component.html</context>
+          <context context-type="linenumber">29,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.allOptions" datatype="html">
+        <source>All</source>
+        <target>Alles</target>
+        <note priority="1" from="meaning">all options in a select</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/person-slot-filter/person-slot-filter.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.sortBy" datatype="html">
+        <source> Sort by </source>
+        <target>Sortieren nach</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/person-sort-buttons/person-sort-buttons.component.html</context>
+          <context context-type="linenumber">16,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.personSearchPlaceholder" datatype="html">
+        <source>Search for a person</source>
+        <target>Suche nach einer Person</target>
+        <note priority="1" from="description">Search for a person</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/search-field/search-field.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.xOfYPersons" datatype="html">
+        <source> (<x id="INTERPOLATION" equiv-text="{{ (this.filteredPersons$ | async)?.length }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ (this.personsCount$ | async) }}"/> persons) </source>
+        <target> (<x id="INTERPOLATION" equiv-text="{{ (this.filteredPersons$ | async)?.length }}"/> von <x id="INTERPOLATION_1" equiv-text="{{ (this.personsCount$ | async) }}"/> Personen) </target>
+        <note priority="1" from="meaning">x of y persons</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">28,31</context>
         </context-group>
       </trans-unit>
     </body>

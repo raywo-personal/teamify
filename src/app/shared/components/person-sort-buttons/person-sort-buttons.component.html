@@ -3,16 +3,18 @@
        aria-labelledby="sort-label">
     <button class="btn btn-outline-primary" (click)="onSortByName()">
       <ng-container *ngTemplateOutlet="nameSortSymbol"></ng-container>
-      <span>name</span>
+      <span i18n="|@@t.personName">Name</span>
     </button>
 
     <button class="btn btn-outline-primary" (click)="onSortByTimeSlot()">
       <ng-container *ngTemplateOutlet="slotSortSymbol"></ng-container>
-      <span>time slot</span>
+      <span i18n="|@@t.timeslots">Time slots</span>
     </button>
   </div>
 
-  <div class="btn-group-description" id="sort-label">Sort by</div>
+  <div class="btn-group-description" id="sort-label" i18n="|@@t.sortBy">
+    Sort by
+  </div>
 </div>
 
 <ng-template #nameSortSymbol>

@@ -1,5 +1,7 @@
 <div [formGroup]="timeSlotForm()">
-  <h5>Priority {{ priority }}</h5>
+  <h5>
+    <ng-container i18n="|@@t.priority">Priority</ng-container> {{ priority }}
+  </h5>
 
   <input type="text"
          id="validity-{{priority}}"
@@ -27,11 +29,11 @@
                             [showDragHandle]="true"/>
       </div>
     } @empty {
-      <div class="invalid-feedback">
+      <div class="invalid-feedback" i18n="|@@t.timeSlotEmptyFeedback">
         Please select at least one time slot for this priority.
       </div>
       <div class="empty-list-hint">
-        <small class="text-muted">No preference given</small>
+        <small class="text-muted" i18n="|@@t.noPreferenceGivenHint">No preference given</small>
       </div>
     }
   </div>

@@ -7,6 +7,7 @@
 
   @if (person().timeSlots.length === 0) {
     <div ngbTooltip="This person has no time slots assigned"
+         i18n-ngbTooltip="@@t.noTimeSlotsAssignedTooltip"
          tooltipClass="tooltip-danger">
       <i class="bi-exclamation-triangle text-danger me-3"></i>
     </div>
@@ -89,7 +90,7 @@
               aria-label="More actions"
               (click)="$event.stopPropagation()">
         <i class="bi-three-dots-vertical"></i>
-        <span class="visually-hidden">More actions</span>
+        <span class="visually-hidden" i18n="|@@t.moreActions">More actions</span>
       </button>
 
       <div ngbDropdownMenu
@@ -98,14 +99,19 @@
           <button class="btn btn-primary"
                   (click)="onEdit($event)"
                   ngbDropdownItem>
-            <i class="bi-pencil me-3"></i>Edit {{ person().name }}
+            <i class="bi-pencil me-3"></i>
+            <ng-container i18n="edit person X|@@t.edit">Edit</ng-container>
+            {{ person().name }}
           </button>
         </div>
 
         <button app-delete-button
                 caption="Delete {{person().name}}"
+                i18n-caption="|@@t.delete"
                 confirmationTitle="Delete person"
+                i18n-confirmationTitle="|@@t.deleteConfirmationTitle"
                 confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
+                i18n-confirmationMessage="|@@t.deleteConfirmationMessage"
                 (deleteConfirmed)="onDelete()"
                 ngbDropdownItem
         ></button>

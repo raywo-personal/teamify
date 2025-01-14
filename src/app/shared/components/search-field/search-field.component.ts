@@ -67,8 +67,9 @@ export class SearchFieldComponent implements OnInit {
   }
 
 
-  protected onFocus(event: any) {
-    this.focus$.next(event.target.value);
+  protected onFocus(event: FocusEvent) {
+    const target = event.target as HTMLInputElement;
+    this.focus$.next(target.value);
   }
 
 

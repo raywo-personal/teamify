@@ -13,5 +13,5 @@ import {NgTemplateOutlet} from '@angular/common';
 export class DataNotAvailableInfoComponent {
 
   public text = input<string>();
-  public textTemplate = input<TemplateRef<any>>();
+  public textTemplate = input<TemplateRef<unknown>>();
 }

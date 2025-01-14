@@ -16,7 +16,7 @@ export class PriorKnowledgeService {
   private eventBus = inject(EventBusService);
 
 
-  public addKnowledge(knowledge: PriorKnowledge, isRestore: boolean = false) {
+  public addKnowledge(knowledge: PriorKnowledge, isRestore = false) {
     this.knowledgeList = this.knowledgeList.concat(knowledge);
 
     if (!isRestore) this.eventBus.emit(createBusEvent(EventType.PRIOR_KNOWLEDGE_CREATED, knowledge));

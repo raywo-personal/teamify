@@ -8,7 +8,7 @@ export interface PersonKnowledge {
 }
 
 export function createPersonKnowledge(priorKnowledge: PriorKnowledge,
-                                      remark: string = ""): PersonKnowledge {
+                                      remark = ""): PersonKnowledge {
   return {
     priorKnowledge,
     remark
@@ -17,12 +17,12 @@ export function createPersonKnowledge(priorKnowledge: PriorKnowledge,
 
 
 export const personKnowledgeValidator: ObjectValidator<PersonKnowledge> = {
-  priorKnowledge: (value: any) => validateObject<PriorKnowledge>(value, knowledgeValidator),
-  remark: (value: any) => typeof value === "string"
+  priorKnowledge: (value: unknown) => validateObject<PriorKnowledge>(value, knowledgeValidator),
+  remark: (value: unknown) => typeof value === "string"
 }
 
 
-export function isPersonKnowledgeArray(value: any): value is PersonKnowledge[] {
+export function isPersonKnowledgeArray(value: unknown): value is PersonKnowledge[] {
   if (!value || !Array.isArray(value)) return false;
 
   return value.every(item => validateObject<PersonKnowledge>(item, personKnowledgeValidator));

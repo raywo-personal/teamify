@@ -8,12 +8,12 @@ export interface ExportImportPerson {
 
 
 export const exportImportPersonValidator: ObjectValidator<ExportImportPerson> = {
-  id: (value: any) => typeof value === "string",
-  name: (value: any) => typeof value === "string",
+  id: (value: unknown) => typeof value === "string",
+  name: (value: unknown) => typeof value === "string",
 }
 
 
-export function isPersonsArray(value: any): value is ExportImportPerson[] {
+export function isPersonsArray(value: unknown): value is ExportImportPerson[] {
   if (!value || !Array.isArray(value)) return false;
 
   return value.every(item => validateObject<ExportImportPerson>(item, exportImportPersonValidator));

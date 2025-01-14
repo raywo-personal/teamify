@@ -98,7 +98,7 @@ export class PersonService {
   }
 
 
-  public addPerson(person: Person, isRestore: boolean = false) {
+  public addPerson(person: Person, isRestore = false) {
     this.persons = this.persons.concat(person);
     this.filteredPersons = this.filteredPersons.concat(person);
     this.addAvailablePerson(person);
@@ -216,7 +216,7 @@ export class PersonService {
     const aEarliestStart = this.earliestStartTime(a);
     const bEarliestStart = this.earliestStartTime(b);
 
-    let slotComparison = timeCompare(
+    const slotComparison = timeCompare(
       aEarliestStart,
       bEarliestStart,
       slotSortOrder
@@ -254,21 +254,25 @@ export class PersonService {
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   private set persons(value: Person[]) {
     this.personsSubject.next(value);
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   private set availablePersons(value: Person[]) {
     this.availablePersonsSubject.next(value);
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   private set filteredPersons(value: Person[]) {
     this.filteredPersonsSubject.next(value);
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   private set filteredAvailablePersons(value: Person[]) {
     this.filteredAvailablePersonsSubject.next(value);
   }

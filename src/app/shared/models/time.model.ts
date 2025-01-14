@@ -7,7 +7,7 @@ export interface Time {
 }
 
 
-export function createTime(hour: number, minute: number = 0, second: number = 0): Time {
+export function createTime(hour: number, minute = 0, second = 0): Time {
   return {hour, minute, second};
 }
 

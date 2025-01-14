@@ -19,7 +19,7 @@ export class PersonKnowledgeEditComponent {
 
   public knowledgeForm = input.required<FormGroup<PersonKnowledgeForm>>()
 
-  protected knowledgeId: string = "";
+  protected knowledgeId = "";
   protected knowledge?: PriorKnowledge;
 
   protected readonly badgeCSSClass = badgeCSSClass;

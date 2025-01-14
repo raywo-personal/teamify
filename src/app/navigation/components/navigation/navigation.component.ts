@@ -6,6 +6,7 @@ import {routes} from '../../../app.routes';
 
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nav:[app-navigation]',
   imports: [
     NgbNavModule,

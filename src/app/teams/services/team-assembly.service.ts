@@ -103,7 +103,7 @@ export class TeamAssemblyService {
 
 
   private removePersonFromAvailableList(person: Person, buckets: Map<string, Person[]>) {
-    buckets.forEach((persons, _) => {
+    buckets.forEach((persons) => {
       const personIndex = persons.findIndex(p => p.id === person.id);
       if (personIndex !== -1) {
         persons.splice(personIndex, 1);

@@ -8,6 +8,7 @@ import {Person} from '../../persons/models/person.model';
 
 export type ExportImportType = typeof ExportImportTypes[number];
 export type ExportImportDataType = TimeSlot[] | PriorKnowledge[] | ExportImportPerson[] | AllData;
+export type ExportImportArrayTypes = TimeSlot[] | PriorKnowledge[] | ExportImportPerson[] | Team[] | Person[];
 
 
 export interface AllData {
@@ -24,8 +25,8 @@ export interface ExportImportData {
 
 
 export const dataValidator: ObjectValidator<ExportImportData> = {
-  type: (value: any) => isExportImportType(value),
-  data: (value: any) => isValidDataType(value)
+  type: (value: unknown) => isExportImportType(value),
+  data: (value: unknown) => isValidDataType(value)
 }
 
 
@@ -34,12 +35,12 @@ const ExportImportTypes = [
 ] as const;
 
 
-function isExportImportType(value: any): value is ExportImportType {
-  return ExportImportTypes.includes(value);
+function isExportImportType(value: unknown): value is ExportImportType {
+  return ExportImportTypes.includes(value as ExportImportType);
 }
 
 
-function isValidDataType(value: any): value is ExportImportType {
+function isValidDataType(value: unknown): value is ExportImportType {
   if (!value) return false;
 
   if (Array.isArray(value)) {
@@ -51,8 +52,8 @@ function isValidDataType(value: any): value is ExportImportType {
 
 
 const allDataValidator: ObjectValidator<AllData> = {
-  timeSlots: (value: any) => isTimeSlotArray(value),
-  priorKnowledge: (value: any) => isKnowledgeArray(value),
-  persons: (value: any) => isPersonsArray(value),
-  teams: (value: any) => isTeamsArray(value)
+  timeSlots: (value: unknown) => isTimeSlotArray(value),
+  priorKnowledge: (value: unknown) => isKnowledgeArray(value),
+  persons: (value: unknown) => isPersonsArray(value),
+  teams: (value: unknown) => isTeamsArray(value)
 }

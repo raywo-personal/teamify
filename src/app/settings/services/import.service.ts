@@ -25,7 +25,7 @@ export class ImportService {
   private persistenceService = inject(PersistenceService);
 
 
-  public determineImportType(data: any): ExportImportType {
+  public determineImportType(data: unknown): ExportImportType {
     if (!validateObject<ExportImportData>(data, dataValidator)) {
       throw new DataFormatError('Invalid data format');
     }
@@ -42,22 +42,21 @@ export class ImportService {
   }
 
 
-  public contentToImportFromJson(data: any): ExportImportDataType {
+  public contentToImportFromJson(data: ExportImportData): ExportImportDataType {
     const type = this.determineImportType(data);
-    console.log(`Importing ${type} data`);
 
     switch (type) {
       case "timeslots":
-        return this.timeslotsToImportFromJson(data.data);
+        return this.timeslotsToImportFromJson(data.data as unknown[]);
 
       case "prior-knowledge":
-        return this.knowledgeToImportFromJson(data.data);
+        return this.knowledgeToImportFromJson(data.data as unknown[]);
 
       case "persons":
-        return this.personsToImportFromJson(data.data);
+        return this.personsToImportFromJson(data.data as unknown[]);
 
       case "all":
-        return this.allToImportFromJson(data.data);
+        return this.allToImportFromJson(data.data as AllData);
 
       default:
         return [];
@@ -82,7 +81,7 @@ export class ImportService {
         (data as Person[]).forEach(p => this.personService.addPerson(p, true));
         break;
 
-      case "all":
+      case "all": {
         this.timeSlotService.removeAllSlots();
         this.knowledgeService.removeAllKnowledge();
         this.personService.removeAllPersons();
@@ -97,24 +96,25 @@ export class ImportService {
         this.personService.updateAvailablePersons(alreadyAssignedPersons);
 
         break;
+      }
     }
 
     this.persistenceService.saveAllData();
   }
 
 
-  private timeslotsToImportFromJson(rawTimeslots: any[]): TimeSlot[] {
+  private timeslotsToImportFromJson(rawTimeslots: unknown[]): TimeSlot[] {
     return rawTimeslots as TimeSlot[];
   }
 
 
-  private knowledgeToImportFromJson(rawKnowledge: any[]): PriorKnowledge[] {
+  private knowledgeToImportFromJson(rawKnowledge: unknown[]): PriorKnowledge[] {
     return rawKnowledge as PriorKnowledge[];
   }
 
 
-  private personsToImportFromJson(rawPersons: Person[]): Person[] {
-    return rawPersons.map(p => {
+  private personsToImportFromJson(rawPersons: unknown[]): Person[] {
+    return (rawPersons as Person[]).map(p => {
       const person = createPerson(p.name);
       person.id = p.id;
 
@@ -133,7 +133,7 @@ export class ImportService {
   }
 
 
-  private allToImportFromJson(data: any): AllData {
+  private allToImportFromJson(data: AllData): AllData {
     const timeSlots = this.timeslotsToImportFromJson(data.timeSlots);
     const priorKnowledge = this.knowledgeToImportFromJson(data.priorKnowledge);
     const persons = this.personsToImportFromAllJson(data.persons);

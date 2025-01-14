@@ -41,7 +41,7 @@ export class PersonViewComponent {
   protected slots = computed(() => {
     const person = this.person();
 
-    let slotBuckets = new Map<number, PersonTimeSlot[]>();
+    const slotBuckets = new Map<number, PersonTimeSlot[]>();
 
     person.timeSlots.forEach(slot => {
       const priority = slot.priority || 0;

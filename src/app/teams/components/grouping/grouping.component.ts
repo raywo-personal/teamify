@@ -62,7 +62,7 @@ export class GroupingComponent {
   protected personFilter = this.personService.nameFilter;
 
 
-  protected onDrop(dropEvent: CdkDragDrop<string, any, PersonDragData>) {
+  protected onDrop(dropEvent: CdkDragDrop<string, unknown, PersonDragData>) {
     const originTeam: Team | undefined = dropEvent.item.data.originTeam;
     const person: Person = dropEvent.item.data.person;
 

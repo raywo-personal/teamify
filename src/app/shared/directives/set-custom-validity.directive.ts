@@ -4,6 +4,7 @@ import {NgControl} from '@angular/forms';
 
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[setCustomValidity]'
 })
 export class SetCustomValidityDirective implements OnInit, OnDestroy {
@@ -21,9 +22,10 @@ export class SetCustomValidityDirective implements OnInit, OnDestroy {
 
     this.control.control!.events
       .pipe(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         filter((event: any) => event['touched'] !== undefined)
       )
-      .subscribe(_ => {
+      .subscribe(() => {
         this.setCustomValidity(this.control.status);
       });
 

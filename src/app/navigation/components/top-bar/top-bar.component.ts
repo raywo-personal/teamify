@@ -4,6 +4,7 @@ import {filter, map} from 'rxjs';
 
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[app-top-bar]',
   imports: [],
   templateUrl: './top-bar.component.html',
@@ -11,7 +12,7 @@ import {filter, map} from 'rxjs';
 })
 export class TopBarComponent implements OnInit {
 
-  protected currentTitle: string = "";
+  protected currentTitle = "";
   protected icon?: string;
 
   private router = inject(Router);

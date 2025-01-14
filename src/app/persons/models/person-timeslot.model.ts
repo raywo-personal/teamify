@@ -18,12 +18,12 @@ export function createPersonTimeSlot(timeSlot: TimeSlot,
 
 
 export const personTimeSlotValidator: ObjectValidator<PersonTimeSlot> = {
-  timeSlot: (value: any) => validateObject<TimeSlot>(value, timeSlotValidator),
-  priority: (value: any) => typeof value === "number",
+  timeSlot: (value: unknown) => validateObject<TimeSlot>(value, timeSlotValidator),
+  priority: (value: unknown) => typeof value === "number",
 }
 
 
-export function isPersonTimeSlotArray(value: any): value is PersonTimeSlot[] {
+export function isPersonTimeSlotArray(value: unknown): value is PersonTimeSlot[] {
   if (!value || !Array.isArray(value)) return false;
 
   return value.every(item => validateObject<PersonTimeSlot>(item, personTimeSlotValidator));

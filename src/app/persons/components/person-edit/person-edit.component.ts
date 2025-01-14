@@ -125,7 +125,7 @@ export class PersonEditComponent {
    *        the dragged item, its source, and the target container.
    * @return {void} This method does not return any value.
    */
-  protected onSlotDropped(dropEvent: CdkDragDrop<number, any, TimeSlotDragData>): void {
+  protected onSlotDropped(dropEvent: CdkDragDrop<number, unknown, TimeSlotDragData>): void {
     const targetPriority = dropEvent.container.data;
     const data = dropEvent.item.data;
     const sourcePriority = data.priority;
@@ -288,7 +288,7 @@ export class PersonEditComponent {
     const priorKnowledge: PersonKnowledge[] = this.personForm.controls.priorKnowledge.controls
       .filter(k => k.value.selected)
       .map(k => createPersonKnowledge(k.value.priorKnowledge!, k.value.remark));
-    let personTimeSlots: PersonTimeSlot[] = this.priorityTimeSlots
+    const personTimeSlots: PersonTimeSlot[] = this.priorityTimeSlots
       .map(s => {
         return s.value.slots!.map(slot => createPersonTimeSlot(slot, s.controls.priority.value))
       })

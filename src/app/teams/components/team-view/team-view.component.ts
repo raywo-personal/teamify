@@ -37,7 +37,7 @@ export class TeamViewComponent {
   protected readonly bgCSSClass = bgCSSClass;
 
 
-  protected onDrop(dropEvent: CdkDragDrop<Person[], any, PersonDragData>) {
+  protected onDrop(dropEvent: CdkDragDrop<Person[], unknown, PersonDragData>) {
     const origin: string | undefined = dropEvent.item.data.origin;
     const originTeam: Team = dropEvent.item.data.originTeam;
     const person: Person = dropEvent.item.data.person;

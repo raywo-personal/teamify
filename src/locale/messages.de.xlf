@@ -849,6 +849,243 @@
           <context context-type="linenumber">40,44</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="t.exportDataHeading" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-download me-3&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Export data</source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-download me-3&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Datenexport</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.whatToExport" datatype="html">
+        <source>What data do you want to export?</source>
+        <target>Was möchtest du exportieren?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.exportDataNote" datatype="html">
+        <source> Please keep in mind when exporting persons, no associations to time slots, prior knowledge or teams will be exported. Only names (and IDs) are exported. If you need to be able to restore all associations, please use “All data” instead. </source>
+        <target> Bitte beachte, dass beim Export von Personen keine Informationen über Zeitfenster und Vorkenntnisse mitexportiert werden. Nur die Namen (und ggf. IDs) werden exportiert. Wenn du alle Informationen exportieren möchtest, nutze bitte die Funktion „Alle Daten“.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">10,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.allDataCaption" datatype="html">
+        <source> All data </source>
+        <target> Alle Daten </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">23,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotDataCaption" datatype="html">
+        <source> Time slot data </source>
+        <target> Zeitfenster </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">30,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeDataCaption" datatype="html">
+        <source> Prior knowledge data </source>
+        <target> Vorkenntnisse </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">37,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.personDataCaption" datatype="html">
+        <source> Person data </source>
+        <target> Personen </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">46,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.exportPersonDataForTeam" datatype="html">
+        <source> Export persons in team: </source>
+        <target> Exportiere Personen des Teams: </target>
+        <note priority="1" from="meaning">heading for dropdown field</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/export/export.component.html</context>
+          <context context-type="linenumber">55,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.importDataHeading" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-upload me-3&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Import data </source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-upload me-3&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/>Datenimport </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">4,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.whatToImport" datatype="html">
+        <source>What data do you want to import?</source>
+        <target>Was möchtest du importieren?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.importDataNote" datatype="html">
+        <source> When importing persons, please note that associations with time slots, prior knowledge, or teams will not be included. Only names (and IDs) will be imported. To restore all associations, consider using the “All data” option instead. </source>
+        <target> Wenn du Personen importierst, werden Verknüpfungen zu Zeitfenstern, Vorkenntnissen und Teams nicht mit importiert. Nur Namen (und ggf. IDs) werden importiert. Wenn du alle Informationen wiederherstellen willst, benutze bitte die Option „Alle Daten“. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.importDataFileFormatNote" datatype="html">
+        <source> Files must be in JSON format, previously exported from the application. Alternatively, you can import names using a text file, with each name on a separate line. </source>
+        <target> Dateien müssen im JSON-Format vorliegen und zuvor aus der Anwendung exportiert worden sein. Alternativ kannst du Namen mithilfe einer Textdatei importieren, wobei jeder Name in einer separaten Zeile stehen muss. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">18,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.importDataWarning" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;text-danger&quot;&gt;"/>Note:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Importing data will overwrite existing data. </source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;text-danger&quot;&gt;"/>Achtung:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Ein Datenimport überschreibt alle vorhandenen Daten! </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">24,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.dropFileHere" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Drop a file<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> or click below to browse for a file. </source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ziehe eine Datei hierher<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> oder klicke, um eine Datei auszuwählen. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.dropFileError" datatype="html">
+        <source> Only a single JSON or txt file is supported. </source>
+        <target> Du kannst nur eine einzelne JSON- oder Text-Datei importieren. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">59,60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.chooseFile" datatype="html">
+        <source> Choose a file to upload </source>
+        <target> Wähle eine Datei zum Hochladen aus. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.previewHeading" datatype="html">
+        <source>Preview</source>
+        <target>Vorschau</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">81,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.invalidJSONError" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Invalid JSON file<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Please check the file and try again. </source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ungültige JSON-Datei<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Bitte prüfe die Datei und versuche es erneut. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">87,88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.invalidFormatError" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Wrong format<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Please check the file and try again. </source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Falsches Format<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Bitte prüfe die Datei und versuche es erneut. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">97,98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.importComplete" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Import complete<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> The data has been imported successfully. </source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Import vollständig<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Die Daten wurden erfolgreich importiert. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">107,108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotPreviewPretext" datatype="html">
+        <source> The following time slots will be imported: </source>
+        <target> Die folgenden Zeitfenster werden importiert: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">116,118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgePreviewPretext" datatype="html">
+        <source> The following prior knowledge will be imported: </source>
+        <target> Die folgenden Vorkenntnisse werden importiert: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">122,124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.personPreviewPretext" datatype="html">
+        <source> The following persons will be imported: </source>
+        <target> Die folgenden Personen werden importiert: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">128,130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.teamPreviewPretext" datatype="html">
+        <source> The following complete set will be imported: </source>
+        <target> Die folgenden vollständigen Daten werden importiert: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">134,136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clearDataCaption" datatype="html">
+        <source> Clear data </source>
+        <target> Zurücksetzen </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">149,151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.importDataCaption" datatype="html">
+        <source> Import data </source>
+        <target> Importiere Daten </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/import/import.component.html</context>
+          <context context-type="linenumber">156,159</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.nothingToImport" datatype="html">
+        <source>Nothing to import here.</source>
+        <target>Nichts zu importieren.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/preview-person-list/preview-person-list.component.html</context>
+          <context context-type="linenumber">8,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/preview-prior-knowledge-list/preview-prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">8,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/preview-team-list/preview-team-list.component.html</context>
+          <context context-type="linenumber">8,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/preview-time-slot-list/preview-time-slot-list.component.html</context>
+          <context context-type="linenumber">8,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.languageHeading" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-translate&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Language</source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-translate&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Sprache</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/settings/components/settings/settings.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

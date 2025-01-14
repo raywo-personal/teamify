@@ -5,7 +5,7 @@
         <app-time-slot-view [timeSlot]="timeSlot" [showButtons]="false" />
       </li>
     } @empty {
-      Nothing to import here.
+      <ng-container i18n="|@@t.nothingToImport">Nothing to import here.</ng-container>
     }
   </ul>
 </div>

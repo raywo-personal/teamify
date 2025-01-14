@@ -6,7 +6,7 @@ import {TimeSlot} from '../../../timeslots/models/time-slot.model';
 import {PriorKnowledgeService} from '../../../prior-knowledge/services/prior-knowledge.service';
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {PersonService} from '../../services/person.service';
-import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 import {PersonForm, PersonKnowledgeForm, PersonTimeSlotBucketForm} from '../../models/person-form.model';
 import {SetCustomValidityDirective} from '../../../shared/directives/set-custom-validity.directive';
 import {PersonKnowledgeEditComponent} from '../person-knowledge-edit/person-knowledge-edit.component';
@@ -16,6 +16,8 @@ import {TimeSlotDragData} from '../../models/time-slot-drag-data.model';
 import {createPersonKnowledge, PersonKnowledge} from '../../models/person-knowledge.model';
 import {createPersonTimeSlot, PersonTimeSlot} from '../../models/person-timeslot.model';
 import {timeCompare} from '../../../shared/helper/comparison';
+import {RouterLink} from '@angular/router';
+import {AsyncPipe} from '@angular/common';
 
 
 const AVAILABLE_SLOTS_PRIORITY = -1;
@@ -32,7 +34,10 @@ const AVAILABLE_SLOTS_PRIORITY = -1;
     CdkDropList,
     CdkDrag,
     TimeSlotViewComponent,
-    PersonTimeSlotBucketEditComponent
+    PersonTimeSlotBucketEditComponent,
+    RouterLink,
+    AsyncPipe,
+    CdkDragPlaceholder
   ],
   templateUrl: './person-edit.component.html',
   styleUrl: './person-edit.component.scss'
@@ -58,6 +63,7 @@ export class PersonEditComponent {
   protected readonly AVAILABLE_SLOTS_PRIORITY = AVAILABLE_SLOTS_PRIORITY;
   protected personForm: FormGroup<PersonForm>;
   protected timeSlotsSource: TimeSlot[] = [];
+  protected slotCount$ = this.timeSlotService.slotCount$;
 
 
   constructor() {

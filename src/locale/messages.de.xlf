@@ -273,6 +273,10 @@
           <context context-type="sourcefile">src/app/app.routes.ts</context>
           <context context-type="linenumber">25</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.priorKnowledge-menu" datatype="html">
         <source>Prior knowledge</source>
@@ -282,6 +286,10 @@
           <context context-type="sourcefile">src/app/app.routes.ts</context>
           <context context-type="linenumber">31</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">41,42</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.persons-menu" datatype="html">
         <source>Persons</source>
@@ -290,6 +298,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.routes.ts</context>
           <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.buildTeams-menu" datatype="html">
@@ -512,7 +524,7 @@
       </trans-unit>
       <trans-unit id="t.startCreatingPersons" datatype="html">
         <source>Start creating persons by clicking the button below.</source>
-        <target>Füge Personen hinzu, indem du auf den Knopf klickst.</target>
+        <target>Füge Personen hinzu, indem du auf die Schaltfläche klickst.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
           <context context-type="linenumber">82,85</context>
@@ -781,7 +793,7 @@
       </trans-unit>
       <trans-unit id="t.startCreatingPriorKnowledge" datatype="html">
         <source> Begin creating prior knowledge by using the button below. </source>
-        <target> Erstelle Vorkenntnisse, indem du den Knopf unten benutzt. </target>
+        <target> Erstelle Vorkenntnisse, indem du die Schaltfläche unten benutzt. </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
           <context context-type="linenumber">72,76</context>
@@ -1084,6 +1096,150 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/settings/components/settings/settings.component.html</context>
           <context context-type="linenumber">2,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.stepHeading" datatype="html">
+        <source>Step <x id="INTERPOLATION" equiv-text="{{ stepNo() }}"/></source>
+        <target>Schritt <x id="INTERPOLATION" equiv-text="{{ stepNo() }}"/></target>
+        <note priority="1" from="meaning">step X</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/step/step.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.goTo" datatype="html">
+        <source>Go to <x id="INTERPOLATION" equiv-text="{{ buttonCaption() }}"/></source>
+        <target>Gehe zu <x id="INTERPOLATION" equiv-text="{{ buttonCaption() }}"/></target>
+        <note priority="1" from="meaning">Go to some step </note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/step/step.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createSomething" datatype="html">
+        <source> Create <x id="INTERPOLATION" equiv-text="{{ buttonCaption() }}"/> <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-chevron-right&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <target> Erstelle <x id="INTERPOLATION" equiv-text="{{ buttonCaption() }}"/> <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-chevron-right&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></target>
+        <note priority="1" from="meaning">Create some step </note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/step/step.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.appName" datatype="html">
+        <source>Teamify</source>
+        <target>Teamify</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.appDescription" datatype="html">
+        <source> Experience a whole new way to create teams – simple, clear, and efficient! Plan time slots when your teams meet, take prior knowledge into account, add people, and let perfectly matched teams emerge automatically at the end. Make team management smarter and effortless with just a few clicks! </source>
+        <target> Erlebe eine völlig neue Art, Teams zu erstellen – einfach, klar und effizient! Plane Zeitfenster, in denen sich deine Teams treffen, berücksichtige vorhandenes Wissen, füge Personen hinzu und lass am Ende perfekt abgestimmte Teams automatisch entstehen. Mache das Teammanagement smarter und mühelos – mit nur wenigen Klicks! </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createTimeslots" datatype="html">
+        <source>Create time slots</source>
+        <target>Erstelle Zeitfenster</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createTimeslotsDescription" datatype="html">
+        <source>In order to create a team, you need to create time slots.</source>
+        <target>Um Teams erstellen zu können, musst du zuerst Zeitfenster anlegen.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createPriorKnowledge" datatype="html">
+        <source>Create prior knowledge</source>
+        <target>Erstelle Vorkenntnisse</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createPriorKnowledgeDescription" datatype="html">
+        <source>Teams are created based on prior knowledge.</source>
+        <target>Teams werden anhand der Vorkenntnisse der Personen zusammengestellt.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createPersons" datatype="html">
+        <source>Create persons</source>
+        <target>Erstelle Personen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createPersonsDescription" datatype="html">
+        <source>Teams are made up of persons.</source>
+        <target>Teams bestehen aus Personen.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.alternativeImportDataCaption" datatype="html">
+        <source> As an alternative, import data </source>
+        <target> Alternativ: importiere die Daten </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">83,86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.teams" datatype="html">
+        <source>Teams</source>
+        <target>Teams</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/teams-overview/teams-overview.component.html</context>
+          <context context-type="linenumber">1,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.startAssemblingTeams" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-info-circle&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Start assembling your teams by completing step 4 or clicking the button. </source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-info-circle&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/> Beginne damit, deine Teams zusammenzustellen, indem du Schritt 4 abschließt oder auf die Schaltfläche klickst. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/teams-overview/teams-overview.component.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.createTeams" datatype="html">
+        <source> Create teams <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-chevron-right&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <target> Erstelle Teams <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i class=&quot;bi-chevron-right&quot;&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></target>
+        <note priority="1" from="meaning">Create teams</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/teams-overview/teams-overview.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.teamUp" datatype="html">
+        <source>Team up</source>
+        <target>Team up</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.teamUpDescription" datatype="html">
+        <source>If you have completed all steps, you can now create teams.</source>
+        <target>Wenn du alle Schritte abgeschlossen hast, kannst du jetzt Teams erstellen.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/start/components/steps/steps.component.html</context>
+          <context context-type="linenumber">69,70</context>
         </context-group>
       </trans-unit>
     </body>

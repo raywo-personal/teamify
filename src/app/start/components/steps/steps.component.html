@@ -1,8 +1,8 @@
 <div class="start-container">
   <div class="row">
     <div class="col-12 text-center">
-      <h2>Teamify</h2>
-      <p class="lead text-muted px-5">
+      <h2 i18n="|@@t.appName">Teamify</h2>
+      <p class="lead text-muted px-5" i18n="|@@t.appDescription">
         Experience a whole new way to create teams – simple, clear, and
         efficient! Plan time slots when your teams meet, take prior knowledge
         into account, add people, and let perfectly matched teams emerge
@@ -18,9 +18,12 @@
         <app-step [stepNo]="1"
                   class="h-100 w-100"
                   stepTitle="Create time slots"
+                  i18n-stepTitle="|@@t.createTimeslots"
                   stepDescription="In order to create a team, you need to create time slots."
+                  i18n-stepDescription="|@@t.createTimeslotsDescription"
                   [stepIsDone]="step1IsDone"
-                  buttonCaption="time slots"
+                  buttonCaption="Time slots"
+                  i18n-buttonCaption="|@@t.timeslots-menu"
                   routingTarget="/time-slots"/>
 
         <div class="chevron">&#10095;</div>
@@ -31,9 +34,12 @@
           <app-step [stepNo]="2"
                     class="h-100 w-100"
                     stepTitle="Create prior knowledge"
+                    i18n-stepTitle="|@@t.createPriorKnowledge"
                     stepDescription="Teams are created based on prior knowledge."
+                    i18n-stepDescription="|@@t.createPriorKnowledgeDescription"
                     [stepIsDone]="step2IsDone"
-                    buttonCaption="prior knowledge"
+                    buttonCaption="Prior knowledge"
+                    i18n-buttonCaption="|@@t.priorKnowledge-menu"
                     routingTarget="/prior-knowledge"/>
 
           <div class="chevron">&#10095;</div>
@@ -44,9 +50,12 @@
         <app-step [stepNo]="3"
                   class="h-100 w-100"
                   stepTitle="Create persons"
+                  i18n-stepTitle="|@@t.createPersons"
                   stepDescription="Teams are made up of persons."
+                  i18n-stepDescription="|@@t.createPersonsDescription"
                   [stepIsDone]="step3IsDone"
-                  buttonCaption="persons"
+                  buttonCaption="Persons"
+                  i18n-buttonCaption="|@@t.persons-menu"
                   routingTarget="/persons"/>
 
         <div class="chevron">&#10095;</div>
@@ -56,16 +65,21 @@
         <app-step [stepNo]="4"
                   class="h-100 w-100"
                   stepTitle="Team up"
+                  i18n-stepTitle="|@@t.teamUp"
                   stepDescription="If you have completed all steps, you can now create teams."
+                  i18n-stepDescription="|@@t.teamUpDescription"
                   [stepIsDone]="step4IsDone"
-                  buttonCaption="teams"
+                  buttonCaption="Teams"
+                  i18n-buttonCaption="|@@t.teams"
                   routingTarget="/build-teams"/>
       </div>
     </div>
 
     <div class="row mt-4">
       <div class="col">
-        <a class="btn btn-outline-primary w-100" routerLink="/settings">
+        <a class="btn btn-outline-primary w-100"
+           routerLink="/settings"
+           i18n="|@@t.alternativeImportDataCaption">
           As an alternative, import data
         </a>
       </div>

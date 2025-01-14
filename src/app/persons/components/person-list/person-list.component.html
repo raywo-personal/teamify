@@ -1,51 +1,53 @@
-<div class="toolbar mb-3"
-     role="toolbar"
-     aria-label="Toolbar for working with teams and persons">
-  <div class="toolbar-buttons">
-    <button app-add-button
-            caption="Add person"
-            (click)="onAdd(content)">
-    </button>
-
-    <app-person-sort-buttons/>
-
-    @if ((personsCount$ | async)! > 0) {
-      <button app-delete-button
-              caption="Clear all persons"
-              confirmationMessage="Are you sure you want to clear all persons?"
-              (deleteConfirmed)="onDeleteAll()">
+<div class="persons">
+  <div class="toolbar mb-3"
+       role="toolbar"
+       aria-label="Toolbar for working with teams and persons">
+    <div class="toolbar-buttons">
+      <button app-add-button
+              caption="Add person"
+              (click)="onAdd(content)">
       </button>
-    }
-  </div>
 
-  <div class="d-flex gap-2">
-    <div class="d-flex align-items-center fit-height gap-2">
-      <small class="">
-        ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.personsCount$ | async) }} persons)
-      </small>
-      <app-person-search [source]="filterSource$"/>
+      <app-person-sort-buttons/>
+
+      @if ((personsCount$ | async)! > 0) {
+        <button app-delete-button
+                caption="Clear all persons"
+                confirmationMessage="Are you sure you want to clear all persons?"
+                (deleteConfirmed)="onDeleteAll()">
+        </button>
+      }
     </div>
-    <app-person-slot-filter/>
-  </div>
-</div>
 
-<div class="content-area">
-  <ul class="list-group scrollable-area">
-    @for (person of filteredPersons$ | async; track person.id) {
-      <li class="list-group-item list-group-item-action pointer"
-          (click)="onEdit(content, person)">
-        <app-person-view
-          [person]="person"
-          (edit)="onEdit(content, $event)"
-          (delete)="onDelete($event)"
-        />
-      </li>
-    } @empty {
-      <app-data-not-available-view title="No persons found"
-                                   mode="warning"
-                                   [messageTemplate]="messageTemplate"/>
-    }
-  </ul>
+    <div class="d-flex gap-2">
+      <div class="d-flex align-items-center fit-height gap-2">
+        <small class="">
+          ({{ (this.filteredPersons$ | async)?.length }} of {{ (this.personsCount$ | async) }} persons)
+        </small>
+        <app-person-search [source]="filterSource$"/>
+      </div>
+      <app-person-slot-filter/>
+    </div>
+  </div>
+
+  <div class="content-area">
+    <ul class="list-group scrollable-area">
+      @for (person of filteredPersons$ | async; track person.id) {
+        <li class="list-group-item list-group-item-action pointer"
+            (click)="onEdit(content, person)">
+          <app-person-view
+            [person]="person"
+            (edit)="onEdit(content, $event)"
+            (delete)="onDelete($event)"
+          />
+        </li>
+      } @empty {
+        <app-data-not-available-view title="No persons found"
+                                     mode="warning"
+                                     [messageTemplate]="messageTemplate"/>
+      }
+    </ul>
+  </div>
 </div>
 
 <ng-template #content let-offcanvas>

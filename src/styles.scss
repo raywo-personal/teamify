@@ -141,3 +141,33 @@ small, .small {
   --bs-tooltip-bg: var(--bs-danger);
   --bs-tooltip-opacity: 1;
 }
+
+@media screen and (max-width: 1350px) {
+
+  .grouping,
+  .persons {
+    --t-tool-bar-height: 6rem;
+
+    .toolbar {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .app-layout {
+    --t-sidebar-width: 8ch;
+  }
+
+  .sidebar {
+    .tooltip {
+      display: block;
+    }
+  }
+
+  .nav-title,
+  .brand .text-logo,
+  .sidebar-footer {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbNavModule, NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NavItem} from '../../routes/nav-item.model';
 import {routes} from '../../../app.routes';
@@ -11,7 +11,8 @@ import {routes} from '../../../app.routes';
   imports: [
     NgbNavModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    NgbTooltip
   ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'

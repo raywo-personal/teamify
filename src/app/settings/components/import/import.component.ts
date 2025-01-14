@@ -38,6 +38,7 @@ export class ImportComponent {
   protected fileType: "json" | "txt" | null = null;
   protected dropError: "unsupported" | "invalidJSON" | "invalidFormat" | "empty" | null = null;
   protected contentToImport: ExportImportDataType = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected contentToImport$: Observable<any[]> = of([]);
   protected importStatus: "none" | "complete" = "none";
 
@@ -61,6 +62,7 @@ export class ImportComponent {
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected onDragLeave(_: DragEvent) {
     this.dropZone.nativeElement.classList.remove("drag-over");
   }
@@ -171,6 +173,7 @@ export class ImportComponent {
         const json = JSON.parse(data as string);
         this.importType = this.importService.determineImportType(json);
         this.contentToImport = this.importService.contentToImportFromJson(json);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.contentToImport$ = of(this.importType === "all" ? (this.contentToImport as AllData).teams : (this.contentToImport as any[]));
       } catch (e) {
         if (e instanceof DataFormatError) {
@@ -181,4 +184,7 @@ export class ImportComponent {
       }
     }
   }
+
+
+  protected readonly Observable = Observable;
 }

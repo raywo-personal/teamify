@@ -45,7 +45,7 @@ export class PersonListComponent implements AfterViewInit {
   private route = inject(ActivatedRoute);
 
   @ViewChild("content")
-  protected content!: TemplateRef<any>;
+  protected content!: TemplateRef<unknown>;
 
   protected personsCount$ = this.personService.personCount$;
   protected filteredPersons$ = this.personService.filteredPersons$;
@@ -53,7 +53,7 @@ export class PersonListComponent implements AfterViewInit {
     .pipe(map(persons => persons.map(p => p.name)));
   protected slotCount$ = this.slotService.slotCount$;
   protected personToEdit?: Person;
-  protected offcanvasTitle: string = "";
+  protected offcanvasTitle = "";
   protected edit = false;
 
 
@@ -75,14 +75,14 @@ export class PersonListComponent implements AfterViewInit {
   }
 
 
-  protected onAdd(content: TemplateRef<any>) {
+  protected onAdd(content: TemplateRef<unknown>) {
     this.personToEdit = createPerson("");
     this.edit = false;
     this.openOffcanvas(content, "Add new person");
   }
 
 
-  protected onEdit(content: TemplateRef<any>, person: Person) {
+  protected onEdit(content: TemplateRef<unknown>, person: Person) {
     this.personToEdit = person;
     this.edit = true;
     this.openOffcanvas(content, "Edit person");
@@ -99,7 +99,7 @@ export class PersonListComponent implements AfterViewInit {
   }
 
 
-  private openOffcanvas(content: TemplateRef<any>, title: string) {
+  private openOffcanvas(content: TemplateRef<unknown>, title: string) {
     this.offcanvasTitle = title;
 
     const options: NgbOffcanvasOptions = {

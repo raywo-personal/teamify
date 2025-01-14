@@ -21,7 +21,7 @@ export class TeamNameEditComponent implements AfterViewInit {
   public editCancelled = output();
   public editConfirmed = output<string>();
 
-  protected teamName: string = "";
+  protected teamName = "";
 
 
   constructor() {

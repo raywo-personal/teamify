@@ -79,6 +79,7 @@ $all-t-colors: map.merge($t-colors, $t-grays);
 
     width: var(--dot-width);
     height: var(--dot-width);
+    aspect-ratio: 1;
     line-height: 1rem;
   }
 }
@@ -95,6 +96,7 @@ $all-t-colors: map.merge($t-colors, $t-grays);
 
     width: var(--dot-width);
     height: var(--dot-width);
+    aspect-ratio: 1;
     line-height: 1rem;
   }
 }
@@ -126,7 +128,7 @@ $all-t-colors: map.merge($t-colors, $t-grays);
 }
 
 .dot-preview {
-  --dot-width: 1.5rem;
+  --dot-width: 1.25rem;
 }
 
 .color-picker-dot {

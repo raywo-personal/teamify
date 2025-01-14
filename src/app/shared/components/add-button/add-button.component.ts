@@ -2,6 +2,7 @@ import {Component, HostListener, input, output} from '@angular/core';
 
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[app-add-button]',
   imports: [],
   templateUrl: './add-button.component.html',

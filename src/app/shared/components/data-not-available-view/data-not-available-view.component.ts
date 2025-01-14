@@ -16,7 +16,7 @@ export class DataNotAvailableViewComponent {
 
   public title = input.required<string>();
   public message = input<string>();
-  public messageTemplate = input<TemplateRef<any>>();
+  public messageTemplate = input<TemplateRef<unknown>>();
   public mode = input<DataNotAvailableViewMode>("neutral");
 
 }

@@ -7,7 +7,7 @@ import {Time} from '../../shared/models/time.model';
 })
 export class TimePipe implements PipeTransform {
 
-  transform(value: Time, ...args: unknown[]): unknown {
+  transform(value: Time): unknown {
     if (value.hour < 0 || value.minute < 0) {
       return '';
     }

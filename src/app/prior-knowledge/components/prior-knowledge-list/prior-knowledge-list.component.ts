@@ -33,11 +33,11 @@ export class PriorKnowledgeListComponent implements AfterViewInit {
   private route = inject(ActivatedRoute);
 
   @ViewChild("content")
-  protected content!: TemplateRef<any>;
+  protected content!: TemplateRef<unknown>;
 
   protected knowledgeList$ = this.knowledgeService.knowledgeList$;
   protected knowledgeToEdit?: PriorKnowledge;
-  protected canvasTitle: string = "";
+  protected canvasTitle = "";
   protected edit = false;
 
 
@@ -49,14 +49,14 @@ export class PriorKnowledgeListComponent implements AfterViewInit {
   }
 
 
-  protected onAdd(content: TemplateRef<any>) {
+  protected onAdd(content: TemplateRef<unknown>) {
     this.knowledgeToEdit = createPriorKnowledge("");
     this.edit = false;
     this.openOffcanvas(content, "Add new prior knowledge");
   }
 
 
-  protected onEdit(content: TemplateRef<any>, knowledge: PriorKnowledge) {
+  protected onEdit(content: TemplateRef<unknown>, knowledge: PriorKnowledge) {
     this.edit = true
     this.knowledgeToEdit = knowledge;
     this.openOffcanvas(content, "Edit prior knowledge");
@@ -83,7 +83,7 @@ export class PriorKnowledgeListComponent implements AfterViewInit {
   }
 
 
-  private openOffcanvas(content: TemplateRef<any>, title: string) {
+  private openOffcanvas(content: TemplateRef<unknown>, title: string) {
     this.canvasTitle = title;
 
     const options: NgbOffcanvasOptions = {

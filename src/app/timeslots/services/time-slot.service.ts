@@ -17,7 +17,7 @@ export class TimeSlotService {
   private eventBus = inject(EventBusService);
 
 
-  public addSlot(slot: TimeSlot, isRestore: boolean = false) {
+  public addSlot(slot: TimeSlot, isRestore = false) {
     this.slots = this.slots.concat(slot);
 
     if (!isRestore) {

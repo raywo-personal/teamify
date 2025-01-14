@@ -3,6 +3,7 @@ import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[app-delete-button]',
   imports: [],
   templateUrl: './delete-button.component.html',
@@ -18,7 +19,7 @@ export class DeleteButtonComponent implements OnInit {
   private renderer = inject(Renderer2);
 
   @ViewChild("modalContent", {static: true})
-  private modalContent!: TemplateRef<any>;
+  private modalContent!: TemplateRef<unknown>;
 
   public showIcon = input<boolean>(true);
   public caption = input<string>();

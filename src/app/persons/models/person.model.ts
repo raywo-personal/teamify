@@ -14,7 +14,7 @@ export interface Person {
 
 
 export function createPerson(name: string,
-                             info: string = "",
+                             info = "",
                              priorKnowledge: PersonKnowledge[] = [],
                              timeSlots: PersonTimeSlot[] = []): Person {
   return {
@@ -28,15 +28,15 @@ export function createPerson(name: string,
 
 
 export const personValidator: ObjectValidator<Person> = {
-  id: (value: any) => typeof value === "string",
-  name: (value: any) => typeof value === "string",
-  info: (value: any) => typeof value === "string",
-  priorKnowledge: (value: any) => isPersonKnowledgeArray(value),
-  timeSlots: (value: any) => isPersonTimeSlotArray(value)
+  id: (value: unknown) => typeof value === "string",
+  name: (value: unknown) => typeof value === "string",
+  info: (value: unknown) => typeof value === "string",
+  priorKnowledge: (value: unknown) => isPersonKnowledgeArray(value),
+  timeSlots: (value: unknown) => isPersonTimeSlotArray(value)
 }
 
 
-export function isPersonArray(value: any): value is Person[] {
+export function isPersonArray(value: unknown): value is Person[] {
   if (!value || !Array.isArray(value)) return false;
 
   return value.every(item => validateObject<ExportImportPerson>(item, personValidator));

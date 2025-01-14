@@ -25,7 +25,7 @@ export class TimeSlotEditComponent {
   public cancelled = output();
   public saved = output<TimeSlot>();
 
-  protected description: string = "";
+  protected description = "";
   protected startHour = signal(0);
   protected startMinute = signal(0);
   protected durationHour = signal(1);
@@ -36,7 +36,7 @@ export class TimeSlotEditComponent {
 
     return addToTime(start, duration);
   });
-  protected color: string = "noon";
+  protected color = "noon";
 
   protected readonly fgCSSClass = fgCSSClass;
   protected readonly dotCSSClass = dotCSSClass;

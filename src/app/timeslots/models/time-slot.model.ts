@@ -14,7 +14,7 @@ export interface TimeSlot {
 
 
 export function createTimeSlot(description: string,
-                               color: string = "noon",
+                               color = "noon",
                                start?: Time,
                                end?: Time): TimeSlot {
   const now = new Date();
@@ -32,15 +32,15 @@ export function createTimeSlot(description: string,
 
 
 export const timeSlotValidator: ObjectValidator<TimeSlot> = {
-  id: (value: any) => typeof value === "string",
-  description: (value: any) => typeof value === "string",
-  start: (value: any) => typeof value === "object",
-  end: (value: any) => typeof value === "object",
-  color: (value: any) => typeof value === "string",
+  id: (value: unknown) => typeof value === "string",
+  description: (value: unknown) => typeof value === "string",
+  start: (value: unknown) => typeof value === "object",
+  end: (value: unknown) => typeof value === "object",
+  color: (value: unknown) => typeof value === "string",
 }
 
 
-export function isTimeSlotArray(value: any): value is TimeSlot[] {
+export function isTimeSlotArray(value: unknown): value is TimeSlot[] {
   if (!value || !Array.isArray(value)) return false;
 
   return value.every(item => validateObject<TimeSlot>(item, timeSlotValidator));

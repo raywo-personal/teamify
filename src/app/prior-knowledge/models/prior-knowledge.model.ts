@@ -12,8 +12,8 @@ export interface PriorKnowledge {
 
 
 export function createPriorKnowledge(name: string,
-                                     description: string = "",
-                                     color: string = "gray"): PriorKnowledge {
+                                     description = "",
+                                     color = "gray"): PriorKnowledge {
   return {
     id: crypto.randomUUID(),
     name,
@@ -24,14 +24,14 @@ export function createPriorKnowledge(name: string,
 
 
 export const knowledgeValidator: ObjectValidator<PriorKnowledge> = {
-  id: (value: any) => typeof value === "string",
-  name: (value: any) => typeof value === "string",
-  description: (value: any) => typeof value === "string",
-  color: (value: any) => typeof value === "string",
+  id: (value: unknown) => typeof value === "string",
+  name: (value: unknown) => typeof value === "string",
+  description: (value: unknown) => typeof value === "string",
+  color: (value: unknown) => typeof value === "string",
 }
 
 
-export function isKnowledgeArray(value: any): value is PriorKnowledge[] {
+export function isKnowledgeArray(value: unknown): value is PriorKnowledge[] {
   if (!value || !Array.isArray(value)) return false;
 
   return value.every(item => validateObject<PriorKnowledge>(item, knowledgeValidator));

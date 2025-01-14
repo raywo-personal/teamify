@@ -43,7 +43,7 @@ export class TeamService {
   }
 
 
-  public addTeam(team: Team, isRestore: boolean = false) {
+  public addTeam(team: Team, isRestore = false) {
     this.teams = this.teams.concat(team);
 
     if (!isRestore) this.eventBus.emit(createBusEvent(EventType.TEAM_CREATED, team));
@@ -116,6 +116,7 @@ export class TeamService {
   }
 
 
+  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   private set teams(value: Team[]) {
     this.teamsSubject.next(value);
   }

@@ -33,12 +33,12 @@ export class TimeSlotListComponent implements AfterViewInit {
   private route = inject(ActivatedRoute);
 
   @ViewChild("content")
-  protected content!: TemplateRef<any>;
+  protected content!: TemplateRef<unknown>;
 
   protected slots$ = this.slotService.slots$;
   protected timeSlotCount$ = this.slotService.slotCount$;
   protected timeSlotToEdit?: TimeSlot;
-  protected canvasTitle: string = "";
+  protected canvasTitle = "";
   protected edit = false;
 
 
@@ -50,14 +50,14 @@ export class TimeSlotListComponent implements AfterViewInit {
   }
 
 
-  protected onAdd(content: TemplateRef<any>) {
+  protected onAdd(content: TemplateRef<unknown>) {
     this.timeSlotToEdit = createTimeSlot("");
     this.edit = false;
     this.openOffcanvas(content, "Add new time slot");
   }
 
 
-  protected onEdit(content: TemplateRef<any>, slot: TimeSlot) {
+  protected onEdit(content: TemplateRef<unknown>, slot: TimeSlot) {
     this.timeSlotToEdit = slot;
     this.edit = true;
     this.openOffcanvas(content, "Edit time slot");
@@ -89,7 +89,7 @@ export class TimeSlotListComponent implements AfterViewInit {
   }
 
 
-  private openOffcanvas(content: TemplateRef<any>, title: string) {
+  private openOffcanvas(content: TemplateRef<unknown>, title: string) {
     this.canvasTitle = title;
 
     const options: NgbOffcanvasOptions = {

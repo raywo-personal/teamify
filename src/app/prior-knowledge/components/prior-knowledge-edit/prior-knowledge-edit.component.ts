@@ -24,9 +24,9 @@ export class PriorKnowledgeEditComponent {
   public saved = output<PriorKnowledge>();
   public cancelled = output<void>();
 
-  protected name: string = "";
-  protected description: string = "";
-  protected color: string = "gray";
+  protected name = "";
+  protected description = "";
+  protected color = "gray";
 
   protected readonly colors = colors;
   protected readonly dotCSSClass = dotCSSClass;

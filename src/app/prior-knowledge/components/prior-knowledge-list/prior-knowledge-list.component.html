@@ -1,15 +1,20 @@
 <div class="toolbar mb-3"
      role="toolbar"
-     aria-label="Toolbar for working with teams and persons">
+     aria-label="Toolbar for working with prior knowledge"
+     i18n-aria-label="@@t.toolbarLabelForPriorKnowledgeList">
   <div class="toolbar-buttons">
     <button app-add-button
             caption="Add knowledge item"
+            i18n-caption="@@t.addKnowledgeItem"
             (click)="onAdd(content)">
     </button>
 
     @if ((knowledgeList$ | async)!.length > 0) {
-      <button app-delete-button caption="Clear all prior knowledge"
+      <button app-delete-button
+              caption="Clear all prior knowledge"
+              i18n-caption="@@t.clearAllPriorKnowledgeCaption"
               confirmationMessage="Are you sure you want to clear all prior knowledge?"
+              i18n-confirmationMessage="@@t.clearAllPriorKnowledgeConfirmationMessage"
               (deleteConfirmed)="onDeleteAll()">
       </button>
     }
@@ -28,6 +33,7 @@
       </li>
     } @empty {
       <app-data-not-available-view title="No prior knowledge found"
+                                   i18n-title="@@t.noPriorKnowledgeFound"
                                    mode="warning"
                                    [messageTemplate]="messageTemplate"/>
     }
@@ -41,6 +47,7 @@
             tabindex="-1"
             class="btn-close"
             aria-label="Close"
+            i18n-aria-label="Close|@@t.close"
             (click)="offcanvas.dismiss('Cross click')">
     </button>
   </div>
@@ -56,17 +63,19 @@
 
 
 <ng-template #messageTemplate>
-  <app-data-not-available-info text="A person's prior knowledge is utilized to
-        achieve a good mix of expertise within the team when assembling
-        teams later."/>
+  <app-data-not-available-info
+    text="A person's prior knowledge is utilized to achieve a good mix of
+     expertise within the team when assembling teams later."
+    i18n-text="|@@t.priorKnowledgeNotAvailableInfoMessage"/>
 
-  <p>
+  <p i18n="|@@t.startCreatingPriorKnowledge">
     Begin creating prior knowledge by using the button below.
   </p>
 
   <button type="button"
           class="btn btn-primary"
-          (click)="onAdd(content)">
+          (click)="onAdd(content)"
+          i18n="Add prior knowledge|@@t.addPriorKnowledgeCaption">
     Add prior knowledge
   </button>
 </ng-template>

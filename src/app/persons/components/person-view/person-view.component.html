@@ -88,6 +88,7 @@
               ngbDropdownToggle
               aria-expanded="false"
               aria-label="More actions"
+              i18n-aria-label="|@@t.moreActions"
               (click)="$event.stopPropagation()">
         <i class="bi-three-dots-vertical"></i>
         <span class="visually-hidden" i18n="|@@t.moreActions">More actions</span>
@@ -107,11 +108,11 @@
 
         <button app-delete-button
                 caption="Delete {{person().name}}"
-                i18n-caption="|@@t.delete"
+                i18n-caption="|@@t.deletePerson"
                 confirmationTitle="Delete person"
-                i18n-confirmationTitle="|@@t.deleteConfirmationTitle"
+                i18n-confirmationTitle="|@@t.deleteConfirmationTitlePerson"
                 confirmationMessage="Are you sure you want to delete person “{{person().name}}”?"
-                i18n-confirmationMessage="|@@t.deleteConfirmationMessage"
+                i18n-confirmationMessage="|@@t.deleteConfirmationMessagePerson"
                 (deleteConfirmed)="onDelete()"
                 ngbDropdownItem
         ></button>

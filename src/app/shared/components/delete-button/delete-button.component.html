@@ -31,7 +31,12 @@
   </div>
 
   <div class="modal-footer border-top">
-    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cancel')">Cancel</button>
+    <button type="button"
+            class="btn btn-outline-secondary"
+            (click)="modal.dismiss('Cancel')"
+            i18n="button caption|@@t.cancelButtonCaption">
+      Cancel
+    </button>
     <button type="button"
             class="btn btn-danger"
             (click)="modal.close('Delete')"

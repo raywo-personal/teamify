@@ -402,12 +402,20 @@
           <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
           <context context-type="linenumber">146,149</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">68,71</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.save" datatype="html">
         <source> Save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-edit/person-edit.component.html</context>
           <context context-type="linenumber">155,156</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">75,77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.addNextPerson" datatype="html">
@@ -439,7 +447,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
-          <context context-type="linenumber">95,98</context>
+          <context context-type="linenumber">96,99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.clear-all-persons" datatype="html">
@@ -471,11 +479,27 @@
           <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="t.close" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <note priority="1" from="meaning">Close</note>
+      </trans-unit>
       <trans-unit id="t.startCreatingPersons" datatype="html">
         <source> Start creating persons by clicking the button below. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
-          <context context-type="linenumber">81,84</context>
+          <context context-type="linenumber">82,85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.priority" datatype="html">
@@ -510,36 +534,174 @@
         <source>More actions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
-          <context context-type="linenumber">93,96</context>
+          <context context-type="linenumber">90,91</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
+          <context context-type="linenumber">94,97</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
+          <context context-type="linenumber">26,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.edit" datatype="html">
         <source>Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
-          <context context-type="linenumber">103,104</context>
+          <context context-type="linenumber">104,105</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
+          <context context-type="linenumber">36,37</context>
         </context-group>
         <note priority="1" from="meaning">edit person X</note>
       </trans-unit>
-      <trans-unit id="t.delete" datatype="html">
+      <trans-unit id="t.deletePerson" datatype="html">
         <source>Delete <x id="INTERPOLATION" equiv-text="{{person().name}}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
-          <context context-type="linenumber">109,110</context>
+          <context context-type="linenumber">110,111</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="t.deleteConfirmationTitle" datatype="html">
+      <trans-unit id="t.deleteConfirmationTitlePerson" datatype="html">
         <source>Delete person</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
-          <context context-type="linenumber">111,112</context>
+          <context context-type="linenumber">112,113</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="t.deleteConfirmationMessage" datatype="html">
+      <trans-unit id="t.deleteConfirmationMessagePerson" datatype="html">
         <source>Are you sure you want to delete person “<x id="INTERPOLATION" equiv-text="{{person().name}}"/>”?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-view/person-view.component.html</context>
-          <context context-type="linenumber">113,114</context>
+          <context context-type="linenumber">114,115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeName" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">19,20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeNameError" datatype="html">
+        <source> Please enter a name (2-50 characters). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">21,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeDescription" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeDescriptionError" datatype="html">
+        <source> Please enter a description (2-160 characters). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">40,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.color" datatype="html">
+        <source>Color</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.toolbarLabelForPriorKnowledgeList" datatype="html">
+        <source>Toolbar for working with prior knowledge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.addKnowledgeItem" datatype="html">
+        <source>Add knowledge item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clearAllPriorKnowledgeCaption" datatype="html">
+        <source>Clear all prior knowledge</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clearAllPriorKnowledgeConfirmationMessage" datatype="html">
+        <source>Are you sure you want to clear all prior knowledge?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noPriorKnowledgeFound" datatype="html">
+        <source>No prior knowledge found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.priorKnowledgeNotAvailableInfoMessage" datatype="html">
+        <source>A person&apos;s prior knowledge is utilized to achieve a good mix of
+     expertise within the team when assembling teams later.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">67,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.startCreatingPriorKnowledge" datatype="html">
+        <source> Begin creating prior knowledge by using the button below. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">72,76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.addPriorKnowledgeCaption" datatype="html">
+        <source> Add prior knowledge </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-list/prior-knowledge-list.component.html</context>
+          <context context-type="linenumber">79,82</context>
+        </context-group>
+        <note priority="1" from="meaning">Add prior knowledge</note>
+      </trans-unit>
+      <trans-unit id="t.deleteKnowledge" datatype="html">
+        <source>Delete <x id="INTERPOLATION" equiv-text="{{knowledge().name}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteConfirmationTitleKnowledge" datatype="html">
+        <source>Delete knowledge item</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteConfirmationMessageKnowledge" datatype="html">
+        <source>Are you sure you want to delete knowledge item “<x id="INTERPOLATION" equiv-text="{{knowledge().name}}"/>”?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
+          <context context-type="linenumber">46,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.deleteButtonCaption" datatype="html">
@@ -550,7 +712,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/components/delete-button/delete-button.component.html</context>
-          <context context-type="linenumber">39,43</context>
+          <context context-type="linenumber">44,48</context>
         </context-group>
         <note priority="1" from="meaning">button caption</note>
       </trans-unit>
@@ -569,6 +731,14 @@
           <context context-type="linenumber">29,33</context>
         </context-group>
         <note priority="1" from="meaning">generic question</note>
+      </trans-unit>
+      <trans-unit id="t.cancelButtonCaption" datatype="html">
+        <source> Cancel </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/components/delete-button/delete-button.component.html</context>
+          <context context-type="linenumber">38,41</context>
+        </context-group>
+        <note priority="1" from="meaning">button caption</note>
       </trans-unit>
       <trans-unit id="t.allOptions" datatype="html">
         <source>All</source>

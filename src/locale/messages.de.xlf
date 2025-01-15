@@ -12,6 +12,7 @@
       </trans-unit>
       <trans-unit id="ngb.carousel.slide-number" datatype="html">
         <source> Slide <x id="INTERPOLATION"/> of <x id="INTERPOLATION_1"/> </source>
+        <target> Slide <x id="INTERPOLATION"/> von <x id="INTERPOLATION_1"/> </target>
         <note priority="1" from="description">Currently selected slide number read by screen reader</note>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/carousel/carousel.ts</context>
@@ -84,6 +85,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.first" datatype="html">
         <source>««</source>
+        <target>««</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">299,300</context>
@@ -91,6 +93,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.previous" datatype="html">
         <source>«</source>
+        <target>«</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">324</context>
@@ -98,6 +101,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.next" datatype="html">
         <source>»</source>
+        <target>»</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">353</context>
@@ -105,6 +109,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.last" datatype="html">
         <source>»»</source>
+        <target>»»</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">386,388</context>
@@ -112,6 +117,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.first-aria" datatype="html">
         <source>First</source>
+        <target>Erste</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">410</context>
@@ -119,6 +125,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.previous-aria" datatype="html">
         <source>Previous</source>
+        <target>Vorherige</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">432,434</context>
@@ -126,6 +133,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.next-aria" datatype="html">
         <source>Next</source>
+        <target>Nächste</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">457,458</context>
@@ -133,6 +141,7 @@
       </trans-unit>
       <trans-unit id="ngb.pagination.last-aria" datatype="html">
         <source>Last</source>
+        <target>Letzte</target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/pagination/pagination.ts</context>
           <context context-type="linenumber">489,490</context>
@@ -140,6 +149,7 @@
       </trans-unit>
       <trans-unit id="ngb.progressbar.value" datatype="html">
         <source><x id="INTERPOLATION"/></source>
+        <target><x id="INTERPOLATION"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">node_modules/.pnpm/@ng-bootstrap+ng-bootstrap@18.0.0_@angular+common@19.0.6_@angular+core@19.0.6_rxjs@7.8.1_zone_wwidaw6ma2uivizdkziei742qu/node_modules/src/progressbar/progressbar.ts</context>
           <context context-type="linenumber">41</context>
@@ -467,7 +477,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
-          <context context-type="linenumber">138,139</context>
+          <context context-type="linenumber">142,143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.save" datatype="html">
@@ -487,7 +497,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
-          <context context-type="linenumber">145,146</context>
+          <context context-type="linenumber">149,150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.addNextPerson" datatype="html">
@@ -1503,7 +1513,7 @@
         <target>Kein Zeitfenster ausgewählt.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
-          <context context-type="linenumber">150,152</context>
+          <context context-type="linenumber">154,156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.toolbarLabelForTimeSlotList" datatype="html">
@@ -1597,6 +1607,15 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-view/time-slot-view.component.html</context>
           <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.endTime" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>End time:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ endTime() | time }}"/> o’clock </source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ende:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ endTime() | time }}"/> Uhr </target>
+        <note priority="1" from="meaning">ebd time: XX o’clock</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">113,114</context>
         </context-group>
       </trans-unit>
     </body>

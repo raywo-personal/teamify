@@ -109,24 +109,28 @@
         </div>
       </div>
 
-      <strong>End time: </strong>{{ endTime() | time }}
+      <ng-container i18n="ebd time: XX o’clock|@@t.endTime">
+        <strong>End time:</strong> {{ endTime() | time }} o’clock
+      </ng-container>
 
-      <label for="color" class="mb-2">Color</label>
-      <div id="color" class="row gap-2">
-        @for (clr of colors.keys(); track $index) {
-          <div class="col mb-2">
-            <div [class]="dotCSSClass(clr)"
-                 class="color-picker-dot focus-ring text-center align-items-center pt-1 pointer"
-                 [ngbTooltip]="colors.get(clr)?.name"
-                 tabindex="0"
-                 (keyup)="onColorKeySelected($event, clr)"
-                 (click)="onColorSelected(clr)">
-              @if (clr === color) {
-                <i class="bi-check fs-1" [class]="fgCSSClass(clr)"></i>
-              }
+      <div class="row gap-2 mt-2">
+        <label for="color" class="mb-2 fw-bold" i18n="@@t.color">Color</label>
+        <div id="color" class="row gap-2">
+          @for (clr of colors.keys(); track $index) {
+            <div class="col mb-2">
+              <div [class]="dotCSSClass(clr)"
+                   class="color-picker-dot focus-ring text-center align-items-center pt-1 pointer"
+                   [ngbTooltip]="colors.get(clr)?.name"
+                   tabindex="0"
+                   (keyup)="onColorKeySelected($event, clr)"
+                   (click)="onColorSelected(clr)">
+                @if (clr === color) {
+                  <i class="bi-check fs-1" [class]="fgCSSClass(clr)"></i>
+                }
+              </div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
     </div>
 

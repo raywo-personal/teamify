@@ -424,7 +424,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
-          <context context-type="linenumber">138,139</context>
+          <context context-type="linenumber">142,143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.save" datatype="html">
@@ -443,7 +443,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
-          <context context-type="linenumber">145,146</context>
+          <context context-type="linenumber">149,150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.addNextPerson" datatype="html">
@@ -1343,11 +1343,19 @@
           <context context-type="linenumber">106,108</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="t.endTime" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>End time:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ endTime() | time }}"/> o’clock </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">113,114</context>
+        </context-group>
+        <note priority="1" from="meaning">ebd time: XX o’clock</note>
+      </trans-unit>
       <trans-unit id="t.noTimeSlotSelected" datatype="html">
         <source>No time slot selected.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
-          <context context-type="linenumber">150,152</context>
+          <context context-type="linenumber">154,156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.toolbarLabelForTimeSlotList" datatype="html">

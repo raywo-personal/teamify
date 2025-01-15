@@ -1,9 +1,11 @@
 <div class="toolbar mb-3"
      role="toolbar"
-     aria-label="Toolbar for working with teams and persons">
+     aria-label="Toolbar for working with time slots"
+     i18n-aria-label="@@t.toolbarLabelForTimeSlotList">
   <div class="toolbar-buttons">
     <button app-add-button
-            caption="Add time slot"
+            caption=" Add time slot "
+            i18n-caption="@@t.addTimeSlotCaption"
             (click)="onAdd(content)">
     </button>
   </div>
@@ -14,14 +16,16 @@
                 class="btn btn-outline-primary"
                 (click)="onAddDefaultSet()">
           <i class="bi-file-earmark-arrow-up me-2"></i>
-          <span>Load default set</span>
+          <span i18n="@@t.loadDefaultTimeSlotSet">Load default set</span>
         </button>
       }
 
       @if ((timeSlotCount$ | async)! > 0) {
         <button app-delete-button
                 caption="Clear all time slots"
+                i18n-caption="@@t.clearAllTimeSlotsCaption"
                 confirmationMessage="Are you sure you want to clear all time slots?"
+                i18n-confirmationMessage="@@t.clearAllTimeSlotsConfirmationMessage"
                 (deleteConfirmed)="onDeleteAll()">
         </button>
       }
@@ -29,8 +33,8 @@
   </div>
 </div>
 
-<div class="content-area">
-  <ul class="list-group scrollable-area">
+<div class="content-area scrollable-area">
+  <ul class="list-group">
     @for (timeSlot of slots$ | async; track timeSlot.id) {
       <li class="list-group-item list-group-item-action pointer"
           (click)="onEdit(content, timeSlot)">
@@ -41,6 +45,7 @@
       </li>
     } @empty {
       <app-data-not-available-view title="No time slots found"
+                                   i18n-title="@@t.noTimeSlotsFound"
                                    mode="warning"
                                    [messageTemplate]="messageTemplate"/>
     }
@@ -70,15 +75,17 @@
 
 
 <ng-template #messageTemplate>
-  <p>
+  <p i18n="|@@t.startCreatingTimeSlots">
     Start creating time slots by clicking the button below.
   </p>
 
-  <app-data-not-available-info text="Please note that a team will be created for each time slot."/>
+  <app-data-not-available-info text="Please note that a team will be created for each time slot."
+                               i18n="|@@t.timeSlotCreationInfoMessage"/>
 
   <button type="button"
           class="btn btn-primary"
-          (click)="onAdd(content)">
+          (click)="onAdd(content)"
+          i18n="Add time slot|@@t.addTimeSlotCaption">
     Add time slot
   </button>
 </ng-template>

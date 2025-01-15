@@ -21,8 +21,8 @@
   </div>
 </div>
 
-<div class="content-area">
-  <ul class="list-group scrollable-area">
+<div class="content-area scrollable-area">
+  <ul class="list-group">
     @for (priorKnowledge of knowledgeList$ | async; track priorKnowledge.id) {
       <li class="list-group-item list-group-item-action pointer"
           (click)="onEdit(content, priorKnowledge)">

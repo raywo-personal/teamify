@@ -422,6 +422,10 @@
           <context context-type="sourcefile">src/app/teams/components/team-name-edit/team-name-edit.component.html</context>
           <context context-type="linenumber">32,34</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">138,139</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.save" datatype="html">
         <source> Save </source>
@@ -436,6 +440,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teams/components/team-name-edit/team-name-edit.component.html</context>
           <context context-type="linenumber">26,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">145,146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.addNextPerson" datatype="html">
@@ -511,7 +519,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">62</context>
         </context-group>
         <note priority="1" from="meaning">Close</note>
       </trans-unit>
@@ -576,6 +584,10 @@
           <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
           <context context-type="linenumber">26,29</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-view/time-slot-view.component.html</context>
+          <context context-type="linenumber">30,33</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.edit" datatype="html">
         <source>Edit</source>
@@ -590,6 +602,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teams/components/team-view/team-view.component.html</context>
           <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-view/time-slot-view.component.html</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
         <note priority="1" from="meaning">edit person X</note>
       </trans-unit>
@@ -1242,6 +1258,178 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/teams/components/team-view/team-view.component.html</context>
           <context context-type="linenumber">47,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotDescription" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotDescriptionError" datatype="html">
+        <source> Please enter a description (2-100 characters). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">20,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.hours" datatype="html">
+        <source>Hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">65,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.hourPlaceholder" datatype="html">
+        <source>HH</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.minutes" datatype="html">
+        <source>Minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">80,81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.minutePlaceholder" datatype="html">
+        <source>MM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.duration" datatype="html">
+        <source>Duration</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotStartError" datatype="html">
+        <source> Please enter a valid start time (hour: 0–23, minute: 0-59). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">100,102</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotDurationError" datatype="html">
+        <source> Please enter a valid duration (hour: 0–8, minute: 0-59). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">106,108</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noTimeSlotSelected" datatype="html">
+        <source>No time slot selected.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-edit/time-slot-edit.component.html</context>
+          <context context-type="linenumber">150,152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.toolbarLabelForTimeSlotList" datatype="html">
+        <source>Toolbar for working with time slots</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.addTimeSlotCaption" datatype="html">
+        <source> Add time slot </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">89,92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.loadDefaultTimeSlotSet" datatype="html">
+        <source>Load default set</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">19,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clearAllTimeSlotsCaption" datatype="html">
+        <source>Clear all time slots</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clearAllTimeSlotsConfirmationMessage" datatype="html">
+        <source>Are you sure you want to clear all time slots?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noTimeSlotsFound" datatype="html">
+        <source>No time slots found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.startCreatingTimeSlots" datatype="html">
+        <source> Start creating time slots by clicking the button below. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-list/time-slot-list.component.html</context>
+          <context context-type="linenumber">79,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.timeSlotStartToEndTime" datatype="html">
+        <source> (<x id="INTERPOLATION" equiv-text="{{ timeSlot().start | time }}"/> – <x id="INTERPOLATION_1" equiv-text="{{ timeSlot().end | time }}"/> o’clock) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-view/time-slot-view.component.html</context>
+          <context context-type="linenumber">15,18</context>
+        </context-group>
+        <note priority="1" from="meaning">X to Y o&apos;clock</note>
+      </trans-unit>
+      <trans-unit id="t.deleteTimeSlot" datatype="html">
+        <source>Delete <x id="INTERPOLATION" equiv-text="{{timeSlot().description}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-view/time-slot-view.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteConfirmationTitleTimeSlot" datatype="html">
+        <source>Delete time slot</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-view/time-slot-view.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.deleteConfirmationMessageTimeSlot" datatype="html">
+        <source>Are you sure you want to delete time slot “<x id="INTERPOLATION" equiv-text="{{timeSlot().description}}"/>”</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/timeslots/components/time-slot-view/time-slot-view.component.html</context>
+          <context context-type="linenumber">50,51</context>
         </context-group>
       </trans-unit>
     </body>

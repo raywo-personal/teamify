@@ -29,10 +29,10 @@ npm install
 3. Start the application
 
 ```bash
-npm start
+npm run start
 ```
 
-**Hint:** Use `npm start-de` to spin up a German version.
+**Hint:** Use `npm run start-de` to spin up a German version.
 
 ## Usage
 

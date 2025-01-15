@@ -50,6 +50,7 @@
     border: 2px solid var(--bs-info);
   }
 
+  &.error,
   &.danger {
     border: 2px solid var(--bs-danger);
   }

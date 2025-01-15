@@ -1,24 +1,26 @@
 <div class="my-5 card">
   <div class="card-body">
-    <h2 class="h5"><i class="bi-upload me-3"></i>Import data</h2>
+    <h2 class="h5" i18n="|@@t.importDataHeading">
+      <i class="bi-upload me-3"></i>Import data
+    </h2>
 
     <div class="text-muted">
-      <p>What data do you want to import?</p>
+      <p i18n="|@@t.whatToImport">What data do you want to import?</p>
 
-      <p>
+      <p i18n="|@@t.importDataNote">
         When importing persons, please note that associations with time slots,
         prior knowledge, or teams will not be included. Only names (and IDs) will
         be imported. To restore all associations, consider using the
         &ldquo;All data&rdquo; option instead.
       </p>
 
-      <p>
+      <p i18n="|@@t.importDataFileFormatNote">
         Files must be in JSON format, previously exported from the application.
         Alternatively, you can import names using a text file, with each name on
         a separate line.
       </p>
 
-      <p>
+      <p i18n="|@@t.importDataWarning">
         <strong class="text-danger">Note:</strong>
         Importing data will overwrite existing data.
       </p>
@@ -47,20 +49,22 @@
             <div class="upload-description">
               <i class="bi-folder2-open display-6"
                  [class.text-danger]="dropError"></i>
-              <p class="text-center mb-0">
+              <p class="text-center mb-0" i18n="|@@t.dropFileHere">
                 <strong>Drop a file</strong><br>
                 or click below to browse for a file.
               </p>
 
               @if (dropError) {
-                <p class="upload-error">
+                <p class="upload-error" i18n="|@@t.dropFileError">
                   Only a single JSON or txt file is supported.
                 </p>
               }
             </div>
           }
 
-          <label for="upload-input" class="form-label visually-hidden">
+          <label for="upload-input"
+                 class="form-label visually-hidden"
+                 i18n="|@@t.chooseFile">
             Choose a file to upload
           </label>
           <input type="file"
@@ -74,12 +78,12 @@
 
       <div class="col">
         <div class="upload-preview-container">
-          <h3 class="h5">Preview</h3>
+          <h3 class="h5" i18n="|@@t.previewHeading">Preview</h3>
 
           @if (dropError === "invalidJSON") {
             <div class="upload-error">
               <i class="bi-file-earmark-x h2"></i>
-              <p class="mb-0">
+              <p class="mb-0" i18n="|@@t.invalidJSONError">
                 <strong>Invalid JSON file</strong><br>
                 Please check the file and try again.
               </p>
@@ -89,17 +93,17 @@
           @if (dropError === "invalidFormat") {
             <div class="upload-error">
               <i class="bi-file-earmark-x h2"></i>
-              <p class="mb-0">
+              <p class="mb-0" i18n="|@@t.invalidFormatError">
                 <strong>Wrong format</strong><br>
                 Please check the file and try again.
               </p>
             </div>
           }
 
-          @if(importStatus === "complete") {
+          @if (importStatus === "complete") {
             <div class="upload-success">
               <i class="bi-check-circle-fill h2"></i>
-              <p class="mb-0">
+              <p class="mb-0" i18n="|@@t.importComplete">
                 <strong>Import complete</strong><br>
                 The data has been imported successfully.
               </p>
@@ -108,25 +112,25 @@
 
           @switch (importType) {
             @case ("timeslots") {
-              <p class="text-muted">
+              <p class="text-muted" i18n="|@@t.timeSlotPreviewPretext">
                 The following time slots will be imported:
               </p>
               <app-preview-time-slot-list [slots$]="contentToImport$"/>
             }
             @case ("prior-knowledge") {
-              <p class="text-muted">
+              <p class="text-muted" i18n="|@@t.priorKnowledgePreviewPretext">
                 The following prior knowledge will be imported:
               </p>
               <app-preview-prior-knowledge-list [knowledge$]="contentToImport$"/>
             }
             @case ("persons") {
-              <p class="text-muted">
+              <p class="text-muted" i18n="|@@t.personPreviewPretext">
                 The following persons will be imported:
               </p>
               <app-preview-person-list [persons$]="contentToImport$"/>
             }
             @case ("all") {
-              <p class="text-muted">
+              <p class="text-muted" i18n="|@@t.teamPreviewPretext">
                 The following complete set will be imported:
               </p>
               <app-preview-team-list [teams$]="contentToImport$"/>
@@ -140,13 +144,15 @@
   <div class="card-footer d-flex justify-content-end gap-2">
     <button type="button"
             class="btn btn-outline-primary"
-            (click)="reset()">
+            (click)="reset()"
+            i18n="|@@t.clearDataCaption">
       Clear data
     </button>
     <button type="button"
             class="btn btn-primary"
             [disabled]="!file"
-            (click)="onImport()">
+            (click)="onImport()"
+            i18n="|@@t.importDataCaption">
       Import data
     </button>
   </div>

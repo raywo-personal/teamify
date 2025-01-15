@@ -20,9 +20,10 @@
               ngbDropdownToggle
               aria-expanded="false"
               aria-label="More actions"
+              i18n-aria-label="|@@t.moreActions"
               (click)="$event.stopPropagation()">
         <i class="bi-three-dots-vertical"></i>
-        <span class="visually-hidden">More actions</span>
+        <span class="visually-hidden" i18n="|@@t.moreActions">More actions</span>
       </button>
 
       <div ngbDropdownMenu
@@ -31,14 +32,19 @@
           <button class="btn btn-primary"
                   (click)="onEdit($event)"
                   ngbDropdownItem>
-            <i class="bi-pencil me-3"></i>Edit {{ knowledge().name }}
+            <i class="bi-pencil me-3"></i>
+            <ng-container i18n="|@@t.edit">Edit</ng-container>
+            {{ knowledge().name }}
           </button>
         </div>
 
         <button app-delete-button
                 caption="Delete {{knowledge().name}}"
+                i18n-caption="|@@t.deleteKnowledge"
                 confirmationTitle="Delete knowledge item"
+                i18n-confirmationTitle="|@@t.deleteConfirmationTitleKnowledge"
                 confirmationMessage="Are you sure you want to delete knowledge item “{{knowledge().name}}”?"
+                i18n-confirmationMessage="|@@t.deleteConfirmationMessageKnowledge"
                 (deleteConfirmed)="onDelete()"
                 ngbDropdownItem>
         </button>

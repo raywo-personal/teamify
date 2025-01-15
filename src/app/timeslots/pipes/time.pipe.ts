@@ -7,7 +7,8 @@ import {Time} from '../../shared/models/time.model';
 })
 export class TimePipe implements PipeTransform {
 
-  transform(value: Time): unknown {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  transform(value: Time, ...args: unknown[]): unknown {
     if (value.hour < 0 || value.minute < 0) {
       return '';
     }

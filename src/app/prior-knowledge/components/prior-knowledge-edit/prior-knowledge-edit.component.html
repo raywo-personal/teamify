@@ -13,10 +13,11 @@
         minlength="2"
         maxlength="50"
         placeholder="Name"
+        i18n-placeholder="@@t.priorKnowledgeName"
         #nameInput="ngModel"
       />
-      <label for="name">Name</label>
-      <div class="invalid-feedback">
+      <label for="name" i18n="|@@t.priorKnowledgeName">Name</label>
+      <div class="invalid-feedback" i18n="|@@t.priorKnowledgeNameError">
         Please enter a name (2-50 characters).
       </div>
     </div>
@@ -31,15 +32,16 @@
         minlength="2"
         maxlength="160"
         placeholder="Description"
+        i18n-placeholder="@@t.priorKnowledgeDescription"
         #descriptionInput="ngModel"
       />
-      <label for="description">Description</label>
-      <div class="invalid-feedback">
+      <label for="description" i18n="|@@t.priorKnowledgeDescription">Description</label>
+      <div class="invalid-feedback" i18n="|@@t.priorKnowledgeDescriptionError">
         Please enter a description (2-160 characters).
       </div>
     </div>
 
-    <label for="color" class="mb-2">Color</label>
+    <label for="color" class="mb-2" i18n="|@@t.color">Color</label>
     <div id="color" class="row gap-2">
       @for (clr of colors.keys(); track $index) {
         <div class="col mb-2">
@@ -59,11 +61,17 @@
   </div>
 
   <div class="offcanvas-footer">
-    <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancel()">
+    <button type="button"
+            class="btn btn-outline-secondary me-2"
+            (click)="onCancel()"
+            i18n="|@@t.cancel">
       Cancel
     </button>
 
-    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    <button type="submit"
+            class="btn btn-primary"
+            [disabled]="form.invalid"
+            i18n="|@@t.save">
       Save
     </button>
   </div>

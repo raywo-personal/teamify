@@ -9,13 +9,14 @@
                id="descriptionInput"
                name="description"
                placeholder="Description"
+               i18n-placeholder="@@t.timeSlotDescription"
                [(ngModel)]="description"
                minlength="2"
                maxlength="100"
                required
                #descriptionInput="ngModel">
-        <label for="descriptionInput">Description</label>
-        <div class="invalid-feedback">
+        <label for="descriptionInput" i18n="@@t.timeSlotDescription">Description</label>
+        <div class="invalid-feedback" i18n="@@t.timeSlotDescriptionError">
           Please enter a description (2-100 characters).
         </div>
       </div>
@@ -26,12 +27,13 @@
             <strong>Start time</strong>
             <div class="d-flex gap-2">
               <div>
-                <label for="startHourInput" class="form-label">Hours</label>
+                <label for="startHourInput" class="form-label" i18n="@@t.hours">Hours</label>
                 <input type="number"
                        class="form-control"
                        id="startHourInput"
                        name="startHour"
                        placeholder="HH"
+                       i18n-placeholder="@@t.hourPlaceholder"
                        min="0"
                        max="23"
                        required
@@ -40,12 +42,13 @@
               </div>
 
               <div>
-                <label for="startMinuteInput" class="form-label">Minutes</label>
+                <label for="startMinuteInput" class="form-label" i18n="@@t.minutes">Minutes</label>
                 <input type="number"
                        class="form-control"
                        id="startMinuteInput"
                        name="startMinute"
                        placeholder="MM"
+                       i18n-placeholder="@@t.minutePlaceholder"
                        min="0"
                        max="59"
                        required
@@ -56,15 +59,16 @@
           </div>
 
           <div [class.was-validated]="durationHourInput.dirty || durationMinuteInput.touched">
-            <strong>Duration</strong>
+            <strong i18n="@@t.duration">Duration</strong>
             <div class="d-flex gap-2">
               <div>
-                <label for="durationHourInput" class="form-label">Hour</label>
+                <label for="durationHourInput" class="form-label" i18n="@@t.hours">Hours</label>
                 <input type="number"
                        class="form-control"
                        id="durationHourInput"
                        name="durationHour"
                        placeholder="HH"
+                       i18n-placeholder="@@t.hourPlaceholder"
                        min="0"
                        max="8"
                        required
@@ -73,12 +77,13 @@
               </div>
 
               <div>
-                <label for="durationMinuteInput" class="form-label">Minute</label>
+                <label for="durationMinuteInput" class="form-label" i18n="@@t.minutes">Minutes</label>
                 <input type="number"
                        class="form-control"
                        id="durationMinuteInput"
                        name="durationMinute"
                        placeholder="MM"
+                       i18n-placeholder="@@t.minutePlaceholder"
                        min="0"
                        max="59"
                        required
@@ -91,13 +96,13 @@
 
         <div class="mb-3">
           @if (startHourInput.invalid || startMinuteInput.invalid) {
-            <div class="text-danger small">
+            <div class="text-danger small" i18n="@@t.timeSlotStartError">
               Please enter a valid start time (hour: 0–23, minute: 0-59).
             </div>
           }
 
           @if (durationHourInput.invalid || durationMinuteInput.invalid) {
-            <div class="text-danger small">
+            <div class="text-danger small" i18n="@@t.timeSlotDurationError">
               Please enter a valid duration (hour: 0–8, minute: 0-59).
             </div>
           }
@@ -126,15 +131,21 @@
     </div>
 
     <div class="offcanvas-footer">
-      <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">
+      <button type="button"
+              class="btn btn-outline-secondary"
+              (click)="onCancel()"
+              i18n="@@t.cancel">
         Cancel
       </button>
 
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      <button type="submit"
+              class="btn btn-primary"
+              [disabled]="form.invalid"
+              i18n="@@t.save">
         Save
       </button>
     </div>
   </form>
 } @else {
-  <p>No time slot selected.</p>
+  <p i18n="@@t.noTimeSlotSelected">No time slot selected.</p>
 }

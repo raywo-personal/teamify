@@ -13,6 +13,14 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "de": {
+            "translation": "src/locale/messages.de.xlf"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -35,7 +43,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "localize": true,
+            "i18nMissingTranslation": "warning"
           },
           "configurations": {
             "production": {
@@ -57,6 +67,9 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "de": {
+              "localize": ["de"]
             }
           },
           "defaultConfiguration": "production"
@@ -69,6 +82,9 @@
             },
             "development": {
               "buildTarget": "teamify:build:development"
+            },
+            "de": {
+              "buildTarget": "teamify:build:development,de"
             }
           },
           "defaultConfiguration": "development"

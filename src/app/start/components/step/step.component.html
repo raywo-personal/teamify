@@ -1,7 +1,7 @@
 <div class="card step">
   <div class="card-body">
     <div class="d-flex justify-content-between">
-      <h3 class="card-title">Step {{ stepNo() }}</h3>
+      <h3 class="card-title" i18n="step X|@@t.stepHeading">Step {{ stepNo() }}</h3>
       <div class="icon">
         @if (stepIsDone()) {
           <i class="bi-bookmark-check-fill text-success"></i>
@@ -23,9 +23,11 @@
        [class.btn-primary]="!stepIsDone()"
        [class.btn-outline-primary]="stepIsDone()">
       @if (stepIsDone()) {
-        Go to {{ buttonCaption() }}
+        <ng-container i18n="Go to some step |@@t.goTo">Go to {{ buttonCaption() }}</ng-container>
       } @else {
-        Create {{ buttonCaption() }}&nbsp;<i class="bi-chevron-right"></i>
+        <ng-container i18n="Create some step |@@t.createSomething">
+          Create {{ buttonCaption() }}&nbsp;<i class="bi-chevron-right"></i>
+        </ng-container>
       }
     </a>
   </div>

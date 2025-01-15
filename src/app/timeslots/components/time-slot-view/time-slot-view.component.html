@@ -11,7 +11,7 @@
 
     <div class="d-flex flex-column">
       <span class="fw-medium">{{ timeSlot().description }}</span>
-      <small class="slot-time">
+      <small class="slot-time" i18n="X to Y o'clock|@@t.timeSlotStartToEndTime">
         ({{ timeSlot().start | time }} – {{ timeSlot().end | time }} o’clock)
       </small>
 
@@ -27,7 +27,7 @@
               aria-label="More actions"
               (click)="$event.stopPropagation()">
         <i class="bi-three-dots-vertical"></i>
-        <span class="visually-hidden">More actions</span>
+        <span class="visually-hidden" i18n="@@t.moreActions">More actions</span>
       </button>
 
       <div ngbDropdownMenu
@@ -36,14 +36,19 @@
           <button class="btn btn-primary"
                   (click)="onEdit($event)"
                   ngbDropdownItem>
-            <i class="bi-pencil me-2"></i>Edit {{ timeSlot().description }}
+            <i class="bi-pencil me-2"></i>
+            <ng-container i18n="edit time slot X|@@t.edit">Edit</ng-container>
+            {{ timeSlot().description }}
           </button>
         </div>
 
         <button app-delete-button
                 caption="Delete {{timeSlot().description}}"
+                i18n-caption="|@@t.deleteTimeSlot"
                 confirmationTitle="Delete time slot"
+                i18n-confirmationTitle="|@@t.deleteConfirmationTitleTimeSlot"
                 confirmationMessage="Are you sure you want to delete time slot “{{timeSlot().description}}”"
+                i18n-confirmationMessage="|@@t.deleteConfirmationMessageTimeSlot"
                 (deleteConfirmed)="onDelete()"
                 ngbDropdownItem>
         </button>

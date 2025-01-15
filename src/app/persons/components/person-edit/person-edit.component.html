@@ -15,8 +15,8 @@
             setCustomValidity
             #nameField
           >
-          <label for="name">Name</label>
-          <div class="invalid-feedback">
+          <label for="name" i18n="|@@t.personName">Name</label>
+          <div class="invalid-feedback" i18n="|@@t.personNameError">
             Please enter a name (2-50 characters).
           </div>
         </div>
@@ -33,8 +33,8 @@
             name="info"
             formControlName="info"
           >
-          <label for="info">Information</label>
-          <div class="invalid-feedback">
+          <label for="info" i18n="|@@t.personInformation">Information</label>
+          <div class="invalid-feedback" i18n="|@@t.personInformationError">
             Please enter information (2-150 characters).
           </div>
         </div>
@@ -42,8 +42,8 @@
     </div>
 
     <div class="row mb-3">
-      <h3>Prior knowledge</h3>
-      <small class="mb-2">
+      <h3 i18n="|@@t.priorKnowledge">Prior knowledge</h3>
+      <small class="mb-2" i18n="|@@t.priorKnowledgeExplanation">
         State what prior knowledge the person already has. This will have
         influence on the creation of groups.
       </small>
@@ -55,10 +55,12 @@
       } @empty {
         <div class="col">
           <div class="alert alert-warning">
-            There is no prior knowledge stored yet.
-            Consider adding some by
+            <ng-container i18n="|@@t.priorKnowledgeEmpty">
+              There is no prior knowledge stored yet.
+              Consider adding some by
+            </ng-container>
             <a routerLink="/prior-knowledge" class="link-offset-1" (click)="onCancel()">
-              clicking here
+              <ng-container i18n="|@@t.byClickingHere">clicking here</ng-container>
             </a>.
           </div>
         </div>
@@ -69,10 +71,10 @@
 
     <div class="row">
       <div class="col">
-        <h3>Time slots</h3>
+        <h3 i18n="|@@t.timeslots">Time slots</h3>
         <small class="mb-2">
-          <p>Select the preferred time slots for the person.</p>
-          <p>
+          <p i18n="|@@t.timeSlotExplanation1">Select the preferred time slots for the person.</p>
+          <p i18n="|@@t.timeSlotExplanation2">
             Place them into the buckets according to the person’s preference. If
             the person has no specific preference, put the time slots into the
             first bucket.
@@ -81,12 +83,13 @@
 
         @if (slotCount === 0) {
           <div class="alert alert-danger">
-            <p>
+            <p i18n="|@@t.timeSlotEmpty">
               There is no time slot stored yet. Persons can only be saved if they
               have a time slot assigned.
             </p>
             <a routerLink="/time-slots" class="btn btn-sm btn-primary mt-2"
-               (click)="onCancel()">
+               (click)="onCancel()"
+               i18n="|@@t.addTimeSlots">
               Add time slots
             </a>.
           </div>
@@ -97,7 +100,7 @@
     @if (slotCount > 0) {
       <div class="row mb-4" cdkDropListGroup>
         <div class="col-8 slot-target">
-          <h4 class="h6">Preferred time slots</h4>
+          <h4 class="h6" i18n="|@@t.preferredTimeSlots">Preferred time slots</h4>
 
           <div class="row">
             @for (slot of priorityTimeSlots; track $index) {
@@ -112,7 +115,7 @@
         </div>
 
         <div class="col-4">
-          <h4 class="h6">Available time slots</h4>
+          <h4 class="h6" i18n="|@@t.availableTimeslots">Available time slots</h4>
           <div
             cdkDropList
             cdkDropListSortingDisabled
@@ -137,7 +140,9 @@
   </div>
 
   <div class="offcanvas-footer">
-    <button type="button" class="btn btn-outline-secondary me-2" (click)="onCancel()">
+    <button type="button" class="btn btn-outline-secondary me-2"
+            (click)="onCancel()"
+            i18n="|@@t.cancel">
       Cancel
     </button>
 
@@ -145,7 +150,8 @@
       <button [type]="edit() ? 'submit' : 'button'"
               class="btn btn-primary"
               [disabled]="personForm.invalid"
-              (click)="onSubmit()">
+              (click)="onSubmit()"
+              i18n="|@@t.save">
         Save
       </button>
 
@@ -153,7 +159,8 @@
         <button type="submit" class="btn btn-primary ms-3"
                 [disabled]="personForm.invalid"
                 (click)="onNextAdd()">
-          Add next person <i class="bi-chevron-right"></i>
+          <ng-container i18n="|@@t.addNextPerson">Add next person</ng-container>
+          <i class="bi-chevron-right"></i>
         </button>
       }
     </div>

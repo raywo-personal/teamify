@@ -9,10 +9,11 @@
            maxlength="50"
            [(ngModel)]="teamName"
            placeholder="Team name"
+           i18n-placeholder="@@t.teamName"
            setCustomValidity
            #nameInput="ngModel"
            #nameField>
-    <div class="invalid-feedback">
+    <div class="invalid-feedback" i18n="|@@t.teamNameError">
       Please enter a name (2-50 characters).
     </div>
   </div>
@@ -22,13 +23,13 @@
             class="btn text-success btn-icon btn-sm"
             (click)="onSubmit()">
       <i class="bi-check"></i>
-      <span class="visually-hidden">Save</span>
+      <span class="visually-hidden" i18n="@@t.save"> Save </span>
     </button>
     <button type="button"
             class="btn text-danger btn-icon btn-sm"
             (click)="onCancel()">
       <i class="bi-x"></i>
-      <span class="visually-hidden">Cancel</span>
+      <span class="visually-hidden" i18n="@@t.cancel"> Cancel </span>
     </button>
   </div>
 </form>

@@ -22,31 +22,31 @@ export const routes: Routes = [
   {
     path: "time-slots",
     component: TimeSlotListComponent,
-    data: {title: "Time slots", icon: "clock"},
+    data: {title: $localize`:time slots menu title@@t.timeslots-menu:Time slots`, icon: "clock"},
     pathMatch: "full"
   },
   {
     path: "prior-knowledge",
     component: PriorKnowledgeListComponent,
-    data: {title: "Prior knowledge", icon: "book"},
+    data: {title: $localize`:prior knowledge menu title@@t.priorKnowledge-menu:Prior knowledge`, icon: "book"},
     pathMatch: "full"
   },
   {
     path: "persons",
     component: PersonListComponent,
-    data: {title: "Persons", icon: "people"},
+    data: {title: $localize`:persons menu title@@t.persons-menu:Persons`, icon: "people"},
     pathMatch: "full"
   },
   {
     path: "build-teams",
     component: GroupingComponent,
-    data: {title: "Build teams", icon: "people-fill"},
+    data: {title: $localize`:build teams menu title@@t.buildTeams-menu:Build teams`, icon: "people-fill"},
     pathMatch: "full"
   },
   {
     path: "settings",
     component: SettingsComponent,
-    data: {title: "Settings", icon: "gear"},
+    data: {title: $localize`:settings menu title@@t.settings-menu:Settings`, icon: "gear"},
     pathMatch: "full"
   },
   {

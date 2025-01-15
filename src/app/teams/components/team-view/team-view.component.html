@@ -8,12 +8,12 @@
         @if (team().name && team().name !== "") {
           <strong>{{ team().name }}</strong>
         } @else {
-          No name given
+          <ng-container i18n="@@t.noNameGiven">No name given</ng-container>
         }
 
         <button class="btn btn-link btn-sm" (click)="onEdit()">
           <i class="bi-pencil ms-2"></i>
-          <span class="visually-hidden">Edit</span>
+          <span class="visually-hidden" i18n="@@t.edit">Edit</span>
         </button>
       } @else {
         <app-team-name-edit [name]="team().name || ''"
@@ -44,7 +44,7 @@
                            [showDragHandle]="true"/>
         </div>
       } @empty {
-        <small class="text-muted mt-2">No persons assigned to this team.</small>
+        <small class="text-muted mt-2" i18n="@@t.noPersonsAdded">No persons assigned to this team.</small>
       }
     </div>
   </div>

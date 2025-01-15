@@ -1,14 +1,15 @@
-<h2 class="text-center mb-3">Teams</h2>
+<h2 class="text-center mb-3" i18n="|@@t.teams">Teams</h2>
 
 @if ((teamsAreAssembled$ | async) === false) {
   <div class="start-container lead text-muted text-center d-flex flex-column align-items-center">
-    <div>
+    <div i18n="|@@t.startAssemblingTeams">
       <i class="bi-info-circle"></i>
       Start assembling your teams by completing step 4 or clicking the button.
     </div>
 
     <a routerLink="/build-teams"
-       class="btn btn-primary mt-3 col-3">
+       class="btn btn-primary mt-3 col-3"
+       i18n="Create teams|@@t.createTeams">
       Create teams&nbsp;<i class="bi-chevron-right"></i>
     </a>
   </div>

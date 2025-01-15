@@ -418,6 +418,10 @@
           <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
           <context context-type="linenumber">68,71</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/team-name-edit/team-name-edit.component.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.save" datatype="html">
         <source> Save </source>
@@ -428,6 +432,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-edit/prior-knowledge-edit.component.html</context>
           <context context-type="linenumber">75,77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/team-name-edit/team-name-edit.component.html</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="t.addNextPerson" datatype="html">
@@ -452,7 +460,7 @@
         </context-group>
       </trans-unit>
       <trans-unit id="t.addPerson" datatype="html">
-        <source>Add person</source>
+        <source> Add person </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
           <context context-type="linenumber">7,8</context>
@@ -513,6 +521,14 @@
           <context context-type="sourcefile">src/app/persons/components/person-list/person-list.component.html</context>
           <context context-type="linenumber">82,85</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">95,98</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">115,118</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.priority" datatype="html">
         <source>Priority</source>
@@ -570,6 +586,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/prior-knowledge/components/prior-knowledge-view/prior-knowledge-view.component.html</context>
           <context context-type="linenumber">36,37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/team-view/team-view.component.html</context>
+          <context context-type="linenumber">16,17</context>
         </context-group>
         <note priority="1" from="meaning">edit person X</note>
       </trans-unit>
@@ -1088,6 +1108,10 @@
           <context context-type="sourcefile">src/app/start/components/teams-overview/teams-overview.component.html</context>
           <context context-type="linenumber">1,3</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">31,33</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="t.alternativeImportDataCaption" datatype="html">
         <source> As an alternative, import data </source>
@@ -1110,6 +1134,115 @@
           <context context-type="linenumber">13,16</context>
         </context-group>
         <note priority="1" from="meaning">Create teams</note>
+      </trans-unit>
+      <trans-unit id="t.toolbarLabelForGrouping" datatype="html">
+        <source>Toolbar for working with teams and persons</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.fillTeamsCaption" datatype="html">
+        <source>Fill teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">10,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.clearAllTeamsCaption" datatype="html">
+        <source>Clear all teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">16,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noTeamsFound" datatype="html">
+        <source>No teams found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noPersonsFound" datatype="html">
+        <source>No persons found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">71,72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">81,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.allPersonsAssigned" datatype="html">
+        <source>All persons assigned</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">76,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.manageTimeSlots" datatype="html">
+        <source> Manage time slots </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">106,110</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noPersonsCreatedYet" datatype="html">
+        <source> No persons have been created yet. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">112,114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.managePersons" datatype="html">
+        <source> Manage persons </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">119,123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.allPersonsAssignedDescription" datatype="html">
+        <source> All available persons have been assigned to teams. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">125,129</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noPersonsFoundWithThisName" datatype="html">
+        <source> No persons found with this name. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/grouping/grouping.component.html</context>
+          <context context-type="linenumber">131,134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.teamName" datatype="html">
+        <source>Team name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/team-name-edit/team-name-edit.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.teamNameError" datatype="html">
+        <source> Please enter a name (2-50 characters). </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/team-name-edit/team-name-edit.component.html</context>
+          <context context-type="linenumber">17,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noNameGiven" datatype="html">
+        <source>No name given</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/team-view/team-view.component.html</context>
+          <context context-type="linenumber">11,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="t.noPersonsAdded" datatype="html">
+        <source>No persons assigned to this team.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/teams/components/team-view/team-view.component.html</context>
+          <context context-type="linenumber">47,50</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

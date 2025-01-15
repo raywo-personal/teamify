@@ -1,18 +1,19 @@
 <div class="grouping">
   <div class="toolbar"
        role="toolbar"
-       aria-label="Toolbar for working with teams and persons">
+       aria-label="Toolbar for working with teams and persons"
+       i18n-aria-label="@@t.toolbarLabelForGrouping">
     <div class="toolbar-buttons">
       <button class="btn btn-outline-primary btn-sm"
               (click)="onFillTeams()">
         <i class="bi-people-fill me-2"></i>
-        <span>Fill teams</span>
+        <span i18n="@@t.fillTeamsCaption">Fill teams</span>
       </button>
 
       <button class="btn btn-outline-danger btn-sm"
               (click)="onClearTeams()">
         <i class="bi-trash me-2"></i>
-        <span>Clear all teams</span>
+        <span i18n="@@t.clearAllTeamsCaption">Clear all teams</span>
       </button>
 
       <app-person-sort-buttons/>
@@ -27,7 +28,7 @@
   <div class="content-area scrollable-area" cdkDropListGroup>
     <div class="row scrollable-area">
       <div class="hstack gap-2 mb-3">
-        <h3>Teams</h3>
+        <h3 i18n="@@t.teams">Teams</h3>
 
         <div class="hstack gap-3 ms-auto">
           <app-time-slot-badge-list/>
@@ -41,6 +42,7 @@
                        class="col"/>
       } @empty {
         <app-data-not-available-view title="No teams found"
+                                     i18n-title="@@t.noTeamsFound"
                                      mode="warning"
                                      [messageTemplate]="slotsMessageTemplate"/>
       }
@@ -67,13 +69,18 @@
           } @empty {
             @if ((personsCount$ | async) === 0) {
               <app-data-not-available-view title="No persons found"
-                                           mode="warning"
+                                           i18n-title="@@t.noPersonsFound"
+                                           mode="error"
                                            [messageTemplate]="personMessageTemplate"/>
             } @else if ((filteredPersons$ | async)?.length === 0 && personFilter() === "") {
               <app-data-not-available-view title="All persons assigned"
+                                           i18n-title="@@t.allPersonsAssigned"
+                                           mode="success"
                                            [messageTemplate]="availablePersonMessageTemplate"/>
             } @else {
               <app-data-not-available-view title="No persons found"
+                                           i18n-title="@@t.noPersonsFound"
+                                           mode="warning"
                                            [messageTemplate]="noPersonFoundTemplate"/>
             }
           }
@@ -84,42 +91,43 @@
 </div>
 
 <ng-template #slotsMessageTemplate>
-  <p>
+  <p i18n="|@@t.startCreatingPersons">
     Start creating persons by clicking the button below.
   </p>
 
   @if ((slotCount$ | async) === 0) {
     <app-data-not-available-info text="No time slots are available at the
           moment. Please consider creating time slots prior to adding
-          individuals, so they can be assigned accordingly."/>
+          individuals, so they can be assigned accordingly."
+                                 i18n="|@@t.noTimeSlotsAvailableInfoMessage"/>
   }
 
-  <a routerLink="/time-slots" class="btn btn-primary">
+  <a routerLink="/time-slots" class="btn btn-primary" i18n="@@t.manageTimeSlots">
     Manage time slots
   </a>
 </ng-template>
 
 <ng-template #personMessageTemplate>
-  <p>
+  <p i18n="|@@t.noPersonsCreatedYet">
     No persons have been created yet.
   </p>
-  <p>
-    Begin creating persons using the button below.
+  <p i18n="|@@t.startCreatingPersons">
+    Start creating persons by clicking the button below.
   </p>
 
-  <a routerLink="/persons" class="btn btn-primary">
+  <a routerLink="/persons" class="btn btn-primary" i18n="@@t.managePersons">
     Manage persons
   </a>
 </ng-template>
 
 <ng-template #availablePersonMessageTemplate>
-  <p>
+  <p i18n="|@@t.allPersonsAssignedDescription">
     All available persons have been assigned to teams.
   </p>
 </ng-template>
 
 <ng-template #noPersonFoundTemplate>
-  <p>
+  <p i18n="|@@t.noPersonsFoundWithThisName">
     No persons found with this name.
   </p>
 </ng-template>

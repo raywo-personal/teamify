@@ -32,6 +32,8 @@ npm install
 npm start
 ```
 
+**Hint:** Use `npm start-de` to spin up a German version.
+
 ## Usage
 
 1.	Input participant information, including skills, prior knowledge, and time preferences.

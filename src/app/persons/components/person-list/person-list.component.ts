@@ -78,14 +78,14 @@ export class PersonListComponent implements AfterViewInit {
   protected onAdd(content: TemplateRef<unknown>) {
     this.personToEdit = createPerson("");
     this.edit = false;
-    this.openOffcanvas(content, "Add new person");
+    this.openOffcanvas(content, $localize`:this title is used for the add UI@@t.addNewPersonTitle:Add new person`);
   }
 
 
   protected onEdit(content: TemplateRef<unknown>, person: Person) {
     this.personToEdit = person;
     this.edit = true;
-    this.openOffcanvas(content, "Edit person");
+    this.openOffcanvas(content, $localize`:this title is used for the edit UI@@p.addNewPersonTitle:Edit person`);
   }
 
 

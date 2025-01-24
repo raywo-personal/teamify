@@ -40,7 +40,7 @@ export class DeleteButtonComponent implements OnInit {
     event.stopPropagation();
 
     const options: NgbModalOptions = {
-      ariaLabelledBy: this.caption() || "Delete",
+      ariaLabelledBy: this.caption() || $localize`:@@t.deleteCaption:Delete`,
     }
 
     this.modalService.open(this.modalContent, options)

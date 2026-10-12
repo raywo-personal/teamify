@@ -46,6 +46,11 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import"]
+              }
+            },
             "scripts": [],
             "localize": true,
             "i18nMissingTranslation": "warning"

@@ -15,7 +15,12 @@ Use `pnpm`, never `npm`/`npx` (the README still shows `npm`).
 - `pnpm test` – Karma/Jasmine; single run: `pnpm test --watch=false`
 - `pnpm lint` – angular-eslint over `src/**/*.ts` and `src/**/*.html`
 - `pnpm ng extract-i18n` – writes `messages.xlf` in the project root
-- `pnpm ng deploy` – builds `gh-pages` configuration and publishes to GitHub Pages
+- `pnpm run build:cloudflare` – production build of the source locale only,
+  as deployed
+- `pnpm preview` – serves that build locally in the Workers runtime
+- `pnpm run deploy` – builds and publishes to the Cloudflare Worker at
+  `teamify.skillbird.de`; the `Deploy` workflow runs it on every push to
+  `main`
 
 ## Architecture
 

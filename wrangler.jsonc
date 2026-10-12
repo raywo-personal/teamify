@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "teamify",
+  "compatibility_date": "2026-10-12",
+  "assets": {
+    "directory": "./dist/teamify/browser",
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [
+    {
+      "pattern": "teamify.skillbird.de",
+      "custom_domain": true
+    }
+  ],
+  // Data lives in localStorage, which is bound to the origin. A second
+  // public URL would show users an empty app.
+  "workers_dev": false,
+  "preview_urls": false
+}

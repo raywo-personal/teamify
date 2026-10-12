@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "sass:map";
 
 @import "bootstrap/scss/functions";
@@ -91,7 +92,7 @@ $all-t-colors: map.merge($t-colors, $t-grays);
     display: inline-block;
 
     background-color: $value;
-    border: var(--bs-border-width) solid darken($value, 30);
+    border: var(--bs-border-width) solid color.adjust($value, $lightness: -30%);
     border-radius: 50%;
 
     width: var(--dot-width);
@@ -146,11 +147,11 @@ $all-colors-without-grays: map-merge-multiple($t-colors, $blues, $indigos, $purp
 $utilities: map.merge(
     $utilities,
     (
-      "bg-color": map-merge(
-          map-get($utilities, "background-color"),
+      "bg-color": map.merge(
+          map.get($utilities, "background-color"),
           (
-            values: map-merge(
-                map-get(map-get($utilities, "background-color"), "values"),
+            values: map.merge(
+                map.get(map.get($utilities, "background-color"), "values"),
                   (
                     $all-colors
                   ),

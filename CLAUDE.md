@@ -19,8 +19,8 @@ Use `pnpm`, never `npm`/`npx` (the README still shows `npm`).
   as deployed
 - `pnpm preview` – serves that build locally in the Workers runtime
 - `pnpm run deploy` – builds and publishes to the Cloudflare Worker at
-  `teamify.skillbird.de`; the `Deploy` workflow runs it on every push to
-  `main`
+  `teamify.skillbird.de` by hand; CI builds every pull request and
+  deploys every push to `main` (`.github/workflows/deploy.yml`)
 
 ## Architecture
 

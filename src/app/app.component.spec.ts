@@ -1,4 +1,5 @@
 import {TestBed} from '@angular/core/testing';
+import {provideRouter} from '@angular/router';
 import {AppComponent} from './app.component';
 
 
@@ -6,6 +7,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 
@@ -15,16 +17,23 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'Teamify' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('Teamify');
-  });
-
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Teamify');
+    expect(compiled.querySelector('.sidebar-title')?.textContent).toContain('Teamify');
+  });
+
+  it('should link privacy policy and imprint', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const links = Array.from(compiled.querySelectorAll<HTMLAnchorElement>('.legal-links a'))
+      .map(link => link.href);
+
+    expect(links).toEqual([
+      'https://www.skillbird.de/datenschutz/',
+      'https://www.skillbird.de/impressum/'
+    ]);
   });
 });

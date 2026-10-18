@@ -4,6 +4,9 @@
 /* Importing Bootstrap SCSS file. */
 @use 'bootstrap/scss/bootstrap';
 @use "bootstrap-icons/font/bootstrap-icons.css";
+// Self-hosted, so no request reaches Google Fonts (GDPR).
+@use "@fontsource-variable/inter/opsz.css";
+@use "@fontsource-variable/inter/opsz-italic.css";
 
 @use "app/styles/sidebar";
 @use "app/styles/drag-drop-support";
@@ -167,7 +170,20 @@ small, .small {
 
   .nav-title,
   .brand .text-logo,
-  .sidebar-footer {
+  .sidebar-footer .made-by {
     display: none;
+  }
+
+  .sidebar-footer .legal-links {
+    flex-direction: column;
+    align-items: center;
+
+    i {
+      margin-right: 0;
+    }
+
+    .legal-title {
+      @include bootstrap.visually-hidden;
+    }
   }
 }

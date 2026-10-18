@@ -16,8 +16,7 @@
   // Data lives in localStorage, which is bound to the origin. A second
   // public URL would show users an empty app.
   "workers_dev": false,
-  "preview_urls": false,
-  "observability": {
-    "enabled": true
-  }
+  "preview_urls": false
+  // No "observability": the privacy policy states that no access data is
+  // stored, and Workers Logs would keep request logs.
 }

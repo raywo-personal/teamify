@@ -39,7 +39,9 @@
     <ul class="list-group">
       @for (person of filteredPersons$ | async; track person.id) {
         <li class="list-group-item list-group-item-action pointer"
-            (click)="onEdit(content, person)">
+            tabindex="0"
+            (click)="onEdit(content, person)"
+            (keydown.enter)="$event.target === $event.currentTarget && onEdit(content, person)">
           <app-person-view
             [person]="person"
             (edit)="onEdit(content, $event)"

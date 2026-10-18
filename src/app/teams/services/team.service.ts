@@ -36,8 +36,8 @@ export class TeamService {
 
 
   public clearAllPersonsInTeams() {
+    this.teams = this.teams.map(team => ({...team, persons: []}));
     this.teams.forEach(team => {
-      team.persons = [];
       this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
     });
   }
@@ -53,12 +53,13 @@ export class TeamService {
   public addToTeam(team: Team, person?: Person) {
     if (!person) return;
 
-    team.persons = team.persons.filter(p => p.id !== person.id);
-    team.persons = team.persons
+    const current = this.currentTeam(team);
+    const persons = current.persons
+      .filter(p => p.id !== person.id)
       .concat(person)
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
+    this.updateTeam({...current, persons});
   }
 
 
@@ -69,13 +70,7 @@ export class TeamService {
 
 
   public updateTeamForSlot(slot: TimeSlot) {
-    this.teams = this.teams.map(t => {
-      if (t.timeSlot.id === slot.id) {
-        t.timeSlot = slot;
-      }
-
-      return t;
-    });
+    this.teams = this.teams.map(t => t.timeSlot.id === slot.id ? {...t, timeSlot: slot} : t);
 
     const team = this.teams.find(t => t.timeSlot.id === slot.id)!;
     this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
@@ -95,8 +90,8 @@ export class TeamService {
 
 
   public removePersonFromTeam(team: Team, person: Person) {
-    team.persons = team.persons.filter(p => p.id !== person.id);
-    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, team));
+    const current = this.currentTeam(team);
+    this.updateTeam({...current, persons: current.persons.filter(p => p.id !== person.id)});
   }
 
 
@@ -110,9 +105,15 @@ export class TeamService {
   public moveBetweenTeams(fromTeam: Team, toTeam: Team, person: Person) {
     this.removePersonFromTeam(fromTeam, person);
     this.addToTeam(toTeam, person);
+  }
 
-    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, fromTeam));
-    this.eventBus.emit(createBusEvent(EventType.TEAM_UPDATED, toTeam));
+
+  /**
+   * Teams are replaced on every change, so a reference held by a caller may
+   * be outdated. Always change the team currently stored in the service.
+   */
+  private currentTeam(team: Team): Team {
+    return this.teams.find(t => t.id === team.id) ?? team;
   }
 
 

@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  @if (!allDone) {
+  @if (!allDone()) {
     <div class="row row-cols-1 row-cols-lg-2 row-cols-xxl-4 g-3 align-items-stretch">
       <div class="col d-flex align-items-center">
         <app-step [stepNo]="1"
@@ -21,7 +21,7 @@
                   i18n-stepTitle="|@@t.createTimeslots"
                   stepDescription="In order to create a team, you need to create time slots."
                   i18n-stepDescription="|@@t.createTimeslotsDescription"
-                  [stepIsDone]="step1IsDone"
+                  [stepIsDone]="step1IsDone()"
                   buttonCaption="Time slots"
                   i18n-buttonCaption="|@@t.timeslots-menu"
                   routingTarget="/time-slots"/>
@@ -37,7 +37,7 @@
                     i18n-stepTitle="|@@t.createPriorKnowledge"
                     stepDescription="Teams are created based on prior knowledge."
                     i18n-stepDescription="|@@t.createPriorKnowledgeDescription"
-                    [stepIsDone]="step2IsDone"
+                    [stepIsDone]="step2IsDone()"
                     buttonCaption="Prior knowledge"
                     i18n-buttonCaption="|@@t.priorKnowledge-menu"
                     routingTarget="/prior-knowledge"/>
@@ -53,7 +53,7 @@
                   i18n-stepTitle="|@@t.createPersons"
                   stepDescription="Teams are made up of persons."
                   i18n-stepDescription="|@@t.createPersonsDescription"
-                  [stepIsDone]="step3IsDone"
+                  [stepIsDone]="step3IsDone()"
                   buttonCaption="Persons"
                   i18n-buttonCaption="|@@t.persons-menu"
                   routingTarget="/persons"/>
@@ -68,7 +68,7 @@
                   i18n-stepTitle="|@@t.teamUp"
                   stepDescription="If you have completed all steps, you can now create teams."
                   i18n-stepDescription="|@@t.teamUpDescription"
-                  [stepIsDone]="step4IsDone"
+                  [stepIsDone]="step4IsDone()"
                   buttonCaption="Teams"
                   i18n-buttonCaption="|@@t.teams"
                   routingTarget="/build-teams"/>

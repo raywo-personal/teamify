@@ -1,4 +1,4 @@
-import {Component, input, output} from '@angular/core';
+import {ChangeDetectorRef, Component, effect, inject, input, output} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {PersonTimeSlotBucketForm} from '../../models/person-form.model';
 import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList} from '@angular/cdk/drag-drop';
@@ -25,6 +25,19 @@ export class PersonTimeSlotBucketEditComponent {
 
   public timeSlotForm = input.required<FormGroup<PersonTimeSlotBucketForm>>();
   public slotDropped = output<CdkDragDrop<number, unknown, TimeSlotDragData>>();
+
+  private changeDetector = inject(ChangeDetectorRef);
+
+
+  constructor() {
+    // The parent changes this form when a slot is dropped onto another
+    // bucket. That drop event does not mark this component for check.
+    effect(onCleanup => {
+      const subscription = this.timeSlotForm().events
+        .subscribe(() => this.changeDetector.markForCheck());
+      onCleanup(() => subscription.unsubscribe());
+    });
+  }
 
 
   protected get priority(): number {

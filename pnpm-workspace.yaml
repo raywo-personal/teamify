@@ -4,3 +4,5 @@ allowBuilds:
   lmdb: false
   msgpackr-extract: false
   workerd: false
+overrides:
+  'ajv-formats>ajv': ^8.18.0

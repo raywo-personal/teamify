@@ -25,7 +25,9 @@
   <ul class="list-group">
     @for (priorKnowledge of knowledgeList$ | async; track priorKnowledge.id) {
       <li class="list-group-item list-group-item-action pointer"
-          (click)="onEdit(content, priorKnowledge)">
+          tabindex="0"
+          (click)="onEdit(content, priorKnowledge)"
+          (keydown.enter)="$event.target === $event.currentTarget && onEdit(content, priorKnowledge)">
         <app-prior-knowledge-view [knowledge]="priorKnowledge"
                                   (edit)="onEdit(content, $event)"
                                   (delete)="onDelete($event)"

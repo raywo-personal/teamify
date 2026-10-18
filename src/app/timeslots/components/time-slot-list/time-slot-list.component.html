@@ -37,7 +37,9 @@
   <ul class="list-group">
     @for (timeSlot of slots$ | async; track timeSlot.id) {
       <li class="list-group-item list-group-item-action pointer"
-          (click)="onEdit(content, timeSlot)">
+          tabindex="0"
+          (click)="onEdit(content, timeSlot)"
+          (keydown.enter)="$event.target === $event.currentTarget && onEdit(content, timeSlot)">
         <app-time-slot-view [timeSlot]="timeSlot"
                             (edit)="onEdit(content, $event)"
                             (delete)="onDelete($event)"

@@ -1,4 +1,4 @@
-import {Component, ElementRef, inject, ViewChild} from '@angular/core';
+import {Component, ElementRef, inject, signal, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ImportService} from '../../services/import.service';
 import {Observable, of} from 'rxjs';
@@ -33,14 +33,14 @@ export class ImportComponent {
 
   protected readonly allowedFileTypes = ["application/json", "text/plain"];
 
-  protected importType: ExportImportType = null;
-  protected file: File | null = null;
-  protected fileType: "json" | "txt" | null = null;
-  protected dropError: "unsupported" | "invalidJSON" | "invalidFormat" | "empty" | null = null;
+  protected importType = signal<ExportImportType>(null);
+  protected file = signal<File | null>(null);
+  protected fileType = signal<"json" | "txt" | null>(null);
+  protected dropError = signal<"unsupported" | "invalidJSON" | "invalidFormat" | "empty" | null>(null);
   protected contentToImport: ExportImportDataType = [];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected contentToImport$: Observable<any[]> = of([]);
-  protected importStatus: "none" | "complete" = "none";
+  protected contentToImport$ = signal<Observable<any[]>>(of([]));
+  protected importStatus = signal<"none" | "complete">("none");
 
 
   protected onDragOver(dragEvent: DragEvent) {
@@ -77,7 +77,7 @@ export class ImportComponent {
 
     if (!types || !types.includes("Files") || !files || files.length != 1) {
       this.reset();
-      this.dropError = "unsupported";
+      this.dropError.set("unsupported");
       return;
     }
 
@@ -92,21 +92,21 @@ export class ImportComponent {
 
 
   protected onImport() {
-    this.importService.importContent(this.importType, this.contentToImport);
+    this.importService.importContent(this.importType(), this.contentToImport);
     this.reset();
-    this.importStatus = "complete";
-    setTimeout(() => this.importStatus = "none", 5000);
+    this.importStatus.set("complete");
+    setTimeout(() => this.importStatus.set("none"), 5000);
   }
 
 
   protected reset() {
-    this.file = null;
-    this.fileType = null;
-    this.importType = null;
+    this.file.set(null);
+    this.fileType.set(null);
+    this.importType.set(null);
     this.fileInput.nativeElement.value = null;
     this.contentToImport = [];
-    this.dropError = null;
-    this.importStatus = "none";
+    this.dropError.set(null);
+    this.importStatus.set("none");
   }
 
 
@@ -114,32 +114,32 @@ export class ImportComponent {
     this.reset();
 
     if (file.type && !this.allowedFileTypes.includes(file.type)) {
-      this.dropError = "unsupported";
+      this.dropError.set("unsupported");
       return;
     }
 
     this.setFileTypeFromFile(file);
-    this.file = file;
+    this.file.set(file);
 
     const dataTransfer = new DataTransfer();
     dataTransfer.items.add(file);
     this.fileInput.nativeElement.files = dataTransfer.files;
 
     const reader = this.getFileReader();
-    reader.readAsText(this.file);
+    reader.readAsText(file);
   }
 
 
   private setFileTypeFromFile(file: File) {
     switch (file.type) {
       case "application/json":
-        this.fileType = "json";
+        this.fileType.set("json");
         break;
       case "text/plain":
-        this.fileType = "txt";
+        this.fileType.set("txt");
         break;
       default:
-        this.fileType = null;
+        this.fileType.set(null);
     }
   }
 
@@ -158,28 +158,36 @@ export class ImportComponent {
 
   private handleReadData(data: string | undefined) {
     if (!data) {
-      this.dropError = "empty";
+      this.dropError.set("empty");
       return;
     }
 
-    if (this.fileType === "txt") {
-      this.importType = "persons";
-      this.contentToImport$ = of(this.importService.personsToImportFromTxt(data as string));
+    if (this.fileType() === "txt") {
+      const persons = this.importService.personsToImportFromTxt(data as string);
+
+      if (persons.length === 0) {
+        this.dropError.set("empty");
+        return;
+      }
+
+      this.importType.set("persons");
+      this.contentToImport = persons;
+      this.contentToImport$.set(of(this.contentToImport));
       return;
     }
 
-    if (this.fileType === "json") {
+    if (this.fileType() === "json") {
       try {
         const json = JSON.parse(data as string);
-        this.importType = this.importService.determineImportType(json);
+        this.importType.set(this.importService.determineImportType(json));
         this.contentToImport = this.importService.contentToImportFromJson(json);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        this.contentToImport$ = of(this.importType === "all" ? (this.contentToImport as AllData).teams : (this.contentToImport as any[]));
+        this.contentToImport$.set(of(this.importType() === "all" ? (this.contentToImport as AllData).teams : (this.contentToImport as any[])));
       } catch (e) {
         if (e instanceof DataFormatError) {
-          this.dropError = "invalidFormat";
+          this.dropError.set("invalidFormat");
         } else {
-          this.dropError = "invalidJSON";
+          this.dropError.set("invalidJSON");
         }
       }
     }

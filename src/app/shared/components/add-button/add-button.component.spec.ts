@@ -14,6 +14,7 @@ describe('AddButtonComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(AddButtonComponent);
+    fixture.componentRef.setInput('caption', 'Add');
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

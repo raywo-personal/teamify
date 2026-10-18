@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeSlotListComponent } from './time-slot-list.component';
+import {provideRouter} from '@angular/router';
 
 describe('TimeSlotListComponent', () => {
   let component: TimeSlotListComponent;
@@ -8,7 +9,8 @@ describe('TimeSlotListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TimeSlotListComponent]
+      imports: [TimeSlotListComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 

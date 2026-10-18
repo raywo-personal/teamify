@@ -60,8 +60,7 @@ export class TeamViewComponent {
 
   protected onEditConfirmed(newName: string) {
     this.isEditing = false;
-    this.team().name = newName;
-    this.teamService.updateTeam(this.team());
+    this.teamService.updateTeam({...this.team(), name: newName});
   }
 
 

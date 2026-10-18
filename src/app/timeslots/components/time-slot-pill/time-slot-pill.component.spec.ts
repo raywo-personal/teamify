@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TimeSlotPillComponent} from './time-slot-pill.component';
+import {createTimeSlot} from '../../models/time-slot.model';
 
 
 describe('TimeSlotPillComponent', () => {
@@ -14,6 +15,7 @@ describe('TimeSlotPillComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(TimeSlotPillComponent);
+    fixture.componentRef.setInput('timeSlot', createTimeSlot('Morning'));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

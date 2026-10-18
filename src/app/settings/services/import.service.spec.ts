@@ -14,4 +14,10 @@ describe('ImportService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should skip blank lines and trim names when reading a txt file', () => {
+    const persons = service.personsToImportFromTxt("Ada\r\n\r\n  Grace  \n   \nLinus\n");
+
+    expect(persons.map(person => person.name)).toEqual(["Ada", "Grace", "Linus"]);
+  });
 });

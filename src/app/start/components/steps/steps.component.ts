@@ -1,4 +1,6 @@
-import {Component, inject} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {map} from 'rxjs';
 import {StepComponent} from '../step/step.component';
 import {TimeSlotService} from '../../../timeslots/services/time-slot.service';
 import {PriorKnowledgeService} from '../../../prior-knowledge/services/prior-knowledge.service';
@@ -23,33 +25,22 @@ export class StepsComponent {
   private personService = inject(PersonService);
   private teamService = inject(TeamService);
 
-  protected step1IsDone = false;
-  protected step2IsDone = false;
-  protected step3IsDone = false;
-  protected step4IsDone = false;
+  protected step1IsDone = toSignal(
+    this.timeSlotService.slotCount$.pipe(map(count => count > 0)),
+    {initialValue: false}
+  );
+  protected step2IsDone = toSignal(
+    this.knowledgeService.knowledgeList$.pipe(map(list => list.length > 0)),
+    {initialValue: false}
+  );
+  protected step3IsDone = toSignal(
+    this.personService.personCount$.pipe(map(count => count > 0)),
+    {initialValue: false}
+  );
+  protected step4IsDone = toSignal(this.teamService.teamsAreAssembled$, {initialValue: false});
 
-
-  constructor() {
-    this.timeSlotService.slotCount$.subscribe(count => {
-      this.step1IsDone = count > 0;
-    });
-
-    this.knowledgeService.knowledgeList$.subscribe(list => {
-      this.step2IsDone = list.length > 0;
-    });
-
-    this.personService.personCount$.subscribe(count => {
-      this.step3IsDone = count > 0;
-    });
-
-    this.teamService.teamsAreAssembled$.subscribe(isAssembled => {
-      this.step4IsDone = isAssembled;
-    });
-  }
-
-
-  protected get allDone(): boolean {
-    return this.step1IsDone && this.step2IsDone && this.step3IsDone && this.step4IsDone;
-  }
+  protected allDone = computed(() =>
+    this.step1IsDone() && this.step2IsDone() && this.step3IsDone() && this.step4IsDone()
+  );
 
 }

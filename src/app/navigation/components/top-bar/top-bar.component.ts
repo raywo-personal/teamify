@@ -1,5 +1,6 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {filter, map} from 'rxjs';
 
 
@@ -10,15 +11,11 @@ import {filter, map} from 'rxjs';
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss'
 })
-export class TopBarComponent implements OnInit {
-
-  protected currentTitle = "";
-  protected icon?: string;
+export class TopBarComponent {
 
   private router = inject(Router);
 
-
-  public ngOnInit() {
+  protected heading = toSignal(
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
@@ -37,10 +34,7 @@ export class TopBarComponent implements OnInit {
 
           return {title, icon};
         })
-      )
-      .subscribe(tupel => {
-        this.currentTitle = tupel.title;
-        this.icon = tupel.icon;
-      });
-  }
+      ),
+    {initialValue: {title: "", icon: ""}}
+  );
 }

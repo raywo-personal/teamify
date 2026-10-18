@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PreviewTimeSlotListComponent} from './preview-time-slot-list.component';
+import {of} from 'rxjs';
 
 
 describe('TimeSlotListComponent', () => {
@@ -14,6 +15,7 @@ describe('TimeSlotListComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(PreviewTimeSlotListComponent);
+    fixture.componentRef.setInput('slots$', of([]));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

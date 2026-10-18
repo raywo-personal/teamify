@@ -33,11 +33,11 @@
              (dragleave)="onDragLeave($event)"
              (drop)="onDrop($event)"
              #dropZone>
-          @if (file) {
+          @if (file(); as file) {
             <div class="upload-description">
-              @if (fileType === "json") {
+              @if (fileType() === "json") {
                 <i class="bi-filetype-json display-6"></i>
-              } @else if (fileType === "txt") {
+              } @else if (fileType() === "txt") {
                 <i class="bi-filetype-txt display-6"></i>
               } @else {
                 <i class="bi-file-earmark-x display-6"></i>
@@ -48,13 +48,13 @@
           } @else {
             <div class="upload-description">
               <i class="bi-folder2-open display-6"
-                 [class.text-danger]="dropError"></i>
+                 [class.text-danger]="dropError()"></i>
               <p class="text-center mb-0" i18n="|@@t.dropFileHere">
                 <strong>Drop a file</strong><br>
                 or click below to browse for a file.
               </p>
 
-              @if (dropError) {
+              @if (dropError()) {
                 <p class="upload-error" i18n="|@@t.dropFileError">
                   Only a single JSON or txt file is supported.
                 </p>
@@ -80,7 +80,7 @@
         <div class="upload-preview-container">
           <h3 class="h5" i18n="|@@t.previewHeading">Preview</h3>
 
-          @if (dropError === "invalidJSON") {
+          @if (dropError() === "invalidJSON") {
             <div class="upload-error">
               <i class="bi-file-earmark-x h2"></i>
               <p class="mb-0" i18n="|@@t.invalidJSONError">
@@ -90,7 +90,7 @@
             </div>
           }
 
-          @if (dropError === "invalidFormat") {
+          @if (dropError() === "invalidFormat") {
             <div class="upload-error">
               <i class="bi-file-earmark-x h2"></i>
               <p class="mb-0" i18n="|@@t.invalidFormatError">
@@ -100,7 +100,17 @@
             </div>
           }
 
-          @if (importStatus === "complete") {
+          @if (dropError() === "empty") {
+            <div class="upload-error">
+              <i class="bi-file-earmark-x h2"></i>
+              <p class="mb-0" i18n="|@@t.emptyFileError">
+                <strong>Empty file</strong><br>
+                The file contains no data to import.
+              </p>
+            </div>
+          }
+
+          @if (importStatus() === "complete") {
             <div class="upload-success">
               <i class="bi-check-circle-fill h2"></i>
               <p class="mb-0" i18n="|@@t.importComplete">
@@ -110,30 +120,30 @@
             </div>
           }
 
-          @switch (importType) {
+          @switch (importType()) {
             @case ("timeslots") {
               <p class="text-muted" i18n="|@@t.timeSlotPreviewPretext">
                 The following time slots will be imported:
               </p>
-              <app-preview-time-slot-list [slots$]="contentToImport$"/>
+              <app-preview-time-slot-list [slots$]="contentToImport$()"/>
             }
             @case ("prior-knowledge") {
               <p class="text-muted" i18n="|@@t.priorKnowledgePreviewPretext">
                 The following prior knowledge will be imported:
               </p>
-              <app-preview-prior-knowledge-list [knowledge$]="contentToImport$"/>
+              <app-preview-prior-knowledge-list [knowledge$]="contentToImport$()"/>
             }
             @case ("persons") {
               <p class="text-muted" i18n="|@@t.personPreviewPretext">
                 The following persons will be imported:
               </p>
-              <app-preview-person-list [persons$]="contentToImport$"/>
+              <app-preview-person-list [persons$]="contentToImport$()"/>
             }
             @case ("all") {
               <p class="text-muted" i18n="|@@t.teamPreviewPretext">
                 The following complete set will be imported:
               </p>
-              <app-preview-team-list [teams$]="contentToImport$"/>
+              <app-preview-team-list [teams$]="contentToImport$()"/>
             }
           }
         </div>
@@ -150,7 +160,7 @@
     </button>
     <button type="button"
             class="btn btn-primary"
-            [disabled]="!file"
+            [disabled]="!importType()"
             (click)="onImport()"
             i18n="|@@t.importDataCaption">
       Import data

@@ -4,6 +4,9 @@
 /* Importing Bootstrap SCSS file. */
 @use 'bootstrap/scss/bootstrap';
 @use "bootstrap-icons/font/bootstrap-icons.css";
+// Self-hosted, so no request reaches Google Fonts (GDPR).
+@use "@fontsource-variable/inter/opsz.css";
+@use "@fontsource-variable/inter/opsz-italic.css";
 
 @use "app/styles/sidebar";
 @use "app/styles/drag-drop-support";

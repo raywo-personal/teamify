@@ -14,6 +14,7 @@ describe('DataNotAvailableViewComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(DataNotAvailableViewComponent);
+    fixture.componentRef.setInput('title', 'No data');
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

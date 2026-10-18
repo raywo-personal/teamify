@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PriorKnowledgeViewComponent } from './prior-knowledge-view.component';
+import {createPriorKnowledge} from '../../models/prior-knowledge.model';
 
 describe('PriorKnowledgeViewComponent', () => {
   let component: PriorKnowledgeViewComponent;
@@ -13,6 +14,7 @@ describe('PriorKnowledgeViewComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(PriorKnowledgeViewComponent);
+    fixture.componentRef.setInput('knowledge', createPriorKnowledge('Java'));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

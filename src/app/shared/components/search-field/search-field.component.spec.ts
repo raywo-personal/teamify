@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SearchFieldComponent} from './search-field.component';
+import {of} from 'rxjs';
 
 
 describe('PersonSearchComponent', () => {
@@ -14,6 +15,7 @@ describe('PersonSearchComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(SearchFieldComponent);
+    fixture.componentRef.setInput('source', of([]));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

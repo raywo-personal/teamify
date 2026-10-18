@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {GroupingComponent} from './grouping.component';
+import {provideRouter} from '@angular/router';
 
 
 describe('GroupingComponent', () => {
@@ -9,7 +10,8 @@ describe('GroupingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GroupingComponent]
+      imports: [GroupingComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 

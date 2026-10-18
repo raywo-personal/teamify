@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {StepsComponent} from './steps.component';
+import {provideRouter} from '@angular/router';
 
 
 describe('StepsComponent', () => {
@@ -9,7 +10,8 @@ describe('StepsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StepsComponent]
+      imports: [StepsComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 

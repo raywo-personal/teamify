@@ -163,8 +163,16 @@ export class ImportComponent {
     }
 
     if (this.fileType() === "txt") {
+      const persons = this.importService.personsToImportFromTxt(data as string);
+
+      if (persons.length === 0) {
+        this.dropError.set("empty");
+        return;
+      }
+
       this.importType.set("persons");
-      this.contentToImport$.set(of(this.importService.personsToImportFromTxt(data as string)));
+      this.contentToImport = persons;
+      this.contentToImport$.set(of(this.contentToImport));
       return;
     }
 

@@ -36,8 +36,9 @@ export class ImportService {
 
   public personsToImportFromTxt(data: string): Person[] {
     return data
-      .trim()
-      .split('\n')
+      .split(/\r?\n/)
+      .map(name => name.trim())
+      .filter(name => name !== '')
       .map(name => createPerson(name));
   }
 

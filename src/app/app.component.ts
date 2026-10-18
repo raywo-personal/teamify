@@ -3,6 +3,7 @@ import {NavigationComponent} from './navigation/components/navigation/navigation
 import {TopBarComponent} from './navigation/components/top-bar/top-bar.component';
 import {RouterOutlet} from '@angular/router';
 import {PersistenceService} from './shared/services/persistence.service';
+import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -10,7 +11,8 @@ import {PersistenceService} from './shared/services/persistence.service';
   imports: [
     NavigationComponent,
     TopBarComponent,
-    RouterOutlet
+    RouterOutlet,
+    NgbTooltip
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
